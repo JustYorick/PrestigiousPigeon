@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float snapDistance = 0.25f;
 
+    [SerializeField]
     Vector3 targetPosition = new Vector3(0, 1, 0);
     
     bool moving;
