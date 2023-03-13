@@ -11,13 +11,13 @@ public class PlayerPathfinding
 
     private List<PathNode> grid;
     private const int STANDARD_MOVE_COST = 10;
-    public static PlayerPathfinding Instance { get; private set; }
+    //public static PlayerPathfinding Instance { get; private set; }
     //private Grid grid;
     private List<PathNode> openList;
     private List<PathNode> closedList;
     public PlayerPathfinding(int width, int height)
     {
-        Instance = this;
+        //Instance = this;
         grid = new List<PathNode>();
         for (int x = 0; x < width; x++)
         {
@@ -57,9 +57,15 @@ public class PlayerPathfinding
             pathnode.gCost = 999999;
             pathnode.CalculateFCost();
             pathnode.previousNode = null;
+            pathnode.isWalkable = true; //temp!!!
+            if (pathnode.x == 7 && pathnode.y != 5) //temp row unwalkable except 1 square
+            {
+                pathnode.isWalkable = false;
+            }
         }
+        //Debug.Log("randomgcost: "+grid[5].gCost);
 
-        startNode.gCost = 20;
+        startNode.gCost = 0;
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
 
@@ -69,7 +75,7 @@ public class PlayerPathfinding
             PathNode currentNode = GetLowestFCostNode(openList);
             if (currentNode.x==endNode.x && currentNode.y==endNode.y)
             {
-                Debug.Log("true");
+                //Debug.Log("true");
                 return CalculatePath(endNode);
             }
 
@@ -79,15 +85,19 @@ public class PlayerPathfinding
             Debug.Log(GetNeighbourList(currentNode).Count);
             foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
             {
-                
                 if (closedList.Contains(neighbourNode)) continue;
+
+                if (!neighbourNode.isWalkable)
+                {
+                    closedList.Add(neighbourNode);
+                    continue;
+                }
                 //Debug.Log("currentnode gcost:"+ currentNode.gCost);
                 int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
-                Debug.Log("tentative gcost:"+tentativeGCost);
-                Debug.Log("neigbournode gcost:" + neighbourNode.gCost);
-                Debug.Log("neigbournode gcost:" + neighbourNode.gCost);
-                Debug.Log("fcost:"+neighbourNode.fCost+", hcost:"+neighbourNode.hCost);
-                if (tentativeGCost < neighbourNode.gCost)//?????????????????????????????? gcost
+                //Debug.Log("tentative gcost:"+tentativeGCost);
+                //Debug.Log("neigbournode gcost:" + neighbourNode.gCost);
+                //Debug.Log("fcost:"+neighbourNode.fCost+", hcost:"+neighbourNode.hCost);
+                if (tentativeGCost < neighbourNode.gCost)
                 {
                     Debug.Log("tentativecost");
                     neighbourNode.previousNode = currentNode;
@@ -98,7 +108,7 @@ public class PlayerPathfinding
                     if (!openList.Contains(neighbourNode))
                     {
                         openList.Add(neighbourNode);
-                        Debug.Log("Added");
+                        //Debug.Log("Added");
                     }
                 }
             }
@@ -148,9 +158,10 @@ public class PlayerPathfinding
         //TEMP!!
         //return grid.GetGridObject(x, y);
         //return new PathNode(x, y);
-        PathNode pnode = grid.Where(g => g.x == x && g.y == y).First();
-        Debug.Log("pnode gcost:" + pnode.gCost);
-        Debug.Log("gridsize" + grid.Count);
+        PathNode pnode = grid.Where(n => n.x == x && n.y == y ).Select(n=>n).First();
+        //pnode.gCost = 99999;
+        //Debug.Log("pnode gcost:" + pnode.gCost);
+        //Debug.Log("gridsize" + grid.Count);
         return pnode;
     }
 

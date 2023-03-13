@@ -12,6 +12,8 @@ public class PathNode
     public int hCost;
     public int fCost;
 
+    public bool isWalkable;
+
     public PathNode previousNode;
     public PathNode(int x, int y)
     {
@@ -22,7 +24,7 @@ public class PathNode
 
     public void CalculateFCost()
     {
-        fCost = gCost = hCost;
+        fCost = gCost + hCost;
     }
 
 }
