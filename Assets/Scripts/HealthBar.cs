@@ -9,23 +9,12 @@ public class HealthBar : MonoBehaviour
     public void Setup(HealthSystem healthSystem)
     {
         this.healthSystem = healthSystem;
-
         healthSystem.OnHealthChange += HealthSystem_OnHealthChange;
     }
 
     private void HealthSystem_OnHealthChange(object sender, System.EventArgs e)
     {
+        // change healthbar scale based on health percentage
         transform.Find("HealthBar").localScale = new Vector3(healthSystem.GetHealthPercent(), 1, 1);
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

@@ -8,16 +8,13 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // set max health
         HealthSystem healthSystem = new HealthSystem(100);
+        // create HealthBar
         Transform healthBarTransform = Instantiate(HealthBar, new Vector3(0, 1), Quaternion.identity);
+        // get healthbar Object
         HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
         healthBar.Setup(healthSystem);
-        
-        Debug.Log("Health: " + healthSystem.GetHealth());
-        healthSystem.Damage(50);
-        Debug.Log("Health: " + healthSystem.GetHealthPercent());
-        healthSystem.Heal(5);
-        Debug.Log("Health: " + healthSystem.GetHealth());
     }
 
     // Update is called once per frame
