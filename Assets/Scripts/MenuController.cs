@@ -15,11 +15,11 @@ public class MenuController : MonoBehaviour {
         
     }
 
-    public void openMenu(){
+    public void OpenMenu(){
         menu.enabled = true;
     }
 
-    public void closeMenu(){
+    public void CloseMenu(){
         menu.enabled = false;
     }
 }

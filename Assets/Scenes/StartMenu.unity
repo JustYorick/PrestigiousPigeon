@@ -1819,7 +1819,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1094335495}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: closeMenu
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2181,7 +2181,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 761114313}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: openMenu
+        m_MethodName: OpenMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2391,7 +2391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1094335495}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: closeMenu
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2677,7 +2677,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 761114313}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: closeMenu
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3508,6 +3508,7 @@ GameObject:
   - component: {fileID: 1529867705}
   - component: {fileID: 1529867704}
   - component: {fileID: 1529867703}
+  - component: {fileID: 1529867706}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -3579,7 +3580,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1529867704}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1529867706}
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Scenes/TutorialMap
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1529867704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3618,6 +3631,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529867701}
   m_CullTransparentMesh: 1
+--- !u!114 &1529867706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529867701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61d6fd4cc88df1acb0887bcaaf7d3ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1586493054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3952,7 +3977,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1094335495}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: openMenu
+        m_MethodName: OpenMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
