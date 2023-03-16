@@ -36,8 +36,8 @@ public class GridSelect : MonoBehaviour
         CreateGrid();
     }
 
-    //Creates square grid of PathNodes based on objects in children, origin of the grid is 0,0
-    //Currently only works for perfectly square grids
+    // Creates square grid of PathNodes based on objects in children, origin of the grid is 0,0
+    // Currently only works for perfectly square grids
     private void CreateGrid()
     {
         children = children.OrderBy(n=>n.transform.position.x).ThenBy(n=>n.transform.position.z).ToList();
@@ -64,7 +64,7 @@ public class GridSelect : MonoBehaviour
             }
         }
 
-        //Adds unwalkable tiles based on tiles in the obstacleLayer
+        // Adds unwalkable tiles based on tiles in the obstacleLayer
         foreach(GameObject child in obstacleLayerChildren)
         {
             float closestX = pathNodesMap.OrderBy(item => Math.Abs(child.transform.position.x - item.worldXPos)).Select(n => n.worldXPos).ToList().First();

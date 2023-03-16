@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerPathfinding
 {
-    //temp
     private int width;
     private int height;
 
@@ -145,7 +144,6 @@ public class PlayerPathfinding
     {
         int xDistance = Mathf.Abs(a.x - b.x);
         int yDistance = Mathf.Abs(a.y - b.y);
-        //int remaining = Mathf.Abs(xDistance - yDistance);
         return (int)(STANDARD_MOVE_COST * (xDistance+yDistance));
     }
 

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +44,9 @@ public class PlayerMovement : MonoBehaviour
         targetPathNode.isWalkable = false;
     }
 
-    //Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.
+    // Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.
     private PathNode FindNearestXYPathNode(Vector3 targetLocation, List<PathNode> pathNodesMap)
     {
-        //PathNode resultNode = pathNodesMap.Aggregate((x, y) => Math.Abs(x.x - targetLocation.x) < Math.Abs(y.x - targetLocation.x) ? x : y);
-        //resultNode = pathNodesMap.Aggregate((x, y) => Math.Abs(x.y - targetLocation.y) < Math.Abs(y.y - targetLocation.y) ? x : y);
-
         float closestX = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.worldXPos)).Select(n => n.worldXPos).ToList().First();
         float closestY = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.z - item.worldYPos)).Select(n => n.worldYPos).ToList().First();
         PathNode resultNode = pathNodesMap.Where(n => n.worldXPos == closestX && n.worldYPos == closestY).First();
@@ -71,8 +69,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
         position = grid.GetCellCenterWorld(cellPos);
-        position.y = -0.5f; //Fix
-        //position.z = grid.GetCellCenterWorld(cellPos).z;
+        position.y = -0.5f; // Fix
+        // Change Y position of player to match grid here
         return position;
     }
 
