@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerPathfinding
 {
-    //???
+    //temp
     private int width;
     private int height;
 
@@ -16,16 +15,7 @@ public class PlayerPathfinding
 
     public PlayerPathfinding(int width, int height, List<PathNode> pathNodesMap)
     {
-        this.grid = pathNodesMap;
-        //grid = new List<PathNode>();
-        //for (int x = 0; x < width; x++)
-        //{
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        grid.Add(new PathNode(x, y));
-        //    }
-        //}
-        
+        grid = pathNodesMap;
         this.width = width;
         this.height = height;
     }
@@ -34,24 +24,9 @@ public class PlayerPathfinding
     {
         PathNode startNode = grid.Where(n=>n.x == startX && n.y == startY).First();
         PathNode endNode = grid.Where(n => n.x == endX && n.y == endY).First();
-        //PathNode startNode = GetNode(startX, startY);
-        //PathNode endNode = GetNode(endX, endY);
 
         openList = new List<PathNode> { startNode };
         closedList = new List<PathNode>();
-
-        //for (int x = 0; x < width; x++)
-        //{
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        //PathNode pathNode = new PathNode(x, y);
-        //        PathNode pathNode = grid.Where(n => n.x == x && n.y == y).First();
-        //        pathNode.gCost = 999999;
-        //        pathNode.CalculateFCost();
-        //        pathNode.previousNode = null;
-        //        //grid.Add(pathNode);
-        //    }
-        //}
 
         foreach (PathNode pathnode in grid)
         {
@@ -64,26 +39,22 @@ public class PlayerPathfinding
                 pathnode.isWalkable = false;
             }
         }
-        //Debug.Log("randomgcost: "+grid[5].gCost);
 
         startNode.gCost = 0;
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
-
         
         while(openList.Count > 0)
         {
             PathNode currentNode = GetLowestFCostNode(openList);
             if (currentNode.x==endNode.x && currentNode.y==endNode.y)
             {
-                //Debug.Log("true");
                 return CalculatePath(endNode);
             }
 
             openList.Remove(currentNode);
             closedList.Add(currentNode);
 
-            //Debug.Log(GetNeighbourList(currentNode).Count);
             foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
             {
                 if (closedList.Contains(neighbourNode)) continue;
@@ -93,14 +64,11 @@ public class PlayerPathfinding
                     closedList.Add(neighbourNode);
                     continue;
                 }
-                //Debug.Log("currentnode gcost:"+ currentNode.gCost);
+
                 int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
-                //Debug.Log("tentative gcost:"+tentativeGCost);
-                //Debug.Log("neigbournode gcost:" + neighbourNode.gCost);
-                //Debug.Log("fcost:"+neighbourNode.fCost+", hcost:"+neighbourNode.hCost);
+
                 if (tentativeGCost < neighbourNode.gCost)
                 {
-                    //Debug.Log("tentativecost");
                     neighbourNode.previousNode = currentNode;
                     neighbourNode.gCost = tentativeGCost;
                     neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
@@ -109,13 +77,12 @@ public class PlayerPathfinding
                     if (!openList.Contains(neighbourNode))
                     {
                         openList.Add(neighbourNode);
-                        //Debug.Log("Added");
                     }
                 }
             }
         }
 
-        //open list empty
+        //when open list empty
         return null;
     }
 
@@ -126,28 +93,24 @@ public class PlayerPathfinding
         // Left
         if (currentNode.x - 1 >= 0)
         {
-            //Debug.Log("Left");
             neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y));
         }
 
         // Right
         if (currentNode.x + 1 < width)
         {
-            //Debug.Log("Right");
             neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y));
         }
 
         // Down
         if (currentNode.y - 1 >= 0)
         {
-            //Debug.Log("Down");
             neighbourList.Add(GetNode(currentNode.x, currentNode.y - 1));
         }
 
         // Up
         if (currentNode.y + 1 < height)
         {
-            //Debug.Log("Up");
             neighbourList.Add(GetNode(currentNode.x, currentNode.y + 1));
         }
 
@@ -156,13 +119,7 @@ public class PlayerPathfinding
 
     public PathNode GetNode(int x, int y)
     {
-        //TEMP!!
-        //return grid.GetGridObject(x, y);
-        //return new PathNode(x, y);
         PathNode pnode = grid.Where(n => n.x == x && n.y == y ).Select(n=>n).FirstOrDefault();
-        //pnode.gCost = 99999;
-        //Debug.Log("pnode gcost:" + pnode.gCost);
-        //Debug.Log("gridsize" + grid.Count);
         return pnode;
     }
 
@@ -176,6 +133,7 @@ public class PlayerPathfinding
             path.Add(currentNode.previousNode);
             currentNode = currentNode.previousNode;
         }
+
         path.Reverse();
         return path;
     }
@@ -198,6 +156,7 @@ public class PlayerPathfinding
                 lowestFCostNode = pathNodeList[i];
             }
         }
+
         return lowestFCostNode;
     }
 }
