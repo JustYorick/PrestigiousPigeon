@@ -34,9 +34,10 @@ public class PlayerMovement : MonoBehaviour
         PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
         List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
 
-        DrawPath(path);
+        
         if (path != null)
         {
+            DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
         }
 
