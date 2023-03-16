@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Moves player from current location to new location
+    /// </summary>
+    /// <param name="targetLocation">Destination vector location in world</param>
+    /// <param name="gridLayout">Layout of the grid the player should move within so the player can be centered</param>
+    /// <param name="pathNodesMap">List of PathNodes that form a grid together, PathNodes have both simplified and in world coordinates</param>
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<PathNode> pathNodesMap)
     {
         int width = 10; //temp
@@ -24,22 +30,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (path != null)
         {
-            Debug.Log("PATH LENGTH:" + path.Count);
             StartCoroutine(MoveSquares(path, gridLayout));
         }
     }
 
+    //Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.
     private PathNode FindNearestXYPathNode(Vector3 targetLocation, List<PathNode> pathNodesMap)
     {
         //PathNode resultNode = pathNodesMap.Aggregate((x, y) => Math.Abs(x.x - targetLocation.x) < Math.Abs(y.x - targetLocation.x) ? x : y);
         //resultNode = pathNodesMap.Aggregate((x, y) => Math.Abs(x.y - targetLocation.y) < Math.Abs(y.y - targetLocation.y) ? x : y);
 
         float closestX = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.worldXPos)).Select(n => n.worldXPos).ToList().First();
-        Debug.Log("DIT IS CLOSESTX: " + closestX);
         float closestY = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.z - item.worldYPos)).Select(n => n.worldYPos).ToList().First();
-        Debug.Log("DIT IS CLOSESTY: " + closestY);
         PathNode resultNode = pathNodesMap.Where(n => n.worldXPos == closestX && n.worldYPos == closestY).First();
-        Debug.Log("RESULTNODE: "+resultNode.x + resultNode.y + resultNode.worldXPos + resultNode.worldYPos);
         return resultNode;
     }
 

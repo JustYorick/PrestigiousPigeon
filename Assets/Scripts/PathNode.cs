@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PathNode
 {
+    //Simplified coordinates used in pathfinding
     public int x;
     public int y;
 
+    //In world coordinates
     public float worldXPos;
     public float worldYPos;
 

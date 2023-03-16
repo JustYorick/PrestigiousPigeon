@@ -20,6 +20,14 @@ public class PlayerPathfinding
         this.height = height;
     }
 
+    /// <summary>
+    /// Pathfinding based on A* algorithm to find lowest cost path between two locations
+    /// </summary>
+    /// <param name="startX">Starting location X coordinate</param>
+    /// <param name="startY">Starting location Y coordinate</param>
+    /// <param name="endX">Destination location X coordinate</param>
+    /// <param name="endY">Destination location Y coordinate</param>
+    /// <returns>Ordered list of PathNodes to be traversed to go to destination</returns>
     public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
     {
         PathNode startNode = grid.Where(n=>n.x == startX && n.y == startY).First();
@@ -117,7 +125,7 @@ public class PlayerPathfinding
         return neighbourList;
     }
 
-    public PathNode GetNode(int x, int y)
+    private PathNode GetNode(int x, int y)
     {
         PathNode pnode = grid.Where(n => n.x == x && n.y == y ).Select(n=>n).FirstOrDefault();
         return pnode;

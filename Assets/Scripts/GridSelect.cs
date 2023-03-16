@@ -10,8 +10,8 @@ public class GridSelect : MonoBehaviour
     [SerializeField] private GridLayout gridLayout;
     [SerializeField] private Tilemap tilemap;
 
-    public List<GameObject> children = new List<GameObject>();
-    public List<PathNode> pathNodesMap = new List<PathNode>();
+    private List<GameObject> children = new List<GameObject>();
+    private List<PathNode> pathNodesMap = new List<PathNode>();
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,7 @@ public class GridSelect : MonoBehaviour
         CreateGrid();
     }
 
+    //Creates square grid of PathNodes based on objects in children
     private void CreateGrid()
     {
         children = children.OrderBy(n=>n.transform.position.x).ThenBy(n=>n.transform.position.z).ToList();
