@@ -30,27 +30,23 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
         PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
-        
         PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
-        List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
 
+        List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
         
         if (path != null)
         {
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
+            playerPathNode.isWalkable = true;
+            targetPathNode.isWalkable = false;
         }
-
-        playerPathNode.isWalkable = true;
-        targetPathNode.isWalkable = false;
     }
 
     // Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.
     private PathNode FindNearestXYPathNode(Vector3 targetLocation, List<PathNode> pathNodesMap)
     {
-        float closestX = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.worldXPos)).Select(n => n.worldXPos).ToList().First();
-        float closestY = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.z - item.worldYPos)).Select(n => n.worldYPos).ToList().First();
-        PathNode resultNode = pathNodesMap.Where(n => n.worldXPos == closestX && n.worldYPos == closestY).First();
+        PathNode resultNode = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.worldXPos)).ThenBy(item => Math.Abs(targetLocation.z - item.worldYPos)).ToList().FirstOrDefault();
         return resultNode;
     }
 
