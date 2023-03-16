@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    [SerializeField] private TileBase ruleTile;
+    [SerializeField] private Tilemap walkingLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
         List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
 
+        DrawPath(path);
         if (path != null)
         {
             StartCoroutine(MoveSquares(path, gridLayout));
@@ -52,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = SnapCoordinateToGrid(new Vector3(pathNode.worldXPos, 0, pathNode.worldYPos), gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.worldXPos, 0,pathNode.worldYPos));
+            walkingLayer.SetTile(cell, null);
         }
     }
 
@@ -65,6 +70,15 @@ public class PlayerMovement : MonoBehaviour
         return position;
     }
 
+    void DrawPath(List<PathNode> pathNodes)
+    {
+        foreach (var node in pathNodes)
+        {
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.worldXPos, 0,node.worldYPos));
+            
+            walkingLayer.SetTile(cell, ruleTile);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
