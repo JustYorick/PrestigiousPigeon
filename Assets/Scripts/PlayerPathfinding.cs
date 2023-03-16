@@ -11,21 +11,20 @@ public class PlayerPathfinding
 
     private List<PathNode> grid;
     private const int STANDARD_MOVE_COST = 10;
-    //public static PlayerPathfinding Instance { get; private set; }
-    //private Grid grid;
     private List<PathNode> openList;
     private List<PathNode> closedList;
-    public PlayerPathfinding(int width, int height)
+
+    public PlayerPathfinding(int width, int height, List<PathNode> pathNodesMap)
     {
-        //Instance = this;
-        grid = new List<PathNode>();
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                grid.Add(new PathNode(x, y));
-            }
-        }
+        this.grid = pathNodesMap;
+        //grid = new List<PathNode>();
+        //for (int x = 0; x < width; x++)
+        //{
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        grid.Add(new PathNode(x, y));
+        //    }
+        //}
         
         this.width = width;
         this.height = height;
@@ -33,8 +32,10 @@ public class PlayerPathfinding
 
     public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
     {
-        PathNode startNode = grid.Where(n=>n.x==startX && n.y == startY).First();
+        PathNode startNode = grid.Where(n=>n.x == startX && n.y == startY).First();
         PathNode endNode = grid.Where(n => n.x == endX && n.y == endY).First();
+        //PathNode startNode = GetNode(startX, startY);
+        //PathNode endNode = GetNode(endX, endY);
 
         openList = new List<PathNode> { startNode };
         closedList = new List<PathNode>();
@@ -82,7 +83,7 @@ public class PlayerPathfinding
             openList.Remove(currentNode);
             closedList.Add(currentNode);
 
-            Debug.Log(GetNeighbourList(currentNode).Count);
+            //Debug.Log(GetNeighbourList(currentNode).Count);
             foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
             {
                 if (closedList.Contains(neighbourNode)) continue;
@@ -99,7 +100,7 @@ public class PlayerPathfinding
                 //Debug.Log("fcost:"+neighbourNode.fCost+", hcost:"+neighbourNode.hCost);
                 if (tentativeGCost < neighbourNode.gCost)
                 {
-                    Debug.Log("tentativecost");
+                    //Debug.Log("tentativecost");
                     neighbourNode.previousNode = currentNode;
                     neighbourNode.gCost = tentativeGCost;
                     neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
@@ -158,7 +159,7 @@ public class PlayerPathfinding
         //TEMP!!
         //return grid.GetGridObject(x, y);
         //return new PathNode(x, y);
-        PathNode pnode = grid.Where(n => n.x == x && n.y == y ).Select(n=>n).First();
+        PathNode pnode = grid.Where(n => n.x == x && n.y == y ).Select(n=>n).FirstOrDefault();
         //pnode.gCost = 99999;
         //Debug.Log("pnode gcost:" + pnode.gCost);
         //Debug.Log("gridsize" + grid.Count);
@@ -184,7 +185,7 @@ public class PlayerPathfinding
         int xDistance = Mathf.Abs(a.x - b.x);
         int yDistance = Mathf.Abs(a.y - b.y);
         //int remaining = Mathf.Abs(xDistance - yDistance);
-        return STANDARD_MOVE_COST * (xDistance+yDistance);
+        return (int)(STANDARD_MOVE_COST * (xDistance+yDistance));
     }
 
     private PathNode GetLowestFCostNode(List<PathNode> pathNodeList)

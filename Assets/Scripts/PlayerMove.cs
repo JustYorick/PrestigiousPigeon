@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
         int height = 14; //temp
         Vector3 pos = GetMouseWorldPos();
        
-        PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height);
+        PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, /**/new List<PathNode>());
         //Debug.Log(""+(int)Math.Floor(player.transform.position.x) + (int)Math.Floor(player.transform.position.z) + (int)Math.Floor(pos.x) + (int)Math.Floor(pos.z));
         List<PathNode> path = playerPathfinding.FindPath((int)Math.Floor(player.transform.position.x), (int)Math.Floor(player.transform.position.z), (int)Math.Floor(pos.x), (int)Math.Floor(pos.z));
         if (path != null)

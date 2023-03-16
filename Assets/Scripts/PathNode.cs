@@ -8,6 +8,9 @@ public class PathNode
     public int x;
     public int y;
 
+    public float worldXPos;
+    public float worldYPos;
+
     public int gCost;
     public int hCost;
     public int fCost;
