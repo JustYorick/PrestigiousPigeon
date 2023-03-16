@@ -21,10 +21,13 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="pathNodesMap">List of PathNodes that form a grid together, PathNodes have both simplified and in world coordinates</param>
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<PathNode> pathNodesMap)
     {
-        int width = 10; //temp
-        int height = 10; //temp
+        //Currently only works for square grids not rectangular grids
+        int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
         PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+        
         PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
         List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
 
@@ -32,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(MoveSquares(path, gridLayout));
         }
+
+        playerPathNode.isWalkable = true;
+        targetPathNode.isWalkable = false;
     }
 
     //Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.

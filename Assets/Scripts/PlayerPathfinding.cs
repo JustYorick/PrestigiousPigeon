@@ -41,11 +41,6 @@ public class PlayerPathfinding
             pathnode.gCost = 999999;
             pathnode.CalculateFCost();
             pathnode.previousNode = null;
-            pathnode.isWalkable = true; //temp!!!
-            if (pathnode.x == 7 && pathnode.y != 5) //temp row unwalkable except 1 square
-            {
-                pathnode.isWalkable = false;
-            }
         }
 
         startNode.gCost = 0;
