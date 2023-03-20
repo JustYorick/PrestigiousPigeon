@@ -14,6 +14,8 @@ public class GridSelect : MonoBehaviour
     private List<GameObject> children = new List<GameObject>();
     private List<GameObject> obstacleLayerChildren = new List<GameObject>();
     private List<PathNode> pathNodesMap = new List<PathNode>();
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -74,29 +76,15 @@ public class GridSelect : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GridLayout GetGridLayout()
     {
-        
-    }
-    
-    private void OnMouseDown()
-    {
-        Vector3 pos = GetMouseWorldPos();
-        player.GetComponent<PlayerMovement>().MovePlayer(pos, gridLayout, pathNodesMap);
+        return gridLayout;
     }
 
-    private Vector3 GetMouseWorldPos()
+    public List<PathNode> GetPathNodesMap()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
-        {
-            return raycastHit.point;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
+        return pathNodesMap;
     }
+
 
 }

@@ -1488,6 +1488,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1040628354}
     m_Modifications:
+    - target: {fileID: 3927927722251868749, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+      propertyPath: moveKey
+      value: 122
+      objectReference: {fileID: 0}
     - target: {fileID: 4642553768984167832, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1546,7 +1550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_Name
-      value: Slime
+      value: Slime4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
@@ -3266,6 +3270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3100063560773881899, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
+      propertyPath: _playerMovement
+      value: 
+      objectReference: {fileID: 1583896425}
     - target: {fileID: 4188028740280688855, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -3751,6 +3759,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 846246482}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &863557667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+  m_PrefabInstance: {fileID: 1967915984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &866227068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3820,6 +3833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1040628354}
     m_Modifications:
+    - target: {fileID: 3927927722251868749, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+      propertyPath: moveKey
+      value: 122
+      objectReference: {fileID: 0}
     - target: {fileID: 4642553768984167832, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3878,7 +3895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_Name
-      value: Slime
+      value: Slime2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
@@ -4304,7 +4321,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08f20e81e0da354eb3efa723ae49cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersGroup: []
+  playersGroup:
+  - playerGameObject: {fileID: 1583896421}
+    isTurn: 0
+    wasTurnPrev: 0
+  - playerGameObject: {fileID: 2103903990}
+    isTurn: 0
+    wasTurnPrev: 0
+  - playerGameObject: {fileID: 1191622177}
+    isTurn: 0
+    wasTurnPrev: 0
+  - playerGameObject: {fileID: 1623049529}
+    isTurn: 0
+    wasTurnPrev: 0
+  - playerGameObject: {fileID: 863557667}
+    isTurn: 0
+    wasTurnPrev: 0
   isSwitched: 0
 --- !u!4 &1019239814
 Transform:
@@ -5260,11 +5292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.005027694
+      value: -0.0050276774
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0010266723
+      value: -0.0010266689
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5415,6 +5447,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4006118923780855115, guid: 6a8f39f9ab6a300419afb341b145b8e0, type: 3}
   m_PrefabInstance: {fileID: 1177568551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1191622177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+  m_PrefabInstance: {fileID: 314005580}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1214842262
 PrefabInstance:
@@ -6439,6 +6476,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 1622966130}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1623049529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+  m_PrefabInstance: {fileID: 879460875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1629018638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6720,11 +6762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000006519258
+      value: -0.000000010244548
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000013969839
+      value: 0.0000000019790605
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485755215597, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_Name
@@ -6907,6 +6949,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1040628354}
     m_Modifications:
+    - target: {fileID: 3927927722251868749, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+      propertyPath: moveKey
+      value: 122
+      objectReference: {fileID: 0}
     - target: {fileID: 4642553768984167832, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7505,6 +7551,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1040628354}
     m_Modifications:
+    - target: {fileID: 3927927722251868749, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+      propertyPath: moveKey
+      value: 122
+      objectReference: {fileID: 0}
     - target: {fileID: 4642553768984167832, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -7563,7 +7613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_Name
-      value: Slime
+      value: Slime3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
@@ -8401,6 +8451,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 2091857389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2103903990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6593983227920834782, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+  m_PrefabInstance: {fileID: 1796181773}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2127053631
 PrefabInstance:
