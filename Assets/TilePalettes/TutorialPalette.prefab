@@ -48,17 +48,51 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2196845022547464120}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: -1, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: b7d029dd39f6abe4598bc232f2c9bb6a, type: 2}
+  m_TileSpriteArray:
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: f0557082f5b67ee41b53eef81e5ad68f, type: 3}
+  m_TileMatrixArray:
+  - m_RefCount: 1
+    m_Data:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_TileColorArray:
+  - m_RefCount: 1
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: -1, y: 0, z: 0}
+  m_Size: {x: 1, y: 3, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -88,7 +122,7 @@ TilemapRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
@@ -179,6 +213,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3060232698172014711}
     m_Modifications:
+    - target: {fileID: 4327960876547824739, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4642553768984167832, guid: f296c0a613a9add4ab27e74d5653fb63, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -253,6 +291,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3060232698172014711}
     m_Modifications:
+    - target: {fileID: 1880342657237740537, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
       propertyPath: m_Name
       value: Water
@@ -367,6 +409,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8216817407306985834, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
 --- !u!4 &1251414346376141710 stripped
@@ -381,6 +427,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3060232698172014711}
     m_Modifications:
+    - target: {fileID: 2857538110336193646, guid: c30141b4a039add48bd798d7942942b6, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665563620291492279, guid: c30141b4a039add48bd798d7942942b6, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5322656016077226428, guid: c30141b4a039add48bd798d7942942b6, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -443,6 +497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3060232698172014711}
     m_Modifications:
+    - target: {fileID: 1598180618474315314, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3926537698754845764, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
       propertyPath: m_Name
       value: Grass
@@ -505,6 +563,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3060232698172014711}
     m_Modifications:
+    - target: {fileID: 2988070583927791093, guid: 6a8f39f9ab6a300419afb341b145b8e0, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3214246606458069452, guid: 6a8f39f9ab6a300419afb341b145b8e0, type: 3}
       propertyPath: m_Name
       value: Rock
@@ -571,6 +633,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 6689041038826477797, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8405106733108736133, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -622,7 +688,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8405106733108736133, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
   m_PrefabInstance: {fileID: 8747004052582308876}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &487651658232877558
+--- !u!114 &7197384706569735359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
