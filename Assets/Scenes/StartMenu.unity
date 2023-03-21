@@ -1914,7 +1914,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761114312}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -3524,8 +3524,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This game is made by the prestigious pigeons for the minor Game Development
-    of THUAS.
+  m_text: "Welcome to the about us section! We're the Prestigious Pigeons, a team
+    of talented game developers who created this game for the minor Game Development
+    at THUAS. Our team includes Chris Golemi, Rick de Bruijn, Yorick Schmidt, Davita
+    de Jong, Dani\xEBl den Heijer, Quinten Ringenier, Arman Farahmand, Ibrahim Zoulali,
+    and Michael Scholten - each of us driven by a shared passion for gaming and a
+    diverse range of skills. We're excited to have used our expertise to bring this
+    game to life and can't wait for you to experience it.\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
