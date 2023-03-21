@@ -53,20 +53,9 @@ public class PlayerTurnClass : MonoBehaviour
     
     private void DoMoveAction()
     {
-        Vector3 pos = GetMouseWorldPos();
+        Vector3 pos = MouseWorld.GetPosition();
         _playerMovement.MovePlayer(pos, _gridSelect.GetGridLayout(), _gridSelect.GetPathNodesMap());
     }
 
-    private Vector3 GetMouseWorldPos()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
-        {
-            return raycastHit.point;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
-    }
+
 }
