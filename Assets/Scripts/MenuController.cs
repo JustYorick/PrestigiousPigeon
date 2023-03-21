@@ -12,18 +12,9 @@ public class MenuController : MonoBehaviour {
         menu = gameObject.GetComponent<Canvas>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
+    // Enabling a canvas, opens it
+    public void OpenMenu() => menu.enabled = true;
 
-    public void OpenMenu(){
-        // Enabling a canvas, opens it
-        menu.enabled = true;
-    }
-
-    public void CloseMenu(){
-        // Disable the menu to close it again
-        menu.enabled = false;
-    }
+    // Disable the menu to close it again
+    public void CloseMenu() => menu.enabled = false;
 }

@@ -13,8 +13,6 @@ public class AppController : MonoBehaviour{
         Screen.fullScreen = SettingsController.ReadSettingBool("FullScreen");
     }
 
-    public void Start(){
-        // Apply the settings
-        ApplySettings();
-    }
+    // Apply the settings
+    public void Start() => ApplySettings();
 }

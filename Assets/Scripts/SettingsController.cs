@@ -41,23 +41,15 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    void SaveSetting(string name, bool value){
-        // Save the setting as an integer with the value 0 or 1
-        PlayerPrefs.SetInt(name, value? 1: 0);
-    }
+    // Save the setting as an integer with the value 0 or 1
+    void SaveSetting(string name, bool value) => PlayerPrefs.SetInt(name, value? 1: 0);
 
-    void SaveSetting(string name, float value){
-        // Save the setting as a float
-        PlayerPrefs.SetFloat(name, value);
-    }
+    // Save the setting as a float
+    void SaveSetting(string name, float value) => PlayerPrefs.SetFloat(name, value);
 
-    public static bool ReadSettingBool(string name){
-        // Read the last saved setting, return 1 if there is no setting with this name available
-        return PlayerPrefs.GetInt(name, 1) >= 1;
-    }
+    // Read the last saved setting, return 1 if there is no setting with this name available
+    public static bool ReadSettingBool(string name) => PlayerPrefs.GetInt(name, 1) >= 1;
 
-    public static float ReadSettingFloat(string name){
-        // Read the last saved setting, return 0 if there is no setting with this name available
-        return PlayerPrefs.GetFloat(name, 0.0f);
-    }
+    // Read the last saved setting, return 0 if there is no setting with this name available
+    public static float ReadSettingFloat(string name) => PlayerPrefs.GetFloat(name, 0.0f);
 }

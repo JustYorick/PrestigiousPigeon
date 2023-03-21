@@ -5,19 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void LoadScene(string sceneName){
-        SceneManager.LoadScene(sceneName);
-    }
+    // Load the scene using the name of the scene
+    public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
 }
