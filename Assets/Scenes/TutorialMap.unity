@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17212448, g: 0.2059594, b: 0.24549764, a: 1}
+  m_IndirectSpecularColor: {r: 0.17212401, g: 0.20595872, b: 0.24549668, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5370,6 +5370,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4006118923780855115, guid: 6a8f39f9ab6a300419afb341b145b8e0, type: 3}
   m_PrefabInstance: {fileID: 1177568551}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1207430060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1023215485755215597, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
+  m_PrefabInstance: {fileID: 1717043562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1207430063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207430060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: d3d725df08100235ba0c38b72d970338, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Camera
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1214842262
 PrefabInstance:
   m_ObjectHideFlags: 0
