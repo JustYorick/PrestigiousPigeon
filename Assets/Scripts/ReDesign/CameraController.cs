@@ -12,13 +12,11 @@ namespace ReDesign
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            }
-            else
-            {
+            } else {
                 _instance = this;
             }
         }
-
+        
         [SerializeField] private float rotationSpeed = 100f;
         [SerializeField] private float moveSpeed = 10f;
         private Vector3 inputMoveDir = Vector3.zero;
@@ -37,8 +35,7 @@ namespace ReDesign
             transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
         }
 
-        void OnMove(InputValue value)
-        {
+        void OnMove(InputValue value){
             // Get the movement input
             Vector2 movement = value.Get<Vector2>();
 
@@ -48,7 +45,7 @@ namespace ReDesign
 
         // Get the rotation input
         void OnRotate(InputValue value) => rotation = value.Get<float>();
-
-
+        
+        
     }
 }
