@@ -19,6 +19,7 @@ namespace ReDesign
 
 
         public int turnCount = 0;
+        private int turnPart = 0;
         
         private List<Entity> entities = new List<Entity>()
         {
@@ -27,11 +28,13 @@ namespace ReDesign
 
         public void ResolveTurn()
         {
-            foreach (var entity in entities)
-            { 
-                entity.NextAction();   
+            if (turnPart < entities.Count-1)
+            {
+                entities[turnPart].NextAction();
+                turnPart++;
             }
 
+            turnPart = 0;
             turnCount++;
         }
     }
