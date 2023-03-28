@@ -35,11 +35,9 @@ namespace ReDesign
         {
             BaseLayer = new List<DefaultTile>();
             ObstacleLayer = new List<DefaultTile>();
-            //load world from scene to tile lists
             for (int i = 0; i < baseTilemap.transform.childCount; i++)
             {
                 GameObject child = baseTilemap.transform.GetChild(i).gameObject;
-                //Debug.Log(""+obstacleLayer.transform.GetChild(i).gameObject.transform.position);
                 baseLayerChildren.Add(child);
             }
 
@@ -63,20 +61,6 @@ namespace ReDesign
             {
                 for (int x = 0; x < Math.Sqrt(baseLayerChildren.Count); x++)
                 {
-                    /*
-                    PathNode pn = new PathNode(x, y)
-                    {
-                        worldXPos = baseLayerChildren[counter].transform.position.x,
-                        worldYPos = baseLayerChildren[counter].transform.position.z,
-                        isWalkable = true
-                    };
-
-                    if (baseLayerChildren[counter].CompareTag("Unwalkable"))
-                    {
-                        pn.isWalkable = false;
-                    }
-
-                    pathNodesMap.Add(pn);*/
                     DefaultTile tile = new DefaultTile {
                         GameObject = baseLayerChildren[counter],
                         XPos = x,
@@ -108,13 +92,6 @@ namespace ReDesign
                 };
 
                 ObstacleLayer.Add(enemy);
-
-                /*
-                float closestX = pathNodesMap.OrderBy(item => Math.Abs(child.transform.position.x - item.worldXPos)).Select(n => n.worldXPos).ToList().First();
-                float closestY = pathNodesMap.OrderBy(item => Math.Abs(child.transform.position.z - item.worldYPos)).Select(n => n.worldYPos).ToList().First();
-                PathNode resultNode = pathNodesMap.Where(n => n.worldXPos == closestX && n.worldYPos == closestY).First();
-                resultNode.isWalkable = false;
-                resultNode.obstacle = child;*/
             }
         }
 

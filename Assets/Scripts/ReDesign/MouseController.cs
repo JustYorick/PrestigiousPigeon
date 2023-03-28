@@ -22,22 +22,11 @@ namespace ReDesign
         {
             if (Input.GetMouseButtonDown(0))
             {
-               // Debug.Log("on mouse down");
                 Vector3 pos = GetMouseWorldPos();
-               // Debug.Log("moveplayer:" + pos.x);
-
-                //Debug.Log(" "+player.transform.position.y);
-
-
-
-                //List<DefaultTile> pathNodesMap = this.GetComponent<WorldController>().BaseLayer;
                 GridLayout gr = WorldController.Instance.gridLayout;
-                //Debug.Log("" + gr.name);
                 List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 Debug.Log("" + pathNodesMap.Count);
                 player.GetComponent<PlayerMovement>().MovePlayer(pos, gr, pathNodesMap);
-                //Debug.Log("" + player.GetComponent<PlayerMovement>().tag);
-                
                 
             }
 
@@ -49,16 +38,13 @@ namespace ReDesign
                 List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
                 WorldController.Instance.GetComponent<EnvironmentEffect>().IceEnvironmentEffects(affectedNodes);
             }
+
             // Temp 2
             if (Input.GetKeyDown("o"))
             {
                 List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 Debug.Log("o pressed");
                 List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
-                //affectedNodes = new List<PathNode>() { pathNodesMap.Where(p => p.x == 1 && p.y == 4).FirstOrDefault(),
-                //    pathNodesMap.Where(p => p.x == 2 && p.y == 8).FirstOrDefault(),
-                //    pathNodesMap.Where(p => p.x == 8 && p.y == 8).FirstOrDefault(),
-                //};
                 WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(affectedNodes);
             }
         }

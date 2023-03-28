@@ -48,7 +48,6 @@ public class PlayerPathfinding
 
         while (openList.Count > 0)
         {
-            Debug.Log("openlist count");
             DefaultTile currentNode = GetLowestFCostNode(openList);
             if (currentNode.XPos == endNode.XPos && currentNode.YPos == endNode.YPos)
             {
@@ -117,14 +116,12 @@ public class PlayerPathfinding
             neighbourList.Add(GetNode(currentNode.XPos, currentNode.YPos + 1));
         }
 
-        Debug.Log("neightbour count"+neighbourList.Count);
         return neighbourList;
     }
 
     private DefaultTile GetNode(int x, int y)
     {
         DefaultTile pnode = grid.Where(n => n.XPos == x && n.YPos == y).Select(n => n).FirstOrDefault();
-        Debug.Log("getnode"+pnode.XPos +","+pnode.YPos);
         return pnode;
     }
 
@@ -135,7 +132,6 @@ public class PlayerPathfinding
         DefaultTile currentNode = endNode;
         while (currentNode.PathNode.previousNode != null)
         {
-            Debug.Log("calculating path");
             path.Add(currentNode.PathNode.previousNode);
             currentNode = currentNode.PathNode.previousNode;
         }
@@ -161,7 +157,6 @@ public class PlayerPathfinding
                 lowestFCostNode = pathNodeList[i];
             }
         }
-        Debug.Log("lowest f"+lowestFCostNode.XPos);
         return lowestFCostNode;
     }
 }

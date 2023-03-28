@@ -25,27 +25,16 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="pathNodesMap">List of PathNodes that form a grid together, PathNodes have both simplified and in world coordinates</param>
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
-        //Debug.Log("MOVE PLAYER ");
-
         //Currently only works for square grids not rectangular grids
         int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
         int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
-        Debug.Log("pnodesmap count"+pathNodesMap.Count);
-        Debug.Log("pnoesmap 100 xpos"+pathNodesMap[99].XPos);
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
         DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
         DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
-        Debug.Log("PLAYER: "+playerPathNode.XPos + ", "+playerPathNode.YPos);
-        Debug.Log("TARGET: " + targetPathNode.XPos + ", " + targetPathNode.YPos);
-        Debug.Log("WORLDPOS: "+ targetPathNode.GameObject.transform.position.x +", "+ targetPathNode.GameObject.transform.position.y+ ", "+ targetPathNode.GameObject.transform.position.z);
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
-        Debug.Log(path.Count);
-        //foreach(DefaultTile tile in pathNodesMap)
-        {
-            //Debug.Log("x: "+tile.XPos+", Y: "+tile.YPos);
-        }
+
         if (path != null)
         {
             DrawPath(path);

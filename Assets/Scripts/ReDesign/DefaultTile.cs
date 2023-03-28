@@ -11,6 +11,5 @@ public class DefaultTile : Tile
     public DefaultTile()
     {
         this.PathNode = new PathNode();
-        //Walkable = true;
     }
 }
