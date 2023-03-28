@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class GridSelect : MonoBehaviour
 
     private List<GameObject> children = new List<GameObject>();
     private List<GameObject> obstacleLayerChildren = new List<GameObject>();
-    private List<PathNode> pathNodesMap = new List<PathNode>();
+    public List<PathNode> pathNodesMap { get; } = new List<PathNode>();
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class GridSelect : MonoBehaviour
         for (int i = 0; i < tilemap.transform.childCount; i++)
         {
             GameObject child = tilemap.transform.GetChild(i).gameObject;
+            //Debug.Log(""+obstacleLayer.transform.GetChild(i).gameObject.transform.position);
             children.Add(child);
         }
 
@@ -71,6 +72,7 @@ public class GridSelect : MonoBehaviour
             float closestY = pathNodesMap.OrderBy(item => Math.Abs(child.transform.position.z - item.worldYPos)).Select(n => n.worldYPos).ToList().First();
             PathNode resultNode = pathNodesMap.Where(n => n.worldXPos == closestX && n.worldYPos == closestY).First();
             resultNode.isWalkable = false;
+            resultNode.obstacle = child;
         }
     }
 
@@ -79,6 +81,25 @@ public class GridSelect : MonoBehaviour
     {
         Vector3 pos = GetMouseWorldPos();
         player.GetComponent<PlayerMovement>().ShowPath(pos, gridLayout, pathNodesMap);
+        
+        // Temp
+        if (Input.GetKeyDown("i"))
+        {
+            Debug.Log("i pressed");
+            List<PathNode> affectedNodes = new List<PathNode>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
+            GetComponent<EnvironmentEffect>().IceEnvironmentEffects(affectedNodes);
+        }
+        // Temp 2
+        if (Input.GetKeyDown("o"))
+        {
+            Debug.Log("o pressed");
+            List<PathNode> affectedNodes = new List<PathNode>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
+            //affectedNodes = new List<PathNode>() { pathNodesMap.Where(p => p.x == 1 && p.y == 4).FirstOrDefault(),
+            //    pathNodesMap.Where(p => p.x == 2 && p.y == 8).FirstOrDefault(),
+            //    pathNodesMap.Where(p => p.x == 8 && p.y == 8).FirstOrDefault(),
+            //};
+            GetComponent<EnvironmentEffect>().FireEnvironmentEffects(affectedNodes);
+        }
     }
     
     private void OnMouseDown()
@@ -100,4 +121,4 @@ public class GridSelect : MonoBehaviour
         }
     }
 
-}
+}*/
