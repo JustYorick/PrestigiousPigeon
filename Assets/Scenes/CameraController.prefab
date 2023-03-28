@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023215485511934631}
-  m_LocalRotation: {x: 0.20007455, y: 0.000000020929566, z: -0.000000004273889, w: 0.9797807}
+  m_LocalRotation: {x: 0.20007455, y: 0.000000006246367, z: -0.0000000012755292, w: 0.9797807}
   m_LocalPosition: {x: 0, y: 4.07, z: -9.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -80,7 +80,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1023215485755215599}
-  - component: {fileID: 1023215485755215598}
+  - component: {fileID: 8316255823005536694}
+  - component: {fileID: 5326410484685980243}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -104,7 +105,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1023215485755215598
+--- !u!114 &8316255823005536694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,11 +114,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1023215485755215597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1594133e8ca6624cb5a86aa15f666ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 37d3781394ec43bda084b4a379278e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   moveSpeed: 10
+--- !u!114 &5326410484685980243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023215485755215597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: d3d725df08100235ba0c38b72d970338, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Camera
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1023215486341514702
 GameObject:
   m_ObjectHideFlags: 0
