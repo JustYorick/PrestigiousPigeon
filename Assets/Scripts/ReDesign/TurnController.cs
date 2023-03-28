@@ -18,20 +18,23 @@ namespace ReDesign
         }
 
 
-        public int turnCount = 0;
+        public static int turnCount = 0;
+        private static int _turnPart = 0;
         
-        private List<Entity> entities = new List<Entity>()
+        private static List<Entity> _entities = new List<Entity>()
         {
             new Player()
         };
 
-        public void ResolveTurn()
+        public static void ResolveTurn()
         {
-            foreach (var entity in entities)
-            { 
-                entity.NextAction();   
+            if (_turnPart < _entities.Count-1)
+            {
+                _entities[_turnPart].NextAction();
+                _turnPart++;
             }
 
+            _turnPart = 0;
             turnCount++;
         }
     }
