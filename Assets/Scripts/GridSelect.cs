@@ -77,7 +77,8 @@ public class GridSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 pos = GetMouseWorldPos();
+        player.GetComponent<PlayerMovement>().ShowPath(pos, gridLayout, pathNodesMap);
     }
     
     private void OnMouseDown()

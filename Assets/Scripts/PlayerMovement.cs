@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
+    [SerializeField] private bool predrawPath = true;
+    private List<PathNode> predrawnPath = new List<PathNode>();
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +33,16 @@ public class PlayerMovement : MonoBehaviour
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
         PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
         PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
-
-        List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
+        List<PathNode> path;
+        if(predrawPath){
+            path = predrawnPath;
+        }else{
+            path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
+        }
         
         if (path != null)
         {
+            predrawPath = false;
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.isWalkable = true;
@@ -84,5 +91,31 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void ShowPath(Vector3 targetLocation, GridLayout layout, List<PathNode> pathNodesMap){
+        if(predrawPath){
+            // Erase the old path
+            foreach(PathNode node in predrawnPath){
+                Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.worldXPos, 0,node.worldYPos));
+                
+                walkingLayer.SetTile(cell, null);
+            }
+            
+            //Currently only works for square grids not rectangular grids
+            int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
+            int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+
+            // Set the starting and end point for the new path
+            PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
+            PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+            PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
+
+            // Find and draw the optimal path
+            List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
+            DrawPath(path);
+
+            predrawnPath = path;
+        }
     }
 }
