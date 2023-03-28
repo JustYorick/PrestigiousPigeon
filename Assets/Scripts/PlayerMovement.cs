@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.Tilemaps;
+using ReDesign;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,41 +23,52 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="targetLocation">Destination vector location in world</param>
     /// <param name="gridLayout">Layout of the grid the player should move within so the player can be centered</param>
     /// <param name="pathNodesMap">List of PathNodes that form a grid together, PathNodes have both simplified and in world coordinates</param>
-    public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<PathNode> pathNodesMap)
+    public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
+        //Debug.Log("MOVE PLAYER ");
+
         //Currently only works for square grids not rectangular grids
         int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
         int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        Debug.Log("pnodesmap count"+pathNodesMap.Count);
+        Debug.Log("pnoesmap 100 xpos"+pathNodesMap[99].XPos);
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
-        PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
-        PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
+        DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+        DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
-        List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
-        
+        Debug.Log("PLAYER: "+playerPathNode.XPos + ", "+playerPathNode.YPos);
+        Debug.Log("TARGET: " + targetPathNode.XPos + ", " + targetPathNode.YPos);
+        Debug.Log("WORLDPOS: "+ targetPathNode.GameObject.transform.position.x +", "+ targetPathNode.GameObject.transform.position.y+ ", "+ targetPathNode.GameObject.transform.position.z);
+        List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
+        Debug.Log(path.Count);
+        //foreach(DefaultTile tile in pathNodesMap)
+        {
+            //Debug.Log("x: "+tile.XPos+", Y: "+tile.YPos);
+        }
         if (path != null)
         {
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
-            playerPathNode.isWalkable = true;
-            targetPathNode.isWalkable = false;
+            playerPathNode.Walkable = true;
+            targetPathNode.Walkable = false;
         }
     }
 
     // Finds the nearest PathNode based on world location coordinates; basically translates in world coordinates to the simplified ones.
-    private PathNode FindNearestXYPathNode(Vector3 targetLocation, List<PathNode> pathNodesMap)
+    public DefaultTile FindNearestXYPathNode(Vector3 targetLocation, List<DefaultTile> pathNodesMap)
     {
-        PathNode resultNode = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.worldXPos)).ThenBy(item => Math.Abs(targetLocation.z - item.worldYPos)).ToList().FirstOrDefault();
+        DefaultTile resultNode = pathNodesMap.OrderBy(item => Math.Abs(targetLocation.x - item.GameObject.transform.position.x)).ThenBy(item => Math.Abs(targetLocation.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
         return resultNode;
     }
 
-    IEnumerator MoveSquares(List<PathNode> path, GridLayout gridLayout)
+    IEnumerator MoveSquares(List<DefaultTile> path, GridLayout gridLayout)
     {
-        foreach (PathNode pathNode in path)
+        foreach (DefaultTile pathNode in path)
         {
-            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.worldXPos, 0, pathNode.worldYPos), gridLayout); //fix!!!!
+            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
-            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.worldXPos, 0,pathNode.worldYPos));
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
         }
     }
@@ -71,11 +83,11 @@ public class PlayerMovement : MonoBehaviour
         return position;
     }
 
-    void DrawPath(List<PathNode> pathNodes)
+    void DrawPath(List<DefaultTile> pathNodes)
     {
         foreach (var node in pathNodes)
         {
-            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.worldXPos, 0,node.worldYPos));
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.GameObject.transform.position.x, 0, node.GameObject.transform.position.z));
             
             walkingLayer.SetTile(cell, ruleTile);
         }
