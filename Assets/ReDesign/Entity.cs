@@ -28,7 +28,8 @@ namespace ReDesign
 
         public override void NextAction()
         {
-            throw new System.NotImplementedException();
+            //do sum stuff
+            TurnController.ResolveTurn();
         }
 
         public override void Move()
