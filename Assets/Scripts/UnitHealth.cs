@@ -9,8 +9,8 @@ public class UnitHealth
     private int _currentMaxHealth;
 
     // Properties
-    public int Health { get; set; }
-    public int MaxHealth { get; set; }
+    public int Health { get => _currentHealth; set => _currentHealth = value; }
+    public int MaxHealth { get => _currentMaxHealth; set => _currentMaxHealth = value; }
 
     // Constructor
 
@@ -42,8 +42,8 @@ public class UnitHealth
         }
     }
 
-    public float HealthPercentage(int _playerHealth)
+    public float HealthPercentage(int health)
     {
-        return (float)_playerHealth / _currentMaxHealth;
+        return (float)health / _currentMaxHealth;
     }
 }

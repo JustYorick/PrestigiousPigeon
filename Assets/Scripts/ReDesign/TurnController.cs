@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ReDesign.Entities;
 using UnityEngine;
 
 namespace ReDesign
