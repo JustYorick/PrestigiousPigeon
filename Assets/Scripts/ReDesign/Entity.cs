@@ -23,7 +23,7 @@ namespace ReDesign
         private GameObject gameObject;
         private List<Attack> Attacks = new List<Attack>
         {
-            new Frostbolt()
+            //new Frostbolt()
         };
 
         public override void NextAction()
