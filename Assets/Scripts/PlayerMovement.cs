@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Tilemap walkingLayer;
     private ManaSystem manaSystem;
     [SerializeField] private bool predrawPath = true;
-    private List<PathNode> predrawnPath = new List<PathNode>();
+    private List<DefaultTile> predrawnPath = new List<DefaultTile>();
 
     // Start is called before the first frame update
     void Start()
@@ -94,28 +94,29 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void ShowPath(Vector3 targetLocation, GridLayout layout, List<PathNode> pathNodesMap){
-        if(predrawPath){
+    public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
+        if(predrawPath && predrawnPath != null){
             // Erase the old path
-            foreach(PathNode node in predrawnPath){
-                Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.worldXPos, 0,node.worldYPos));
-                
+            foreach (DefaultTile pathNode in predrawnPath){
+                Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
                 walkingLayer.SetTile(cell, null);
             }
-            
+        }
+        if(predrawPath){
             //Currently only works for square grids not rectangular grids
             int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
             int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
 
-            // Set the starting and end point for the new path
             PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
-            PathNode targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
-            PathNode playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
-            // Find and draw the optimal path
-            List<PathNode> path = playerPathfinding.FindPath(playerPathNode.x, playerPathNode.y, targetPathNode.x, targetPathNode.y);
-            DrawPath(path);
+            DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+            DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
+            List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
+
+            if (path != null && path.Count <= manaSystem.GetMana()){
+                DrawPath(path);
+            }
             predrawnPath = path;
         }
     }
