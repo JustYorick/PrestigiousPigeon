@@ -41,8 +41,8 @@ public class PlayerMovement : MonoBehaviour
         {
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
-            playerPathNode.isWalkable = true;
-            targetPathNode.isWalkable = false;
+            playerPathNode.Walkable = true;
+            targetPathNode.Walkable = false;
             manaSystem.UseMana(path.Count);
         }
     }
