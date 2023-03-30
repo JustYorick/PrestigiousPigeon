@@ -6,17 +6,19 @@ using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
 
+[RequireComponent(typeof(ManaSystem))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
+    private ManaSystem manaSystem;
     [SerializeField] private bool predrawPath = true;
     private List<PathNode> predrawnPath = new List<PathNode>();
 
     // Start is called before the first frame update
     void Start()
     {
-
+        manaSystem = GetComponent<ManaSystem>();
     }
 
     /// <summary>
@@ -38,13 +40,14 @@ public class PlayerMovement : MonoBehaviour
 
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
 
-        if (path != null)
+        if (path != null && path.Count <= manaSystem.GetMana())
         {
             predrawPath = false;
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
+            manaSystem.UseMana(path.Count);
         }
     }
 
