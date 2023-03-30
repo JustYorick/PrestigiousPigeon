@@ -23,7 +23,8 @@ namespace ReDesign
         
         private static List<Entity> _entities = new List<Entity>()
         {
-            new Player()
+            new Player(),
+            new Slime()
         };
 
         public static void ResolveTurn()

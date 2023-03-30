@@ -7,34 +7,11 @@ public class UnitHealth
     // Fields
     private int _currentHealth;
     private int _currentMaxHealth;
-    
+
     // Properties
-    public int Health
-    {
-        get
-        {
-            return _currentHealth;
-        }
+    public int Health { get; set; }
+    public int MaxHealth { get; set; }
 
-        set
-        {
-            _currentHealth = value;
-        }
-    }
-    
-    public int MaxHealth
-    {
-        get
-        {
-            return _currentMaxHealth;
-        }
-
-        set
-        {
-            _currentMaxHealth = value;
-        }
-    }
-    
     // Constructor
 
     public UnitHealth(int health, int maxHealth)
@@ -42,7 +19,7 @@ public class UnitHealth
         _currentHealth = health;
         _currentMaxHealth = maxHealth;
     }
-    
+
     // Methods
     public void DmgUnit(int dmgAmount)
     {
@@ -51,7 +28,7 @@ public class UnitHealth
             _currentHealth -= dmgAmount;
         }
     }
-    
+
     public void HealUnit(int healAmount)
     {
         if (_currentHealth < _currentMaxHealth)
