@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ReDesign;
-using System.Linq;
 
-public class BasicFireSpell : SpellEffect
+public class BasicFireSpell : AttacksAndSpells
 {
     public override int MinimumRange { get { return 2; } }
     public override int MaximumRange { get { return 2; } }
+    public override int Damage { get { return 5; } }
 
-    public override void Effect(int x, int y)
+    public override void EnvironmentEffect(List<DefaultTile> targetTiles)
     {
-        DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault(); // change to GetTile()?
-        List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
-        WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(tileList);
-
-        DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
-        
-        //foreach enemy/tile
-        //mana -2
-        //range alle tiles met afstand van 2
-        //apply damage
+        WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(targetTiles);
     }
 }

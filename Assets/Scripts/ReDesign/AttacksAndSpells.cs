@@ -1,3 +1,4 @@
+using ReDesign.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,17 +6,41 @@ using UnityEngine;
 
 namespace ReDesign
 {
-    public abstract class SpellEffect
+    public abstract class AttacksAndSpells
     {
         public abstract int MinimumRange { get; }
         public abstract int MaximumRange { get; }
+        public abstract int Damage { get; }
 
         /// <summary>
-        /// Causes the spell to be casted at targeted x and y coordinates
+        /// Causes the spell or attack to be casted at targeted x and y coordinates
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public abstract void Effect(int x, int y);
+        public void Effect(int x, int y)
+        {
+            DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault(); // change to GetTile()?
+            List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
+            EnvironmentEffect(tileList);
+
+            DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
+
+            if (enemyTile != null && enemyTile.GameObject.CompareTag("Entity"))
+            {
+                Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
+                enemy.ReceiveDamage(Damage);
+            }
+            //foreach enemy/tile
+            //mana -2
+            //range alle tiles met afstand van 2
+            //apply damage
+        }
+
+        /// <summary>
+        /// Makes environment react to spell. This gets called in the Effect(..) method.
+        /// </summary>
+        /// <param name="targetTiles">List of tiles that are affected by the environment effect</param>
+        public abstract void EnvironmentEffect(List<DefaultTile> targetTiles);
 
         /// <summary>
         /// Use this to determine tiles the spell can hit
@@ -43,18 +68,5 @@ namespace ReDesign
 
             return locations;
         }
-
-        public List<DefaultTile> GetTargetLocations(int[][] coordinates) //Or something similar for AOE spells
-        {
-            return null;
-        }
-    }
-
-    public class Burn : SpellEffect
-    {
-        public override void Effect()
-        {
-            throw new NotImplementedException();
-        } 
     }
 }
