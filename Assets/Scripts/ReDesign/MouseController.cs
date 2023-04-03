@@ -47,10 +47,21 @@ namespace ReDesign
             // Temp 2
             if (Input.GetKeyDown("o"))
             {
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 Debug.Log("o pressed");
+                /*List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
                 WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(affectedNodes);
+                */
+                BasicFireSpell fire = new BasicFireSpell();
+                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+                int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
+                int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
+                if (fire.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
+                {
+                    int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
+                    int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    fire.Effect(x, y);
+                }
             }
         }
 

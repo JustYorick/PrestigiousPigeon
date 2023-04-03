@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ReDesign;
+using System.Linq;
 
-public class BasicFireSpell : MonoBehaviour
+public class BasicFireSpell : SpellEffect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override int MinimumRange { get { return 2; } }
+    public override int MaximumRange { get { return 2; } }
 
-    // Update is called once per frame
-    void Update()
+    public override void Effect(int x, int y)
     {
+        DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault(); // change to GetTile()?
+        List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
+        WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(tileList);
+
+        DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
         
+        //foreach enemy/tile
+        //mana -2
+        //range alle tiles met afstand van 2
+        //apply damage
     }
 }

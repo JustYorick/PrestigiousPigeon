@@ -40,6 +40,7 @@ namespace ReDesign
                     }
                 }
             }
+
             return locations;
         }
 
@@ -47,13 +48,5 @@ namespace ReDesign
         {
             return null;
         }
-
-        //public class Freeze : SpellEffect
-        //{
-        //    public override void Effect()
-        //    {
-        //        throw new System.NotImplementedException();
-        //    }
-        //}
     }
 }
