@@ -49,4 +49,12 @@ namespace ReDesign
             return null;
         }
     }
+
+    public class Burn : SpellEffect
+    {
+        public override void Effect()
+        {
+            throw new NotImplementedException();
+        } 
+    }
 }
