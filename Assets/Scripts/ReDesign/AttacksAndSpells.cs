@@ -25,7 +25,7 @@ namespace ReDesign
 
             DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
 
-            if (enemyTile != null && enemyTile.GameObject.CompareTag("Entity"))
+            if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
             {
                 Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                 enemy.ReceiveDamage(Damage);

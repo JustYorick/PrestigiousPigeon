@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ReDesign.Entities
@@ -23,6 +24,7 @@ namespace ReDesign.Entities
             if (_entityHealth.Health <= 0)
             {
                 //Add animation so it isnt instant
+                WorldController.Instance.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault().GameObject = null;
                 Destroy(this.gameObject);
             }
         }
