@@ -6,21 +6,17 @@ namespace ReDesign.Entities
 {
     public class Player : Entity
     {
-        private UnitHealth _playerHealth;
-        private int XPos = 0;
-        private int YPos = 0;
-        private GameObject _gameObject;
-        [SerializeField] private GameObject _healthBar;
 
-        private List<Attack> _attacks = new List<Attack>
+        private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
         {
-            new Fireball(),
-            new Frostbolt()
+            new BasicFireSpell(),
+            new BasicIceSpell()
         };
 
         private void Awake()
         {
-            _playerHealth = new UnitHealth(20, 20);
+            int MaxHealth = 20;
+            _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
         }
 
         public override void NextAction()
