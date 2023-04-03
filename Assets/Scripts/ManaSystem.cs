@@ -13,7 +13,7 @@ public class ManaSystem : MonoBehaviour
         StartTurn();
     }
 
-    void StartTurn(){
+    public void StartTurn(){
         // Fill the mana back to the max
         manaPointsLeft = manaPointsPerTurn;
     }
