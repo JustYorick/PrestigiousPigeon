@@ -5,13 +5,14 @@ namespace ReDesign.Entities
 {
     public class Slime : Entity
     {
-        private UnitHealth _slimeHealth = new UnitHealth(5, 5);
-        private int XPos = 0;
-        private int YPos = 0;
-        private GameObject _gameObject;
-        [SerializeField] private GameObject _healthBar;
 
-        private List<Attack> _attacks = new List<Attack>()
+        public Slime()
+        {
+            int MaxHealth = 5;
+            _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
+        }
+
+        private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>()
         {
             new SlimeAttack()
         };
@@ -32,13 +33,6 @@ namespace ReDesign.Entities
         
         private void Update()
         {
-            if (Input.GetKeyDown("f"))
-            {
-                _slimeHealth.DmgUnit(1);
-                _healthBar.transform.localScale = (new Vector3(
-                    _slimeHealth.HealthPercentage(_slimeHealth.Health),
-                    (float)0.1584, (float)0.09899999));
-            }
         }
     }
 }

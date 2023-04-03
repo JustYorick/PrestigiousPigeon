@@ -25,27 +25,43 @@ namespace ReDesign
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
                 List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
-                Debug.Log("" + pathNodesMap.Count);
                 player.GetComponent<PlayerMovement>().MovePlayer(pos, gr, pathNodesMap);
-                
             }
 
             // Temp
             if (Input.GetKeyDown("i"))
             {
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 Debug.Log("i pressed");
-                List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
-                WorldController.Instance.GetComponent<EnvironmentEffect>().IceEnvironmentEffects(affectedNodes);
+                BasicIceSpell ice = new BasicIceSpell();
+                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+                int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
+                int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
+                if (ice.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
+                {
+                    int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
+                    int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    ice.Effect(x, y);
+                }
             }
 
             // Temp 2
             if (Input.GetKeyDown("o"))
             {
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 Debug.Log("o pressed");
+                /*List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
                 WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(affectedNodes);
+                */
+                BasicFireSpell fire = new BasicFireSpell();
+                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+                int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
+                int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
+                if (fire.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
+                {
+                    int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
+                    int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    fire.Effect(x, y);
+                }
             }
         }
 

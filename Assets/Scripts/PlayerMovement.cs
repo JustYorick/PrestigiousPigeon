@@ -41,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
+
+            List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
+            foreach (DefaultTile dt in list)
+            {
+                Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
+            }
         }
     }
 
@@ -84,6 +90,5 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 }
