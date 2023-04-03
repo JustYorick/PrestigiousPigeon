@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ReDesign.Entities;
 using UnityEngine;
 
 namespace ReDesign
@@ -23,7 +24,6 @@ namespace ReDesign
         
         private static List<Entity> _entities = new List<Entity>()
         {
-            new Player()
         };
 
         public static void ResolveTurn()

@@ -1,30 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace ReDesign
+namespace ReDesign.Entities
 {
-    public abstract class Entity
-    {
-        private int Health { get; set; }
-        private int XPos { get; set; }
-        private int YPos { get; set; }
-        private List<Attack> Attacks { get; set; }
-
-        public abstract void NextAction();
-        public abstract void Move();
-        public abstract void Attack();
-    }
-
     public class Player : Entity
     {
-        private int Health = 100;
+        private UnitHealth _playerHealth;
         private int XPos = 0;
         private int YPos = 0;
-        private GameObject gameObject;
-        private List<Attack> Attacks = new List<Attack>
+        private GameObject _gameObject;
+        [SerializeField] private GameObject _healthBar;
+
+        private List<Attack> _attacks = new List<Attack>
         {
+            new Fireball(),
             new Frostbolt()
         };
+
+        private void Awake()
+        {
+            _playerHealth = new UnitHealth(20, 20);
+        }
 
         public override void NextAction()
         {

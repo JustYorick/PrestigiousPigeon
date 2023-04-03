@@ -15,4 +15,12 @@ namespace ReDesign
             throw new System.NotImplementedException();
         }
     }
+
+    public class Burn : SpellEffect
+    {
+        public override void Effect()
+        {
+            throw new NotImplementedException();
+        } 
+    }
 }
