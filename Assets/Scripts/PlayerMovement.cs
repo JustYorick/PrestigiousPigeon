@@ -6,15 +6,19 @@ using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
 
+[RequireComponent(typeof(ManaSystem))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
+    private ManaSystem manaSystem;
+    [SerializeField] private bool predrawPath = true;
+    private List<DefaultTile> predrawnPath = new List<DefaultTile>();
 
     // Start is called before the first frame update
     void Start()
     {
-
+        manaSystem = GetComponent<ManaSystem>();
     }
 
     /// <summary>
@@ -30,17 +34,21 @@ public class PlayerMovement : MonoBehaviour
         int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
+
         DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
         DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
+        int pathCost = path == null? 0 : path.Count - 1;
 
-        if (path != null)
+        if (path != null && pathCost <= manaSystem.GetMana())
         {
+            predrawPath = false;
             DrawPath(path);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
+            manaSystem.UseMana(pathCost);
 
             List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
             foreach (DefaultTile dt in list)
@@ -66,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
         }
+        manaSystem.StartTurn();
+        predrawPath = true;
     }
 
     private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
@@ -90,5 +100,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
+        if(predrawPath && predrawnPath != null){
+            // Erase the old path
+            foreach (DefaultTile pathNode in predrawnPath){
+                Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
+                walkingLayer.SetTile(cell, null);
+            }
+        }
+        if(predrawPath){
+            //Currently only works for square grids not rectangular grids
+            int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
+            int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+
+            PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
+
+            DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+            DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
+
+            List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
+
+            if (path != null && path.Count - 1 <= manaSystem.GetMana()){
+                DrawPath(path);
+            }
+            predrawnPath = path;
+        }
     }
 }
