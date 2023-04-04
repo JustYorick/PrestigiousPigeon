@@ -55,7 +55,7 @@ namespace ReDesign
             {
                 for (int moveY = -MaximumRange; moveY <= MaximumRange; moveY++)
                 {
-                    if (Math.Abs(moveX) + Math.Abs(moveY) == MaximumRange)
+                    if (Math.Abs(moveX) + Math.Abs(moveY) <= MaximumRange && Math.Abs(moveX) + Math.Abs(moveY) >= MinimumRange)
                     {
                         int targetLocationX = x + moveX;
                         int targetLocationY = y + moveY;
