@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ReDesign.Entities;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace ReDesign
     {
         private static TurnController _instance;
         public static TurnController Instance { get { return _instance; } }
-        public static int turnCount = 0;
+        public static int TurnCount = 0;
         private static int _turnPart = -1;
         private static List<Entity> _entities = new List<Entity>();
 
@@ -42,10 +41,11 @@ namespace ReDesign
             }
 
             //_turnPart = 0;
-            turnCount++;
+            TurnCount++;
+            FillEntityList();
         }
 
-        public void FillEntityList()
+        public static void FillEntityList()
         {
             _entities = WorldController.getEntities();
         }
