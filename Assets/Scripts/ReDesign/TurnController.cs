@@ -8,34 +8,46 @@ namespace ReDesign
     {
         private static TurnController _instance;
         public static TurnController Instance { get { return _instance; } }
+        public static int TurnCount = 0;
+        private static int _turnPart = -1;
+        private static List<Entity> _entities = new List<Entity>();
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            } else {
+            }
+            else
+            {
                 _instance = this;
             }
         }
 
-
-        public static int turnCount = 0;
-        private static int _turnPart = 0;
-        
-        private static List<Entity> _entities = new List<Entity>()
+        private void Start()
         {
-        };
+            FillEntityList();
+            
+            //starts the first turn loop
+            ResolveNextTurn();
+        }
 
-        public static void ResolveTurn()
+        public static void ResolveNextTurn()
         {
             if (_turnPart < _entities.Count-1)
             {
-                _entities[_turnPart].NextAction();
                 _turnPart++;
+                _entities[_turnPart].NextAction();
             }
 
-            _turnPart = 0;
-            turnCount++;
+            //_turnPart = 0;
+            TurnCount++;
+            FillEntityList();
+        }
+
+        public static void FillEntityList()
+        {
+            _entities = WorldController.getEntities();
         }
     }
 }

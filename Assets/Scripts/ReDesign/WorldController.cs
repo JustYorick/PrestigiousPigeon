@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -10,7 +11,7 @@ namespace ReDesign
     public class WorldController : MonoBehaviour
     {
         public List<DefaultTile> BaseLayer;
-        public List<DefaultTile> ObstacleLayer;
+        public static List<DefaultTile> ObstacleLayer;
         [SerializeField] private Tilemap baseTilemap;
         [SerializeField] private Tilemap obstacleTilemap;
         public GridLayout gridLayout;
@@ -93,6 +94,20 @@ namespace ReDesign
 
                 ObstacleLayer.Add(enemy);
             }
+        }
+
+        public static List<Entity> getEntities()
+        {
+            List<Entity> outList = new List<Entity>();
+            foreach (var tile in ObstacleLayer)
+            {
+                if (tile.GameObject.CompareTag("Entity"))
+                {
+                    outList.Add(tile.GameObject.GetComponent<Entity>());
+                }
+            }
+
+            return outList;
         }
 
         public List<Dictionary<string, List<int>>> getTiles(int XPos, int YPos)

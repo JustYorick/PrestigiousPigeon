@@ -18,18 +18,24 @@ namespace ReDesign
         }
 
 
-        public GameState currentState { get; private set; } = GameState.Idle;
+        public static GameState currentState { get; private set; } = GameState.Idle;
 
-        public void ChangeState(GameState state)
+        public static void ChangeState(GameState state)
         {
             currentState = state;
+
+            if (state == GameState.EndTurn)
+            {
+               TurnController.ResolveNextTurn(); 
+            }
         }
     }
 
     public enum GameState
     {
         Idle,
-        ballin,
-        offDaZoinks,
+        PlayerTurn,
+        EnemyTurn,
+        EndTurn,
     }
 }

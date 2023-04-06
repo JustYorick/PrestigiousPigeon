@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17212418, g: 0.20595899, b: 0.24549705, a: 1}
+  m_IndirectSpecularColor: {r: 0.17212401, g: 0.20595872, b: 0.24549668, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6378,6 +6378,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruleTile: {fileID: 11400000, guid: 7a8692fdc99ac884ebb3ceafef24f699, type: 2}
   walkingLayer: {fileID: 1040628356}
+  predrawPath: 1
+--- !u!114 &1583896429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583896421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d80f1c73338e2b59bfaebf35705d8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaPointsPerTurn: 5
+  manaPointsLeft: 0
 --- !u!1001 &1584751922
 PrefabInstance:
   m_ObjectHideFlags: 0

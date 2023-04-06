@@ -20,6 +20,12 @@ namespace ReDesign
         }
         private void Update()
         {
+            {
+                Vector3 pos = GetMouseWorldPos();
+                GridLayout gr = WorldController.Instance.gridLayout;
+                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+                player.GetComponent<PlayerMovement>().ShowPath(pos, gr, pathNodesMap);
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 pos = GetMouseWorldPos();

@@ -19,7 +19,9 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            throw new System.NotImplementedException();
+            StateController.ChangeState(GameState.EnemyTurn);
+            Debug.Log("im a slime");
+            StateController.ChangeState(GameState.EndTurn);
         }
 
         public override void Move()
@@ -29,10 +31,7 @@ namespace ReDesign.Entities
 
         public override void Attack()
         {
-        }
-        
-        private void Update()
-        {
+            throw new System.NotImplementedException();
         }
     }
 }

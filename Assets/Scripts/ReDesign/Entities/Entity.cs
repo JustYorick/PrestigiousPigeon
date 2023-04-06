@@ -24,7 +24,7 @@ namespace ReDesign.Entities
             if (_entityHealth.Health <= 0)
             {
                 //Add animation so it isnt instant
-                DefaultTile obstacleTile = WorldController.Instance.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
+                DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
                 obstacleTile.GameObject = null;
                 WorldController.Instance.BaseLayer.Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault().Walkable = true;
                 Destroy(this.gameObject);

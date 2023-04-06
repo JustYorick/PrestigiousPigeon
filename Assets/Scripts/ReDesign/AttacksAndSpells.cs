@@ -23,7 +23,7 @@ namespace ReDesign
             List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
             EnvironmentEffect(tileList);
 
-            DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
+            DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
 
             if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
             {
@@ -55,7 +55,7 @@ namespace ReDesign
             {
                 for (int moveY = -MaximumRange; moveY <= MaximumRange; moveY++)
                 {
-                    if (Math.Abs(moveX) + Math.Abs(moveY) == MaximumRange)
+                    if (Math.Abs(moveX) + Math.Abs(moveY) <= MaximumRange && Math.Abs(moveX) + Math.Abs(moveY) >= MinimumRange)
                     {
                         int targetLocationX = x + moveX;
                         int targetLocationY = y + moveY;
