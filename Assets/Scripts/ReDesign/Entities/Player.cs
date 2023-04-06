@@ -21,8 +21,9 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            //do sum stuff
-            TurnController.ResolveTurn();
+            StateController.ChangeState(GameState.PlayerTurn);
+            Debug.Log("im a player");
+            StateController.ChangeState(GameState.EndTurn);
         }
 
         public override void Move()

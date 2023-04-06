@@ -77,11 +77,12 @@ public class EnvironmentEffect : MonoBehaviour
     {
         foreach (DefaultTile pn in pathNodes)
         {
-            DefaultTile tempTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
 
             if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("tree"))
             {
                 WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+                WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
                 Destroy(tempTile.GameObject);
                 tempTile.GameObject = null;
             }

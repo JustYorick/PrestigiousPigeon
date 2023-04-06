@@ -23,7 +23,7 @@ namespace ReDesign
             List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
             EnvironmentEffect(tileList);
 
-            DefaultTile enemyTile = WorldController.Instance.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
+            DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
 
             if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
             {
