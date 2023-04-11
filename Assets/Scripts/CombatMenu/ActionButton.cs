@@ -21,7 +21,7 @@ public class ActionButton : MonoBehaviour{
     [Header("Other buttons")]
     [SerializeField] private ActionButton[] buttons;
 
-    public bool active{get; private set;} = false;
+    [field:SerializeField] public bool active{get; private set;} = false;
 
     private RectTransform rectTransform;
     
@@ -33,8 +33,12 @@ public class ActionButton : MonoBehaviour{
         // Add a listener for the OnClick of the button, to make the button wide
         button.onClick.AddListener(Activate);
 
-        // Set the default values to narrow
-        MakeNarrow();
+        // Make the button wide or narrow depending on whether the button is active
+        if(active){
+            MakeWide();
+        }else{
+            MakeNarrow();
+        }
     }
     
     void MakeWide(){
@@ -58,7 +62,7 @@ public class ActionButton : MonoBehaviour{
         rectTransform.sizeDelta = narrowSize;
     }
 
-    private void Activate(){
+    void Activate(){
         // Activate the button, if it's currently inactive
         if(!active){
             MakeWide();
