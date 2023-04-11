@@ -70,9 +70,9 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (DefaultTile pathNode in path)
         {
-            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
+            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
-            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
         }
 
@@ -90,8 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
-        position = grid.GetCellCenterWorld(cellPos);
-        position.y = -0.5f; // Fix
+        position = new Vector3(grid.GetCellCenterWorld(cellPos).x, position.y, grid.GetCellCenterWorld(cellPos).z);
         // Change Y position of player to match grid here
         return position;
     }
