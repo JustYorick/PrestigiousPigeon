@@ -6,19 +6,17 @@ using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
 
-[RequireComponent(typeof(ManaSystem))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
-    private ManaSystem manaSystem;
+    [SerializeField] private ManaSystem manaSystem;
     [SerializeField] private bool predrawPath = true;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
 
     // Start is called before the first frame update
     void Start()
     {
-        manaSystem = GetComponent<ManaSystem>();
     }
 
     /// <summary>
