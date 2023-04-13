@@ -40,23 +40,22 @@ namespace ReDesign
         // Update is called once per frame
         void Update()
         {
+            // Calculate the direction to move the camera in, use the direction the camera is facing
+            Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
 
-                // Calculate the direction to move the camera in, use the direction the camera is facing
-                Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
+            // Move the camera
+            transform.position += moveVector * (moveSpeed * Time.deltaTime);
+            
+            //Sets position to the current position if the position between the boundaries
+            gameObject.transform.position = new Vector3 
+            (
+                Mathf.Clamp (gameObject.transform.position.x, minPos.x, maxPos.x), 
+                0.0f, 
+                Mathf.Clamp (gameObject.transform.position.z, minPos.y, maxPos.y)
+            );
 
-                // Move the camera
-                transform.position += moveVector * (moveSpeed * Time.deltaTime);
-                
-                //Sets position to the current position if the position between the boundaries
-                gameObject.transform.position = new Vector3 
-                (
-                    Mathf.Clamp (gameObject.transform.position.x, minPos.x, maxPos.x), 
-                    0.0f, 
-                    Mathf.Clamp (gameObject.transform.position.z, minPos.y, maxPos.y)
-                );
-
-                // Rotate the camera
-                transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
+            // Rotate the camera
+            transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
         }
 
         void OnMove(InputValue value){
