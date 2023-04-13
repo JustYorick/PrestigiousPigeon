@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace ReDesign.Entities
         public bool finishedMoving = false;
         public bool attacking = false;
         public IEnumerator movingCoroutine;
+        private static GameObject _gameOver;
         public abstract void NextAction();
         public abstract void Move();
         public abstract void Attack();
@@ -25,14 +27,22 @@ namespace ReDesign.Entities
 
             if (_entityHealth.Health <= 0)
             {
-                //Add animation so it isnt instant
-                DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
-                //obstacleTile.GameObject = null;
-                WorldController.Instance.BaseLayer.Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault().Walkable = true;
-                WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
-                obstacleTile.GameObject = null;
-                obstacleTile = null;
-                Destroy(this.gameObject);
+                if (this.gameObject.name.Contains("Player"))
+                {
+                    TurnController.gameOver = true;
+ 
+                }
+                else
+                {
+                    //Add animation so it isnt instant
+                    DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
+                    //obstacleTile.GameObject = null;
+                    WorldController.Instance.BaseLayer.Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault().Walkable = true;
+                    WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
+                    obstacleTile.GameObject = null;
+                    obstacleTile = null;
+                    Destroy(this.gameObject);
+                }
             }
         }
 
