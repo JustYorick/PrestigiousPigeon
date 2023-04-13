@@ -104,10 +104,6 @@ public class PlayerMovement : MonoBehaviour
             walkingLayer.SetTile(cell, ruleTile);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
         if(predrawPath && predrawnPath != null){

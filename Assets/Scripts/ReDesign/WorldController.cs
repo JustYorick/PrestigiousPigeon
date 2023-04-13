@@ -25,10 +25,7 @@ namespace ReDesign
                 Destroy(gameObject);
             else
                 Instance = this;
-        }
-
-        private void Start()
-        {
+            
             ReadWorld();
         }
 
