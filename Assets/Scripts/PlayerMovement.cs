@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Tilemap walkingLayer;
     [SerializeField] private ManaSystem manaSystem;
     [SerializeField] private bool predrawPath = true;
+    [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
 
     // Start is called before the first frame update
@@ -27,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="pathNodesMap">List of PathNodes that form a grid together, PathNodes have both simplified and in world coordinates</param>
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
+        // Don't move, if the movement button is inactive 
+        if(!movementButton.active){
+            return;
+        }
+
         //Currently only works for square grids not rectangular grids
         int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
         int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
@@ -101,29 +107,31 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
-        if(predrawPath && predrawnPath != null){
+        // Don't draw a path, if the movement button is inactive or the path drawing is turned off
+        if(!movementButton.active || !predrawPath){
+            return;
+        }
+        if(predrawnPath != null){
             // Erase the old path
             foreach (DefaultTile pathNode in predrawnPath){
                 Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
                 walkingLayer.SetTile(cell, null);
             }
         }
-        if(predrawPath){
-            //Currently only works for square grids not rectangular grids
-            int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
-            int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        //Currently only works for square grids not rectangular grids
+        int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
 
-            PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
+        PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
 
-            DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
-            DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
+        DefaultTile targetPathNode = FindNearestXYPathNode(targetLocation, pathNodesMap);
+        DefaultTile playerPathNode = FindNearestXYPathNode(transform.position, pathNodesMap);
 
-            List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
+        List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
 
-            if (path != null && path.Count - 1 <= manaSystem.GetMana()){
-                DrawPath(path);
-            }
-            predrawnPath = path;
+        if (path != null && path.Count - 1 <= manaSystem.GetMana()){
+            DrawPath(path);
         }
+        predrawnPath = path;
     }
 }

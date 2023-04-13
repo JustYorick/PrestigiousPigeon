@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform), typeof(Button))]
 public class ActionButton : MonoBehaviour{
-    [SerializeField] private RawImage image;
     [Header("Narrow Button")]
     [SerializeField] private Vector2 narrowPosition;
     [SerializeField] private Vector2 narrowSize;
@@ -22,12 +21,14 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private ActionButton[] buttons;
 
     [field:SerializeField] public bool active{get; private set;} = false;
-
+    private RawImage image;
+    
     private RectTransform rectTransform;
     
     void Start(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<RawImage>();
         Button button = GetComponent<Button>();
 
         // Add a listener for the OnClick of the button, to make the button wide
@@ -55,7 +56,6 @@ public class ActionButton : MonoBehaviour{
         // Make the other buttons narrow
         for(int i = 0;i < buttons.Length;i++){
             buttons[i].Deactivate();
-            Debug.LogWarning("Narrowed " + buttons[i].name);
         }
 
         // Make this button wide
@@ -72,7 +72,6 @@ public class ActionButton : MonoBehaviour{
         if(!active){
             MakeWide();
             active = true;
-            Debug.LogWarning(name + " is wide now.");
         }
     }
 
@@ -81,7 +80,6 @@ public class ActionButton : MonoBehaviour{
         if(active){
             MakeNarrow();
             active = false;
-            Debug.LogWarning(name + " is narrow now.");
         }
     }
 }
