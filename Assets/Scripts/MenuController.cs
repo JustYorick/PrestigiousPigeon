@@ -17,4 +17,7 @@ public class MenuController : MonoBehaviour {
 
     // Disable the menu to close it again
     public void CloseMenu() => menu.enabled = false;
+
+    // Toggle the menu between open and closed
+    public void ToggleMenu() => menu.enabled = !menu.enabled;
 }
