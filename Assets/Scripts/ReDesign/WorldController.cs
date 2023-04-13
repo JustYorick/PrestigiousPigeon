@@ -110,6 +110,19 @@ namespace ReDesign
             return outList;
         }
 
+        public static DefaultTile getPlayerTile()
+        {
+            foreach (var tile in ObstacleLayer)
+            {
+                if (tile.GameObject.name.Equals("Player"))
+                {
+                    return tile;
+                }
+            }
+
+            return null;
+        }
+
         public List<Dictionary<string, List<int>>> getTiles(int XPos, int YPos)
         {
             List<Dictionary<string, List<int>>> output = null;

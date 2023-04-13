@@ -88,7 +88,7 @@ public class PlayerPathfinding
         return null;
     }
 
-    private List<DefaultTile> GetNeighbourList(DefaultTile currentNode)
+    public List<DefaultTile> GetNeighbourList(DefaultTile currentNode)
     {
         List<DefaultTile> neighbourList = new List<DefaultTile>();
 
