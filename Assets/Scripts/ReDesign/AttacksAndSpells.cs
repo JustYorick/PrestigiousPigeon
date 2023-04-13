@@ -21,7 +21,6 @@ namespace ReDesign
         {
             DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault(); // change to GetTile()?
             List<DefaultTile> tileList = new List<DefaultTile>() { targetTile };
-            EnvironmentEffect(tileList);
 
             DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == x && t.YPos == y).FirstOrDefault();
 
@@ -30,7 +29,12 @@ namespace ReDesign
                 Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                 Debug.Log("dmg" + Damage);
                 enemy.ReceiveDamage(Damage);
+            } 
+            else
+            {
+                EnvironmentEffect(tileList);
             }
+            
             //foreach enemy/tile
             //mana -2
             //range alle tiles met afstand van 2
