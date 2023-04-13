@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,26 +19,31 @@ namespace ReDesign.Entities
             };
         }
 
-        //private List<AttacksAndSpells> Attacks = new List<AttacksAndSpells>()
-        //{
-        //    new SlimeAttack()
-        //};
-
         public override void NextAction()
         {
-            Debug.Log("im a slime");
+            //Debug.Log("im a slime");
             StateController.ChangeState(GameState.EnemyTurn);
 
+            //Move() will call Attack() and change turn
             Move();
-            //Attack();
             
         }
 
         public override void Move()
         {
-            MoveToPlayer(1);
-            //foreach(AttacksAndSpells atk in _attacks)
+            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
+            DefaultTile enemyPos = WorldController.getPlayerTile();
+            int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
+            Debug.Log(""+range);
+            if (range < 9)
+            {
+                MoveToPlayer(1);
+            } else
+            {
+                MoveToPlayer(0);
+            }
             
+            //foreach(AttacksAndSpells atk in _attacks)
         }
 
         public override void Attack()
@@ -47,12 +53,10 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
-                Debug.Log("targettile");
+                //Debug.Log("targettile");
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;
-            
-            //_attacks[0].Effect(WorldController.getPlayerTile().XPos, WorldController.getPlayerTile().YPos);
         }
     }
 }
