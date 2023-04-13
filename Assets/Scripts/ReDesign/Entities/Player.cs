@@ -23,17 +23,17 @@ namespace ReDesign.Entities
         {
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
-            StateController.ChangeState(GameState.EndTurn);
+            //StateController.ChangeState(GameState.EndTurn);
         }
 
         public override void Move()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public override void Attack()
         {
-            throw new System.NotImplementedException();
+            attacking = false;
         }
     }
 }

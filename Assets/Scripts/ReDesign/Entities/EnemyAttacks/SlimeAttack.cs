@@ -13,7 +13,7 @@ namespace ReDesign
 
         public override void EnvironmentEffect(List<DefaultTile> targetTiles)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

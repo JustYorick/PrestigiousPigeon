@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
+using ReDesign.Entities;
 
 [RequireComponent(typeof(ManaSystem))]
 public class PlayerMovement : MonoBehaviour
@@ -50,11 +51,11 @@ public class PlayerMovement : MonoBehaviour
             targetPathNode.Walkable = false;
             manaSystem.UseMana(pathCost);
 
-            List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
-            foreach (DefaultTile dt in list)
-            {
-                Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
-            }
+            //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
+            //foreach (DefaultTile dt in list)
+            //{
+            //    Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
+            //}
         }
     }
 
@@ -69,11 +70,18 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (DefaultTile pathNode in path)
         {
-            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
+            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
-            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, 0, pathNode.GameObject.transform.position.z));
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
         }
+
+        DefaultTile dt = WorldController.ObstacleLayer.Where(o => o.XPos == path.First().XPos && o.YPos == path.First().YPos).FirstOrDefault();
+        dt.XPos = path.Last().XPos;
+        dt.YPos = path.Last().YPos;
+
+
+        GetComponent<Player>().finishedMoving = true;
         manaSystem.StartTurn();
         predrawPath = true;
     }
@@ -82,8 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
-        position = grid.GetCellCenterWorld(cellPos);
-        position.y = -0.5f; // Fix
+        position = new Vector3(grid.GetCellCenterWorld(cellPos).x, position.y, grid.GetCellCenterWorld(cellPos).z);
         // Change Y position of player to match grid here
         return position;
     }
