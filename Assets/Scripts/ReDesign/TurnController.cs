@@ -20,8 +20,10 @@ namespace ReDesign
         public static int TurnCount = 0;
         private static int _turnPart = 0;
         public static bool gameOver = false;
+        private static bool _controlsHidden;
         private static List<Entity> _entities = new List<Entity>();
         private static GameObject _gameOver;
+        private static GameObject _controlsPanel;
 
         private void Awake()
         {
@@ -37,6 +39,8 @@ namespace ReDesign
             gameOver = false;
             _gameOver = GameObject.Find("GameOver");
             _gameOver.SetActive(false);
+            _controlsPanel = GameObject.Find("Controls");
+            _controlsHidden = true;
         }
 
         private void Start()
@@ -92,6 +96,20 @@ namespace ReDesign
         {
             _gameOver = GameObject.Find("GameOver");
             _gameOver.SetActive(false);
+        }
+
+        public void ShowControls()
+        {
+            if (_controlsHidden)
+            {
+                _controlsPanel.SetActive(true);
+                _controlsHidden = false;
+            }
+            else
+            {
+                _controlsPanel.SetActive(false);
+                _controlsHidden = true;
+            }
         }
     }
 }
