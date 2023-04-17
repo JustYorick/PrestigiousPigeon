@@ -40,6 +40,7 @@ namespace ReDesign
             _gameOver = GameObject.Find("GameOver");
             _gameOver.SetActive(false);
             _controlsPanel = GameObject.Find("Controls");
+            _controlsPanel.SetActive(false);
             _controlsHidden = true;
         }
 
