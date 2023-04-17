@@ -39,14 +39,15 @@ namespace ReDesign
             }else{
                 int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.GetMana()>=2)
                 {
+
                     int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     spellSelection.Effect(x, y);
+                    manaSystem.UseMana(2);
+                    spellSelection = null;
                 }
-                manaSystem.UseMana(2);
-                spellSelection = null;
             }
         }
 
