@@ -8,10 +8,10 @@ public class SpellButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField][TextArea] private string description;
     
     public void OnPointerEnter(PointerEventData data){
-        descriptionText.SetText(description);
+        // descriptionText.SetText(description);
     }
 
     public void OnPointerExit(PointerEventData data){
-        descriptionText.SetText("Description");
+        // descriptionText.SetText("Description");
     }
 }
