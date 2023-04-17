@@ -10,6 +10,8 @@ namespace ReDesign
         public static TurnController Instance { get { return _instance; } }
         public static int TurnCount = 0;
         private static int _turnPart = 0;
+        private static bool controlsHidden;
+        private static GameObject _controlsPanel;
         private static List<Entity> _entities = new List<Entity>();
 
         private void Awake()
@@ -22,6 +24,10 @@ namespace ReDesign
             {
                 _instance = this;
             }
+
+            controlsHidden = true;
+            _controlsPanel = GameObject.Find("Controls");
+            _controlsPanel.SetActive(false);
         }
 
         private void Start()
@@ -58,6 +64,20 @@ namespace ReDesign
             _entities = WorldController.getEntities();
             //Debug.Log("entities count: "+_entities.Count);
             //Debug.Log("obst count : " + WorldController.ObstacleLayer.Count);
+        }
+
+        public void ShowControls ()
+        {
+            if (controlsHidden)
+            {
+                _controlsPanel.SetActive(true);
+                controlsHidden = false;
+            }
+            else
+            {
+                _controlsPanel.SetActive(false);
+                controlsHidden = true;
+            }
         }
     }
 }
