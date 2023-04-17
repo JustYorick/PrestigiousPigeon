@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 27788810}
   - component: {fileID: 27788809}
   - component: {fileID: 27788808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Terrain_(5.00, -1.47, -54.04)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 170389017}
   - component: {fileID: 170389016}
   - component: {fileID: 170389015}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Terrain_(-45.00, -1.47, -54.04)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4104,7 +4104,6 @@ RectTransform:
   - {fileID: 1508057996}
   - {fileID: 1192686540}
   - {fileID: 1082526762}
-  - {fileID: 1772688783}
   - {fileID: 1138534871}
   m_Father: {fileID: 615685319}
   m_RootOrder: 4
@@ -6507,7 +6506,7 @@ RectTransform:
   m_Children:
   - {fileID: 305801632}
   m_Father: {fileID: 703892443}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6661,11 +6660,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.005027694
+      value: -0.0050276774
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0010266723
+      value: -0.0010266689
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.y
@@ -7784,7 +7783,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1772688783}
   m_Father: {fileID: 703892443}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8731,6 +8731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1583896421}
+  manaSystem: {fileID: 1033115211}
 --- !u!4 &1686651854
 Transform:
   m_ObjectHideFlags: 0
@@ -8885,6 +8886,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 8271568519414257314, guid: 11ac169e4c8c22f4fad47b2ae4900f64, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8271568519414257327, guid: 11ac169e4c8c22f4fad47b2ae4900f64, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -8960,11 +8965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000006519258
+      value: -0.000000010244548
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000013969839
+      value: 0.0000000019790605
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934631, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_IsActive
@@ -9305,18 +9310,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772688782}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 703892443}
-  m_RootOrder: 3
+  m_Father: {fileID: 1508057996}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: 170}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 575, y: 370}
+  m_SizeDelta: {x: 455, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772688784
 MonoBehaviour:
@@ -9338,7 +9343,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Description
+  m_text: 'Description:
+
+    Ice Spell Range: 2 squares
+
+    Fire Spell Range: 2
+    squares'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10481,7 +10491,7 @@ GameObject:
   - component: {fileID: 2139565208}
   - component: {fileID: 2139565207}
   - component: {fileID: 2139565206}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Terrain_(-45.00, -1.47, -4.04)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
