@@ -86,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         GetComponent<Player>().finishedMoving = true;
-        manaSystem.StartTurn();
         predrawPath = true;
     }
 
