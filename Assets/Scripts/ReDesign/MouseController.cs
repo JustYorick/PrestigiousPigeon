@@ -9,6 +9,7 @@ namespace ReDesign
         [SerializeField] private GameObject player;
         private static MouseController _instance;
         public static MouseController Instance { get { return _instance; } }
+        private AttacksAndSpells spellSelection = null;
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -20,54 +21,30 @@ namespace ReDesign
         }
         private void Update()
         {
+            List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 player.GetComponent<PlayerMovement>().ShowPath(pos, gr, pathNodesMap);
             }
-            if (Input.GetMouseButtonDown(0))
+            if(!Input.GetMouseButtonDown(0)){
+                return;
+            }
+            if (spellSelection == null)
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
                 player.GetComponent<PlayerMovement>().MovePlayer(pos, gr, pathNodesMap);
-            }
-
-            // Temp
-            if (Input.GetKeyDown("i"))
-            {
-                Debug.Log("i pressed");
-                BasicIceSpell ice = new BasicIceSpell();
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+            }else{
                 int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (ice.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
                 {
                     int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
-                    ice.Effect(x, y);
+                    spellSelection.Effect(x, y);
                 }
-            }
-
-            // Temp 2
-            if (Input.GetKeyDown("o"))
-            {
-                Debug.Log("o pressed");
-                /*List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
-                List<DefaultTile> affectedNodes = new List<DefaultTile>() { player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap) };
-                WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(affectedNodes);
-                */
-                BasicFireSpell fire = new BasicFireSpell();
-                List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
-                int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
-                int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (fire.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)))
-                {
-                    int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
-                    int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
-                    fire.Effect(x, y);
-                }
+                spellSelection = null;
             }
         }
 
@@ -83,5 +60,8 @@ namespace ReDesign
                 return Vector3.zero;
             }
         }
+
+        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
+        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
     }
 }
