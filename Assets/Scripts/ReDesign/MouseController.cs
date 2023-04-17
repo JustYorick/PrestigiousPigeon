@@ -45,7 +45,7 @@ namespace ReDesign
                     int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     spellSelection.Effect(x, y);
                 }
-                manaSystem.UseMana(1);
+                manaSystem.UseMana(2);
                 spellSelection = null;
             }
         }
