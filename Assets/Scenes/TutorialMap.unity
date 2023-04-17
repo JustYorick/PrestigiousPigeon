@@ -3925,6 +3925,10 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 680116754}
+    - target: {fileID: 5328196969636175749, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
+      propertyPath: _manaSystem
+      value: 
+      objectReference: {fileID: 1033115211}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
 --- !u!4 &680116753 stripped
@@ -5072,7 +5076,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 891301786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1583896426}
+        m_TargetAssemblyTypeName: ReDesign.Entities.Player, Assembly-CSharp
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &891301786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8089,6 +8105,17 @@ MonoBehaviour:
   manaSystem: {fileID: 1033115211}
   predrawPath: 1
   movementButton: {fileID: 1194501315}
+--- !u!114 &1583896426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5328196969636175749, guid: 1bbdafe71846a4541ab5f1ab8c64eaad, type: 3}
+  m_PrefabInstance: {fileID: 680116752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583896421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f61836a4ae246aa81bb147077f53989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1584751922
 PrefabInstance:
   m_ObjectHideFlags: 0

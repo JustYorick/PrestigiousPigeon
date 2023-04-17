@@ -6,7 +6,7 @@ namespace ReDesign.Entities
 {
     public class Player : Entity
     {
-
+        [SerializeField] private ManaSystem _manaSystem;
         private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
         {
             new BasicFireSpell(),
@@ -24,6 +24,8 @@ namespace ReDesign.Entities
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
+            turnShouldEnd = false;
+            _manaSystem.StartTurn();
         }
 
         public override void Move()
@@ -35,5 +37,7 @@ namespace ReDesign.Entities
         {
             attacking = false;
         }
+
+        public void EndTurn() => turnShouldEnd = true;
     }
 }
