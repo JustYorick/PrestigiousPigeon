@@ -27,7 +27,7 @@ public class RangeTileTool : MonoBehaviour
 
     private void Start()
     {
-        //SpawnTile(0,0,new Color(255,0,0,0.5f));
+        SpawnCircle(5,5,4,new Color(255,0,0,0.5f));
     }
 
     public void SpawnTile(int xPos, int yPos, Color color)
@@ -49,6 +49,31 @@ public class RangeTileTool : MonoBehaviour
         Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.GameObject.transform.position.x, 0, node.GameObject.transform.position.z));
         rangeTileTileMap.SetTile(cell, tile);
         rangeTileTileMap.SetColor(cell, color);
+    }
+
+    public void SpawnCircle(int centerX, int centerY, int radius, Color color)
+    {
+        bool IsInsideCircle(int circleCenterX, int circleCenterY, int tileX, int tileY, int diameter) {
+            float dx = circleCenterX - tileX;
+            float dy = circleCenterY - tileY;
+            float distanceSquared = dx*dx + dy*dy;
+            return 4 * distanceSquared <= diameter*diameter;
+        }
+
+        // Calc bounds around circle
+        int top = (int) Mathf.Ceil(centerY - radius);
+        int bottom = (int) Mathf.Floor(centerY + radius);
+        int left = (int) Mathf.Ceil(centerX - radius);
+        int right  = (int) Mathf.Floor(centerX + radius);
+
+        // Loop trough bounds, spawnTile at location in radius
+        for (int j = top; j <= bottom; j++) {
+            for (int i = left; i <= right; i++) {
+                if (IsInsideCircle(centerX, centerY, i, j, radius)) {
+                    SpawnTile(i,j, color);
+                }
+            }
+        }
     }
 
     public void clearTileMap()
