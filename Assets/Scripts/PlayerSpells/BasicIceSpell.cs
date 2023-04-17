@@ -7,7 +7,7 @@ public class BasicIceSpell : AttacksAndSpells
 {
     public override int MinimumRange { get { return 2; } }
     public override int MaximumRange { get { return 2; } }
-    public override int Damage { get { return 2; } } //Change back to 5
+    public override int Damage { get { return 5; } } //Change back to 5
 
     public override void EnvironmentEffect(List<DefaultTile> targetTiles)
     {
