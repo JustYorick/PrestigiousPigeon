@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: -8533484102522983529}
   m_Layer: 0
   m_Name: Mobs_Slime_Straight
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -468,6 +468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 9001698590853459571}
+  finishedMoving: 0
+  attacking: 0
 --- !u!1001 &2059535377529279385
 PrefabInstance:
   m_ObjectHideFlags: 0

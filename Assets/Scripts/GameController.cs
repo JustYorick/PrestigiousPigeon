@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour{
     }
 
     // Reload the active scene
-    public void ReleadCurrentScene() => LoadScene(SceneManager.GetActiveScene().name);
+    public void ReloadCurrentScene() => LoadScene(SceneManager.GetActiveScene().name);
 
     private void LoadVolume(){
         // Set all sound settings to 0, if the sound setting is off
