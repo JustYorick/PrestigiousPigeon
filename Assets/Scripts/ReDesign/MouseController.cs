@@ -7,6 +7,7 @@ namespace ReDesign
     public class MouseController : MonoBehaviour
     {
         [SerializeField] private GameObject player;
+        [SerializeField] private ManaSystem manaSystem;
         private static MouseController _instance;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
@@ -44,6 +45,7 @@ namespace ReDesign
                     int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     spellSelection.Effect(x, y);
                 }
+                manaSystem.UseMana(1);
                 spellSelection = null;
             }
         }
