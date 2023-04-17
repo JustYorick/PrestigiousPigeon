@@ -24,12 +24,6 @@ namespace ReDesign.Entities
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
-
-            List<DefaultTile> locations = _attacks[0].GetTargetLocations(WorldController.getPlayerTile().XPos, WorldController.getPlayerTile().YPos);
-            foreach (var defaultTile in locations)
-            {
-                RangeTileTool.Instance.SpawnTile(defaultTile.XPos, defaultTile.YPos, new Color(255,0,0, 0.5f));
-            }
         }
 
         public override void Move()
