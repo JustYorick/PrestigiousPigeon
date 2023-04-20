@@ -30,19 +30,19 @@ namespace ReDesign.Entities
                 if (this.gameObject.name.Contains("Player"))
                 {
                     TurnController.gameOver = true;
- 
                 }
                 else
                 {
                     //Add animation so it isnt instant
                     DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
-                    //obstacleTile.GameObject = null;
                     WorldController.Instance.BaseLayer.Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault().Walkable = true;
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
                     obstacleTile = null;
                     Destroy(this.gameObject);
                 }
+
+                TurnController.Instance.gameOverEvent.Invoke();
             }
         }
 
