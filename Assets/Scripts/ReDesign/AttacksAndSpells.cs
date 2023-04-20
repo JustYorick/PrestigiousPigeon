@@ -11,6 +11,7 @@ namespace ReDesign
         public abstract int MinimumRange { get; }
         public abstract int MaximumRange { get; }
         public abstract int Damage { get; }
+        public virtual int ManaCost { get{ return 0; } }
 
         /// <summary>
         /// Causes the spell or attack to be casted at targeted x and y coordinates
