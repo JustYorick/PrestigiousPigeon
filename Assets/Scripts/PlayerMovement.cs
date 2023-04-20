@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
         // Don't move, if the movement button is inactive 
-        if(!movementButton.active){
+        if(!movementButton.active || TurnController.gameOver){
             return;
         }
 
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
         // Don't draw a path, if the movement button is inactive or the path drawing is turned off
-        if(!movementButton.active || !predrawPath){
+        if(!movementButton.active || !predrawPath || TurnController.gameOver){
             return;
         }
         if(predrawnPath != null){
