@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayerSpells;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayerSpells;
 using UnityEngine;
 
 namespace ReDesign.Entities

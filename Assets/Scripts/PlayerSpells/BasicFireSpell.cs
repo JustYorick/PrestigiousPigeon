@@ -1,17 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using ReDesign;
 
-public class BasicFireSpell : AttacksAndSpells
+namespace PlayerSpells
 {
-    public override int MinimumRange { get { return 2; } }
-    public override int MaximumRange { get { return 2; } }
-    public override int Damage { get { return 5; } }
-    public override int ManaCost { get { return 2; } }
-
-    public override void EnvironmentEffect(List<DefaultTile> targetTiles)
+    public class BasicFireSpell : AttacksAndSpells
     {
-        WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(targetTiles);
+        public override int MinimumRange { get { return 2; } }
+        public override int MaximumRange { get { return 2; } }
+        public override int Damage { get { return 5; } }
+        public override int ManaCost { get { return 2; } }
+
+        public override void EnvironmentEffect(List<DefaultTile> targetTiles)
+        {
+            WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(targetTiles);
+        }
     }
 }
