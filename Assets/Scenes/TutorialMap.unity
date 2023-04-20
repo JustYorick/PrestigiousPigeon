@@ -3587,6 +3587,7 @@ MonoBehaviour:
   - {fileID: 1194501315}
   - {fileID: 891301784}
   <active>k__BackingField: 0
+  keyBinding: 112
 --- !u!114 &633907938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5289,6 +5290,7 @@ MonoBehaviour:
   - {fileID: 1194501315}
   - {fileID: 633907937}
   <active>k__BackingField: 0
+  keyBinding: 116
 --- !u!114 &891301785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7419,6 +7421,7 @@ MonoBehaviour:
   - {fileID: 633907937}
   - {fileID: 891301784}
   <active>k__BackingField: 1
+  keyBinding: 109
 --- !u!114 &1194501316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11564,6 +11567,18 @@ PrefabInstance:
     - target: {fileID: 5444487451922674160, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 810
       objectReference: {fileID: 0}
     - target: {fileID: 5444487451922674172, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_Name
