@@ -6,7 +6,7 @@ namespace ReDesign
 {
     public class MouseController : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerMovement player;
         [SerializeField] private ManaSystem manaSystem;
         private static MouseController _instance;
         public static MouseController Instance { get { return _instance; } }
@@ -26,7 +26,7 @@ namespace ReDesign
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
-                player.GetComponent<PlayerMovement>().ShowPath(pos, gr, pathNodesMap);
+                player.ShowPath(pos, gr, pathNodesMap);
             }
             if(!Input.GetMouseButtonDown(0)){
                 return;
@@ -35,15 +35,15 @@ namespace ReDesign
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
-                player.GetComponent<PlayerMovement>().MovePlayer(pos, gr, pathNodesMap);
+                player.MovePlayer(pos, gr, pathNodesMap);
             }else{
-                int playerPosX = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
-                int playerPosY = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.GetMana()>=2)
+                int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
+                int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.GetMana()>=2)
                 {
 
-                    int x = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
-                    int y = player.GetComponent<PlayerMovement>().FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
+                    int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     spellSelection.Effect(x, y);
                     manaSystem.UseMana(2);
                 }

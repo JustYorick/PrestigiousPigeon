@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
+    private Player _player;
 
     // Start is called before the first frame update
     void Start()
     {
+        _player = GetComponent<Player>();
     }
 
     /// <summary>
@@ -85,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         dt.YPos = path.Last().YPos;
 
 
-        GetComponent<Player>().finishedMoving = true;
+        _player.finishedMoving = true;
         predrawPath = true;
     }
 
