@@ -57,7 +57,7 @@ namespace ReDesign
         {
             FillEntityList();
 
-            if (_turnPart < _entities.Count)
+            if (_turnPart < _entities.Count && !gameOver)
             {
                 Debug.Log("turnpart:" + _turnPart);
                 _entities[_turnPart].NextAction();
@@ -104,7 +104,7 @@ namespace ReDesign
             if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
             {
                 _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
-                _gameOver.SetActive(true);                
+                gameOver = true;               
             }
 
             if (gameOver)
