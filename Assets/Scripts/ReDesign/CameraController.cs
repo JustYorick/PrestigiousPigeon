@@ -38,7 +38,7 @@ namespace ReDesign
         }
 
         // Update is called once per frame
-        void Update()
+        void LateUpdate()
         {
             // Calculate the direction to move the camera in, use the direction the camera is facing
             Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
