@@ -19,12 +19,13 @@ namespace ReDesign.Entities
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
         }
 
+        public override void Update(){}
+
         public override void NextAction()
         {
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
-            turnShouldEnd = false;
             _manaSystem.StartTurn();
         }
 
@@ -38,6 +39,6 @@ namespace ReDesign.Entities
             attacking = false;
         }
 
-        public void EndTurn() => turnShouldEnd = true;
+        public void EndTurn() => StateController.ChangeState(GameState.EndTurn);
     }
 }
