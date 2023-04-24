@@ -3162,10 +3162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1100, y: 810}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3392,6 +3392,7 @@ MonoBehaviour:
   - {fileID: 1194501315}
   - {fileID: 891301784}
   <active>k__BackingField: 0
+  keyBinding: 112
 --- !u!114 &633907938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5094,6 +5095,7 @@ MonoBehaviour:
   - {fileID: 1194501315}
   - {fileID: 633907937}
   <active>k__BackingField: 0
+  keyBinding: 116
 --- !u!114 &891301785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5141,6 +5143,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1583896426}
         m_TargetAssemblyTypeName: ReDesign.Entities.Player, Assembly-CSharp
         m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 703892444}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6660,11 +6674,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0050276774
+      value: -0.005027694
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0010266689
+      value: -0.0010266723
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalRotation.y
@@ -7183,6 +7197,7 @@ MonoBehaviour:
   - {fileID: 633907937}
   - {fileID: 891301784}
   <active>k__BackingField: 1
+  keyBinding: 109
 --- !u!114 &1194501316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7226,7 +7241,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1194501317}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703892444}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: CloseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1194501317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8730,7 +8757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cc35d064ca46429d857b2bb206a6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1583896421}
+  player: {fileID: 1583896425}
   manaSystem: {fileID: 1033115211}
 --- !u!4 &1686651854
 Transform:
@@ -8965,11 +8992,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000010244548
+      value: 0.000000006519258
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934630, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000019790605
+      value: -0.0000000013969839
       objectReference: {fileID: 0}
     - target: {fileID: 1023215485511934631, guid: 6589a1819120abb459ba4b3fbfc05dce, type: 3}
       propertyPath: m_IsActive
@@ -11005,6 +11032,18 @@ PrefabInstance:
     - target: {fileID: 5444487451922674160, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 810
       objectReference: {fileID: 0}
     - target: {fileID: 5444487451922674172, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_Name

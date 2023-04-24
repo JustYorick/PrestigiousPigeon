@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
+    private Player _player;
 
     // Start is called before the first frame update
     void Start()
     {
+        _player = GetComponent<Player>();
     }
 
     /// <summary>
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
         // Don't move, if the movement button is inactive 
-        if(!movementButton.active){
+        if(!movementButton.active || TurnController.gameOver){
             return;
         }
 
@@ -85,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         dt.YPos = path.Last().YPos;
 
 
-        GetComponent<Player>().finishedMoving = true;
+        _player.finishedMoving = true;
         predrawPath = true;
     }
 
@@ -114,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
         // Don't draw a path, if the movement button is inactive or the path drawing is turned off
-        if(!movementButton.active || !predrawPath){
+        if(!movementButton.active || !predrawPath || TurnController.gameOver){
             return;
         }
         if(predrawnPath != null){

@@ -66,6 +66,7 @@ namespace ReDesign
                 {
                     _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
                     _gameOver.SetActive(true);
+                    gameOver = true;
                 }
 
                 if (_turnPart < _entities.Count)

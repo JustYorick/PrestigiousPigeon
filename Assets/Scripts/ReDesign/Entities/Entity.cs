@@ -14,7 +14,6 @@ namespace ReDesign.Entities
         public bool finishedMoving = false;
         public bool attacking = false;
         public IEnumerator movingCoroutine;
-        public bool turnShouldEnd = true;
         private static GameObject _gameOver;
         public abstract void NextAction();
         public abstract void Move();
@@ -107,7 +106,7 @@ namespace ReDesign.Entities
             finishedMoving = true;
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (finishedMoving == true)
             {
@@ -120,7 +119,7 @@ namespace ReDesign.Entities
                 this.Attack();
             }
 
-            if (finishedMoving && !attacking && turnShouldEnd)
+            if (finishedMoving && !attacking)
             {
                 finishedMoving = false;
                 StateController.ChangeState(GameState.EndTurn);

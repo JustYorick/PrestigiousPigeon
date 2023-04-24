@@ -21,15 +21,16 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private ActionButton[] buttons;
 
     [field:SerializeField] public bool active{get; private set;} = false;
+    [field:SerializeField] private KeyCode keyBinding;
     private RawImage image;
-    
+    private Button button;
     private RectTransform rectTransform;
     
     void Start(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<RawImage>();
-        Button button = GetComponent<Button>();
+        button = GetComponent<Button>();
 
         // Add a listener for the OnClick of the button, to make the button wide
         button.onClick.AddListener(Activate);
@@ -39,6 +40,12 @@ public class ActionButton : MonoBehaviour{
             MakeWide();
         }else{
             MakeNarrow();
+        }
+    }
+
+    void Update(){
+        if(Input.GetKeyDown(keyBinding)){
+            button.onClick.Invoke();
         }
     }
 
@@ -82,4 +89,6 @@ public class ActionButton : MonoBehaviour{
             active = false;
         }
     }
+
+    void OnClick(){}
 }
