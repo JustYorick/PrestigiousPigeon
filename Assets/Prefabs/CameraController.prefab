@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023215485511934631}
-  m_LocalRotation: {x: 0.20007455, y: 0.000000020913511, z: -0.00000000427061, w: 0.9797807}
+  m_LocalRotation: {x: 0.20007455, y: 0.000000020929564, z: -0.000000004273888, w: 0.9797807}
   m_LocalPosition: {x: 0, y: 4.07, z: -9.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -81,6 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023215485755215599}
   - component: {fileID: 5326410484685980243}
+  - component: {fileID: 3885278423419836787}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -134,6 +135,21 @@ MonoBehaviour:
   m_DefaultActionMap: Camera
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3885278423419836787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023215485755215597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b38e7cf135ecb4fac788a16780dabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  moveSpeed: 5
+  ExtraAmountToMove: {x: 5, y: 5}
 --- !u!1 &1023215486341514702
 GameObject:
   m_ObjectHideFlags: 0
