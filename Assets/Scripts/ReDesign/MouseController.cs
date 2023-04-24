@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 namespace ReDesign
 {
@@ -8,6 +11,7 @@ namespace ReDesign
     {
         [SerializeField] private PlayerMovement player;
         [SerializeField] private ManaSystem manaSystem;
+        [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
@@ -22,6 +26,7 @@ namespace ReDesign
         }
         private void Update()
         {
+            DrawCurrentSelectedTile();
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
                 Vector3 pos = GetMouseWorldPos();
@@ -66,5 +71,26 @@ namespace ReDesign
 
         public void SelectFireSpell() => spellSelection = new BasicFireSpell();
         public void SelectIceSpell() => spellSelection = new BasicIceSpell();
+        
+        public DefaultTile MouseToTile()
+        {
+            DefaultTile hoveredNode = WorldController.Instance.BaseLayer
+                .OrderBy(item => Math.Abs(GetMouseWorldPos().x - item.GameObject.transform.position.x))
+                .ThenBy(item => Math.Abs(GetMouseWorldPos().z - item.GameObject.transform.position.z)).ToList()
+                .FirstOrDefault();
+
+            return hoveredNode;
+        }
+
+        private void DrawCurrentSelectedTile()
+        {
+            Color color = new Color(255, 255, 255, 0.05f);
+            DefaultTile hoveredNode = MouseToTile();
+            RangeTileTool.Instance.clearTileMap(SelectorMap);
+            if (hoveredNode != null)
+            {
+                RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
+            }
+        }
     }
 }
