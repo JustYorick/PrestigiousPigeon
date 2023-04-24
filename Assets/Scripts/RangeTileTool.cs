@@ -27,28 +27,30 @@ public class RangeTileTool : MonoBehaviour
 
     private void Start()
     {
-        SpawnCircle(5,5,4,new Color(255,0,0,0.5f));
+        SpawnCircle(5,5,3,new Color(255,0,0,0.5f));
     }
 
-    public void SpawnTile(int xPos, int yPos, Color color)
+    public void SpawnTile(int xPos, int yPos, Color color, Tilemap tilemap, bool checkWalkable = true)
     {
         var walkingLayer = tileMap;
-        var rangeTileTileMap = rangeTileMap;
-        
-        DefaultTile node;
-        node = null;
+
+        DefaultTile node = null;
         foreach (var t in WorldController.Instance.BaseLayer)
         {
-            if (t.XPos == xPos && t.YPos == yPos)
+            if (t.XPos == xPos && t.YPos == yPos && (t.Walkable || !checkWalkable))
             {
                 node = t;
                 break;
             }
         }
 
-        Vector3Int cell = walkingLayer.WorldToCell(new Vector3(node.GameObject.transform.position.x, 0, node.GameObject.transform.position.z));
-        rangeTileTileMap.SetTile(cell, tile);
-        rangeTileTileMap.SetColor(cell, color);
+        if (node != null)
+        {
+            var position = node.GameObject.transform.position;
+            Vector3Int cell = walkingLayer.WorldToCell(new Vector3(position.x, 0, position.z));
+            tilemap.SetTile(cell, tile);
+            tilemap.SetColor(cell, color);
+        }
     }
 
     public void SpawnCircle(int centerX, int centerY, int radius, Color color)
@@ -66,18 +68,25 @@ public class RangeTileTool : MonoBehaviour
         int left = (int) Mathf.Ceil(centerX - radius);
         int right  = (int) Mathf.Floor(centerX + radius);
 
-        // Loop trough bounds, spawnTile at location in radius
+        // Loop trough bounds, spawnTile at location in radius if tile is walkable
         for (int j = top; j <= bottom; j++) {
             for (int i = left; i <= right; i++) {
                 if (IsInsideCircle(centerX, centerY, i, j, radius)) {
-                    SpawnTile(i,j, color);
+                    foreach (var t in WorldController.Instance.BaseLayer)
+                    {
+                        if (t.XPos == i && t.YPos == j && t.Walkable)
+                        {
+                            SpawnTile(i,j, color, rangeTileMap);
+                        }
+                    }
+                    
                 }
             }
         }
     }
 
-    public void clearTileMap()
+    public void clearTileMap(Tilemap tilemap)
     {
-        rangeTileMap.ClearAllTiles();
+        tilemap.ClearAllTiles();
     }
 }
