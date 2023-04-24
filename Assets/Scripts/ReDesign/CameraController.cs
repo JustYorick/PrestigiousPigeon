@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,54 +8,52 @@ namespace ReDesign
     public class CameraController : MonoBehaviour
     {
         private static CameraController _instance;
-        public static CameraController Instance { get { return _instance; } }
+        public static CameraController Instance => _instance;
 
         private void Awake()
         {
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            } else {
-                _instance = this;
             }
+            
+            _instance = this;
         }
         
         [SerializeField] private float rotationSpeed = 100f;
-        [SerializeField] private float moveSpeed = 10f;
-        private Vector3 inputMoveDir = Vector3.zero;
-        private float rotation = 0.0f;
-        private Vector2 minPos = new Vector2(0f,0f);
-        private Vector2 maxPos = new Vector2(0f,0f);
+        [SerializeField] private float moveSpeed = 5f;
+        private Vector3 inputMoveDir { get; set; } = Vector3.zero;
+        private float rotation { get; set; } = 0.0f;
+        private Vector2 MinPos { get; set; } = new Vector2(0f,0f);
+        private Vector2 MaxPos { get; set; } = new Vector2(0f,0f);
+        [SerializeField] private Vector2 ExtraAmountToMove;
+        
         private void Start()
         {
-            // Gets the minimal position the camera can travel in the level
-            minPos = new Vector2(WorldController.Instance.BaseLayer.First().GameObject.transform.position.x,
-                WorldController.Instance.BaseLayer.First().GameObject.transform.position.z);
-            // Gets the Maximal position the camera can travel in the level
-            maxPos = new Vector2(WorldController.Instance.BaseLayer.Last().GameObject.transform.position.x,
-                WorldController.Instance.BaseLayer.Last().GameObject.transform.position.z);
+            List<DefaultTile> baseLayer = WorldController.Instance.BaseLayer;
+            GameObject firstGameObject = baseLayer.First().GameObject;
+            GameObject lastGameObject = baseLayer.Last().GameObject;
 
+            Vector3 minimalPosition = firstGameObject.transform.position;
+            Vector3 maximalPosition = lastGameObject.transform.position;
+            MinPos = new Vector2(minimalPosition.x, minimalPosition.z);
+            MaxPos = new Vector2(maximalPosition.x, maximalPosition.z);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             // Calculate the direction to move the camera in, use the direction the camera is facing
             Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
 
             // Move the camera
-            transform.position += moveVector * (moveSpeed * Time.deltaTime);
-            
-            //Sets position to the current position if the position between the boundaries
-            gameObject.transform.position = new Vector3 
+            transform.position += moveVector * (moveSpeed * Time.fixedDeltaTime);
+            transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.fixedDeltaTime);            
+            transform.position = new Vector3 
             (
-                Mathf.Clamp (gameObject.transform.position.x, minPos.x, maxPos.x), 
+                Mathf.Clamp (transform.position.x, MinPos.x - ExtraAmountToMove.x, MaxPos.x + ExtraAmountToMove.x), 
                 0.0f, 
-                Mathf.Clamp (gameObject.transform.position.z, minPos.y, maxPos.y)
+                Mathf.Clamp (transform.position.z, MinPos.y - ExtraAmountToMove.y, MaxPos.y + ExtraAmountToMove.y)
             );
-
-            // Rotate the camera
-            transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
         }
 
         void OnMove(InputValue value){
@@ -66,7 +64,5 @@ namespace ReDesign
 
         // Get the rotation input
         void OnRotate(InputValue value) => rotation = value.Get<float>();
-        
-        
     }
 }
