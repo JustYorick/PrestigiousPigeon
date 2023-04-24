@@ -36,6 +36,9 @@ namespace ReDesign
                 _instance = this;
             }
 
+            TurnCount = 0;
+            _turnPart = 0;
+
             gameOver = false;
             _gameOver = GameObject.Find("GameOver");
             _gameOver.SetActive(false);
