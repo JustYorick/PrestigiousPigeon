@@ -13,6 +13,7 @@ namespace ReDesign
         [SerializeField] private ManaSystem manaSystem;
         [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
+        private bool drawSelectedTile = true;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
         private void Awake()
@@ -27,6 +28,7 @@ namespace ReDesign
         private void Update()
         {
             DrawCurrentSelectedTile();
+            
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
                 Vector3 pos = GetMouseWorldPos();
@@ -61,17 +63,16 @@ namespace ReDesign
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
+                drawSelectedTile = true;
                 return raycastHit.point;
             }
             else
             {
+                drawSelectedTile = false;
                 return Vector3.zero;
             }
         }
 
-        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
-        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
-        
         public DefaultTile MouseToTile()
         {
             DefaultTile hoveredNode = WorldController.Instance.BaseLayer
@@ -81,13 +82,17 @@ namespace ReDesign
 
             return hoveredNode;
         }
+        
+        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
+        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
+        
 
         private void DrawCurrentSelectedTile()
         {
             Color color = new Color(255, 255, 255, 0.05f);
             DefaultTile hoveredNode = MouseToTile();
             RangeTileTool.Instance.clearTileMap(SelectorMap);
-            if (hoveredNode != null)
+            if (hoveredNode != null && drawSelectedTile)
             {
                 RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
             }
