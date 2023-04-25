@@ -97,12 +97,12 @@ public class RangeTileTool : MonoBehaviour
         tilemap.ClearAllTiles();
     }
 
-    public void drawMoveRange(DefaultTile tile)
+    public void drawMoveRange(DefaultTile tile, int range)
     {
         clearTileMap(rangeTileMap);
         int widthAndHeight = (int)Mathf.Sqrt(WorldController.Instance.BaseLayer.Count);
         PlayerPathfinding pf = new PlayerPathfinding(widthAndHeight, widthAndHeight, WorldController.Instance.BaseLayer);
-        int maxRange = manaSystem.GetMana()*2;
+        int maxRange = range*2;
         List<DefaultTile> tilesToDraw = new List<DefaultTile>();
 
         bool IsInsideCircle(int circleCenterX, int circleCenterY, int tileX, int tileY, int diameter) {

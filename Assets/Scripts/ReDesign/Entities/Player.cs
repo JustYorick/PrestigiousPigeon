@@ -27,7 +27,7 @@ namespace ReDesign.Entities
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
             _manaSystem.StartTurn();
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile());
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }
 
         public override void Move()

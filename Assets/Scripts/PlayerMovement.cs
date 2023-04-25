@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         _player.finishedMoving = true;
         predrawPath = true;
         
-        RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile());
+        RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.GetMana());
     }
 
     private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
