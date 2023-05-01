@@ -47,7 +47,10 @@ public class DialogueScript : MonoBehaviour
     void StartDialogue()
     {
         StartCoroutine(TypeCharactersEffect());
-        LoadImage();
+        if (LinesReader.Instance.linesList.dialogueLines[index].speakingCharImg != string.Empty)
+        LinesReader.Instance.characterPortrait.texture = LoadImage("Assets\\Images\\Character Portraits\\", LinesReader.Instance.linesList.dialogueLines[index].speakingCharImg);
+        if (LinesReader.Instance.linesList.dialogueLines[index].backgroundImg != string.Empty)
+        LinesReader.Instance.backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", LinesReader.Instance.linesList.dialogueLines[index].backgroundImg);
         //Change background
         //Change portrait
         //Play music
@@ -79,12 +82,12 @@ public class DialogueScript : MonoBehaviour
         }
     }
 
-    void LoadImage()
+    private Texture2D LoadImage(string folderPath, string imgName)
     {
         MemoryStream dest = new MemoryStream();
         
         //Read from each Image File
-        using (Stream source = File.OpenRead("Assets\\Images\\Character Portraits\\" + LinesReader.Instance.linesList.dialogueLines[index].speakingCharImg))
+        using (Stream source = File.OpenRead(folderPath + imgName))
         {
             byte[] buffer = new byte[2048];
             int bytesRead;
@@ -100,6 +103,6 @@ public class DialogueScript : MonoBehaviour
 
         //Load the Image Byte to Texture2D
         tempTexture.LoadImage(imageBytes);
-        LinesReader.Instance.characterPortrait.texture = tempTexture;
+        return tempTexture;
     }
 }

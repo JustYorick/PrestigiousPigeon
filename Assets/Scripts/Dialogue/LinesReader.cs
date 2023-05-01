@@ -25,6 +25,7 @@ public class LinesReader : MonoBehaviour
     public TextAsset textAsset;
     public Canvas canvas;
     public RawImage characterPortrait;
+    public RawImage backgroundImage;
     
     [System.Serializable]
     public class DialogueLine
