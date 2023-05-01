@@ -28,12 +28,6 @@ public class RangeTileTool : MonoBehaviour
             Instance = this;
     }
 
-    private void Start()
-    {
-        //SpawnCircle(5,5,3, 4, new Color(255,0,0,0.5f));
-        //drawMoveRange(WorldController.getPlayerTile());
-    }
-
     public void SpawnTile(int xPos, int yPos, Color color, Tilemap tilemap, bool checkWalkable = true)
     {
         var walkingLayer = tileMap;
