@@ -5,27 +5,7 @@ using UnityEngine.UI;
 
 public class LinesReader : MonoBehaviour
 {
-    private static LinesReader _instance;
-    public static LinesReader Instance => _instance;
-
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-
-        ReadCSV();
-    }
-
     public TextAsset textAsset;
-    public Canvas canvas;
-    public RawImage characterPortrait;
-    public RawImage backgroundImage;
     
     [System.Serializable]
     public class DialogueLine
@@ -47,7 +27,7 @@ public class LinesReader : MonoBehaviour
 
     public LinesList linesList = new LinesList();
 
-    private void ReadCSV()
+    public void ReadCSV()
     {
         string[] data = textAsset.text.Split(new string[] { ";", "\n" }, System.StringSplitOptions.None);
         Debug.Log(""+data.Length);
@@ -56,6 +36,7 @@ public class LinesReader : MonoBehaviour
 
         for (int i = 0; i < tableSize; i++)
         {
+            //This kind of sucks but it works so who cares.
             linesList.dialogueLines.Add(new DialogueLine());
             linesList.dialogueLines[i].speakerName = data[7 * (i + 1)];
             linesList.dialogueLines[i].dialogueLine = data[7 * (i + 1) + 1];

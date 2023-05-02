@@ -1,22 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class DialogueScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textComponent;
+    [SerializeField] private TextMeshProUGUI speakerNameText;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private RawImage characterPortrait;
+    [SerializeField] private RawImage backgroundImage;
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioSource soundEffect;
+
     private string text;
     [SerializeField] private float textSpeed;
     [SerializeField] private float clickCooldownAmount;
     private float cooldown;
     private int index;
+    private bool lineComplete;
 
-    // Start is called before the first frame update
+    [SerializeField] LinesReader linesReader;
+
     void Start()
     {
+        linesReader.ReadCSV();
         index = -1;
         //text = LinesReader.Instance.linesList.dialogueLines[index].dialogueLine;
         textComponent.text = string.Empty;
@@ -25,32 +37,47 @@ public class DialogueScript : MonoBehaviour
         //index++;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount)
         {
             cooldown = Time.time;
             Debug.Log("text: "+ text+";;;; index:"+index);
-            if (textComponent.text.Equals(text))
+            if (lineComplete)
             {
                 NextLine();
             } 
             else
             {
                 StopAllCoroutines();
-                textComponent.text = text;
+                textComponent.text = linesReader.linesList.dialogueLines[index].dialogueLine;
+                lineComplete = true;
             }
         }
     }
 
     void StartDialogue()
     {
+        lineComplete = false;
+        textComponent.text = linesReader.linesList.dialogueLines[index].dialogueLine;
         StartCoroutine(TypeCharactersEffect());
-        if (LinesReader.Instance.linesList.dialogueLines[index].speakingCharImg != string.Empty)
-        LinesReader.Instance.characterPortrait.texture = LoadImage("Assets\\Images\\Character Portraits\\", LinesReader.Instance.linesList.dialogueLines[index].speakingCharImg);
-        if (LinesReader.Instance.linesList.dialogueLines[index].backgroundImg != string.Empty)
-        LinesReader.Instance.backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", LinesReader.Instance.linesList.dialogueLines[index].backgroundImg);
+
+        if (linesReader.linesList.dialogueLines[index].speakingCharImg != string.Empty)
+            characterPortrait.texture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
+
+        if (linesReader.linesList.dialogueLines[index].backgroundImg != string.Empty)
+            backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", linesReader.linesList.dialogueLines[index].backgroundImg);
+
+        if (linesReader.linesList.dialogueLines[index].speakerName != string.Empty)
+            speakerNameText.text = linesReader.linesList.dialogueLines[index].speakerName;
+
+        if (linesReader.linesList.dialogueLines[index].music != string.Empty)
+            StartCoroutine(LoadAudio("\\Sounds\\Music\\" + linesReader.linesList.dialogueLines[index].music, backgroundMusic));
+
+        if (linesReader.linesList.dialogueLines[index].soundEffect != string.Empty)
+            StartCoroutine(LoadAudio("\\Sounds\\Effects\\" + linesReader.linesList.dialogueLines[index].soundEffect, soundEffect));
+
+
         //Change background
         //Change portrait
         //Play music
@@ -58,19 +85,34 @@ public class DialogueScript : MonoBehaviour
         //Play effects
     }
 
+    private IEnumerator LoadAudio(string filePath, AudioSource audioSource)
+    { 
+        string path = "file:///" + Application.dataPath + filePath;
+        UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.MPEG);
+        yield return req.SendWebRequest();
+        audioSource.clip = DownloadHandlerAudioClip.GetContent(req);
+        audioSource.Play();
+    }
+
     IEnumerator TypeCharactersEffect()
     {
-        text = LinesReader.Instance.linesList.dialogueLines[index].dialogueLine;
-        foreach (char c in text.ToCharArray())
+        string textToWrite = linesReader.linesList.dialogueLines[index].dialogueLine;
+        string colorTag = "<color=#00000000>";
+
+        int index2 = 0;
+        while (index2 <= textToWrite.Length)
         {
-            textComponent.text += c;
+            textComponent.text = textToWrite.Substring(0, index2) + colorTag + textToWrite.Substring(index2) + "</color>";
+            index2++;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        lineComplete = true;
     }
 
     void NextLine()
     {
-        if (index < LinesReader.Instance.linesList.dialogueLines.Count - 1)
+        if (index < linesReader.linesList.dialogueLines.Count - 1)
         {
             index++;
             textComponent.text = string.Empty;
@@ -78,7 +120,8 @@ public class DialogueScript : MonoBehaviour
         } else
         {
             //gameObject.SetActive(false);
-            LinesReader.Instance.canvas.gameObject.SetActive(false);
+            canvas.gameObject.SetActive(false);
+            //GO NEXT SCENE
         }
     }
 
