@@ -19,7 +19,13 @@ namespace ReDesign.Entities
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
         }
 
-        public override void Update(){}
+        public override void Update()
+        {
+            if (StateController.currentState == GameState.PlayerTurn)
+            {
+                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            }
+        }
 
         public override void NextAction()
         {
@@ -29,6 +35,7 @@ namespace ReDesign.Entities
             _manaSystem.StartTurn();
         }
 
+            
         public override void Move()
         {
             //throw new System.NotImplementedException();

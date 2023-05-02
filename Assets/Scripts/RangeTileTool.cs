@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ReDesign;
+using ReDesign.Entities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -14,6 +15,8 @@ public class RangeTileTool : MonoBehaviour
     [SerializeField] private Tilemap rangeTileMap;
     
     [SerializeField] private RuleTile tile;
+
+    [SerializeField] private ManaSystem manaSystem;
     
     public static RangeTileTool Instance { get; private set; }
 
@@ -23,11 +26,6 @@ public class RangeTileTool : MonoBehaviour
             Destroy(gameObject);
         else
             Instance = this;
-    }
-
-    private void Start()
-    {
-        SpawnCircle(5,5,3,new Color(255,0,0,0.5f));
     }
 
     public void SpawnTile(int xPos, int yPos, Color color, Tilemap tilemap, bool checkWalkable = true)
@@ -53,8 +51,11 @@ public class RangeTileTool : MonoBehaviour
         }
     }
 
-    public void SpawnCircle(int centerX, int centerY, int radius, Color color)
+    public void SpawnCircle(int centerX, int centerY, int minRange, int maxRange, Color color)
     {
+        maxRange = maxRange*2;
+        minRange = minRange * 2 - 1;
+        
         bool IsInsideCircle(int circleCenterX, int circleCenterY, int tileX, int tileY, int diameter) {
             float dx = circleCenterX - tileX;
             float dy = circleCenterY - tileY;
@@ -63,18 +64,19 @@ public class RangeTileTool : MonoBehaviour
         }
 
         // Calc bounds around circle
-        int top = (int) Mathf.Ceil(centerY - radius);
-        int bottom = (int) Mathf.Floor(centerY + radius);
-        int left = (int) Mathf.Ceil(centerX - radius);
-        int right  = (int) Mathf.Floor(centerX + radius);
+        int top = (int) Mathf.Ceil(centerY - maxRange);
+        int bottom = (int) Mathf.Floor(centerY + maxRange);
+        int left = (int) Mathf.Ceil(centerX - maxRange);
+        int right  = (int) Mathf.Floor(centerX + maxRange);
 
         // Loop trough bounds, spawnTile at location in radius if tile is walkable
         for (int j = top; j <= bottom; j++) {
             for (int i = left; i <= right; i++) {
-                if (IsInsideCircle(centerX, centerY, i, j, radius)) {
+                if (IsInsideCircle(centerX, centerY, i, j, maxRange) &&
+                    !IsInsideCircle(centerX, centerY, i, j, minRange)) {
                     foreach (var t in WorldController.Instance.BaseLayer)
                     {
-                        if (t.XPos == i && t.YPos == j && t.Walkable)
+                        if (t.XPos == i && t.YPos == j)
                         {
                             SpawnTile(i,j, color, rangeTileMap);
                         }
@@ -87,5 +89,59 @@ public class RangeTileTool : MonoBehaviour
     public void clearTileMap(Tilemap tilemap)
     {
         tilemap.ClearAllTiles();
+    }
+
+    public void drawMoveRange(DefaultTile tile, int range)
+    {
+        clearTileMap(rangeTileMap);
+        int widthAndHeight = (int)Mathf.Sqrt(WorldController.Instance.BaseLayer.Count);
+        PlayerPathfinding pf = new PlayerPathfinding(widthAndHeight, widthAndHeight, WorldController.Instance.BaseLayer);
+        int maxRange = range*2;
+        List<DefaultTile> tilesToDraw = new List<DefaultTile>();
+
+        bool IsInsideCircle(int circleCenterX, int circleCenterY, int tileX, int tileY, int diameter) {
+            float dx = circleCenterX - tileX;
+            float dy = circleCenterY - tileY;
+            float distanceSquared = dx*dx + dy*dy;
+            return 4 * distanceSquared <= diameter*diameter;
+        }
+
+        // Calc bounds around circle
+        int top = (int) Mathf.Ceil(tile.YPos - maxRange);
+        int bottom = (int) Mathf.Floor(tile.YPos + maxRange);
+        int left = (int) Mathf.Ceil(tile.XPos - maxRange);
+        int right  = (int) Mathf.Floor(tile.XPos + maxRange);
+
+        // Loop trough bounds, spawnTile at location in radius if tile is walkable
+        for (int j = top; j <= bottom; j++) {
+            for (int i = left; i <= right; i++) {
+                if (IsInsideCircle(tile.XPos, tile.YPos, i, j, maxRange))
+                {
+                    foreach (var t in WorldController.Instance.BaseLayer)
+                    {
+                        if (t.XPos == i && t.YPos == j && t.Walkable)
+                        {
+                            List<DefaultTile> tiles = pf.FindPath(tile.XPos, tile.YPos, t.XPos, t.YPos);
+                            if (tiles != null)
+                            {
+                                tiles.RemoveAt(0);
+                                if (tiles.Count >= manaSystem.GetMana())
+                                {
+                                    
+                                    tiles = tiles.GetRange(0, manaSystem.GetMana());
+                                }
+                                tilesToDraw.AddRange(tiles); 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        tilesToDraw = tilesToDraw.Distinct().ToList();
+        foreach (var t in tilesToDraw)
+        {
+            SpawnTile(t.XPos, t.YPos, new Color(0,0,255,0.5f), rangeTileMap);
+        }
     }
 }
