@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace ReDesign
 {
@@ -13,17 +14,26 @@ namespace ReDesign
         [SerializeField] private ManaSystem manaSystem;
         [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
-        public static MouseController Instance { get { return _instance; } }
+
+        public static MouseController Instance
+        {
+            get { return _instance; }
+        }
+
         private AttacksAndSpells spellSelection = null;
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            } else {
+            }
+            else
+            {
                 _instance = this;
             }
         }
+
         private void Update()
         {
             DrawCurrentSelectedTile();
@@ -33,27 +43,35 @@ namespace ReDesign
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.ShowPath(pos, gr, pathNodesMap);
             }
-            if(!Input.GetMouseButtonDown(0)){
+            if (!Input.GetMouseButtonDown(0))
+            {
                 return;
             }
+
             if (spellSelection == null)
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.MovePlayer(pos, gr, pathNodesMap);
-            }else{
+            }
+            else
+            {
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.GetMana()>= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY)
+                        .Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) &&
+                    manaSystem.GetMana() >= spellSelection.ManaCost)
                 {
-
+                    CheckSpellCasted(spellSelection);
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     spellSelection.Effect(x, y);
                     manaSystem.UseMana(spellSelection.ManaCost);
                 }
+
                 spellSelection = null;
             }
+            CheckSpellCasted(spellSelection);
         }
 
         private Vector3 GetMouseWorldPos()
@@ -69,9 +87,16 @@ namespace ReDesign
             }
         }
 
-        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
-        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
-        
+        public void SelectFireSpell()
+        {
+            spellSelection = new BasicFireSpell();
+        }
+
+        public void SelectIceSpell()
+        {
+            spellSelection = new BasicIceSpell();
+        }
+
         public DefaultTile MouseToTile()
         {
             DefaultTile hoveredNode = WorldController.Instance.BaseLayer
@@ -90,6 +115,16 @@ namespace ReDesign
             if (hoveredNode != null)
             {
                 RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
+            }
+        }
+
+        private static void CheckSpellCasted(AttacksAndSpells spellSelection)
+        {
+            if (spellSelection != null)
+            {
+                if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
+
+                if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
     }

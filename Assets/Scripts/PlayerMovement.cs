@@ -18,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
     private Player _player;
-    public static bool isMoving;
-    public static bool isIdle;
 
     private Vector3 targetLoc;
 
@@ -32,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        isMoving = false;
-        isIdle = true;
     }
 
     /// <summary>
@@ -65,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
         {
             predrawPath = false;
             DrawPath(path);
-            isIdle = false;
-            isMoving = true;
+            PlayerAnimator._animator.SetBool("isIdle", false);
+            PlayerAnimator._animator.SetBool("isMoving", true);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
@@ -101,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
         dt.XPos = path.Last().XPos;
         dt.YPos = path.Last().YPos;
 
-        isMoving = false;
-        isIdle = true;
+        PlayerAnimator._animator.SetBool("isIdle", true);
+        PlayerAnimator._animator.SetBool("isMoving", false);
         _player.finishedMoving = true;
         predrawPath = true;
     }
@@ -160,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         predrawnPath = path;
     }
 
-    private void RotatePlayer()
+    public void RotatePlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
         // MoveTowards(transform.position, targetLoc, 0.1f);
