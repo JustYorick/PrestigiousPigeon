@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
+    [SerializeField] private Canvas spellMenu;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator == null) _animator = GetComponent<Animator>();
         
         if (_animator.GetBool("isIdle") && !_animator.GetBool("iceCasted") && !_animator.GetBool("fireCasted") &&
-            !_animator.GetBool("hasCasted") && !_animator.GetBool("isHit") &&
+            !_animator.GetBool("hasCasted") && !_animator.GetBool("isHit") && !_animator.GetBool("isScrolling") &&
             !_animator.GetBool("PlayerDead"))
         {
             _animator.Play("Idle");
@@ -28,6 +29,18 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetBool("isMoving"))
         {
             _animator.Play("Walking");
+        }
+
+        if (spellMenu.enabled)
+        {
+            _animator.SetBool("isScrolling", true);
+            _animator.applyRootMotion = true;
+            _animator.Play("Scrolling");
+        }
+        else if (!spellMenu.enabled)
+        {
+            _animator.SetBool("isScrolling", false);
+            _animator.applyRootMotion = false;
         }
 
         if (_animator.GetBool("fireCasted"))

@@ -159,13 +159,11 @@ public class PlayerMovement : MonoBehaviour
     public void RotatePlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
-        // MoveTowards(transform.position, targetLoc, 0.1f);
-        
+
         Vector3 relativePos = targetLoc - transform.position;
 
         if (targetLoc != transform.position)
         {
-            // the second argument, upwards, defaults to Vector3.up
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
         }
