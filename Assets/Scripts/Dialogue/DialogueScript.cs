@@ -72,7 +72,10 @@ public class DialogueScript : MonoBehaviour
         StartCoroutine(typeCoroutine);
 
         if (linesReader.linesList.dialogueLines[index].speakingCharImg != string.Empty)
-            characterPortrait.texture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
+        {
+            Texture2D newTexture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
+            characterPortrait.texture = newTexture;
+        }
 
         if (linesReader.linesList.dialogueLines[index].backgroundImg != string.Empty)
             backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", linesReader.linesList.dialogueLines[index].backgroundImg);
