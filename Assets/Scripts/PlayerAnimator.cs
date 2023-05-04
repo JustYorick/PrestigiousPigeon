@@ -15,18 +15,19 @@ public class PlayerAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    void Start()
     {
         if (_animator == null) _animator = GetComponent<Animator>();
-        
-        if (_animator.GetBool("isIdle") && !_animator.GetBool("iceCasted") && !_animator.GetBool("fireCasted") &&
-            !_animator.GetBool("hasCasted") && !_animator.GetBool("isHit") && !_animator.GetBool("isScrolling") &&
-            !_animator.GetBool("PlayerDead"))
-        {
-            _animator.Play("Idle");
-        }
+    }
 
-        if (_animator.GetBool("isMoving"))
+    void Update()
+    {
+        CheckAnimations();
+    }
+
+    void CheckAnimations()
+    {
+        if (_animator.GetBool("isWalking"))
         {
             _animator.Play("Walking");
         }
@@ -65,15 +66,12 @@ public class PlayerAnimator : MonoBehaviour
             }
         }
 
-        if (_animator.GetBool("isHit") && !_animator.GetBool("PlayerDead"))
+        if (_animator.GetBool("isHit"))
         {
             _animator.Play("TakeDamage");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
             {
-                if (!_animator.GetBool("PlayerDead"))
-                {
-                    _animator.SetBool("isHit", false);
-                }
+                _animator.SetBool("isHit", false);
             }
         }
 

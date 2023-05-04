@@ -19,18 +19,13 @@ namespace ReDesign.Entities
         public abstract void Move();
         public abstract void Attack();
 
-        public void ReceiveDamage(int dmg)
+        public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
             _healthBar.transform.localScale = (new Vector3(
                 _entityHealth.HealthPercentage(_entityHealth.Health),
                 (float)0.1584, (float)0.09899999));
-
-            if (this.gameObject.name.Contains("Player"))
-            {
-                PlayerAnimator._animator.SetBool("isHit", true);
-            }
-
+            
             if (_entityHealth.Health <= 0)
             {
                 if (this.gameObject.name.Contains("Player"))

@@ -47,5 +47,12 @@ namespace ReDesign.Entities
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);
+
+        public override void ReceiveDamage(int dmg)
+        {
+            base.ReceiveDamage(dmg);
+            PlayerAnimator._animator.SetBool("isHit", true);
+            PlayerAnimator._animator.SetBool("isIdle", false);
+        }
     }
 }

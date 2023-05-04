@@ -29,10 +29,6 @@ namespace ReDesign
             {
                 Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                 Debug.Log("dmg" + Damage);
-                if (enemy.gameObject.name.Contains("Player"))
-                {
-                    PlayerAnimator._animator.SetBool("isHit", true);
-                }
                 enemy.ReceiveDamage(Damage);
             } 
             else

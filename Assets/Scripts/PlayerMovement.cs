@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             predrawPath = false;
             DrawPath(path);
             PlayerAnimator._animator.SetBool("isIdle", false);
-            PlayerAnimator._animator.SetBool("isMoving", true);
+            PlayerAnimator._animator.SetBool("isWalking", true);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         dt.YPos = path.Last().YPos;
 
         PlayerAnimator._animator.SetBool("isIdle", true);
-        PlayerAnimator._animator.SetBool("isMoving", false);
+        PlayerAnimator._animator.SetBool("isWalking", false);
         _player.finishedMoving = true;
         predrawPath = true;
     }
