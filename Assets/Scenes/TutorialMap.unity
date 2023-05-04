@@ -1221,6 +1221,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 118202777}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &128356088 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 437255851163339371, guid: bbea10d16b15c48e5aea63409313a707, type: 3}
+  m_PrefabInstance: {fileID: 1976821684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &130796239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8265731052364952745, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
@@ -8963,6 +8968,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!198 &1611570244 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6267495424815937766, guid: 3314d1531cdad6fd8891e730771c703a, type: 3}
+  m_PrefabInstance: {fileID: 2021152251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1622966130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9448,8 +9458,8 @@ MonoBehaviour:
   player: {fileID: 1583896425}
   manaSystem: {fileID: 1033115211}
   SelectorMap: {fileID: 1607830966}
-  fireParticles: {fileID: 0}
-  iceParticles: {fileID: 0}
+  fireParticles: {fileID: 128356088}
+  iceParticles: {fileID: 1611570244}
 --- !u!4 &1686651854
 Transform:
   m_ObjectHideFlags: 0
