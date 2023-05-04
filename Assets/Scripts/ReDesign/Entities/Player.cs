@@ -13,7 +13,7 @@ namespace ReDesign.Entities
             new BasicIceSpell()
         };
 
-        private void Awake()
+        public new virtual void Awake()
         {
             int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);

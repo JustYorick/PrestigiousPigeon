@@ -15,6 +15,7 @@ namespace ReDesign.Entities
         public bool attacking = false;
         public IEnumerator movingCoroutine;
         private static GameObject _gameOver;
+        private Vector3 targetLoc;
         public abstract void NextAction();
         public abstract void Move();
         public abstract void Attack();
@@ -105,12 +106,21 @@ namespace ReDesign.Entities
         {
             foreach (DefaultTile pathNode in path)
             {
-                transform.position = new Vector3(pathNode.GameObject.transform.position.x, height,
+                // transform.position = new Vector3(pathNode.GameObject.transform.position.x, height,
+                //     pathNode.GameObject.transform.position.z);
+                targetLoc = new Vector3(pathNode.GameObject.transform.position.x, height,
                     pathNode.GameObject.transform.position.z);
+                transform.position = targetLoc;
+                RotateEntity();
                 yield return new WaitForSeconds(.2f);
             }
 
             finishedMoving = true;
+        }
+
+        public virtual void Awake()
+        {
+            targetLoc = transform.position;
         }
 
         public virtual void Update()
@@ -130,6 +140,19 @@ namespace ReDesign.Entities
             {
                 finishedMoving = false;
                 StateController.ChangeState(GameState.EndTurn);
+            }
+        }
+        
+        public void RotateEntity()
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
+
+            Vector3 relativePos = targetLoc - transform.position;
+
+            if (targetLoc != transform.position)
+            {
+                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+                transform.rotation = rotation;
             }
         }
     }
