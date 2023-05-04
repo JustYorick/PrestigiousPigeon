@@ -52,10 +52,12 @@ namespace ReDesign
                 {
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.UseMana(spellSelection.ManaCost);
                 }
                 spellSelection = null;
+                CheckSpellCasted(spellSelection);
             }
         }
 
@@ -109,6 +111,16 @@ namespace ReDesign
                 {
                     RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(255,0,0,0.5f), SelectorMap, false);
                 }
+            }
+        }
+        
+        private static void CheckSpellCasted(AttacksAndSpells spellSelection)
+        {
+            if (spellSelection != null)
+            {
+                if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
+
+                if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
     }
