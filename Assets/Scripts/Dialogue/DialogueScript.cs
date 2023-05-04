@@ -5,6 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueScript : MonoBehaviour
@@ -16,6 +17,8 @@ public class DialogueScript : MonoBehaviour
     [SerializeField] private RawImage backgroundImage;
     [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private AudioSource soundEffect;
+    [SerializeField] private string nextSceneName;
+    [SerializeField] private RawImage blackFade;
 
     private string text;
     [SerializeField] private float textSpeed;
@@ -23,11 +26,14 @@ public class DialogueScript : MonoBehaviour
     private float cooldown;
     private int index;
     private bool lineComplete;
+    private bool fadeFinished;
+    private IEnumerator typeCoroutine;
 
     [SerializeField] LinesReader linesReader;
 
     void Start()
     {
+        canvas.gameObject.SetActive(true);
         linesReader.ReadCSV();
         index = -1;
         //text = LinesReader.Instance.linesList.dialogueLines[index].dialogueLine;
@@ -47,9 +53,11 @@ public class DialogueScript : MonoBehaviour
             {
                 NextLine();
             } 
-            else
+            else if (fadeFinished)
             {
-                StopAllCoroutines();
+                // I think it works like this, but I'm not sure..
+                StopCoroutine(typeCoroutine);
+                //StopAllCoroutines();
                 textComponent.text = linesReader.linesList.dialogueLines[index].dialogueLine;
                 lineComplete = true;
             }
@@ -60,7 +68,8 @@ public class DialogueScript : MonoBehaviour
     {
         lineComplete = false;
         textComponent.text = linesReader.linesList.dialogueLines[index].dialogueLine;
-        StartCoroutine(TypeCharactersEffect());
+        typeCoroutine = TypeCharactersEffect();
+        StartCoroutine(typeCoroutine);
 
         if (linesReader.linesList.dialogueLines[index].speakingCharImg != string.Empty)
             characterPortrait.texture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
@@ -71,8 +80,15 @@ public class DialogueScript : MonoBehaviour
         if (linesReader.linesList.dialogueLines[index].speakerName != string.Empty)
             speakerNameText.text = linesReader.linesList.dialogueLines[index].speakerName;
 
-        if (linesReader.linesList.dialogueLines[index].music != string.Empty)
-            StartCoroutine(LoadAudio("\\Sounds\\Music\\" + linesReader.linesList.dialogueLines[index].music, backgroundMusic));
+        
+        if (linesReader.linesList.dialogueLines[index].music.Length > 0)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeOutAudio());
+        } else
+        {
+            fadeFinished = true;
+        }
 
         if (linesReader.linesList.dialogueLines[index].soundEffect != string.Empty)
             StartCoroutine(LoadAudio("\\Sounds\\Effects\\" + linesReader.linesList.dialogueLines[index].soundEffect, soundEffect));
@@ -86,7 +102,7 @@ public class DialogueScript : MonoBehaviour
     }
 
     private IEnumerator LoadAudio(string filePath, AudioSource audioSource)
-    { 
+    {
         string path = "file:///" + Application.dataPath + filePath;
         UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.MPEG);
         yield return req.SendWebRequest();
@@ -94,7 +110,26 @@ public class DialogueScript : MonoBehaviour
         audioSource.Play();
     }
 
-    IEnumerator TypeCharactersEffect()
+    private IEnumerator FadeOutAudio()
+    {
+        while (backgroundMusic.volume > 0f)
+        {
+            backgroundMusic.volume -= 0.05f;
+            yield return new WaitForSeconds(0.05f);
+        }
+        backgroundMusic.volume = 1f;
+        if (linesReader.linesList.dialogueLines[index].music.ToLower().Equals("stopmusic"))
+        {
+            backgroundMusic.Stop();
+        }
+        else
+        {
+            StartCoroutine(LoadAudio("\\Sounds\\Music\\" + linesReader.linesList.dialogueLines[index].music, backgroundMusic));
+        }
+        fadeFinished = true;
+    }
+
+    private IEnumerator TypeCharactersEffect()
     {
         string textToWrite = linesReader.linesList.dialogueLines[index].dialogueLine;
         string colorTag = "<color=#00000000>";
@@ -110,7 +145,7 @@ public class DialogueScript : MonoBehaviour
         lineComplete = true;
     }
 
-    void NextLine()
+    private void NextLine()
     {
         if (index < linesReader.linesList.dialogueLines.Count - 1)
         {
@@ -120,7 +155,14 @@ public class DialogueScript : MonoBehaviour
         } else
         {
             //gameObject.SetActive(false);
-            canvas.gameObject.SetActive(false);
+            if (nextSceneName.Length > 0)
+            {
+                StartCoroutine(FadeToBlackAndNextScene());
+            } 
+            else
+            {
+                canvas.gameObject.SetActive(false);
+            }
             //GO NEXT SCENE
         }
     }
@@ -147,5 +189,18 @@ public class DialogueScript : MonoBehaviour
         //Load the Image Byte to Texture2D
         tempTexture.LoadImage(imageBytes);
         return tempTexture;
+    }
+
+    private IEnumerator FadeToBlackAndNextScene()
+    {
+        float opacity = 0.0f;
+        while (opacity <= 1.01f)
+        {
+            Debug.Log(blackFade.color.a);
+            blackFade.color = new Color(0, 0, 0, opacity);
+            opacity += 0.05f;
+            yield return new WaitForSeconds(0.05f);
+        }
+        SceneManager.LoadScene(nextSceneName);
     }
 }

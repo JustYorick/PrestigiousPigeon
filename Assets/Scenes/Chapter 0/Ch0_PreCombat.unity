@@ -290,6 +290,17 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8644391171977109, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
   m_PrefabInstance: {fileID: 1989253479950081456}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &866180284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7643281574661278300, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
+  m_PrefabInstance: {fileID: 1989253479950081456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1513038621
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,9 +429,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1989253480492615472, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
+      propertyPath: blackFade
+      value: 
+      objectReference: {fileID: 866180284}
+    - target: {fileID: 1989253480492615472, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
       propertyPath: soundEffect
       value: 
       objectReference: {fileID: 642581642}
+    - target: {fileID: 1989253480492615472, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
+      propertyPath: nextSceneName
+      value: TutorialMap
+      objectReference: {fileID: 0}
     - target: {fileID: 1989253480492615472, guid: a2e93e21e0581fb45a68643632017b6e, type: 3}
       propertyPath: backgroundMusic
       value: 

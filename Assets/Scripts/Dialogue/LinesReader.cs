@@ -30,9 +30,7 @@ public class LinesReader : MonoBehaviour
     public void ReadCSV()
     {
         string[] data = textAsset.text.Split(new string[] { ";", "\n" }, System.StringSplitOptions.None);
-        Debug.Log(""+data.Length);
         int tableSize = data.Length / 7 - 1;
-        Debug.Log("tablesize: "+tableSize);
 
         for (int i = 0; i < tableSize; i++)
         {
