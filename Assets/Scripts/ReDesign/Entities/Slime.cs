@@ -10,8 +10,6 @@ namespace ReDesign.Entities
 {
     public class Slime : Entity
     {
-        // private Vector3 targetLoc;
-        
         public Slime()
         {
             int MaxHealth = 5;
@@ -21,17 +19,7 @@ namespace ReDesign.Entities
                 new SlimeAttack()
             };
         }
-        //
-        // public virtual void Awake()
-        // {
-        //     targetLoc = transform.position;
-        // }
 
-        // public new void Update()
-        // {
-        //     RotateEntity();
-        // }
-        
         public override void NextAction()
         {
             //Debug.Log("im a slime");
@@ -46,7 +34,6 @@ namespace ReDesign.Entities
         {
             DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
             DefaultTile enemyPos = WorldController.getPlayerTile();
-            // targetLoc = new Vector3(enemyPos.GameObject.transform.position.x, enemyPos.GameObject.transform.position.y, enemyPos.GameObject.transform.position.z);
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             Debug.Log(""+range);
             if (range < 9)
@@ -56,8 +43,6 @@ namespace ReDesign.Entities
             {
                 MoveToPlayer(0);
             }
-            
-            //foreach(AttacksAndSpells atk in _attacks)
         }
 
         public override void Attack()

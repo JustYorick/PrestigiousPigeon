@@ -37,10 +37,9 @@ namespace ReDesign.Entities
                 else
                 {
                     //Add animation so it isnt instant
-                    DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject)
-                        .FirstOrDefault();
-                    WorldController.Instance.BaseLayer
-                        .Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault()
+                    DefaultTile obstacleTile = WorldController.ObstacleLayer
+                        .FirstOrDefault(t => t.GameObject == gameObject);
+                    WorldController.Instance.BaseLayer.FirstOrDefault(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos)
                         .Walkable = true;
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
@@ -54,11 +53,11 @@ namespace ReDesign.Entities
 
         public void MoveToPlayer(int movementRange)
         {
-            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject)
-                .FirstOrDefault();
+            DefaultTile currentTile = WorldController.ObstacleLayer
+                .FirstOrDefault(o => o.GameObject == this.gameObject);
             List<DefaultTile> targetLocations = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
             DefaultTile enemyPos = WorldController.getPlayerTile();
-            if (targetLocations.Where(t => t.XPos == enemyPos.XPos && t.YPos == enemyPos.YPos).FirstOrDefault() == null)
+            if (targetLocations.FirstOrDefault(t => t.XPos == enemyPos.XPos && t.YPos == enemyPos.YPos) == null)
             {
                 int widthAndHeight = (int)Mathf.Sqrt(WorldController.Instance.BaseLayer.Count);
                 PlayerPathfinding pf =
@@ -76,7 +75,7 @@ namespace ReDesign.Entities
                 }
 
 
-                Debug.Log("playerpos = " + enemyPos.XPos);
+                Debug.Log("PlayerPos = " + enemyPos.XPos);
                 if (path != null)
                 {
                     List<DefaultTile> actualPath = new List<DefaultTile>();
@@ -101,26 +100,75 @@ namespace ReDesign.Entities
                 attacking = true;
             }
         }
-
+        
         public IEnumerator EntityMoveSquares(List<DefaultTile> path, float height)
         {
-            foreach (DefaultTile pathNode in path)
+            GridLayout gr = WorldController.Instance.gridLayout;
+            for (int i = 1; i < path.Count; i++)
             {
-                // transform.position = new Vector3(pathNode.GameObject.transform.position.x, height,
-                //     pathNode.GameObject.transform.position.z);
-                targetLoc = new Vector3(pathNode.GameObject.transform.position.x, height,
-                    pathNode.GameObject.transform.position.z);
-                transform.position = targetLoc;
-                RotateEntity();
-                yield return new WaitForSeconds(.2f);
+                DefaultTile pathNode = path[i];
+                Vector3 targetPos = new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z);
+                Vector3 dir = (targetPos - transform.position).normalized;
+                Debug.Log(dir);
+                Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
+                targetLoc = SnapCoordinateToGrid(targetPos, gr);
+                float time = 0;
+                while (time < 0.5f)
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
+                    transform.rotation = targetRotation;
+                    transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5);
+                    time += Time.deltaTime;
+                    yield return null;
+                }
             }
 
             finishedMoving = true;
         }
+        // public IEnumerator EntityMoveSquares(List<DefaultTile> path, float height)
+        // {
+        //     GridLayout gr = WorldController.Instance.gridLayout;
+        //     for (int i = 1; i < path.Count; i++)
+        //     {
+        //         DefaultTile pathNode = path[i];
+        //         targetLoc = SnapCoordinateToGrid(
+        //             new Vector3(pathNode.GameObject.transform.position.x,
+        //                 height,
+        //                 pathNode.GameObject.transform.position.z
+        //             ),
+        //             gr);
+        //         Debug.Log("TARGETLOC:" + targetLoc);
+        //         Vector3 relativePos = targetLoc - transform.position;
+        //         Debug.Log("transformPOS: " + transform.position);
+        //         Debug.Log("RELATIVEPOS: " + relativePos);
+        //         Quaternion targetRotation = Quaternion.LookRotation(relativePos,Vector3.up);
+        //         Debug.Log("TARGETROT1: " + targetRotation);
+        //         targetRotation = new Quaternion(transform.localRotation.x, transform.localRotation.y, targetRotation.z, 1f);
+        //         Debug.Log("TARGETROT2: " + targetRotation);
+        //
+        //         float time = 0;
+        //         while (time < 1f)
+        //         {
+        //             transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5);
+        //             transform.localRotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
+        //             time += Time.deltaTime;
+        //             yield return null;
+        //
+        //         }
+        //         Debug.Log("TargetROT: " + targetRotation);
+        //         transform.localRotation = targetRotation;
+        //     }
+        //
+        //     finishedMoving = true;
+        // }
 
-        public virtual void Awake()
+        private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
         {
-            targetLoc = transform.position;
+            Vector3Int cellPos = gridLayout.WorldToCell(position);
+            Grid grid = gridLayout.gameObject.GetComponent<Grid>();
+            position = new Vector3(grid.GetCellCenterWorld(cellPos).x, position.y, grid.GetCellCenterWorld(cellPos).z);
+            // Change Y position of player to match grid here
+            return position;
         }
 
         public virtual void Update()
@@ -141,19 +189,8 @@ namespace ReDesign.Entities
                 finishedMoving = false;
                 StateController.ChangeState(GameState.EndTurn);
             }
-        }
-        
-        public void RotateEntity()
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
 
-            Vector3 relativePos = targetLoc - transform.position;
 
-            if (targetLoc != transform.position)
-            {
-                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-                transform.rotation = rotation;
-            }
         }
     }
 }
