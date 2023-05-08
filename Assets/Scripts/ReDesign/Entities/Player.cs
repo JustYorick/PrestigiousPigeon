@@ -19,12 +19,14 @@ namespace ReDesign.Entities
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
         }
 
+        private void Start()
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+        }
+
         public override void Update()
         {
-            if (StateController.currentState == GameState.PlayerTurn)
-            {
-                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
-            }
+            //Player needs to override update since the entity update will end the players turn at the en of movement.
         }
 
         public override void NextAction()
@@ -33,6 +35,7 @@ namespace ReDesign.Entities
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
             _manaSystem.StartTurn();
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }
 
             
