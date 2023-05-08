@@ -101,18 +101,24 @@ namespace ReDesign.Entities
             }
         }
         
+        // Enumerator function for moving an entity along a path of tiles
         public IEnumerator EntityMoveSquares(List<DefaultTile> path)
         {
             GridLayout gr = WorldController.Instance.gridLayout;
-            // For loop to loop over the path
+            // Loop over each tile in the path (skipping the first one, since that's the entity's starting tile)
             for (int i = 1; i < path.Count; i++)
             {
+                // Get the next tile in the path
                 DefaultTile pathNode = path[i];
+                
+                // Calculate the direction to the target position and set the entity's rotation accordingly
                 Vector3 targetPos = new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z);
                 Vector3 dir = (targetPos - transform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
                 targetLoc = SnapCoordinateToGrid(targetPos, gr);
-                float time = 0;
+                float time = 0; 
+                
+                // Loop until the entity has moved halfway to the target location
                 while (time < 0.5f)
                 {
                     // Adds the position and rotation
