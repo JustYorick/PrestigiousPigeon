@@ -166,10 +166,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
 
         Vector3 relativePos = targetLoc - transform.position;
-        Debug.Log("transformPOS PLAYER:" + transform.position);
-        Debug.Log("TARGETLOC PLAYER:" + targetLoc);
-        Debug.Log("relativePOS PLAYER:" + relativePos);
-
 
         if (targetLoc != transform.position)
         {

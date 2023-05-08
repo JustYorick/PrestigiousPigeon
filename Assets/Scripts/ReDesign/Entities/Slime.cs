@@ -22,7 +22,6 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            //Debug.Log("im a slime");
             StateController.ChangeState(GameState.EnemyTurn);
 
             //Move() will call Attack() and change turn
@@ -52,7 +51,6 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
-                //Debug.Log("targettile");
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;

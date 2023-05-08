@@ -84,7 +84,7 @@ namespace ReDesign.Entities
                     actualPath.Last().Walkable = false;
 
 
-                    movingCoroutine = EntityMoveSquares(actualPath, currentTile.GameObject.transform.position.y);
+                    movingCoroutine = EntityMoveSquares(actualPath);
                     StartCoroutine(movingCoroutine);
                     currentTile.XPos = actualPath.Last().XPos;
                     currentTile.YPos = actualPath.Last().YPos;
@@ -101,20 +101,21 @@ namespace ReDesign.Entities
             }
         }
         
-        public IEnumerator EntityMoveSquares(List<DefaultTile> path, float height)
+        public IEnumerator EntityMoveSquares(List<DefaultTile> path)
         {
             GridLayout gr = WorldController.Instance.gridLayout;
+            // For loop to loop over the path
             for (int i = 1; i < path.Count; i++)
             {
                 DefaultTile pathNode = path[i];
                 Vector3 targetPos = new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z);
                 Vector3 dir = (targetPos - transform.position).normalized;
-                Debug.Log(dir);
                 Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
                 targetLoc = SnapCoordinateToGrid(targetPos, gr);
                 float time = 0;
                 while (time < 0.5f)
                 {
+                    // Adds the position and rotation
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
                     transform.rotation = targetRotation;
                     transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5);
@@ -125,42 +126,6 @@ namespace ReDesign.Entities
 
             finishedMoving = true;
         }
-        // public IEnumerator EntityMoveSquares(List<DefaultTile> path, float height)
-        // {
-        //     GridLayout gr = WorldController.Instance.gridLayout;
-        //     for (int i = 1; i < path.Count; i++)
-        //     {
-        //         DefaultTile pathNode = path[i];
-        //         targetLoc = SnapCoordinateToGrid(
-        //             new Vector3(pathNode.GameObject.transform.position.x,
-        //                 height,
-        //                 pathNode.GameObject.transform.position.z
-        //             ),
-        //             gr);
-        //         Debug.Log("TARGETLOC:" + targetLoc);
-        //         Vector3 relativePos = targetLoc - transform.position;
-        //         Debug.Log("transformPOS: " + transform.position);
-        //         Debug.Log("RELATIVEPOS: " + relativePos);
-        //         Quaternion targetRotation = Quaternion.LookRotation(relativePos,Vector3.up);
-        //         Debug.Log("TARGETROT1: " + targetRotation);
-        //         targetRotation = new Quaternion(transform.localRotation.x, transform.localRotation.y, targetRotation.z, 1f);
-        //         Debug.Log("TARGETROT2: " + targetRotation);
-        //
-        //         float time = 0;
-        //         while (time < 1f)
-        //         {
-        //             transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5);
-        //             transform.localRotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
-        //             time += Time.deltaTime;
-        //             yield return null;
-        //
-        //         }
-        //         Debug.Log("TargetROT: " + targetRotation);
-        //         transform.localRotation = targetRotation;
-        //     }
-        //
-        //     finishedMoving = true;
-        // }
 
         private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
         {
@@ -179,9 +144,9 @@ namespace ReDesign.Entities
                 //finishedMoving = false;
             }
 
-            if (attacking == true)
+            if (attacking)
             {
-                this.Attack();
+                Attack();
             }
 
             if (finishedMoving && !attacking)
@@ -189,8 +154,6 @@ namespace ReDesign.Entities
                 finishedMoving = false;
                 StateController.ChangeState(GameState.EndTurn);
             }
-
-
         }
     }
 }
