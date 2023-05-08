@@ -19,6 +19,7 @@ public class DialogueScript : MonoBehaviour
     [SerializeField] private AudioSource soundEffect;
     [SerializeField] private string nextSceneName;
     [SerializeField] private RawImage blackFade;
+    [SerializeField] private GameObject skipPanel;
 
     private string text;
     [SerializeField] private float textSpeed;
@@ -33,14 +34,12 @@ public class DialogueScript : MonoBehaviour
 
     void Start()
     {
+        skipPanel.SetActive(false);
         canvas.gameObject.SetActive(true);
         linesReader.ReadCSV();
         index = -1;
-        //text = LinesReader.Instance.linesList.dialogueLines[index].dialogueLine;
         textComponent.text = string.Empty;
         NextLine();
-        //StartDialogue();
-        //index++;
     }
 
     void Update()
@@ -48,7 +47,6 @@ public class DialogueScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount)
         {
             cooldown = Time.time;
-            Debug.Log("text: "+ text+";;;; index:"+index);
             if (lineComplete)
             {
                 NextLine();
@@ -96,11 +94,6 @@ public class DialogueScript : MonoBehaviour
         if (linesReader.linesList.dialogueLines[index].soundEffect != string.Empty)
             StartCoroutine(LoadAudio("\\Sounds\\Effects\\" + linesReader.linesList.dialogueLines[index].soundEffect, soundEffect));
 
-
-        //Change background
-        //Change portrait
-        //Play music
-        //Play sound effect
         //Play effects
     }
 
@@ -157,15 +150,7 @@ public class DialogueScript : MonoBehaviour
             StartDialogue();
         } else
         {
-            //gameObject.SetActive(false);
-            if (nextSceneName.Length > 0)
-            {
-                StartCoroutine(FadeToBlackAndNextScene());
-            } 
-            else
-            {
-                canvas.gameObject.SetActive(false);
-            }
+            EndScene();
             //GO NEXT SCENE
         }
     }
@@ -199,11 +184,34 @@ public class DialogueScript : MonoBehaviour
         float opacity = 0.0f;
         while (opacity <= 1.01f)
         {
-            Debug.Log(blackFade.color.a);
             blackFade.color = new Color(0, 0, 0, opacity);
             opacity += 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void EndScene()
+    {
+        if (nextSceneName.Length > 0)
+        {
+            StartCoroutine(FadeToBlackAndNextScene());
+        }
+        else
+        {
+            canvas.gameObject.SetActive(false);
+        }
+    }
+
+    public void SkipButton()
+    {
+        Time.timeScale = 0f;
+        skipPanel.SetActive(true);
+    }
+
+    public void CancelSkipButton()
+    {
+        Time.timeScale = 1f;
+        skipPanel.SetActive(false);
     }
 }
