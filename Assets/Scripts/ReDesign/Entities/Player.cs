@@ -42,10 +42,9 @@ namespace ReDesign.Entities
             //throw new System.NotImplementedException();
         }
 
-        public override IEnumerator Attack()
+        public override void Attack()
         {
             attacking = false;
-            yield return null;
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);

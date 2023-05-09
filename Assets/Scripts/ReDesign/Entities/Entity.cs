@@ -13,12 +13,13 @@ namespace ReDesign.Entities
         public List<AttacksAndSpells> Attacks { get; set; }
         public bool finishedMoving = false;
         public bool attacking = false;
+        private Vector3 targetLocation;
         public IEnumerator movingCoroutine;
         private static GameObject _gameOver;
         private Vector3 targetLoc;
         public abstract void NextAction();
         public abstract void Move();
-        public abstract IEnumerator Attack();
+        public abstract void Attack();
 
         public virtual void ReceiveDamage(int dmg)
         {
@@ -141,10 +142,7 @@ namespace ReDesign.Entities
 
             if (attacking)
             {
-                StartCoroutine(Attack());
-            } else
-            {
-                StopCoroutine(Attack());
+                this.Attack();
             }
 
             if (finishedMoving && !attacking)
@@ -152,6 +150,29 @@ namespace ReDesign.Entities
                 finishedMoving = false;
                 StateController.ChangeState(GameState.EndTurn);
             }
+        }
+        
+        public IEnumerator RotateToAttack()
+        {
+            Vector3 attackerPos = transform.position;
+            Vector3 targetPos = WorldController.getPlayerTile().GameObject.transform.position;
+            GridLayout gr = WorldController.Instance.gridLayout;
+            // Calculate the direction to the target position and set the entity's rotation accordingly
+            Vector3 targetPosition = new Vector3(targetPos.x, attackerPos.y, targetPos.z);
+            Vector3 dir = (targetPosition - attackerPos).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
+            targetLocation = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
+            float time = 0;
+
+            // Loop until the entity has moved halfway to the target location
+            while (time < 0.5f)
+            {
+                // Adds the position and rotation
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
+                time += Time.deltaTime;
+                yield return attacking = false;
+            }
+            transform.rotation = targetRotation;
         }
     }
 }
