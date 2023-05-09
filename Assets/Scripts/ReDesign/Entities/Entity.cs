@@ -18,24 +18,29 @@ namespace ReDesign.Entities
         public abstract void NextAction();
         public abstract void Move();
         public abstract void Attack();
-        public void ReceiveDamage(int dmg)
+
+        public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
             _healthBar.transform.localScale = (new Vector3(
                 _entityHealth.HealthPercentage(_entityHealth.Health),
                 (float)0.1584, (float)0.09899999));
-
+            
             if (_entityHealth.Health <= 0)
             {
                 if (this.gameObject.name.Contains("Player"))
                 {
                     TurnController.gameOver = true;
+                    PlayerAnimator._animator.SetBool("PlayerDead", true);
                 }
                 else
                 {
                     //Add animation so it isnt instant
-                    DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject).FirstOrDefault();
-                    WorldController.Instance.BaseLayer.Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault().Walkable = true;
+                    DefaultTile obstacleTile = WorldController.ObstacleLayer.Where(t => t.GameObject == gameObject)
+                        .FirstOrDefault();
+                    WorldController.Instance.BaseLayer
+                        .Where(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos).FirstOrDefault()
+                        .Walkable = true;
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
                     obstacleTile = null;
@@ -48,13 +53,15 @@ namespace ReDesign.Entities
 
         public void MoveToPlayer(int movementRange)
         {
-            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
+            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject)
+                .FirstOrDefault();
             List<DefaultTile> targetLocations = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
             DefaultTile enemyPos = WorldController.getPlayerTile();
             if (targetLocations.Where(t => t.XPos == enemyPos.XPos && t.YPos == enemyPos.YPos).FirstOrDefault() == null)
             {
                 int widthAndHeight = (int)Mathf.Sqrt(WorldController.Instance.BaseLayer.Count);
-                PlayerPathfinding pf = new PlayerPathfinding(widthAndHeight, widthAndHeight, WorldController.Instance.BaseLayer);
+                PlayerPathfinding pf =
+                    new PlayerPathfinding(widthAndHeight, widthAndHeight, WorldController.Instance.BaseLayer);
 
                 List<DefaultTile> path = null;
 
@@ -68,12 +75,11 @@ namespace ReDesign.Entities
                 }
 
 
-
                 Debug.Log("playerpos = " + enemyPos.XPos);
                 if (path != null)
                 {
                     List<DefaultTile> actualPath = new List<DefaultTile>();
-                    actualPath.AddRange(path.GetRange(0, movementRange+1));
+                    actualPath.AddRange(path.GetRange(0, movementRange + 1));
                     actualPath.First().Walkable = true;
                     actualPath.Last().Walkable = false;
 
@@ -99,7 +105,8 @@ namespace ReDesign.Entities
         {
             foreach (DefaultTile pathNode in path)
             {
-                transform.position = new Vector3(pathNode.GameObject.transform.position.x, height, pathNode.GameObject.transform.position.z);
+                transform.position = new Vector3(pathNode.GameObject.transform.position.x, height,
+                    pathNode.GameObject.transform.position.z);
                 yield return new WaitForSeconds(.2f);
             }
 
