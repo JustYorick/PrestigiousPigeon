@@ -73,9 +73,7 @@ namespace ReDesign.Entities
                         path = newPath;
                     }
                 }
-
-
-                Debug.Log("PlayerPos = " + enemyPos.XPos);
+                
                 if (path != null)
                 {
                     List<DefaultTile> actualPath = new List<DefaultTile>();
@@ -113,7 +111,6 @@ namespace ReDesign.Entities
                 
                 // Calculate the direction to the target position and set the entity's rotation accordingly
                 Vector3 targetPos = new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z);
-                Debug.Log("tpos ent: "+ targetPos);
                 Vector3 dir = (targetPos - transform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
                 targetLoc = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
@@ -140,7 +137,6 @@ namespace ReDesign.Entities
             if (finishedMoving)
             {
                 attacking = true;
-                //finishedMoving = false;
             }
 
             if (attacking)
