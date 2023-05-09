@@ -59,7 +59,7 @@ namespace ReDesign
         public static void ResolveNextTurn()
         {
             FillEntityList();
-
+            showGameOver();
             if (_turnPart < _entities.Count && !gameOver)
             {
                 Debug.Log("turnpart:" + _turnPart);
@@ -102,9 +102,10 @@ namespace ReDesign
                 _controlsHidden = true;
             }
         }
-        private void showGameOver()
+        private static void showGameOver()
         {
-            if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
+            // if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
+            if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 21 )
             {
                 _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
                 gameOver = true;               

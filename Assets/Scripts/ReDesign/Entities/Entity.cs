@@ -73,6 +73,14 @@ namespace ReDesign.Entities
                 if (path != null)
                 {
                     List<DefaultTile> actualPath = new List<DefaultTile>();
+                    Debug.Log("moverange = " + movementRange + " pc " + path.Count);
+                    if(movementRange >= path.Count){
+                        if (path.Count > 0){
+                            movementRange = path.Count-1;
+                        } else {
+                            movementRange = 0;
+                        }
+                    }
                     actualPath.AddRange(path.GetRange(0, movementRange+1));
                     actualPath.First().Walkable = true;
                     actualPath.Last().Walkable = false;
