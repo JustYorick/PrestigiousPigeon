@@ -16,6 +16,7 @@ namespace ReDesign
         private bool drawSelectedTile = true;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
+        private DefaultTile prevSelectedTile;
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -91,12 +92,16 @@ namespace ReDesign
         
         private void DrawCurrentSelectedTile()
         {
-            Color color = new Color(255, 255, 255, 0.05f);
-            DefaultTile hoveredNode = MouseToTile();
-            RangeTileTool.Instance.clearTileMap(SelectorMap);
-            if (hoveredNode != null && drawSelectedTile)
+            if (MouseToTile() != prevSelectedTile)
             {
-                RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
+                Color color = new Color(255, 255, 255, 0.05f);
+                DefaultTile hoveredNode = MouseToTile();
+                prevSelectedTile = hoveredNode;
+                RangeTileTool.Instance.clearTileMap(SelectorMap);
+                if (hoveredNode != null && drawSelectedTile)
+                {
+                    RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
+                }
             }
         }
 

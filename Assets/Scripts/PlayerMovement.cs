@@ -101,6 +101,10 @@ public class PlayerMovement : MonoBehaviour
         PlayerAnimator._animator.SetBool("isWalking", false);
         _player.finishedMoving = true;
         predrawPath = true;
+        if (StateController.currentState == GameState.PlayerTurn)
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.GetMana());
+        }
     }
 
     private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
