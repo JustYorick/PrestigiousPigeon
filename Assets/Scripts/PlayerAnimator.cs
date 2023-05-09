@@ -35,13 +35,11 @@ public class PlayerAnimator : MonoBehaviour
         if (spellMenu.enabled)
         {
             _animator.SetBool("isScrolling", true);
-            _animator.applyRootMotion = true;
             _animator.Play("Scrolling");
         }
         else if (!spellMenu.enabled)
         {
             _animator.SetBool("isScrolling", false);
-            _animator.applyRootMotion = false;
         }
 
         if (_animator.GetBool("fireCasted"))
