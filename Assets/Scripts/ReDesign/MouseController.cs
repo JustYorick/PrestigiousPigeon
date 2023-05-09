@@ -19,6 +19,7 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
 
+        private DefaultTile prevSelectedTile;
         private void Awake()
         {
             if (_instance != null && _instance != this)
