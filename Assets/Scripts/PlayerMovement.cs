@@ -87,7 +87,12 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (DefaultTile pathNode in path)
         {
-            targetLoc = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
+            targetLoc = SnapCoordinateToGrid(new Vector3(
+                pathNode.GameObject.transform.position.x,
+                transform.position.y,
+                pathNode.GameObject.transform.position.z
+            ),
+            gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
             Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
@@ -107,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
+    public static Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
