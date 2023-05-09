@@ -144,7 +144,7 @@ namespace ReDesign.Entities
 
         public virtual void Update()
         {
-            if (finishedMoving == true)
+            if (finishedMoving)
             {
                 attacking = true;
                 //finishedMoving = false;
