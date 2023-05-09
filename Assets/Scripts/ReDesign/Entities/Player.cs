@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,9 +42,10 @@ namespace ReDesign.Entities
             //throw new System.NotImplementedException();
         }
 
-        public override void Attack()
+        public override IEnumerator Attack()
         {
             attacking = false;
+            yield return null;
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);

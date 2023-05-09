@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         predrawPath = true;
     }
 
-    private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
+    public static Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();

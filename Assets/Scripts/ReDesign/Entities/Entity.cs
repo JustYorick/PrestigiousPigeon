@@ -18,7 +18,7 @@ namespace ReDesign.Entities
         private Vector3 targetLoc;
         public abstract void NextAction();
         public abstract void Move();
-        public abstract void Attack();
+        public abstract IEnumerator Attack();
 
         public virtual void ReceiveDamage(int dmg)
         {
@@ -113,9 +113,10 @@ namespace ReDesign.Entities
                 
                 // Calculate the direction to the target position and set the entity's rotation accordingly
                 Vector3 targetPos = new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z);
+                Debug.Log("tpos ent: "+ targetPos);
                 Vector3 dir = (targetPos - transform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
-                targetLoc = SnapCoordinateToGrid(targetPos, gr);
+                targetLoc = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
                 float time = 0; 
                 
                 // Loop until the entity has moved halfway to the target location
@@ -123,24 +124,16 @@ namespace ReDesign.Entities
                 {
                     // Adds the position and rotation
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
-                    transform.rotation = targetRotation;
                     transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5);
                     time += Time.deltaTime;
                     yield return null;
                 }
+                transform.rotation = targetRotation;
             }
 
             finishedMoving = true;
         }
-
-        private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
-        {
-            Vector3Int cellPos = gridLayout.WorldToCell(position);
-            Grid grid = gridLayout.gameObject.GetComponent<Grid>();
-            position = new Vector3(grid.GetCellCenterWorld(cellPos).x, position.y, grid.GetCellCenterWorld(cellPos).z);
-            // Change Y position of player to match grid here
-            return position;
-        }
+        
 
         public virtual void Update()
         {
@@ -152,7 +145,10 @@ namespace ReDesign.Entities
 
             if (attacking)
             {
-                Attack();
+                StartCoroutine(Attack());
+            } else
+            {
+                StopCoroutine(Attack());
             }
 
             if (finishedMoving && !attacking)
