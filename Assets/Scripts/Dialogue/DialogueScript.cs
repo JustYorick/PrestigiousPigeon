@@ -29,11 +29,13 @@ public class DialogueScript : MonoBehaviour
     private bool lineComplete;
     private bool fadeFinished;
     private IEnumerator typeCoroutine;
+    private bool receiveInput;
 
     [SerializeField] LinesReader linesReader;
 
     void Start()
     {
+        receiveInput = true;
         skipPanel.SetActive(false);
         canvas.gameObject.SetActive(true);
         linesReader.ReadCSV();
@@ -44,7 +46,7 @@ public class DialogueScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount)
+        if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount && receiveInput)
         {
             cooldown = Time.time;
             if (lineComplete)
@@ -193,6 +195,7 @@ public class DialogueScript : MonoBehaviour
 
     public void EndScene()
     {
+        receiveInput = false;
         if (nextSceneName.Length > 0)
         {
             StartCoroutine(FadeToBlackAndNextScene());
