@@ -8,28 +8,26 @@ public class ActionButton : MonoBehaviour{
     [Header("Narrow Button")]
     [SerializeField] private Vector2 narrowPosition;
     [SerializeField] private Vector2 narrowSize;
-    [SerializeField] private Texture2D narrowTexture;
-    [SerializeField] private Vector2 narrowImageScale;
+    [SerializeField] private Sprite narrowTexture;
 
     [Header("Wide Button")]
     [SerializeField] private Vector2 widePosition;
     [SerializeField] private Vector2 wideSize;
-    [SerializeField] private Texture2D wideTexture;
-    [SerializeField] private Vector2 wideImageScale;
+    [SerializeField] private Sprite wideTexture;
 
     [Header("Other buttons")]
     [SerializeField] private ActionButton[] buttons;
 
     [field:SerializeField] public bool active{get; private set;} = false;
     [field:SerializeField] private KeyCode keyBinding;
-    private RawImage image;
+    private Image image;
     private Button button;
     private RectTransform rectTransform;
     
     void Start(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
-        image = GetComponent<RawImage>();
+        image = GetComponent<Image>();
         button = GetComponent<Button>();
 
         // Add a listener for the OnClick of the button, to make the button wide
@@ -55,8 +53,7 @@ public class ActionButton : MonoBehaviour{
         rectTransform.sizeDelta = narrowSize;
 
         // Set the correct image
-        image.texture = narrowTexture;
-        image.rectTransform.localScale = narrowImageScale;
+        image.sprite = narrowTexture;
     }
 
     void MakeWide(){
@@ -70,8 +67,7 @@ public class ActionButton : MonoBehaviour{
         rectTransform.sizeDelta = wideSize;
 
         // Set the correct image
-        image.texture = wideTexture;
-        image.rectTransform.localScale = wideImageScale;
+        image.sprite = wideTexture;
     }
 
     void Activate(){
