@@ -87,7 +87,7 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    void ChangeButton(bool status)
+    private void ChangeButton(bool status)
     {
         spellsButton.interactable = status;
         moveButton.interactable = status;
