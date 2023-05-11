@@ -88,20 +88,7 @@ namespace ReDesign
         {
             _gameOver.enabled = false;
         }
-
-        public void ShowControls()
-        {
-            if (_controlsHidden)
-            {
-                _controlsPanel.enabled = true;
-                _controlsHidden = false;
-            }
-            else
-            {
-                _controlsPanel.enabled = false;
-                _controlsHidden = true;
-            }
-        }
+        
         private void showGameOver()
         {
             if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)

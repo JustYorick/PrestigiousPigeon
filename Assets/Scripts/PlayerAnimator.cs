@@ -48,31 +48,27 @@ public class PlayerAnimator : MonoBehaviour
 
         if (_animator.GetBool("fireCasted"))
         {
-            spellsButton.interactable = false;
-            moveButton.interactable = false;
+            ChangeButton(false);
             _animator.SetBool("hasCasted", false);
             _animator.Play("Fire Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 _animator.SetBool("fireCasted", false);
                 _animator.SetBool("hasCasted", true);
-                spellsButton.interactable = true;
-                moveButton.interactable = true;
+                ChangeButton(true);
             }
         }
 
         if (_animator.GetBool("iceCasted"))
         {
-            spellsButton.interactable = false;
-            moveButton.interactable = false;
+            ChangeButton(false);
             _animator.SetBool("hasCasted", false);
             _animator.Play("Ice Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 _animator.SetBool("iceCasted", false);
                 _animator.SetBool("hasCasted", true);
-                spellsButton.interactable = true;
-                moveButton.interactable = true;
+                ChangeButton(true);
             }
         }
 
@@ -89,5 +85,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             _animator.Play("Death");
         }
+    }
+
+    void ChangeButton(bool status)
+    {
+        spellsButton.interactable = status;
+        moveButton.interactable = status;
     }
 }
