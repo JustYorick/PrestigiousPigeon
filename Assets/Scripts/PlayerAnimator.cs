@@ -36,7 +36,7 @@ public class PlayerAnimator : MonoBehaviour
             _animator.Play("Walking");
         }
 
-        if (spellMenu.enabled)
+        if (spellMenu.enabled && !_animator.GetBool("isWalking"))
         {
             _animator.SetBool("isScrolling", true);
             _animator.Play("Scrolling");
