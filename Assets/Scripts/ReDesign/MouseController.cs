@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -32,6 +33,11 @@ namespace ReDesign
             DrawCurrentSelectedTile();
             
             DrawCurrentSpellRange();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                ShowEntityInfo();
+            }
             
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
@@ -153,6 +159,17 @@ namespace ReDesign
                 yield return null;
             }
             player.transform.rotation = targetRotation;
+        }
+
+        private void ShowEntityInfo()
+        {
+            GameObject enemyTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == MouseToTile().XPos && t.YPos == MouseToTile().YPos)?.GameObject;
+
+            if (enemyTile != null && enemyTile.CompareTag("Entity"))
+            {
+                Entity entity = enemyTile.GetComponent<Entity>();
+                RangeTileTool.Instance.drawMoveRange(MouseToTile(), entity.MoveRange);
+            }
         }
     }
 }

@@ -10,6 +10,9 @@ namespace ReDesign.Entities
 {
     public class Slime : Entity
     {
+        public override int SightRange { get { return 9; } }
+        public override int MoveRange { get { return 1; } }
+        
         public Slime()
         {
             int MaxHealth = 5;
@@ -35,9 +38,9 @@ namespace ReDesign.Entities
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             Debug.Log("" + range);
-            if (range < 9)
+            if (range < SightRange)
             {
-                MoveToPlayer(1);
+                MoveToPlayer(this.MoveRange);
             }
             else
             {
@@ -60,7 +63,6 @@ namespace ReDesign.Entities
             }
             attacking = false;
             StopCoroutine(RotateToAttack());
-            
         }
     }
 }

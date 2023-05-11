@@ -8,6 +8,10 @@ namespace ReDesign.Entities
     public class Player : Entity
     {
         [SerializeField] private ManaSystem _manaSystem;
+        
+        public override int SightRange { get; }
+        public override int MoveRange { get { return _manaSystem.GetMana(); } }
+        
         private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
         {
             new BasicFireSpell(),
