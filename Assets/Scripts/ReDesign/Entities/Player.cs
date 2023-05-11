@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,18 +14,20 @@ namespace ReDesign.Entities
             new BasicIceSpell()
         };
 
-        private void Awake()
+        public virtual void Awake()
         {
             int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
         }
 
+        private void Start()
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+        }
+
         public override void Update()
         {
-            if (StateController.currentState == GameState.PlayerTurn)
-            {
-                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
-            }
+            //Player needs to override update since the entity update will end the players turn at the en of movement.
         }
 
         public override void NextAction()
@@ -33,6 +36,7 @@ namespace ReDesign.Entities
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
             _manaSystem.StartTurn();
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }
 
             
@@ -47,5 +51,12 @@ namespace ReDesign.Entities
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);
+
+        public override void ReceiveDamage(int dmg)
+        {
+            base.ReceiveDamage(dmg);
+            PlayerAnimator._animator.SetBool("isHit", true);
+            PlayerAnimator._animator.SetBool("isIdle", false);
+        }
     }
 }

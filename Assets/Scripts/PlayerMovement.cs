@@ -6,6 +6,8 @@ using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
 using ReDesign.Entities;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
     private Player _player;
+
+    private Vector3 targetLoc;
+
+    private void Awake()
+    {
+        targetLoc = transform.position;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
         {
             predrawPath = false;
             DrawPath(path);
+            PlayerAnimator._animator.SetBool("isIdle", false);
+            PlayerAnimator._animator.SetBool("isWalking", true);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
@@ -76,7 +87,12 @@ public class PlayerMovement : MonoBehaviour
     {
         foreach (DefaultTile pathNode in path)
         {
-            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
+            targetLoc = SnapCoordinateToGrid(new Vector3(
+                pathNode.GameObject.transform.position.x,
+                transform.position.y,
+                pathNode.GameObject.transform.position.z
+            ),
+            gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
             Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
@@ -86,12 +102,17 @@ public class PlayerMovement : MonoBehaviour
         dt.XPos = path.Last().XPos;
         dt.YPos = path.Last().YPos;
 
-
+        PlayerAnimator._animator.SetBool("isIdle", true);
+        PlayerAnimator._animator.SetBool("isWalking", false);
         _player.finishedMoving = true;
         predrawPath = true;
+        if (StateController.currentState == GameState.PlayerTurn)
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.GetMana());
+        }
     }
 
-    private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
+    public static Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
@@ -112,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RotatePlayer();
     }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
@@ -141,5 +163,18 @@ public class PlayerMovement : MonoBehaviour
             DrawPath(path);
         }
         predrawnPath = path;
+    }
+
+    public void RotatePlayer()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
+
+        Vector3 relativePos = targetLoc - transform.position;
+
+        if (targetLoc != transform.position)
+        {
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            transform.rotation = rotation;
+        }
     }
 }
