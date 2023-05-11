@@ -3740,11 +3740,9 @@ MonoBehaviour:
   narrowPosition: {x: -50, y: 0}
   narrowSize: {x: 70, y: 70}
   narrowTexture: {fileID: 2800000, guid: 94a2ffa234e333dd9971d8a1a826be13, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: 0}
   wideSize: {x: 70, y: 70}
   wideTexture: {fileID: 2800000, guid: ffda0f33f72d8a1b7b3f0e0c973f6dc9, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 1194501315}
   - {fileID: 891301784}
@@ -5364,11 +5362,9 @@ MonoBehaviour:
   narrowPosition: {x: -50, y: -70}
   narrowSize: {x: 70, y: 70}
   narrowTexture: {fileID: 2800000, guid: 69640961cb633d24c928db941dbbd0fc, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: -70}
   wideSize: {x: 70, y: 70}
   wideTexture: {fileID: 2800000, guid: 5a781238d9d8b7883a1ce6d7cb6e3099, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 1194501315}
   - {fileID: 633907937}
@@ -7464,7 +7460,7 @@ RectTransform:
   m_GameObject: {fileID: 1194501313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 615685319}
@@ -7473,7 +7469,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -50, y: 70}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 140, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194501315
 MonoBehaviour:
@@ -7488,13 +7484,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrowPosition: {x: -50, y: 70}
-  narrowSize: {x: 70, y: 70}
+  narrowSize: {x: 140, y: 70}
   narrowTexture: {fileID: 2800000, guid: 3eb1aebece26797c2abeae0a1a0682e0, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: 70}
-  wideSize: {x: 70, y: 70}
+  wideSize: {x: 210, y: 105}
   wideTexture: {fileID: 2800000, guid: 050fd3b5d5b408083b69a8520227bf78, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 633907937}
   - {fileID: 891301784}

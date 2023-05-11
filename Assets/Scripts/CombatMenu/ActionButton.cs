@@ -9,13 +9,11 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private Vector2 narrowPosition;
     [SerializeField] private Vector2 narrowSize;
     [SerializeField] private Texture2D narrowTexture;
-    [SerializeField] private Vector2 narrowImageScale;
 
     [Header("Wide Button")]
     [SerializeField] private Vector2 widePosition;
     [SerializeField] private Vector2 wideSize;
     [SerializeField] private Texture2D wideTexture;
-    [SerializeField] private Vector2 wideImageScale;
 
     [Header("Other buttons")]
     [SerializeField] private ActionButton[] buttons;
@@ -44,6 +42,7 @@ public class ActionButton : MonoBehaviour{
     }
 
     void Update(){
+        // Simulate a click event when the keybinding has been pressed
         if(Input.GetKeyDown(keyBinding)){
             button.onClick.Invoke();
         }
@@ -56,7 +55,6 @@ public class ActionButton : MonoBehaviour{
 
         // Set the correct image
         image.texture = narrowTexture;
-        image.rectTransform.localScale = narrowImageScale;
     }
 
     void MakeWide(){
@@ -71,7 +69,6 @@ public class ActionButton : MonoBehaviour{
 
         // Set the correct image
         image.texture = wideTexture;
-        image.rectTransform.localScale = wideImageScale;
     }
 
     void Activate(){
@@ -89,6 +86,4 @@ public class ActionButton : MonoBehaviour{
             active = false;
         }
     }
-
-    void OnClick(){}
 }
