@@ -4,12 +4,16 @@ using ReDesign;
 using ReDesign.Entities;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
     [SerializeField] private Canvas spellMenu;
+    [SerializeField] private Button spellsButton;
+    [SerializeField] private Button moveButton;
 
+    
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -44,23 +48,31 @@ public class PlayerAnimator : MonoBehaviour
 
         if (_animator.GetBool("fireCasted"))
         {
+            spellsButton.interactable = false;
+            moveButton.interactable = false;
             _animator.SetBool("hasCasted", false);
             _animator.Play("Fire Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 _animator.SetBool("fireCasted", false);
                 _animator.SetBool("hasCasted", true);
+                spellsButton.interactable = true;
+                moveButton.interactable = true;
             }
         }
 
         if (_animator.GetBool("iceCasted"))
         {
+            spellsButton.interactable = false;
+            moveButton.interactable = false;
             _animator.SetBool("hasCasted", false);
             _animator.Play("Ice Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 _animator.SetBool("iceCasted", false);
                 _animator.SetBool("hasCasted", true);
+                spellsButton.interactable = true;
+                moveButton.interactable = true;
             }
         }
 
