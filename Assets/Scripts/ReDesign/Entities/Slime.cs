@@ -55,11 +55,11 @@ namespace ReDesign.Entities
                 .FirstOrDefault();
             if (targetTile != null)
             {
-                StartCoroutine(RotateToAttack());
+                StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;
-            StopCoroutine(RotateToAttack());
+            StopCoroutine(EnemyRotateToAttack());
             
         }
     }
