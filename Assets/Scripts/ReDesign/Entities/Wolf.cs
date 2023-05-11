@@ -35,7 +35,7 @@ namespace ReDesign.Entities
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             Debug.Log("wolfmoving "+range);
-            if (range < 12)         // wolf notices player from 12 tiles away: is now very hidden ingame, create feedback about this for player?
+            if (range < 13)         // wolf notices player from 13 tiles away: is now very hidden ingame, create feedback about this for player?
             {
                 MoveToPlayer(4);
             } else
