@@ -28,7 +28,6 @@ namespace ReDesign
             if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
             {
                 Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
-                Debug.Log("dmg" + Damage);
                 enemy.ReceiveDamage(Damage);
             } 
             else
