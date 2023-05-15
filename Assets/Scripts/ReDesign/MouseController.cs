@@ -14,7 +14,7 @@ namespace ReDesign
         [SerializeField] private ManaSystem manaSystem;
         [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
-        private bool drawSelectedTile = true;
+        private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
@@ -60,18 +60,18 @@ namespace ReDesign
                 {
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
-                    StartCoroutine(RotateToAttack());    
+                    StartCoroutine(Player.RotateToAttack());    
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.UseMana(spellSelection.ManaCost);
                 }
                 spellSelection = null;
                 CheckSpellCasted(spellSelection);
-                StopCoroutine(RotateToAttack());
+                StopCoroutine(Player.RotateToAttack());
             }
         }
 
-        private Vector3 GetMouseWorldPos()
+        public static Vector3 GetMouseWorldPos()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
@@ -135,40 +135,6 @@ namespace ReDesign
                 if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
 
                 if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
-            }
-        }
-        
-        private IEnumerator RotateToAttack()
-        {
-            Vector3 attackerPos = player.transform.position;
-            Vector3 targetPos = GetMouseWorldPos();
-            GridLayout gr = WorldController.Instance.gridLayout;
-            // Calculate the direction to the target position and set the entity's rotation accordingly
-            Vector3 targetPosition = new Vector3(targetPos.x, attackerPos.y, targetPos.z);
-            Vector3 dir = (targetPosition - attackerPos).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
-            targetLocation = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
-            float time = 0;
-
-            // Loop until the entity has moved halfway to the target location
-            while (time < 0.5f)
-            {
-                // Adds the position and rotation
-                player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, time / 0.5f);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            player.transform.rotation = targetRotation;
-        }
-
-        private void ShowEntityInfo()
-        {
-            GameObject enemyTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == MouseToTile().XPos && t.YPos == MouseToTile().YPos)?.GameObject;
-
-            if (enemyTile != null && enemyTile.CompareTag("Entity"))
-            {
-                Entity entity = enemyTile.GetComponent<Entity>();
-                RangeTileTool.Instance.drawMoveRange(MouseToTile(), entity.MoveRange);
             }
         }
     }

@@ -20,7 +20,6 @@ namespace ReDesign
         public static int TurnCount = 0;
         private static int _turnPart = 0;
         public static bool gameOver = false;
-        private static bool _controlsHidden;
         private static List<Entity> _entities = new List<Entity>();
         private static Canvas _gameOver;
         private static RawImage _controlsPanel;
@@ -43,9 +42,6 @@ namespace ReDesign
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
-            _controlsPanel = GameObject.Find("Controls").GetComponent<RawImage>();
-            _controlsPanel.enabled = false;
-            _controlsHidden = true;
         }
 
         private void Start()
@@ -88,20 +84,7 @@ namespace ReDesign
         {
             _gameOver.enabled = false;
         }
-
-        public void ShowControls()
-        {
-            if (_controlsHidden)
-            {
-                _controlsPanel.enabled = true;
-                _controlsHidden = false;
-            }
-            else
-            {
-                _controlsPanel.enabled = false;
-                _controlsHidden = true;
-            }
-        }
+        
         private void showGameOver()
         {
             if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)

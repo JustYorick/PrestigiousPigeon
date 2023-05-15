@@ -154,7 +154,7 @@ namespace ReDesign.Entities
             }
         }
         
-        public IEnumerator RotateToAttack()
+        public IEnumerator EnemyRotateToAttack()
         {
             Vector3 attackerPos = transform.position;
             Vector3 targetPos = WorldController.getPlayerTile().GameObject.transform.position;
