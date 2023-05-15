@@ -8,6 +8,8 @@ namespace ReDesign.Entities
 {
     public class Wolf : Entity
     {
+        public override int SightRange { get { return 12; } }
+        public override int MoveRange { get { return 4; } }
         
         public Wolf()
         {
@@ -34,10 +36,9 @@ namespace ReDesign.Entities
             DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
-            Debug.Log("wolfmoving "+range);
-            if (range < 13)         // wolf notices player from 13 tiles away: is now very hidden ingame, create feedback about this for player?
+            if (range < SightRange)
             {
-                MoveToPlayer(4);
+                MoveToPlayer(this.MoveRange);
             } else
             {
                 MoveToPlayer(0);
@@ -53,10 +54,11 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
-                //Debug.Log("targettile");
+                StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;
+            StopCoroutine(EnemyRotateToAttack());
         }
     }
 }
