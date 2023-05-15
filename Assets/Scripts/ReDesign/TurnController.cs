@@ -103,7 +103,7 @@ namespace ReDesign
                 case "Level1Map":
                     if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
                     {
-                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
+                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
                         gameOver = true;               
                     }
                     break;
