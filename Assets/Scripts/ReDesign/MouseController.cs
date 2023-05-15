@@ -163,6 +163,7 @@ namespace ReDesign
 
         private void ShowEntityInfo()
         {
+            //comment, like and subscribe
             GameObject enemyTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == MouseToTile().XPos && t.YPos == MouseToTile().YPos)?.GameObject;
 
             if (enemyTile != null && enemyTile.CompareTag("Entity"))
