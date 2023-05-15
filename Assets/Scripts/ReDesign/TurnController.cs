@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 namespace ReDesign
 {
@@ -20,10 +22,9 @@ namespace ReDesign
         public static int TurnCount = 0;
         private static int _turnPart = 0;
         public static bool gameOver = false;
-        private static bool _controlsHidden;
         private static List<Entity> _entities = new List<Entity>();
-        private static GameObject _gameOver;
-        private static GameObject _controlsPanel;
+        private static Canvas _gameOver;
+        private static RawImage _controlsPanel;
         public UnityEvent gameOverEvent = new UnityEvent();
 
         private void Awake()
@@ -41,11 +42,8 @@ namespace ReDesign
             _turnPart = 0;
 
             gameOver = false;
-            _gameOver = GameObject.Find("GameOver");
-            _gameOver.SetActive(false);
-            _controlsPanel = GameObject.Find("Controls");
-            _controlsPanel.SetActive(false);
-            _controlsHidden = true;
+            _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
+            _gameOver.enabled = false;
         }
 
         private void Start()
@@ -86,23 +84,9 @@ namespace ReDesign
 
         public void RemoveUI()
         {
-            _gameOver = GameObject.Find("GameOver");
-            _gameOver.SetActive(false);
+            _gameOver.enabled = false;
         }
 
-        public void ShowControls()
-        {
-            if (_controlsHidden)
-            {
-                _controlsPanel.SetActive(true);
-                _controlsHidden = false;
-            }
-            else
-            {
-                _controlsPanel.SetActive(false);
-                _controlsHidden = true;
-            }
-        }
         private static void showGameOver()
         {
             Scene currentScene = SceneManager.GetActiveScene();
@@ -127,7 +111,7 @@ namespace ReDesign
 
             if (gameOver)
             {
-                _gameOver.SetActive(true);
+                _gameOver.enabled = true;
             }
         }
     }

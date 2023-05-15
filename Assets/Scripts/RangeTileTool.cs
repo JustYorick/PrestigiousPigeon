@@ -125,10 +125,10 @@ public class RangeTileTool : MonoBehaviour
                             if (tiles != null)
                             {
                                 tiles.RemoveAt(0);
-                                if (tiles.Count >= manaSystem.GetMana())
+                                if (tiles.Count >= range)
                                 {
                                     
-                                    tiles = tiles.GetRange(0, manaSystem.GetMana());
+                                    tiles = tiles.GetRange(0, range);
                                 }
                                 tilesToDraw.AddRange(tiles); 
                             }
