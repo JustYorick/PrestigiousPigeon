@@ -14,7 +14,7 @@ namespace ReDesign
         [SerializeField] private ManaSystem manaSystem;
         [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
-        private bool drawSelectedTile = true;
+        private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
@@ -60,18 +60,18 @@ namespace ReDesign
                 {
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
-                    StartCoroutine(RotateToAttack());    
+                    StartCoroutine(Player.RotateToAttack());    
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.UseMana(spellSelection.ManaCost);
                 }
                 spellSelection = null;
                 CheckSpellCasted(spellSelection);
-                StopCoroutine(RotateToAttack());
+                StopCoroutine(Player.RotateToAttack());
             }
         }
 
-        private Vector3 GetMouseWorldPos()
+        public static Vector3 GetMouseWorldPos()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
