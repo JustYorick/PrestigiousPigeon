@@ -1546,7 +1546,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4307f5586ad0ff4e94caccb21c3a35e, type: 2}
+  - {fileID: 2100000, guid: 15ff5343faea96042be57b5bc918fbb5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7348,6 +7348,10 @@ PrefabInstance:
     - target: {fileID: 4375099119916177491, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: orthographic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375099119916177491, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177491, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: far clip plane
