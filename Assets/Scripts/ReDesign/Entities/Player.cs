@@ -10,6 +10,10 @@ namespace ReDesign.Entities
         private static Transform player;
         private static Vector3 targetLocation;
         [SerializeField] private ManaSystem _manaSystem;
+        
+        public override int SightRange { get; }
+        public override int MoveRange { get { return _manaSystem.GetMana(); } }
+        
         private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
         {
             new BasicFireSpell(),

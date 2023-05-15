@@ -33,6 +33,11 @@ namespace ReDesign
             DrawCurrentSelectedTile();
             
             DrawCurrentSpellRange();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                ShowEntityInfo();
+            }
             
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
@@ -130,6 +135,18 @@ namespace ReDesign
                 if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
 
                 if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
+            }
+        }
+
+        private void ShowEntityInfo()
+        {
+            //comment, like and subscribe
+            GameObject enemyTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == MouseToTile().XPos && t.YPos == MouseToTile().YPos)?.GameObject;
+
+            if (enemyTile != null && enemyTile.CompareTag("Entity"))
+            {
+                Entity entity = enemyTile.GetComponent<Entity>();
+                RangeTileTool.Instance.drawMoveRange(MouseToTile(), entity.MoveRange);
             }
         }
     }
