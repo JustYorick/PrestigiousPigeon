@@ -137,29 +137,6 @@ namespace ReDesign
                 if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
-        
-        private IEnumerator RotateToAttack()
-        {
-            Vector3 attackerPos = player.transform.position;
-            Vector3 targetPos = GetMouseWorldPos();
-            GridLayout gr = WorldController.Instance.gridLayout;
-            // Calculate the direction to the target position and set the entity's rotation accordingly
-            Vector3 targetPosition = new Vector3(targetPos.x, attackerPos.y, targetPos.z);
-            Vector3 dir = (targetPosition - attackerPos).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
-            targetLocation = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
-            float time = 0;
-
-            // Loop until the entity has moved halfway to the target location
-            while (time < 0.5f)
-            {
-                // Adds the position and rotation
-                player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, time / 0.5f);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            player.transform.rotation = targetRotation;
-        }
 
         private void ShowEntityInfo()
         {
