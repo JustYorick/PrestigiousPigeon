@@ -2,48 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SpellSlot : MonoBehaviour{
     [SerializeField] private TMPro.TMP_Text spellNameField;
-    [SerializeField] private TMPro.TMP_Text rangeField;
-    [SerializeField] private TMPro.TMP_Text damageField;
+    [SerializeField] private TMPro.TMP_Text spellStatsField;
     [SerializeField] private string spellName;
     [SerializeField] private int range = 0;
     [SerializeField] private int damage = 0;
+    [SerializeField] private int manaCost = 0;
     [SerializeField] private Color lockedColor;
     [SerializeField] private Color unlockedColor;
     [SerializeField] private Color activeColor;
     [field:SerializeField] public bool unlocked{get; private set;} = false;
     public bool active{get; private set;} = false;
     
-    private Button spellButton;
     private Image spellImage;
 
     void Awake(){
         // Retrieve the button and image components
-        spellButton = GetComponent<Button>();
+        Button spellButton = GetComponent<Button>();
         spellImage = GetComponent<Image>();
 
         // Add a listener for when the button is clicked
-        spellButton.onClick.AddListener(OnClick);
-
-        // disable clicking locked spells, allow clicking unlocked ones
-        spellButton.enabled = unlocked;
+        spellButton.onClick.AddListener(Enable);
 
         // Set the color depending on whether the spell should be unlocked
         spellImage.color = unlocked? unlockedColor : lockedColor;
+
+        // Retrieve a reference to all other spell slots and disable them when the button is clicked
+        List<SpellSlot> spellSlots = new List<SpellSlot>(gameObject.transform.parent.GetComponentsInChildren<SpellSlot>());
+        spellSlots.Remove(this);
+        spellSlots.ForEach(slot => spellButton.onClick.AddListener(slot.Disable));
+
+        // disable clicking locked spells, allow clicking unlocked ones
+        spellButton.interactable = unlocked;
     }
 
-    void OnClick(){
+    public void Enable(){
         // Toggle the the spell between active and inactive
-        active = !active;
+        active = true;
 
         // Set the color, based on whether the spell should be active
-        spellImage.color = active? activeColor : unlockedColor;
+        spellImage.color = activeColor;
 
         // Fill the spell info bar with info about the spell
         spellNameField.text = spellName;
-        rangeField.text = range.ToString();
-        damageField.text = damage.ToString();
+        spellStatsField.text = $"Range: {range}\nDamage: {damage}\nMana cost: {manaCost}";
+    }
+    
+    public void Disable(){
+        // Disable the button, if it is unlocked and active
+        if(active && unlocked){
+            active = false;
+            spellImage.color = unlockedColor;
+        }
     }
 }
