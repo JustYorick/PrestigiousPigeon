@@ -10,4 +10,6 @@ UNITY Version - 2021.3.19f1
 5. Open newly created Prefab -> Select the 3D Model
 6. In the top right, select the Z-Axis view
 7. Change the 3D Model rotation to look toward the camera
-8. Add the Healthbar prefab to the GameObject and set position above 3D Model
+8. Add the enemy script to the GameObject.
+9. Add the Healthbar prefab to the GameObject and set position above 3D Model
+10. Add HealthBar reference to the entity script.
