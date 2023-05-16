@@ -97,7 +97,6 @@ namespace ReDesign
                     if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
                         SceneManager.LoadScene("Level1Map");
-                        gameOver = true;               
                     }
                     break;
                 case "Level1Map":
