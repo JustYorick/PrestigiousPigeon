@@ -20,7 +20,9 @@ namespace ReDesign.Entities
         public abstract void NextAction();
         public abstract void Move();
         public abstract void Attack();
-
+        public abstract int SightRange { get; }
+        public abstract int MoveRange { get; }
+        
         public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
@@ -152,7 +154,7 @@ namespace ReDesign.Entities
             }
         }
         
-        public IEnumerator RotateToAttack()
+        public IEnumerator EnemyRotateToAttack()
         {
             Vector3 attackerPos = transform.position;
             Vector3 targetPos = WorldController.getPlayerTile().GameObject.transform.position;
