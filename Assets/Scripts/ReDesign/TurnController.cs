@@ -96,7 +96,7 @@ namespace ReDesign
                 case "TutorialMap":
                     if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
-                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
+                        SceneManager.LoadScene("Level1Map");
                         gameOver = true;               
                     }
                     break;
