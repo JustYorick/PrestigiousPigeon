@@ -3675,6 +3675,7 @@ GameObject:
   - component: {fileID: 1426113236}
   - component: {fileID: 1426113238}
   - component: {fileID: 1426113237}
+  - component: {fileID: 1426113239}
   m_Layer: 5
   m_Name: Manabar Full
   m_TagString: Untagged
@@ -3740,6 +3741,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426113235}
   m_CullTransparentMesh: 1
+--- !u!114 &1426113239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426113235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7199afb2897d897b393e8aca2bb35249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxValue: 5
+  status: 5
+  maxWidth: 380
 --- !u!1 &1463467460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,6 +4251,7 @@ GameObject:
   - component: {fileID: 1565471457}
   - component: {fileID: 1565471459}
   - component: {fileID: 1565471458}
+  - component: {fileID: 1565471460}
   m_Layer: 5
   m_Name: Healthbar Full
   m_TagString: Untagged
@@ -4300,6 +4317,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565471456}
   m_CullTransparentMesh: 1
+--- !u!114 &1565471460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565471456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7199afb2897d897b393e8aca2bb35249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxValue: 5
+  status: 5
+  maxWidth: 380
 --- !u!1 &1754508526
 GameObject:
   m_ObjectHideFlags: 0
