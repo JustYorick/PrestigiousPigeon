@@ -28,13 +28,7 @@ public class StatusBar : MonoBehaviour{
 
     void UpdateStatus(int value){
         // Make sure the status stays in bounds
-        if(value < 0){
-            status = 0;
-        }else if(value > maxValue){
-            status = maxValue;
-        }else{
-            status = value;
-        }
+        status = Mathf.Clamp(value, 0, maxValue);
 
         // Update the status bar
         rectTransform.sizeDelta += (maxWidth / maxValue * status - rectTransform.rect.width) * Vector2.right;
