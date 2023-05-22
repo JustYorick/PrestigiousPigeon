@@ -152,9 +152,11 @@ namespace ReDesign
             if (enemyTile != null && enemyTile.CompareTag("Entity"))
             {
                 Entity entity = enemyTile.GetComponent<Entity>();
-                RangeTileTool.Instance.drawMoveRange(MouseToTile(), entity.MoveRange);
+                DefaultTile tile = MouseToTile();
+                RangeTileTool.Instance.drawMoveRange(tile, entity.MoveRange);
                 tileTitleText.text = entity.name;
                 tileHpText.text = "HP: " + entity._entityHealth.Health.ToString();
+                tileDistanceText.text = "Distance: " + Vector3.Distance(player.transform.position, tile.GameObject.transform.position);
             }
         }
     }
