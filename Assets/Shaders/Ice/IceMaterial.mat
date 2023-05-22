@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _IceTexture:
-        m_Texture: {fileID: 2800000, guid: e62b69f38cb1fd94a836f9f5720d95b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5a5d2fd5b4bd2ce408c7920e416caddc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,9 +51,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelStrength: 1.46
-    - _Metallic: 0.13
-    - _Normals: 0.33
+    - _FresnelStrength: 3.44
+    - _Metallic: 0.097
+    - _Normals: 0.85
     - _QueueControl: 0
     - _QueueOffset: 1
     - _Refraction: 0.54
