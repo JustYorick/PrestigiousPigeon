@@ -19,6 +19,12 @@ namespace ReDesign
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
         private DefaultTile prevSelectedTile;
+
+        [Header("Tile info")]
+        [SerializeField] private TMPro.TMP_Text tileTitleText;
+        [SerializeField] private TMPro.TMP_Text tileHpText;
+        [SerializeField] private TMPro.TMP_Text tileDistanceText;
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -147,6 +153,8 @@ namespace ReDesign
             {
                 Entity entity = enemyTile.GetComponent<Entity>();
                 RangeTileTool.Instance.drawMoveRange(MouseToTile(), entity.MoveRange);
+                tileTitleText.text = entity.name;
+                tileHpText.text = "HP: " + entity._entityHealth.Health.ToString();
             }
         }
     }
