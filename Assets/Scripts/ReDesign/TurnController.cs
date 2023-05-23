@@ -4,7 +4,9 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 namespace ReDesign
 {
@@ -56,7 +58,7 @@ namespace ReDesign
         public static void ResolveNextTurn()
         {
             FillEntityList();
-
+            showGameOver();
             if (_turnPart < _entities.Count && !gameOver)
             {
                 Debug.Log("turnpart:" + _turnPart);
@@ -84,13 +86,26 @@ namespace ReDesign
         {
             _gameOver.enabled = false;
         }
-        
-        private void showGameOver()
+
+        private static void showGameOver()
         {
-            if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
-            {
-                _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat the Tutorial!";
-                gameOver = true;               
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            
+            switch(sceneName){
+                case "TutorialMap":
+                    if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
+                    {
+                        SceneManager.LoadScene("Level1Map");
+                    }
+                    break;
+                case "Level1Map":
+                    if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
+                    {
+                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
+                        gameOver = true;               
+                    }
+                    break;
             }
 
             if (gameOver)
