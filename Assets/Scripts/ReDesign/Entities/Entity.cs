@@ -22,6 +22,41 @@ namespace ReDesign.Entities
         public abstract void Attack();
         public abstract int SightRange { get; }
         public abstract int MoveRange { get; }
+        private GameObject healthBarObj;
+        private Camera cam;
+
+        public virtual void Start()
+        {
+            cam = Camera.main;
+            healthBarObj = getChildGameObject(gameObject, "HealthBar");
+        }
+
+        private void LateUpdate()
+        {
+            if (healthBarObj)
+            {
+                healthBarObj.transform.LookAt(healthBarObj.transform.position + cam.transform.rotation * Vector3.forward,cam.transform.rotation * Vector3.up); 
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (finishedMoving)
+            {
+                attacking = true;
+            }
+
+            if (attacking)
+            {
+                this.Attack();
+            }
+
+            if (finishedMoving && !attacking)
+            {
+                finishedMoving = false;
+                StateController.ChangeState(GameState.EndTurn);
+            }
+        }
         
         public virtual void ReceiveDamage(int dmg)
         {
@@ -143,27 +178,7 @@ namespace ReDesign.Entities
 
             finishedMoving = true;
         }
-        
 
-        public virtual void Update()
-        {
-            if (finishedMoving)
-            {
-                attacking = true;
-            }
-
-            if (attacking)
-            {
-                this.Attack();
-            }
-
-            if (finishedMoving && !attacking)
-            {
-                finishedMoving = false;
-                StateController.ChangeState(GameState.EndTurn);
-            }
-        }
-        
         public IEnumerator EnemyRotateToAttack()
         {
             Vector3 attackerPos = transform.position;
@@ -185,6 +200,13 @@ namespace ReDesign.Entities
                 yield return attacking = false;
             }
             transform.rotation = targetRotation;
+        }
+        
+        static public GameObject getChildGameObject(GameObject fromGameObject, string withName) {
+            Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>();
+            foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
+            
+            return null;
         }
     }
 }
