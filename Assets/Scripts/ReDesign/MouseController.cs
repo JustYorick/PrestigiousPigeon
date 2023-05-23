@@ -18,8 +18,9 @@ namespace ReDesign
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
+        public ParticleSystem fireParticles;
+        public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
-
         [Header("Tile info")]
         [SerializeField] private TMPro.TMP_Text tileTitleText;
         [SerializeField] private TMPro.TMP_Text tileHpText;
@@ -102,8 +103,15 @@ namespace ReDesign
             return hoveredNode;
         }
         
-        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
-        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
+        public void SelectFireSpell(){
+            spellSelection = new BasicFireSpell();
+            spellSelection.particleSystem = fireParticles;
+        }
+
+        public void SelectIceSpell(){
+            spellSelection = new BasicIceSpell();
+            spellSelection.particleSystem = iceParticles;
+        }
         
         private void DrawCurrentSelectedTile()
         {
