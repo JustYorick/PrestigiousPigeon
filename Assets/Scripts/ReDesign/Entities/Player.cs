@@ -60,7 +60,11 @@ namespace ReDesign.Entities
             attacking = false;
         }
 
-        public void EndTurn() => StateController.ChangeState(GameState.EndTurn);
+        public void EndTurn(){
+            if(StateController.currentState == GameState.PlayerTurn){
+                StateController.ChangeState(GameState.EndTurn);
+            }
+        }
 
         public override void ReceiveDamage(int dmg)
         {
