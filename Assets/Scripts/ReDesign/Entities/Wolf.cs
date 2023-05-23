@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ReDesign.Entities
 {
-    public class Wolf : Entity
+    public class Wolf : Enemy
     {
         public override int SightRange { get { return 12; } }
         public override int MoveRange { get { return 4; } }

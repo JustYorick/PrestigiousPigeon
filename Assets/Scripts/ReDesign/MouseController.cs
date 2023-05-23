@@ -11,7 +11,7 @@ namespace ReDesign
     public class MouseController : MonoBehaviour
     {
         [SerializeField] private PlayerMovement player;
-        [SerializeField] private ManaSystem manaSystem;
+        [SerializeField] private StatusBar manaSystem;
         [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
@@ -62,14 +62,14 @@ namespace ReDesign
             }else{
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.GetMana()>= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
                 {
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
                     StartCoroutine(Player.RotateToAttack());    
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
-                    manaSystem.UseMana(spellSelection.ManaCost);
+                    manaSystem.Value -= spellSelection.ManaCost;
                 }
                 spellSelection = null;
                 CheckSpellCasted(spellSelection);

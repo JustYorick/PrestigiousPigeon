@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
 public class StatusBar : MonoBehaviour{
-    [SerializeField] private int maxValue = 1;
+    [SerializeField] public int maxValue = 1;
     [field:SerializeField] private int status = 1;
     [SerializeField] private float maxWidth;
     private RectTransform rectTransform;
@@ -21,9 +21,6 @@ public class StatusBar : MonoBehaviour{
 
         // Update the statusbar
         UpdateStatus(status);
-
-        // Decreases the value of the status bar
-        StartCoroutine(LoseStats());
     }
 
     void UpdateStatus(int value){
@@ -34,12 +31,7 @@ public class StatusBar : MonoBehaviour{
         rectTransform.sizeDelta += (maxWidth / maxValue * status - rectTransform.rect.width) * Vector2.right;
     }
 
-    // TEST FUNCTION!
-    IEnumerator LoseStats(){
-        // Decrement the value of the status bar every second until it's 0
-        while(Value > 0){
-            yield return new WaitForSeconds(1);
-            Value--;
-        }
+    public void Fill(){
+        Value = maxValue;
     }
 }

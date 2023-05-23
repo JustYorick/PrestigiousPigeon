@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
-    [SerializeField] private ManaSystem manaSystem;
+    [SerializeField] private StatusBar manaSystem;
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
         int pathCost = path == null? 0 : path.Count - 1;
 
-        if (path != null && pathCost <= manaSystem.GetMana())
+        if (path != null && pathCost <= manaSystem.Value)
         {
             predrawPath = false;
             DrawPath(path);
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
-            manaSystem.UseMana(pathCost);
+            manaSystem.Value -= pathCost;
 
             //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
             //foreach (DefaultTile dt in list)
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         predrawPath = true;
         if (StateController.currentState == GameState.PlayerTurn)
         {
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.GetMana());
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.Value);
         }
     }
 
@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
 
-        if (path != null && path.Count - 1 <= manaSystem.GetMana()){
+        if (path != null && path.Count - 1 <= manaSystem.Value){
             DrawPath(path);
         }
         predrawnPath = path;

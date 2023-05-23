@@ -9,10 +9,11 @@ namespace ReDesign.Entities
     {
         private static Transform player;
         private static Vector3 targetLocation;
-        [SerializeField] private ManaSystem _manaSystem;
+        [SerializeField] private StatusBar _manaSystem;
+        [SerializeField] private StatusBar _healthBar;
         
         public override int SightRange { get; }
-        public override int MoveRange { get { return _manaSystem.GetMana(); } }
+        public override int MoveRange { get { return _manaSystem.Value; } }
         
         private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
         {
@@ -25,11 +26,13 @@ namespace ReDesign.Entities
             int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             player = transform;
+            _healthBar.maxValue = MaxHealth;
+            _healthBar.Fill();
         }
 
         private void Start()
         {
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
         }
 
         public override void Update()
@@ -42,8 +45,8 @@ namespace ReDesign.Entities
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
-            _manaSystem.StartTurn();
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            _manaSystem.Fill();
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
         }
 
             
@@ -61,7 +64,14 @@ namespace ReDesign.Entities
 
         public override void ReceiveDamage(int dmg)
         {
-            base.ReceiveDamage(dmg);
+            _entityHealth.ChangeHealth(-dmg);
+            _healthBar.Value = _entityHealth.Health;
+            
+            if (_entityHealth.Health <= 0){
+                TurnController.gameOver = true;
+                PlayerAnimator._animator.SetBool("PlayerDead", true);
+                TurnController.Instance.gameOverEvent.Invoke();
+            }
             PlayerAnimator._animator.SetBool("isHit", true);
             PlayerAnimator._animator.SetBool("isIdle", false);
         }
