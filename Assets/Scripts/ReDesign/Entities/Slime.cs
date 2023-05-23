@@ -12,7 +12,13 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 9; } }
         public override int MoveRange { get { return 1; } }
-        
+        private SlimeAnimator _slimeAnimator;
+
+        private void Awake()
+        {
+            _slimeAnimator = GetComponentInChildren<SlimeAnimator>();
+        }
+
         public Slime()
         {
             int MaxHealth = 5;
@@ -40,6 +46,10 @@ namespace ReDesign.Entities
             Debug.Log("" + range);
             if (range < SightRange)
             {
+                
+                _slimeAnimator._animator.SetBool("isWalking", true);
+                _slimeAnimator._animator.SetBool("isIdle", true);
+
                 MoveToPlayer(this.MoveRange);
             }
             else
@@ -59,6 +69,8 @@ namespace ReDesign.Entities
             if (targetTile != null)
             {
                 StartCoroutine(EnemyRotateToAttack());
+                _slimeAnimator._animator.SetBool("isAttacking", true);
+                _slimeAnimator._animator.SetBool("isIdle", true);
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;
