@@ -22,7 +22,7 @@ namespace ReDesign.Entities
         public abstract void Attack();
         public abstract int SightRange { get; }
         public abstract int MoveRange { get; }
-        
+
         public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
@@ -127,8 +127,7 @@ namespace ReDesign.Entities
                 Vector3 dir = (targetPos - transform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(dir,Vector3.up);
                 targetLoc = PlayerMovement.SnapCoordinateToGrid(targetPos, gr);
-                float time = 0; 
-                
+                float time = 0;
                 // Loop until the entity has moved halfway to the target location
                 while (time < 0.5f)
                 {
@@ -140,7 +139,7 @@ namespace ReDesign.Entities
                 }
                 transform.rotation = targetRotation;
             }
-
+            
             finishedMoving = true;
         }
         
@@ -185,6 +184,12 @@ namespace ReDesign.Entities
                 yield return attacking = false;
             }
             transform.rotation = targetRotation;
+        }
+
+        public static bool CheckLocation(DefaultTile currentTile, DefaultTile enemyPos)
+        {
+            
+            return true;
         }
     }
 }
