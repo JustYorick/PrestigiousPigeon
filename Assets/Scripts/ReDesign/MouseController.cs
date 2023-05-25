@@ -18,7 +18,10 @@ namespace ReDesign
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
+        public ParticleSystem fireParticles;
+        public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
+        
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -96,8 +99,15 @@ namespace ReDesign
             return hoveredNode;
         }
         
-        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
-        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
+        public void SelectFireSpell(){
+            spellSelection = new BasicFireSpell();
+            spellSelection.particleSystem = fireParticles;
+        }
+
+        public void SelectIceSpell(){
+            spellSelection = new BasicIceSpell();
+            spellSelection.particleSystem = iceParticles;
+        }
         
         private void DrawCurrentSelectedTile()
         {
