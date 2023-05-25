@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlimeAnimator : MonoBehaviour
 {
-    public Animator _animator;
+    private Animator _animator;
     
     void Awake()
     {
@@ -57,5 +57,18 @@ public class SlimeAnimator : MonoBehaviour
 
             _animator.Play("Mobs_Slime_Death");
         }
+    }
+
+
+    public void SetAttacking()
+    {
+        _animator.SetBool("isAttacking", true);
+        _animator.SetBool("isIdle", true);
+    }
+
+    public void SetWalking()
+    {
+        _animator.SetBool("isWalking", true);
+        _animator.SetBool("isIdle", true);
     }
 }

@@ -46,9 +46,7 @@ namespace ReDesign.Entities
             Debug.Log("" + range);
             if (range < SightRange)
             {
-                
-                _slimeAnimator._animator.SetBool("isWalking", true);
-                _slimeAnimator._animator.SetBool("isIdle", true);
+                _slimeAnimator.SetWalking();
 
                 MoveToPlayer(this.MoveRange);
             }
@@ -69,13 +67,13 @@ namespace ReDesign.Entities
             if (targetTile != null)
             {
                 StartCoroutine(EnemyRotateToAttack());
-                _slimeAnimator._animator.SetBool("isAttacking", true);
-                _slimeAnimator._animator.SetBool("isIdle", true);
+                _slimeAnimator.SetAttacking();
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             attacking = false;
 
             StopCoroutine(EnemyRotateToAttack());
         }
+        
     }
 }

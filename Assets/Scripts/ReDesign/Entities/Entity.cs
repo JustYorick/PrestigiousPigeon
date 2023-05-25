@@ -47,6 +47,7 @@ namespace ReDesign.Entities
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
                     obstacleTile = null;
+
                     Destroy(this.gameObject);
                 }
 
