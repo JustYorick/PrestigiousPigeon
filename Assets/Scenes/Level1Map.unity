@@ -15981,11 +15981,9 @@ MonoBehaviour:
   narrowPosition: {x: -50, y: 0}
   narrowSize: {x: 70, y: 70}
   narrowTexture: {fileID: 2800000, guid: 94a2ffa234e333dd9971d8a1a826be13, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: 0}
   wideSize: {x: 70, y: 70}
   wideTexture: {fileID: 2800000, guid: ffda0f33f72d8a1b7b3f0e0c973f6dc9, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 1194501315}
   - {fileID: 891301784}
@@ -24983,11 +24981,9 @@ MonoBehaviour:
   narrowPosition: {x: -50, y: -70}
   narrowSize: {x: 70, y: 70}
   narrowTexture: {fileID: 2800000, guid: 69640961cb633d24c928db941dbbd0fc, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: -70}
   wideSize: {x: 70, y: 70}
   wideTexture: {fileID: 2800000, guid: 5a781238d9d8b7883a1ce6d7cb6e3099, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 1194501315}
   - {fileID: 633907937}
@@ -34131,11 +34127,9 @@ MonoBehaviour:
   narrowPosition: {x: -50, y: 70}
   narrowSize: {x: 70, y: 70}
   narrowTexture: {fileID: 2800000, guid: 3eb1aebece26797c2abeae0a1a0682e0, type: 3}
-  narrowImageScale: {x: 2, y: 1}
   widePosition: {x: -110, y: 70}
   wideSize: {x: 70, y: 70}
   wideTexture: {fileID: 2800000, guid: 050fd3b5d5b408083b69a8520227bf78, type: 3}
-  wideImageScale: {x: 3, y: 1.5}
   buttons:
   - {fileID: 633907937}
   - {fileID: 891301784}
@@ -46734,10 +46728,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1931783219}
-  manaSystem: {fileID: 1033115211}
+  manaSystem: {fileID: 0}
   SelectorMap: {fileID: 1607830966}
   fireParticles: {fileID: 807015142}
   iceParticles: {fileID: 61748926}
+  tileTitleText: {fileID: 0}
+  tileHpText: {fileID: 0}
+  tileDistanceText: {fileID: 0}
 --- !u!4 &1686651854
 Transform:
   m_ObjectHideFlags: 0
@@ -58172,6 +58169,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349107519789170951, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
 --- !u!1001 &3318669724270236818
@@ -58357,6 +58358,10 @@ PrefabInstance:
     - target: {fileID: 5444487451922674162, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_ReferenceResolution.y
       value: 810
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444487451922674163, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5444487451922674172, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
       propertyPath: m_Name
