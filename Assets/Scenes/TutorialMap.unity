@@ -4808,6 +4808,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 397162536590043373, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1574288005}
+    - target: {fileID: 397162536590043373, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EndTurn
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6841,6 +6849,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4444728127320036556, guid: b43cf97ae8cba3347b113d9abc1ab29d, type: 3}
+--- !u!114 &1574288005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5796109697066660938, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
+  m_PrefabInstance: {fileID: 236637139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f61836a4ae246aa81bb147077f53989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1574288006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5796109697066660939, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
