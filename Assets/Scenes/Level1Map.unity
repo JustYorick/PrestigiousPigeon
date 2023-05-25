@@ -26937,6 +26937,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 989376344}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &993372595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 397162536665899878, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+  m_PrefabInstance: {fileID: 465426388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993372596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 397162537623658180, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+  m_PrefabInstance: {fileID: 465426388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993372597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 397162537160717400, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+  m_PrefabInstance: {fileID: 465426388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1001535640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45189,13 +45222,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1931783219}
-  manaSystem: {fileID: 0}
+  manaSystem: {fileID: 465426392}
   SelectorMap: {fileID: 1607830966}
   fireParticles: {fileID: 807015142}
   iceParticles: {fileID: 61748926}
-  tileTitleText: {fileID: 0}
-  tileHpText: {fileID: 0}
-  tileDistanceText: {fileID: 0}
+  tileTitleText: {fileID: 993372597}
+  tileHpText: {fileID: 993372596}
+  tileDistanceText: {fileID: 993372595}
 --- !u!4 &1686651854
 Transform:
   m_ObjectHideFlags: 0
