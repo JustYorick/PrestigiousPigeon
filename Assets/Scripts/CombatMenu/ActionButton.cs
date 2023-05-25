@@ -71,7 +71,7 @@ public class ActionButton : MonoBehaviour{
         image.texture = wideTexture;
     }
 
-    void Activate(){
+    public void Activate(){
         // Activate the button, if it's currently inactive
         if(!active){
             MakeWide();

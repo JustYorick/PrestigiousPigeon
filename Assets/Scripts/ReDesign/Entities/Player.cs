@@ -11,6 +11,7 @@ namespace ReDesign.Entities
         private static Vector3 targetLocation;
         [SerializeField] private StatusBar _manaSystem;
         [SerializeField] private StatusBar _healthBar;
+        [SerializeField] private ActionButton movementButton;
         
         public override int SightRange { get; }
         public override int MoveRange { get { return _manaSystem.Value; } }
@@ -47,6 +48,7 @@ namespace ReDesign.Entities
             //StateController.ChangeState(GameState.EndTurn);
             _manaSystem.Fill();
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
+            movementButton.Activate();
         }
 
             
