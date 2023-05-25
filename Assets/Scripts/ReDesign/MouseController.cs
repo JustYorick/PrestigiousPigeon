@@ -16,11 +16,12 @@ namespace ReDesign
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
-        private List<DefaultTile> pathNodesMap;
-
         public static MouseController Instance { get { return _instance; } }
         private AttacksAndSpells spellSelection = null;
-        private Vector3Int prevSelectedTile;
+        public ParticleSystem fireParticles;
+        public ParticleSystem iceParticles;
+        private DefaultTile prevSelectedTile;
+        
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -30,12 +31,6 @@ namespace ReDesign
                 _instance = this;
             }
         }
-
-        private void Start()
-        {
-            pathNodesMap = WorldController.Instance.BaseLayer;
-        }
-
         private void Update()
         {
             DrawCurrentSelectedTile();
@@ -47,7 +42,12 @@ namespace ReDesign
                 ShowEntityInfo();
             }
             
-            
+            List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
+            {
+                Vector3 pos = GetMouseWorldPos();
+                GridLayout gr = WorldController.Instance.gridLayout;
+                player.ShowPath(pos, gr, pathNodesMap);
+            }
             if(!Input.GetMouseButtonDown(0)){
                 return;
             }
@@ -99,31 +99,29 @@ namespace ReDesign
             return hoveredNode;
         }
         
-        public void SelectFireSpell() => spellSelection = new BasicFireSpell();
-        public void SelectIceSpell() => spellSelection = new BasicIceSpell();
+        public void SelectFireSpell(){
+            spellSelection = new BasicFireSpell();
+            spellSelection.particleSystem = fireParticles;
+        }
+
+        public void SelectIceSpell(){
+            spellSelection = new BasicIceSpell();
+            spellSelection.particleSystem = iceParticles;
+        }
         
         private void DrawCurrentSelectedTile()
         {
-            Vector3Int cell = SelectorMap.WorldToCell(GetMouseWorldPos());
-            if (cell != prevSelectedTile)
+            if (MouseToTile() != prevSelectedTile)
             {
-                ShowPath(); //Dit is lelijk! Niet door Rick!
                 Color color = new Color(255, 255, 255, 0.05f);
                 DefaultTile hoveredNode = MouseToTile();
-                prevSelectedTile = cell;
+                prevSelectedTile = hoveredNode;
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 if (hoveredNode != null && drawSelectedTile)
                 {
                     RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
                 }
             }
-        }
-
-        private void ShowPath()
-        {
-            Vector3 pos = GetMouseWorldPos();
-            GridLayout gr = WorldController.Instance.gridLayout;
-            player.ShowPath(pos, gr, pathNodesMap);
         }
 
         private void DrawCurrentSpellRange()

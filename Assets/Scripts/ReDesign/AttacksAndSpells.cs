@@ -12,6 +12,7 @@ namespace ReDesign
         public abstract int MaximumRange { get; }
         public abstract int Damage { get; }
         public virtual int ManaCost { get{ return 0; } }
+        public ParticleSystem particleSystem;
 
         /// <summary>
         /// Causes the spell or attack to be casted at targeted x and y coordinates
@@ -34,6 +35,8 @@ namespace ReDesign
             {
                 EnvironmentEffect(tileList);
             }
+            particleSystem.transform.position = targetTile.GameObject.transform.position;
+            particleSystem.Play();
             
             //foreach enemy/tile
             //mana -2
