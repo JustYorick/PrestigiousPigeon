@@ -147,6 +147,13 @@ namespace ReDesign.Entities
 
         public virtual void Update()
         {
+            Debug.Log("finishedmoving"+finishedMoving);
+            Debug.Log("attacking"+attacking);
+            if (finishedMoving && !attacking)
+            {
+                finishedMoving = false;
+                StateController.ChangeState(GameState.EndTurn);
+            }
             if (finishedMoving)
             {
                 attacking = true;
@@ -157,11 +164,7 @@ namespace ReDesign.Entities
                 this.Attack();
             }
 
-            if (finishedMoving && !attacking)
-            {
-                finishedMoving = false;
-                StateController.ChangeState(GameState.EndTurn);
-            }
+
         }
         
         public IEnumerator EnemyRotateToAttack()
