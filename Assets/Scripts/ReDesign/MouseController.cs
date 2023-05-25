@@ -164,7 +164,7 @@ namespace ReDesign
                 RangeTileTool.Instance.drawMoveRange(tile, entity.MoveRange);
                 tileTitleText.text = entity.name;
                 tileHpText.text = "HP: " + entity._entityHealth.Health.ToString();
-                tileDistanceText.text = "Distance: " + Vector3.Distance(player.transform.position, tile.GameObject.transform.position);
+                tileDistanceText.text = "Distance: " + Mathf.RoundToInt(Vector3.Distance(player.transform.position, tile.GameObject.transform.position));
             }
         }
     }
