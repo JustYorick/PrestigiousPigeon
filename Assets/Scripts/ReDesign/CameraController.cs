@@ -40,7 +40,7 @@ namespace ReDesign
             MaxPos = new Vector2(maximalPosition.x, maximalPosition.z);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             // Calculate the direction to move the camera in, use the direction the camera is facing
             Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
