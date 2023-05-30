@@ -35,8 +35,12 @@ namespace ReDesign
             {
                 EnvironmentEffect(tileList);
             }
-            particleSystem.transform.position = targetTile.GameObject.transform.position;
-            particleSystem.Play();
+            if (particleSystem != null)
+            {
+                particleSystem.transform.position = targetTile.GameObject.transform.position;
+                particleSystem.Play();
+            }
+
             
             //foreach enemy/tile
             //mana -2

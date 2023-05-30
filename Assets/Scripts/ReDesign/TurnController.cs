@@ -93,7 +93,7 @@ namespace ReDesign
             string sceneName = currentScene.name;
             
             switch(sceneName){
-                case "TutorialMap":
+                case "TutorialWithTerrainMap":
                     if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
                         // save the current scene as the previously beaten level

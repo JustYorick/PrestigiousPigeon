@@ -13,3 +13,8 @@ UNITY Version - 2021.3.19f1
 8. Add the enemy script to the GameObject.
 9. Add the Healthbar prefab to the GameObject and set position above 3D Model
 10. Add HealthBar reference to the entity script.
+
+### Fix the animation bug where model implodes when animation plays
+1. Put FBX in the prefab
+2. Make avatar from FBX
+3. Add avatar to the animation
