@@ -43,7 +43,7 @@ namespace ReDesign.Entities
         {
             if (_animator.GetBool("hasCasted"))
             {
-                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
             }
         }
 
