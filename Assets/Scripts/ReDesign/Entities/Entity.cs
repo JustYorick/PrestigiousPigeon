@@ -12,7 +12,6 @@ namespace ReDesign.Entities
         [SerializeField] private GameObject _healthBar;
         public List<AttacksAndSpells> Attacks { get; set; }
         public bool finishedMoving = false;
-        public bool attacking = false;
         private Vector3 targetLocation;
         public IEnumerator movingCoroutine;
         private static GameObject _gameOver;
@@ -109,7 +108,6 @@ namespace ReDesign.Entities
             else
             {
                 finishedMoving = true;
-                attacking = true;
             }
         }
         
@@ -148,19 +146,11 @@ namespace ReDesign.Entities
 
         public virtual void Update()
         {
+
             if (finishedMoving)
             {
-                attacking = true;
-            }
-
-            if (attacking)
-            {
-                this.Attack();
-            }
-
-            if (finishedMoving && !attacking)
-            {
                 finishedMoving = false;
+                this.Attack();
                 StateController.ChangeState(GameState.EndTurn);
             }
         }
@@ -183,7 +173,7 @@ namespace ReDesign.Entities
                 // Adds the position and rotation
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
                 time += Time.deltaTime;
-                yield return attacking = false;
+                yield return null;
             }
             transform.rotation = targetRotation;
         }

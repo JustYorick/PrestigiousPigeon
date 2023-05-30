@@ -70,7 +70,6 @@ namespace ReDesign.Entities
                 _slimeAnimator.SetAttacking();
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
-            attacking = false;
 
             StopCoroutine(EnemyRotateToAttack());
         }
