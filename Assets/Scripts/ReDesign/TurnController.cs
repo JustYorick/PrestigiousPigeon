@@ -26,6 +26,8 @@ namespace ReDesign
         private static Canvas _gameOver;
         private static RawImage _controlsPanel;
         public UnityEvent gameOverEvent = new UnityEvent();
+        private static GameObject _retryButton;
+        private static GameObject _continueButton;
 
         private void Awake()
         {
@@ -44,6 +46,10 @@ namespace ReDesign
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
+            _retryButton = GameObject.Find("RetryButton");
+            _retryButton.SetActive(true);
+            _continueButton = GameObject.Find("ContinueButton");
+            _continueButton.SetActive(false);
         }
 
         private void Start()
@@ -96,30 +102,21 @@ namespace ReDesign
                 case "TutorialWithTerrainMap":
                     if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
-                        // save the current scene as the previously beaten level
-                        PlayerPrefs.SetString("prevLevel", sceneName);
-                        
-                        SceneManager.LoadScene("LevelSelect");
+                        _retryButton.SetActive(false);
+                        _continueButton.SetActive(true);
+                        gameOver = true;
                     }
                     break;
                 case "Level1Map":
                     if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
                     {
-                        // save the current scene as the previously beaten level
-                        PlayerPrefs.SetString("prevLevel", sceneName);
                         _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
                         gameOver = true;
-                        
-                        SceneManager.LoadScene("LevelSelect");
                     }
                     break;
                 case "Level2Map":
-                    // save the current scene as the previously beaten level
-                    PlayerPrefs.SetString("prevLevel", sceneName);
                     break;
                 case "Level3Map":
-                    // save the current scene as the previously beaten level
-                    PlayerPrefs.SetString("prevLevel", sceneName);
                     break;
             }
 
@@ -127,6 +124,14 @@ namespace ReDesign
             {
                 _gameOver.enabled = true;
             }
+        }
+
+        public void ContinueLevel()
+        {
+            // save the current scene as the previously beaten level
+            PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
+                        
+            SceneManager.LoadScene("LevelSelect");
         }
     }
 }

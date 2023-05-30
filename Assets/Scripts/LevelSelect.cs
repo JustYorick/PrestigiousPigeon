@@ -12,11 +12,21 @@ public class LevelSelect : MonoBehaviour
     private string _levelAt;
     private string _prevLevel;
     private string _selectedLevel;
+    [SerializeField] private Button tutorialMapButton;
+    [SerializeField] private Button level1MapButton;
+    [SerializeField] private Button level2MapButton;
+    [SerializeField] private Button level3MapButton;
 
     void Awake()
     {
+        // tutorialMapButton.interactable = PlayerPrefs.GetString("tutorialMapUnlocked"); 
+        // level1MapButton.interactable = PlayerPrefs.GetString("level1Unlocked");
+        // level2MapButton.interactable = PlayerPrefs.GetString("level2Unlocked");
+        // level3MapButton.interactable = PlayerPrefs.GetString("level3Unlocked");
         playButton.SetActive(false);
         _prevLevel = PlayerPrefs.GetString("prevLevel");
+        Button prevButton = GameObject.Find(_prevLevel + "Button").GetComponent<Button>();
+        prevButton.interactable = true;
         _levelAt = PlayerPrefs.GetString("levelAt");
         // if no levels have been completed activate tutorialmap button
         if (_prevLevel.Equals(""))
@@ -27,6 +37,7 @@ public class LevelSelect : MonoBehaviour
         // activate button for next level
         else
         {
+            Debug.Log(_levelAt);
             _nextLevelButton = GameObject.Find(_levelAt + "Button").GetComponent<Button>();
             CheckUnlocked(_levelAt, _prevLevel, _nextLevelButton);
         }
