@@ -23,7 +23,6 @@ public class LevelSelect : MonoBehaviour
     // checks if level is unlocked
     public void CheckUnlocked(string currentLevel, string prevLevel, Button nextButton)
     {
-        
         if (!prevLevel.Equals(currentLevel))
         {
             AnimateUnlock(currentLevel, prevLevel, nextButton);
