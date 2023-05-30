@@ -96,15 +96,30 @@ namespace ReDesign
                 case "TutorialMap":
                     if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
-                        SceneManager.LoadScene("Level1Map");
+                        // save the current scene as the previously beaten level
+                        PlayerPrefs.SetString("prevLevel", sceneName);
+                        
+                        SceneManager.LoadScene("LevelSelect");
                     }
                     break;
                 case "Level1Map":
                     if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
                     {
+                        // save the current scene as the previously beaten level
+                        PlayerPrefs.SetString("prevLevel", sceneName);
                         _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
-                        gameOver = true;               
+                        gameOver = true;
+                        
+                        SceneManager.LoadScene("LevelSelect");
                     }
+                    break;
+                case "Level2Map":
+                    // save the current scene as the previously beaten level
+                    PlayerPrefs.SetString("prevLevel", sceneName);
+                    break;
+                case "Level3Map":
+                    // save the current scene as the previously beaten level
+                    PlayerPrefs.SetString("prevLevel", sceneName);
                     break;
             }
 
