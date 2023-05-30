@@ -18,7 +18,7 @@ namespace ReDesign.Entities
         {
             _slimeAnimator = GetComponentInChildren<SlimeAnimator>();
         }
-
+        
         public Slime()
         {
             int MaxHealth = 5;
@@ -46,9 +46,7 @@ namespace ReDesign.Entities
             Debug.Log("" + range);
             if (range < SightRange)
             {
-                _slimeAnimator.SetWalking();
-
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _slimeAnimator);
             }
             else
             {
