@@ -32,6 +32,9 @@ public class PlayerPathfinding
         DefaultTile startNode = grid.Where(n => n.XPos == startX && n.YPos == startY).First();
         DefaultTile endNode = grid.Where(n => n.XPos == endX && n.YPos == endY).First();
 
+        if (!endNode.Walkable)
+            return null;
+
         openList = new List<DefaultTile> { startNode };
         closedList = new List<DefaultTile>();
 

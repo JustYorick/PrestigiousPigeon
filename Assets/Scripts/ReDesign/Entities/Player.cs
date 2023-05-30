@@ -54,7 +54,7 @@ namespace ReDesign.Entities
 
         public override void Attack()
         {
-            attacking = false;
+
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);
