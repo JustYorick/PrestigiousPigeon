@@ -27,7 +27,7 @@ namespace ReDesign.Entities
             player = transform;
         }
 
-        private void Start()
+        public override void Start()
         {
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }
