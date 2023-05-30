@@ -38,25 +38,6 @@ namespace ReDesign.Entities
             }
         }
 
-        public virtual void Update()
-        {
-            if (finishedMoving)
-            {
-                attacking = true;
-            }
-
-            if (attacking)
-            {
-                this.Attack();
-            }
-
-            if (finishedMoving && !attacking)
-            {
-                finishedMoving = false;
-                StateController.ChangeState(GameState.EndTurn);
-            }
-        }
-        
         public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
