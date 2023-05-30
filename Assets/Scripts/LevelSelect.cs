@@ -8,7 +8,6 @@ public class LevelSelect : MonoBehaviour
     private Button _prevLevelButton;
     private Button _nextLevelButton;
     private static bool _animationPlayed;
-    private List<bool> _unlocks;
     private string _levelAt;
     private string _prevLevel;
 
@@ -16,8 +15,20 @@ public class LevelSelect : MonoBehaviour
     {
         _prevLevel = PlayerPrefs.GetString("prevLevel");
         _levelAt = PlayerPrefs.GetString("levelAt");
-        _nextLevelButton = GameObject.Find(_levelAt + "Button").GetComponent<Button>();
-        CheckUnlocked(_levelAt, _prevLevel, _nextLevelButton);
+        Debug.Log(_prevLevel);
+        Debug.Log(_levelAt);
+        if (_prevLevel.Equals(""))
+        {
+            Debug.Log("ahahhai");
+            CheckUnlocked("TutorialMapWithTerrain", "TutorialMapWithTerrain",
+                GameObject.Find("TutorialMapWithTerrainButton").GetComponent<Button>());
+        }
+        else
+        {
+            Debug.Log("bozo");
+            _nextLevelButton = GameObject.Find(_levelAt + "Button").GetComponent<Button>();
+            CheckUnlocked(_levelAt, _prevLevel, _nextLevelButton);
+        }
     }
 
     // checks if level is unlocked
@@ -25,8 +36,12 @@ public class LevelSelect : MonoBehaviour
     {
         if (!prevLevel.Equals(currentLevel))
         {
+            Debug.Log("true bro");
             AnimateUnlock(currentLevel, prevLevel, nextButton);
         }
+        Debug.Log("false man");
+        Debug.Log(nextButton);
+        nextButton.interactable = true;
     }
 
     // animate new level unlocking
@@ -38,6 +53,5 @@ public class LevelSelect : MonoBehaviour
         Vector3 prevButtonLoc = prevButton.transform.position;
         // use locations to draw arrow between
         PlayerPrefs.GetInt(currentLevel + "anim");
-        nextButton.enabled = true;
     }
 }
