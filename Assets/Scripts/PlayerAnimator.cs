@@ -75,15 +75,7 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetBool("isHit"))
         {
             _animator.Play("TakeDamage");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
-            {
-                _animator.SetBool("isHit", false);
-            }
-        }
-
-        if (_animator.GetBool("PlayerDead"))
-        {
-            _animator.Play("Death");
+            _animator.SetBool("isHit", false);
         }
     }
 
