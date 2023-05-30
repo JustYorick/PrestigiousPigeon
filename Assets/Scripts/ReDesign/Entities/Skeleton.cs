@@ -8,8 +8,8 @@ namespace ReDesign.Entities
 {
     public class Skeleton : Entity
     {
-        public override int SightRange { get { return 8; } }
-        public override int MoveRange { get { return 2; } }
+        public override int SightRange { get { return 6; } }
+        public override int MoveRange { get { return 3; } }
         
         public Skeleton()
         {

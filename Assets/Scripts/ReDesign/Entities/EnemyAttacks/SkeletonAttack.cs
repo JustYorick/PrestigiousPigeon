@@ -6,11 +6,11 @@ namespace ReDesign
 {
     public class SkeletonAttack : AttacksAndSpells
     {
-        public override int MinimumRange { get { return 2; } }
+        public override int MinimumRange { get { return 1; } }
 
-            public override int MaximumRange { get { return 3; } }
+            public override int MaximumRange { get { return 1; } }
 
-            public override int Damage { get { return 3; } }
+            public override int Damage { get { return 4; } }
 
             public override void EnvironmentEffect(List<DefaultTile> targetTiles)
             {
