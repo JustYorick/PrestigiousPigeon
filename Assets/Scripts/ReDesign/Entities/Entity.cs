@@ -20,6 +20,68 @@ namespace ReDesign.Entities
         public abstract void Attack();
         public abstract int SightRange { get; }
         public abstract int MoveRange { get; }
+        private GameObject healthBarObj;
+        private Camera cam;
+
+        public virtual void Start()
+        {
+            cam = Camera.main;
+            healthBarObj = getChildGameObject(gameObject, "HealthBar");
+        }
+
+        private void LateUpdate()
+        {
+            if (healthBarObj)
+            {
+                healthBarObj.transform.LookAt(healthBarObj.transform.position + cam.transform.rotation * Vector3.forward,cam.transform.rotation * Vector3.up); 
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (finishedMoving)
+            {
+                attacking = true;
+            }
+
+            if (attacking)
+            {
+                this.Attack();
+            }
+
+            if (finishedMoving && !attacking)
+            {
+                finishedMoving = false;
+                StateController.ChangeState(GameState.EndTurn);
+            }
+        }
+        
+        public virtual void ReceiveDamage(int dmg)
+        {
+            _entityHealth.ChangeHealth(-dmg);
+            _healthBar.transform.localScale = (new Vector3(
+                _entityHealth.HealthPercentage(_entityHealth.Health),
+                (float)0.1584, (float)0.09899999));
+            
+            if (_entityHealth.Health <= 0)
+            {
+                if (this.gameObject.name.Contains("Player"))
+                {
+                    TurnController.gameOver = true;
+                    PlayerAnimator._animator.SetBool("PlayerDead", true);
+                }
+                else
+                {
+                    //Add animation so it isnt instant
+                    DefaultTile obstacleTile = WorldController.ObstacleLayer
+                        .FirstOrDefault(t => t.GameObject == gameObject);
+                    WorldController.Instance.BaseLayer.FirstOrDefault(t => t.XPos == obstacleTile.XPos && t.YPos == obstacleTile.YPos)
+                        .Walkable = true;
+                    WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
+                    obstacleTile.GameObject = null;
+                    obstacleTile = null;
+                    Destroy(this.gameObject);
+                }
 
         public abstract void ReceiveDamage(int dmg);
 
@@ -111,7 +173,6 @@ namespace ReDesign.Entities
 
             finishedMoving = true;
         }
-        
 
         public virtual void Update()
         {
@@ -145,6 +206,13 @@ namespace ReDesign.Entities
                 yield return null;
             }
             transform.rotation = targetRotation;
+        }
+        
+        static public GameObject getChildGameObject(GameObject fromGameObject, string withName) {
+            Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>();
+            foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
+            
+            return null;
         }
     }
 }

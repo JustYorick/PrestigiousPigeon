@@ -12,6 +12,7 @@ namespace ReDesign.Entities
         [SerializeField] private StatusBar _manaSystem;
         [SerializeField] private StatusBar _healthBar;
         [SerializeField] private ActionButton movementButton;
+        public static Animator _animator;
         
         public override int SightRange { get; }
         public override int MoveRange { get { return _manaSystem.Value; } }
@@ -24,6 +25,7 @@ namespace ReDesign.Entities
 
         public virtual void Awake()
         {
+            _animator = GetComponent<Animator>();
             int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             player = transform;
@@ -31,14 +33,18 @@ namespace ReDesign.Entities
             _healthBar.Fill();
         }
 
-        private void Start()
+        public override void Start()
         {
+            if (_animator == null) _animator = GetComponent<Animator>();
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
         }
 
         public override void Update()
         {
-            //Player needs to override update since the entity update will end the players turn at the en of movement.
+            if (_animator.GetBool("hasCasted"))
+            {
+                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            }
         }
 
         public override void NextAction()
