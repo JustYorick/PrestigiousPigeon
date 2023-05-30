@@ -14,14 +14,16 @@ public class SpellSlot : MonoBehaviour{
     [SerializeField] private Color lockedColor;
     [SerializeField] private Color unlockedColor;
     [SerializeField] private Color activeColor;
+    [SerializeField] private KeyCode binding;
     [field:SerializeField] public bool unlocked{get; private set;} = false;
     public bool active{get; private set;} = false;
     
     private Image spellImage;
+    private Button spellButton;
 
     void Awake(){
         // Retrieve the button and image components
-        Button spellButton = GetComponent<Button>();
+        spellButton = GetComponent<Button>();
         spellImage = GetComponent<Image>();
 
         // Add a listener for when the button is clicked
@@ -37,6 +39,13 @@ public class SpellSlot : MonoBehaviour{
 
         // disable clicking locked spells, allow clicking unlocked ones
         spellButton.interactable = unlocked;
+    }
+
+    void Update(){
+        // Simulate a button click, if the button is unlocked and the keybinding is down
+        if(unlocked && Input.GetKeyDown(binding)){
+            spellButton.onClick.Invoke();
+        }
     }
 
     public void Enable(){

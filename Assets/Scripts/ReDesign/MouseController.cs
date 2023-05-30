@@ -21,10 +21,10 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
-        [Header("Tile info")]
-        [SerializeField] private TMPro.TMP_Text tileTitleText;
-        [SerializeField] private TMPro.TMP_Text tileHpText;
-        [SerializeField] private TMPro.TMP_Text tileDistanceText;
+        [Header("Entity info")]
+        [SerializeField] private TMPro.TMP_Text entityTitleText;
+        [SerializeField] private TMPro.TMP_Text entityHpText;
+        [SerializeField] private TMPro.TMP_Text entityMoveRangeText;
 
         private void Awake()
         {
@@ -162,9 +162,9 @@ namespace ReDesign
                 Entity entity = enemyTile.GetComponent<Entity>();
                 DefaultTile tile = MouseToTile();
                 RangeTileTool.Instance.drawMoveRange(tile, entity.MoveRange);
-                tileTitleText.text = entity.name;
-                tileHpText.text = "HP: " + entity._entityHealth.Health.ToString();
-                tileDistanceText.text = "Distance: " + Mathf.RoundToInt(Vector3.Distance(player.transform.position, tile.GameObject.transform.position));
+                entityTitleText.text = entity.name;
+                entityHpText.text = $"HP: {entity._entityHealth.Health}";
+                entityMoveRangeText.text = $"Move Range: {entity.MoveRange}";
             }
         }
     }

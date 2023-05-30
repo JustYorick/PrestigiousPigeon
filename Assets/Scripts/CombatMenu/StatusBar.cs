@@ -7,6 +7,7 @@ public class StatusBar : MonoBehaviour{
     [SerializeField] public int maxValue = 1;
     [field:SerializeField] private int status = 1;
     [SerializeField] private float maxWidth;
+    [SerializeField] private TMPro.TMP_Text label;
     private RectTransform rectTransform;
 
     // External interface to the status value
@@ -29,6 +30,7 @@ public class StatusBar : MonoBehaviour{
 
         // Update the status bar
         rectTransform.sizeDelta += (maxWidth / maxValue * status - rectTransform.rect.width) * Vector2.right;
+        label?.SetText(status.ToString());
     }
 
     public void Fill(){
