@@ -44,6 +44,12 @@ public class GameController : MonoBehaviour{
         }
     }
     
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("prevLevel");
+        PlayerPrefs.DeleteKey("levelsBeaten");
+    }
+    
     public void ContinueLevel()
     {
         // save the current scene as the previously beaten level
