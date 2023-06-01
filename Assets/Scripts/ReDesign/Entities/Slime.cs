@@ -12,6 +12,12 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 9; } }
         public override int MoveRange { get { return 1; } }
+        private EntityAnimator _slimeAnimator;
+
+        private void Awake()
+        {
+            _slimeAnimator = GetComponentInChildren<EntityAnimator>();
+        }
         
         public Slime()
         {
@@ -40,7 +46,7 @@ namespace ReDesign.Entities
             Debug.Log("" + range);
             if (range < SightRange)
             {
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _slimeAnimator);
             }
             else
             {
@@ -59,10 +65,12 @@ namespace ReDesign.Entities
             if (targetTile != null)
             {
                 StartCoroutine(EnemyRotateToAttack());
+                _slimeAnimator.SetAttacking();
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
 
             StopCoroutine(EnemyRotateToAttack());
         }
+        
     }
 }

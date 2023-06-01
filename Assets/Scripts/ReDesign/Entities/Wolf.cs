@@ -10,7 +10,8 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 12; } }
         public override int MoveRange { get { return 4; } }
-        
+
+        private EntityAnimator _wolfAnimator;
         public Wolf()
         {
             int MaxHealth = 8;
@@ -19,6 +20,11 @@ namespace ReDesign.Entities
             {
                 new WolfAttack()
             };
+        }
+
+        private void Awake()
+        {
+            _wolfAnimator = GetComponentInChildren<EntityAnimator>();
         }
 
         public override void NextAction()
@@ -38,12 +44,12 @@ namespace ReDesign.Entities
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             if (range < SightRange)
             {
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _wolfAnimator);
             } else
             {
                 MoveToPlayer(0);
             }
-            
+
             //foreach(AttacksAndSpells atk in _attacks)
         }
 
@@ -54,9 +60,16 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
+                _wolfAnimator.SetAttacking();
                 StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
+
+            // if (wolfAnimator._animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            // {
+            //     wolfAnimator._animator.SetBool("IsAttacking", false);
+            // }
+
             StopCoroutine(EnemyRotateToAttack());
         }
     }
