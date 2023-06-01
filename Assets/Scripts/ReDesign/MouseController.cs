@@ -25,6 +25,7 @@ namespace ReDesign
         [SerializeField] private TMPro.TMP_Text entityTitleText;
         [SerializeField] private TMPro.TMP_Text entityHpText;
         [SerializeField] private TMPro.TMP_Text entityMoveRangeText;
+        [SerializeField] private Canvas spellMenu;
 
         private void Awake()
         {
@@ -73,6 +74,7 @@ namespace ReDesign
                     manaSystem.Value -= spellSelection.ManaCost;
                 }
                 spellSelection = null;
+                spellMenu.enabled = false;
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
             }
