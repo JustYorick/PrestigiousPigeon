@@ -106,13 +106,13 @@ namespace ReDesign
                         gameOver = true;               
                     }
                     break;
-                case "Level2Map":
-                    if ( WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
-                    {
-                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 2!";
-                        gameOver = true;               
-                    }
-                    break;
+                // case "Level2Map":
+                //     if (WorldController.getEntities().Where(e => e.name.Contains("Pillar")).Count() == 0)
+                //     {
+                //         _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 2!";
+                //         gameOver = true;               
+                //     }
+                //     break;
             }
 
             if (gameOver)
