@@ -92,7 +92,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fire Spell
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1355416162297085739}
@@ -428,7 +428,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ice Spell
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7162361131560455319}
@@ -549,20 +549,20 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2462003025630227544}
-    m_Position: {x: 360, y: -40, z: 0}
+    m_Position: {x: 460, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6479851364626971488}
-    m_Position: {x: 140, y: -40, z: 0}
+    m_Position: {x: 50, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1158677926251689638}
-    m_Position: {x: 250, y: 40, z: 0}
+    m_Position: {x: 250, y: -230, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: 50, y: 130, z: 0}
   m_ExitPosition: {x: 50, y: 70, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 7556353269504350469}

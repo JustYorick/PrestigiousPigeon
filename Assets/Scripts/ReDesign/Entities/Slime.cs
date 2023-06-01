@@ -12,11 +12,11 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 9; } }
         public override int MoveRange { get { return 1; } }
-        private SlimeAnimator _slimeAnimator;
+        private EntityAnimator _slimeAnimator;
 
         private void Awake()
         {
-            _slimeAnimator = GetComponentInChildren<SlimeAnimator>();
+            _slimeAnimator = GetComponentInChildren<EntityAnimator>();
         }
         
         public Slime()

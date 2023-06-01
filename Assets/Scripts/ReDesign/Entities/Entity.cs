@@ -71,7 +71,7 @@ namespace ReDesign.Entities
             }
         }
 
-        public void MoveToPlayer(int movementRange, SlimeAnimator animator = null)
+        public void MoveToPlayer(int movementRange, EntityAnimator animator = null)
         {
             DefaultTile currentTile = WorldController.ObstacleLayer
                 .FirstOrDefault(o => o.GameObject == this.gameObject);
@@ -129,14 +129,16 @@ namespace ReDesign.Entities
         }
         
         // Enumerator function for moving an entity along a path of tiles
-        public IEnumerator EntityMoveSquares(List<DefaultTile> path, SlimeAnimator animator = null)
+        public IEnumerator EntityMoveSquares(List<DefaultTile> path, EntityAnimator animator = null)
         {
             GridLayout gr = WorldController.Instance.gridLayout;
             // Loop over each tile in the path (skipping the first one, since that's the entity's starting tile)
             for (int i = 1; i < path.Count; i++)
             {
+                // Starts the walking animation of the entity
                 if(animator)
                     animator.SetWalking();
+
 
                 // Get the next tile in the path
                 DefaultTile pathNode = path[i];
@@ -169,7 +171,7 @@ namespace ReDesign.Entities
             if (finishedMoving)
             {
                 finishedMoving = false;
-                this.Attack();
+                Attack();
                 StateController.ChangeState(GameState.EndTurn);
             }
         }

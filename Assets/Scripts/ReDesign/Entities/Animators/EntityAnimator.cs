@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-public class SlimeAnimator : MonoBehaviour
+public class EntityAnimator : MonoBehaviour
 {
     private Animator _animator;
     
@@ -26,7 +26,7 @@ public class SlimeAnimator : MonoBehaviour
         if (_animator.GetBool("isWalking"))
         {
             Debug.Log("isWalking");
-            _animator.Play("Mobs_Slime_walking");
+            _animator.Play("Walking");
             _animator.SetBool("isWalking", false);
 
         }
@@ -35,7 +35,7 @@ public class SlimeAnimator : MonoBehaviour
         {
             Debug.Log("isHit");
 
-            _animator.Play("TakeDamage");
+            _animator.Play("Hit");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
             {
                 _animator.SetBool("isHit", false);
@@ -46,16 +46,16 @@ public class SlimeAnimator : MonoBehaviour
         {
             Debug.Log("isAttacking");
 
-            _animator.Play("Mobs_Slime_Attack");                
+            _animator.Play("Attacking");                
             _animator.SetBool("isAttacking", false);
 
         }
 
-        if (_animator.GetBool("slimeDead"))
+        if (_animator.GetBool("isDead"))
         {
             Debug.Log("Dead");
 
-            _animator.Play("Mobs_Slime_Death");
+            _animator.Play("Death");
         }
     }
 

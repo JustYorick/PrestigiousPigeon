@@ -32,6 +32,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
+        _spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        _spellsButton = GameObject.Find("SpellButton").GetComponent<Button>();
+        _moveButton = GameObject.Find("MovementButton").GetComponent<Button>();
+
+        
         Animator.enabled = true; // Enable the animator if it's disabled.
     }
 
@@ -62,12 +67,18 @@ public class PlayerAnimator : MonoBehaviour
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+                ChangeButton(true);
+
         }
         else if (IsIceCasted)
         {
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+                ChangeButton(true);
+
         }
 
         if (IsHit)

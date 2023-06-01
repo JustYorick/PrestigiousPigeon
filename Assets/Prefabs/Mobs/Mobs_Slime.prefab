@@ -298,7 +298,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 6766628948815027616}
   finishedMoving: 0
-  attacking: 0
 --- !u!1 &4730788196103260511
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5398956548161065957}
   - component: {fileID: 2021235200403769759}
-  - component: {fileID: 4662771869988621493}
+  - component: {fileID: 1203326096864575432}
   m_Layer: 0
   m_Name: Mobs_Slime
   m_TagString: Untagged
@@ -354,7 +353,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &4662771869988621493
+--- !u!114 &1203326096864575432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,10 +362,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4730788196103260511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027268573ce94773b77822af73f014db, type: 3}
+  m_Script: {fileID: 11500000, guid: d4e4f72772d34d079c37f77b88cadb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 2021235200403769759}
 --- !u!1 &8882245971599967630
 GameObject:
   m_ObjectHideFlags: 0

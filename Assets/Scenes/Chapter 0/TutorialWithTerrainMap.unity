@@ -265,7 +265,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4662771869988621493, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
 --- !u!4 &26059423 stripped
 Transform:

@@ -48,7 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 7450689246520139763}
   finishedMoving: 0
-  attacking: 0
 --- !u!1001 &513040696658633241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,26 +202,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mobs_Wolf_Grey
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8599856952462847689, guid: 8021872908ee9a34ab38309441017ea9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8021872908ee9a34ab38309441017ea9, type: 3}
---- !u!1 &1227135002421371851 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9034146552115982544, guid: 8021872908ee9a34ab38309441017ea9, type: 3}
-  m_PrefabInstance: {fileID: 7807012652436640539}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4669100448468507770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227135002421371851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e50414bc9b1b45fbbe91df6257d9e3f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
 --- !u!4 &1895021918075386225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8508545168117410410, guid: 8021872908ee9a34ab38309441017ea9, type: 3}
