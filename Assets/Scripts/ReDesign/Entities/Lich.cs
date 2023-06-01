@@ -8,7 +8,7 @@ namespace ReDesign.Entities
 {
     public class Lich : Entity
     {
-        public override int SightRange { get { return 5; } }
+        public override int SightRange { get { return 6; } }
         public override int MoveRange { get { return 2; } }
         
         public Lich()

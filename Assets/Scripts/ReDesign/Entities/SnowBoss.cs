@@ -8,8 +8,8 @@ namespace ReDesign.Entities
 {
     public class SnowBoss : Entity
     {
-        public override int SightRange { get { return 30; } }
-        public override int MoveRange { get { return 2; } }
+        public override int SightRange { get { return 40; } }
+        public override int MoveRange { get { return 4; } }
         
         public SnowBoss()
         {
