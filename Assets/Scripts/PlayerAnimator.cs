@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
-    [SerializeField] private Canvas _spellMenu;
-    [SerializeField] private Button _spellsButton;
-    [SerializeField] private Button _moveButton;
+    private Canvas _spellMenu;
+    private Button _spellsButton;
+    private Button _moveButton;
 
     private Animator Animator
     {
@@ -67,8 +67,10 @@ public class PlayerAnimator : MonoBehaviour
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f){
+                _animator.SetBool("fireCasted", false);
                 ChangeButton(true);
+            }
 
         }
         else if (IsIceCasted)
@@ -76,8 +78,10 @@ public class PlayerAnimator : MonoBehaviour
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f){
+                _animator.SetBool("iceCasted", false);
                 ChangeButton(true);
+            }
 
         }
 

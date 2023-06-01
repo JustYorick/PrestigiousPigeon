@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17383964, g: 0.20901126, b: 0.25200605, a: 1}
+  m_IndirectSpecularColor: {r: 0.1738391, g: 0.20901069, b: 0.25200552, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1538,11 +1538,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 550189395}
     - target: {fileID: 5796109697066660948, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
+      propertyPath: _spellMenu
+      value: 
+      objectReference: {fileID: 550189395}
+    - target: {fileID: 5796109697066660948, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
       propertyPath: moveButton
       value: 
       objectReference: {fileID: 550189387}
     - target: {fileID: 5796109697066660948, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
+      propertyPath: _moveButton
+      value: 
+      objectReference: {fileID: 550189387}
+    - target: {fileID: 5796109697066660948, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
       propertyPath: spellsButton
+      value: 
+      objectReference: {fileID: 550189394}
+    - target: {fileID: 5796109697066660948, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
+      propertyPath: _spellsButton
       value: 
       objectReference: {fileID: 550189394}
     - target: {fileID: 6333559100720780197, guid: 85f40eb256db5924eb3a55fe221f6703, type: 3}
@@ -3704,6 +3716,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1574288005}
+    - target: {fileID: 397162537424545054, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_Name
+      value: SpellButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090304, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_Name
+      value: MovementButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537966919818, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_Name
+      value: SpellMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

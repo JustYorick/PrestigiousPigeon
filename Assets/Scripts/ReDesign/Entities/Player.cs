@@ -82,10 +82,8 @@ namespace ReDesign.Entities
             if (_entityHealth.Health <= 0){
                 TurnController.gameOver = true;
                 PlayerAnimator._animator.SetBool("PlayerDead", true);
-                TurnController.Instance.gameOverEvent.Invoke();
             }
-            PlayerAnimator._animator.SetBool("isHit", true);
-            PlayerAnimator._animator.SetBool("isIdle", false);
+            TurnController.Instance.gameOverEvent.Invoke();
         }
 
         public static IEnumerator RotateToAttack()
