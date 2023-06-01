@@ -28,6 +28,7 @@ namespace ReDesign
         public UnityEvent gameOverEvent = new UnityEvent();
         private static GameObject _retryButton;
         private static GameObject _continueButton;
+        private static TextMeshProUGUI _gameOverText;
 
         private void Awake()
         {
@@ -46,6 +47,7 @@ namespace ReDesign
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
+            _gameOverText = _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>();
             _retryButton = GameObject.Find("RetryButton");
             _retryButton.SetActive(true);
             _continueButton = GameObject.Find("ContinueButton");
@@ -97,26 +99,36 @@ namespace ReDesign
         {
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
-            
-            switch(sceneName){
+
+            switch (sceneName)
+            {
                 case "TutorialWithTerrainMap":
-                    if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
+                    if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 &&
+                        WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
+                        ChangeGameOverUI("You beat the Tutorial!");
+                    }
+
+                    break;
+                case "Level1Map":
+                    if ((int)WorldController.getPlayerTile().XPos == 0 &&
+                        (int)WorldController.getPlayerTile().YPos == 25)
+                    {
+                        ChangeGameOverUI("You beat Level 1!");
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
                     }
-                    break;
-                case "Level1Map":
-                    if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
-                    {
-                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
-                        gameOver = true;
-                    }
+
                     break;
                 case "Level2Map":
+                    ChangeGameOverUI("You beat Level 1!");
+                    _retryButton.SetActive(false);
+                    _continueButton.SetActive(true);
+                    gameOver = true;
                     break;
                 case "Level3Map":
+                    ChangeGameOverUI("You beat Level 3!");
                     break;
             }
 
@@ -130,8 +142,17 @@ namespace ReDesign
         {
             // save the current scene as the previously beaten level
             PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
-                        
+            PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+
             SceneManager.LoadScene("LevelSelect");
+        }
+
+        private static void ChangeGameOverUI(string gameOverText)
+        {
+            _gameOverText.text = gameOverText;
+            _retryButton.SetActive(false);
+            _continueButton.SetActive(true);
+            gameOver = true;
         }
     }
 }

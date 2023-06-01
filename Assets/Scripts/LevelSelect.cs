@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,25 +11,33 @@ public class LevelSelect : MonoBehaviour
     private Button _nextLevelButton;
     [SerializeField] private GameObject playButton;
     private static bool _animationPlayed;
-    private string _levelAt;
+    private string _nextLevel;
     private string _prevLevel;
+    private int _levelsBeaten;
     private string _selectedLevel;
     [SerializeField] private Button tutorialMapButton;
     [SerializeField] private Button level1MapButton;
     [SerializeField] private Button level2MapButton;
     [SerializeField] private Button level3MapButton;
+    private List<Button> _buttons;
 
     void Awake()
     {
-        // tutorialMapButton.interactable = PlayerPrefs.GetString("tutorialMapUnlocked"); 
-        // level1MapButton.interactable = PlayerPrefs.GetString("level1Unlocked");
-        // level2MapButton.interactable = PlayerPrefs.GetString("level2Unlocked");
-        // level3MapButton.interactable = PlayerPrefs.GetString("level3Unlocked");
+        _buttons = new List<Button>
+        {
+            tutorialMapButton,
+            level1MapButton,
+            level2MapButton,
+            level3MapButton
+        };
+        
+        _levelsBeaten = PlayerPrefs.GetInt("levelsBeaten");
+        for (int i = 0; i < _levelsBeaten; i++)
+        {
+            _buttons[i].interactable = true;
+        }
         playButton.SetActive(false);
         _prevLevel = PlayerPrefs.GetString("prevLevel");
-        Button prevButton = GameObject.Find(_prevLevel + "Button").GetComponent<Button>();
-        prevButton.interactable = true;
-        _levelAt = PlayerPrefs.GetString("levelAt");
         // if no levels have been completed activate tutorialmap button
         if (_prevLevel.Equals(""))
         {
@@ -37,19 +47,21 @@ public class LevelSelect : MonoBehaviour
         // activate button for next level
         else
         {
-            Debug.Log(_levelAt);
-            _nextLevelButton = GameObject.Find(_levelAt + "Button").GetComponent<Button>();
-            CheckUnlocked(_levelAt, _prevLevel, _nextLevelButton);
+            _nextLevel = SceneUtility.GetScenePathByBuildIndex(_levelsBeaten + 1);
+            _nextLevel = _nextLevel.Split('/').Last();
+            _nextLevel = Path.GetFileNameWithoutExtension(_nextLevel);
+            _nextLevelButton = GameObject.Find(_nextLevel + "Button").GetComponent<Button>();
+            CheckUnlocked(_nextLevel, _prevLevel, _nextLevelButton);
         }
     }
 
     // checks if level is unlocked
-    public void CheckUnlocked(string currentLevel, string prevLevel, Button nextButton)
+    public void CheckUnlocked(string nextLevel, string prevLevel, Button nextButton)
     {
         // if the previous level is not the current level animate the unlock of the new level
-        if (!prevLevel.Equals(currentLevel))
+        if (!prevLevel.Equals(nextLevel))
         {
-            AnimateUnlock(currentLevel, prevLevel, nextButton);
+            AnimateUnlock(nextLevel, prevLevel, nextButton);
         }
         // make the next level button interactable again
         nextButton.interactable = true;
@@ -76,11 +88,6 @@ public class LevelSelect : MonoBehaviour
 
     public void PlayLevel()
     {
-        // split _selectedLevel, so that only the Map name gets stored
-        string saveLevelAt = _selectedLevel.Split('/').Last();
-        // store Map name into levelAt
-        PlayerPrefs.SetString("levelAt", saveLevelAt);
-        // load selected level
         SceneManager.LoadScene(_selectedLevel);
     }
 }
