@@ -9,11 +9,6 @@ public class CollapseableUI : MonoBehaviour
     [SerializeField] private GameObject PlayerTurnUI;
     [SerializeField] private GameObject EnemyTurnUI;
 
-    private void Start()
-    {
-        ShowPlayerTurnUI();
-    }
-
     public void ShowPlayerTurnUI()
     {
         StartCoroutine(MoveUpAndDown(170, PlayerTurnUI));
