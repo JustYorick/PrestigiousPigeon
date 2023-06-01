@@ -19,7 +19,10 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private ActionButton[] buttons;
 
     [field:SerializeField] public bool active{get; private set;} = false;
-    [field:SerializeField] private KeyCode keyBinding;
+    [SerializeField] private KeyCode keyBinding;
+    [SerializeField] private RectTransform bindingTextTransform;
+    [SerializeField] private Vector2 narrowBindingPosition;
+    [SerializeField] private Vector2 wideBindingPosition;
     private RawImage image;
     private Button button;
     private RectTransform rectTransform;

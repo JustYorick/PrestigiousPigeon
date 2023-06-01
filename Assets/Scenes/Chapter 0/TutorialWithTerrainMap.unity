@@ -3716,18 +3716,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1574288005}
-    - target: {fileID: 397162537424545054, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_Name
-      value: SpellButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 397162537872090304, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_Name
-      value: MovementButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 397162537966919818, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_Name
-      value: SpellMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3868,39 +3856,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7199afb2897d897b393e8aca2bb35249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &550189391 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162536665899878, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 550189386}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &550189392 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162537623658180, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 550189386}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &550189393 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162537160717400, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 550189386}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &550189394 stripped
@@ -10453,9 +10408,6 @@ MonoBehaviour:
   SelectorMap: {fileID: 1607830966}
   fireParticles: {fileID: 374308440}
   iceParticles: {fileID: 1149691690}
-  entityTitleText: {fileID: 550189393}
-  entityHpText: {fileID: 550189392}
-  entityMoveRangeText: {fileID: 550189391}
   spellMenu: {fileID: 550189395}
 --- !u!4 &1686651854
 Transform:

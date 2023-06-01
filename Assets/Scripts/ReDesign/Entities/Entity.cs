@@ -23,6 +23,7 @@ namespace ReDesign.Entities
         public abstract int MoveRange { get; }
         private GameObject healthBarObj;
         private Camera cam;
+        public abstract string displayName{get;}
 
         public virtual void Start()
         {

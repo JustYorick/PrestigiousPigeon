@@ -13,6 +13,7 @@ namespace ReDesign.Entities
         [SerializeField] private StatusBar _healthBar;
         [SerializeField] private ActionButton movementButton;
         public static Animator _animator;
+        public override string displayName{get{ return "Loki"; }}
         
         public override int SightRange { get; }
         public override int MoveRange { get { return _manaSystem.Value; } }

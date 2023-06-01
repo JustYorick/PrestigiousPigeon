@@ -21,10 +21,6 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
-        [Header("Entity info")]
-        [SerializeField] private TMPro.TMP_Text entityTitleText;
-        [SerializeField] private TMPro.TMP_Text entityHpText;
-        [SerializeField] private TMPro.TMP_Text entityMoveRangeText;
         [SerializeField] private Canvas spellMenu;
 
         private void Awake()
@@ -41,11 +37,6 @@ namespace ReDesign
             DrawCurrentSelectedTile();
             
             DrawCurrentSpellRange();
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                ShowEntityInfo();
-            }
             
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
@@ -107,12 +98,20 @@ namespace ReDesign
         
         public void SelectFireSpell(){
             spellSelection = new BasicFireSpell();
-            spellSelection.particleSystem = fireParticles;
+            if(spellSelection.ManaCost <= manaSystem.Value){
+                spellSelection.particleSystem = fireParticles;
+            }else{
+                spellSelection = null;
+            }
         }
 
         public void SelectIceSpell(){
             spellSelection = new BasicIceSpell();
-            spellSelection.particleSystem = iceParticles;
+            if(spellSelection.ManaCost <= manaSystem.Value){
+                spellSelection.particleSystem = iceParticles;
+            }else{
+                spellSelection = null;
+            }
         }
         
         private void DrawCurrentSelectedTile()
@@ -151,22 +150,6 @@ namespace ReDesign
                 if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
 
                 if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
-            }
-        }
-
-        private void ShowEntityInfo()
-        {
-            //comment, like and subscribe
-            GameObject enemyTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == MouseToTile().XPos && t.YPos == MouseToTile().YPos)?.GameObject;
-
-            if (enemyTile != null && enemyTile.CompareTag("Entity"))
-            {
-                Entity entity = enemyTile.GetComponent<Entity>();
-                DefaultTile tile = MouseToTile();
-                RangeTileTool.Instance.drawMoveRange(tile, entity.MoveRange);
-                entityTitleText.text = entity.name;
-                entityHpText.text = $"HP: {entity._entityHealth.Health}";
-                entityMoveRangeText.text = $"Move Range: {entity.MoveRange}";
             }
         }
     }

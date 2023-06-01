@@ -297,18 +297,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162536564834817}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162536995578699}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 570, y: 0}
+  m_AnchoredPosition: {x: 570.00037, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162536564834820
@@ -414,7 +414,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 262
+  binding: 110
   <unlocked>k__BackingField: 0
 --- !u!1 &397162536590043375
 GameObject:
@@ -535,10 +535,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397162537966919817}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 3138412152859740423}
+        m_TargetAssemblyTypeName: SpellMenu, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -582,6 +582,9 @@ MonoBehaviour:
   - {fileID: 397162537424545056}
   <active>k__BackingField: 0
   keyBinding: 51
+  bindingTextTransform: {fileID: 397162537878006957}
+  narrowBindingPosition: {x: -33, y: 200}
+  wideBindingPosition: {x: -133, y: 200}
 --- !u!1 &397162536593181907
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.00016, y: 85.000015}
+  m_AnchoredPosition: {x: -33.00016, y: 70}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162536614606577
@@ -1107,18 +1110,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162536688103940}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162538314196737}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: 0}
+  m_AnchoredPosition: {x: -239.99997, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162536688103947
@@ -1224,7 +1227,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 259
+  binding: 99
   <unlocked>k__BackingField: 0
 --- !u!1 &397162536691283865
 GameObject:
@@ -1387,18 +1390,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162536857057861}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162537273809274}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30, y: 0}
+  m_AnchoredPosition: {x: 30.000122, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162536857057864
@@ -1504,7 +1507,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 260
+  binding: 118
   <unlocked>k__BackingField: 0
 --- !u!1 &397162536866888222
 GameObject:
@@ -1744,18 +1747,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162537020974471}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162537921623267}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 840, y: 0}
+  m_AnchoredPosition: {x: 840.00024, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162537020974474
@@ -1861,7 +1864,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 263
+  binding: 109
   <unlocked>k__BackingField: 0
 --- !u!1 &397162537047933156
 GameObject:
@@ -2431,7 +2434,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 397162537403371539}
   - {fileID: 397162538076870721}
   - {fileID: 397162538102416880}
   - {fileID: 397162536688103941}
@@ -2440,7 +2442,7 @@ RectTransform:
   - {fileID: 397162536564834822}
   - {fileID: 397162537020974468}
   m_Father: {fileID: 397162537966919819}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2549,19 +2551,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162537403371538}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162538529888866}
   - {fileID: 397162537970314387}
-  m_Father: {fileID: 397162537279776416}
+  m_Father: {fileID: 397162537966919819}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 175}
+  m_AnchoredPosition: {x: 150, y: -194.68674}
   m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162537403371537
@@ -2721,10 +2723,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397162537966919817}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 3138412152859740423}
+        m_TargetAssemblyTypeName: SpellMenu, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2756,6 +2758,9 @@ MonoBehaviour:
   - {fileID: 397162536590043377}
   <active>k__BackingField: 0
   keyBinding: 50
+  bindingTextTransform: {fileID: 397162537773025662}
+  narrowBindingPosition: {x: -33, y: 60}
+  wideBindingPosition: {x: -133, y: 60}
 --- !u!1 &397162537623658182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,8 +3000,9 @@ GameObject:
   - component: {fileID: 397162537692555245}
   - component: {fileID: 397162537692555251}
   - component: {fileID: 397162537692555250}
+  - component: {fileID: 295733166}
   m_Layer: 5
-  m_Name: Tile Info
+  m_Name: Entity Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3063,6 +3069,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &295733166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397162537692555244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feeab85a2c1648cc8532dc00b6b4042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityTitleText: {fileID: 397162537160717400}
+  entityHpText: {fileID: 397162537623658180}
+  entityMoveRangeText: {fileID: 397162536665899878}
 --- !u!1 &397162537733620315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.00016, y: -60}
+  m_AnchoredPosition: {x: -33.00016, y: -70}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162537773025660
@@ -3681,10 +3702,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397162537966919817}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 3138412152859740423}
+        m_TargetAssemblyTypeName: SpellMenu, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3716,6 +3737,9 @@ MonoBehaviour:
   - {fileID: 397162536590043377}
   <active>k__BackingField: 1
   keyBinding: 49
+  bindingTextTransform: {fileID: 397162536614606579}
+  narrowBindingPosition: {x: -33, y: 70}
+  wideBindingPosition: {x: -133, y: 70}
 --- !u!1 &397162537878006956
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,7 +3775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -32.999752, y: -199.99998}
+  m_AnchoredPosition: {x: -32.999752, y: -210}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162537878006963
@@ -3938,6 +3962,7 @@ GameObject:
   - component: {fileID: 397162537966919819}
   - component: {fileID: 397162537966919817}
   - component: {fileID: 397162537966919816}
+  - component: {fileID: 3138412152859740423}
   m_Layer: 5
   m_Name: SpellMenu
   m_TagString: Untagged
@@ -3957,6 +3982,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 397162537403371539}
   - {fileID: 397162537279776416}
   m_Father: {fileID: 397162538507337341}
   m_RootOrder: 2
@@ -4004,6 +4030,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3138412152859740423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397162537966919818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce36289a08ad8c5dabcf02316fc51d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
+  mana: {fileID: 397162537656574421}
+  minimumMana: 2
 --- !u!1 &397162537970314386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4286,18 +4327,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162538076870720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162536593181904}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -780, y: 0}
+  m_AnchoredPosition: {x: -780.0001, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162538076870727
@@ -4415,7 +4456,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 257
+  binding: 122
   <unlocked>k__BackingField: 1
 --- !u!1 &397162538102416883
 GameObject:
@@ -4444,14 +4485,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162538102416883}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162537205981279}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4573,7 +4614,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 258
+  binding: 120
   <unlocked>k__BackingField: 1
 --- !u!1 &397162538253159796
 GameObject:
@@ -4678,18 +4719,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397162538271211145}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162538253159797}
   m_Father: {fileID: 397162537279776416}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 0}
+  m_AnchoredPosition: {x: 300.00012, y: 0}
   m_SizeDelta: {x: 200, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &397162538271211148
@@ -4795,7 +4836,7 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
-  binding: 261
+  binding: 98
   <unlocked>k__BackingField: 0
 --- !u!1 &397162538314196736
 GameObject:
