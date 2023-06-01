@@ -138,15 +138,6 @@ namespace ReDesign
             }
         }
 
-        public void ContinueLevel()
-        {
-            // save the current scene as the previously beaten level
-            PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
-            PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
-
-            SceneManager.LoadScene("LevelSelect");
-        }
-
         private static void ChangeGameOverUI(string gameOverText)
         {
             _gameOverText.text = gameOverText;

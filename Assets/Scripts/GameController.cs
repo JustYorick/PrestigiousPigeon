@@ -43,4 +43,13 @@ public class GameController : MonoBehaviour{
             effectVolume = PlayerPrefs.GetFloat("EffectVolume");
         }
     }
+    
+    public void ContinueLevel()
+    {
+        // save the current scene as the previously beaten level
+        PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+
+        SceneManager.LoadScene("LevelSelect");
+    }
 }
