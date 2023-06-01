@@ -8,12 +8,12 @@ namespace ReDesign.Entities
 {
     public class SnowBoss : Entity
     {
-        public override int SightRange { get { return 10; } }
-        public override int MoveRange { get { return 1; } }
+        public override int SightRange { get { return 30; } }
+        public override int MoveRange { get { return 2; } }
         
         public SnowBoss()
         {
-            int MaxHealth = 20;
+            int MaxHealth = 25;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             Attacks = new List<AttacksAndSpells>()
             {

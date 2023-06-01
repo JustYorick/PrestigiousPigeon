@@ -8,7 +8,7 @@ namespace ReDesign
     {
         public override int MinimumRange { get { return 1; } }
 
-            public override int MaximumRange { get { return 2; } }
+            public override int MaximumRange { get { return 3; } }
 
             public override int Damage { get { return 4; } }
 
