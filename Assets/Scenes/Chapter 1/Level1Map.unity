@@ -63118,6 +63118,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8257760456247541951, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1223850741}
+    - target: {fileID: 8257760456247541951, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257760456247541951, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameController, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9fa0e53d6278204a8b7fa252d2f86c0, type: 3}
 --- !u!1001 &6686418169781275530
