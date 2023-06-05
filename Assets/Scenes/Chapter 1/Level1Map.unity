@@ -34842,6 +34842,38 @@ PrefabInstance:
       propertyPath: onConfirm.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1931783221}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1183113239}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SpellMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537872090310, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -35000,6 +35032,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 397162537966919817, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
   m_PrefabInstance: {fileID: 1183113228}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1183113239 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3138412152859740423, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+  m_PrefabInstance: {fileID: 1183113228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce36289a08ad8c5dabcf02316fc51d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1185108418
 PrefabInstance:
   m_ObjectHideFlags: 0

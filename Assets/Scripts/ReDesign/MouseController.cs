@@ -116,6 +116,8 @@ namespace ReDesign
             }
         }
         
+        public void DeselectSpell() => spellSelection = null;
+        
         private void DrawCurrentSelectedTile()
         {
             if (MouseToTile() != prevSelectedTile)
