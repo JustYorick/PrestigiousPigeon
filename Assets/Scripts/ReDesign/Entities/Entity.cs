@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace ReDesign.Entities
@@ -12,7 +13,6 @@ namespace ReDesign.Entities
         [SerializeField] private GameObject _healthBar;
         public List<AttacksAndSpells> Attacks { get; set; }
         public bool finishedMoving = false;
-        public bool attacking = false;
         private Vector3 targetLocation;
         public IEnumerator movingCoroutine;
         private static GameObject _gameOver;
@@ -22,7 +22,23 @@ namespace ReDesign.Entities
         public abstract void Attack();
         public abstract int SightRange { get; }
         public abstract int MoveRange { get; }
-        
+        private GameObject healthBarObj;
+        private Camera cam;
+
+        public virtual void Start()
+        {
+            cam = Camera.main;
+            healthBarObj = getChildGameObject(gameObject, "HealthBar");
+        }
+
+        private void LateUpdate()
+        {
+            if (healthBarObj)
+            {
+                healthBarObj.transform.LookAt(healthBarObj.transform.position + cam.transform.rotation * Vector3.forward,cam.transform.rotation * Vector3.up); 
+            }
+        }
+
         public virtual void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
@@ -47,6 +63,7 @@ namespace ReDesign.Entities
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
                     obstacleTile = null;
+
                     Destroy(this.gameObject);
                 }
 
@@ -54,7 +71,7 @@ namespace ReDesign.Entities
             }
         }
 
-        public void MoveToPlayer(int movementRange)
+        public void MoveToPlayer(int movementRange, EntityAnimator animator = null)
         {
             DefaultTile currentTile = WorldController.ObstacleLayer
                 .FirstOrDefault(o => o.GameObject == this.gameObject);
@@ -95,7 +112,7 @@ namespace ReDesign.Entities
                     actualPath.Last().Walkable = false;
 
 
-                    movingCoroutine = EntityMoveSquares(actualPath);
+                    movingCoroutine = EntityMoveSquares(actualPath, animator);
                     StartCoroutine(movingCoroutine);
                     currentTile.XPos = actualPath.Last().XPos;
                     currentTile.YPos = actualPath.Last().YPos;
@@ -108,17 +125,21 @@ namespace ReDesign.Entities
             else
             {
                 finishedMoving = true;
-                attacking = true;
             }
         }
         
         // Enumerator function for moving an entity along a path of tiles
-        public IEnumerator EntityMoveSquares(List<DefaultTile> path)
+        public IEnumerator EntityMoveSquares(List<DefaultTile> path, EntityAnimator animator = null)
         {
             GridLayout gr = WorldController.Instance.gridLayout;
             // Loop over each tile in the path (skipping the first one, since that's the entity's starting tile)
             for (int i = 1; i < path.Count; i++)
             {
+                // Starts the walking animation of the entity
+                if(animator)
+                    animator.SetWalking();
+
+
                 // Get the next tile in the path
                 DefaultTile pathNode = path[i];
                 
@@ -143,23 +164,14 @@ namespace ReDesign.Entities
 
             finishedMoving = true;
         }
-        
 
         public virtual void Update()
         {
+
             if (finishedMoving)
             {
-                attacking = true;
-            }
-
-            if (attacking)
-            {
-                this.Attack();
-            }
-
-            if (finishedMoving && !attacking)
-            {
                 finishedMoving = false;
+                Attack();
                 StateController.ChangeState(GameState.EndTurn);
             }
         }
@@ -182,9 +194,16 @@ namespace ReDesign.Entities
                 // Adds the position and rotation
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, time / 0.5f);
                 time += Time.deltaTime;
-                yield return attacking = false;
+                yield return null;
             }
             transform.rotation = targetRotation;
+        }
+        
+        static public GameObject getChildGameObject(GameObject fromGameObject, string withName) {
+            Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>();
+            foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
+            
+            return null;
         }
     }
 }
