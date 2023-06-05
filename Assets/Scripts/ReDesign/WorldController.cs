@@ -78,6 +78,11 @@ namespace ReDesign
             // Adds unwalkable tiles based on tiles in the obstacleLayer
             foreach (GameObject child in obstacleLayerChildren)
             {
+                addObstacle(child);
+            }
+        }
+
+        public void addObstacle(GameObject child){
                 DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(child.transform.position.x - item.GameObject.transform.position.x))
                     .ThenBy(item => Math.Abs(child.transform.position.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
                 resultNode.Walkable = false;
@@ -90,7 +95,6 @@ namespace ReDesign
                 };
 
                 ObstacleLayer.Add(enemy);
-            }
         }
 
         public static List<Entity> getEntities()

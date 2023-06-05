@@ -6,10 +6,10 @@ namespace ReDesign{
 public class SnowKingAwake : MonoBehaviour
 {
     public bool AllPillarsDestroyed = false;
-    private int pillars = 3;
+    private int pillars = 0;
     [SerializeField] GameObject SnowBoss;
     [SerializeField] GameObject Layer;
-    //[SerializeField] private List<GameObject> Icicles = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +29,7 @@ public class SnowKingAwake : MonoBehaviour
             g.transform.parent = Layer.transform;
             //SnowKingSequence
             pillars = 0;
+           WorldController.Instance.addObstacle(g);
         }
     }
 }
