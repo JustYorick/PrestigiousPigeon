@@ -19,6 +19,7 @@ namespace ReDesign
             get { return _instance; }
         }
 
+        [SerializeField] private GameObject levelUI;
         public static int TurnCount = 0;
         private static int _turnPart = 0;
         public static bool gameOver = false;
@@ -26,6 +27,7 @@ namespace ReDesign
         private static Canvas _gameOver;
         private static RawImage _controlsPanel;
         public UnityEvent gameOverEvent = new UnityEvent();
+        private static CollapseableUI collapseableUI;
 
         private void Awake()
         {
@@ -38,9 +40,6 @@ namespace ReDesign
                 _instance = this;
             }
 
-            TurnCount = 0;
-            _turnPart = 0;
-
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
@@ -48,6 +47,7 @@ namespace ReDesign
 
         private void Start()
         {
+            collapseableUI = levelUI.GetComponent<CollapseableUI>();
             gameOverEvent.AddListener(showGameOver);
             FillEntityList();
 
@@ -61,7 +61,15 @@ namespace ReDesign
             showGameOver();
             if (_turnPart < _entities.Count && !gameOver)
             {
-                Debug.Log("turnpart:" + _turnPart);
+                if (_turnPart == 0)
+                {
+                    collapseableUI.ShowPlayerTurnUI(); 
+                }
+                if (_turnPart == 1)
+                {
+                    collapseableUI.ShowEnemyTurnUI();
+                }
+                
                 _entities[_turnPart].NextAction();
                 _turnPart++;
             }
@@ -69,7 +77,6 @@ namespace ReDesign
             if (_turnPart >= _entities.Count)
             {
                 _turnPart = 0;
-                Debug.Log("all turn parts completed");
             }
 
             TurnCount++;
@@ -78,8 +85,6 @@ namespace ReDesign
         public static void FillEntityList()
         {
             _entities = WorldController.getEntities();
-            //Debug.Log("entities count: "+_entities.Count);
-            //Debug.Log("obst count : " + WorldController.ObstacleLayer.Count);
         }
 
         public void RemoveUI()
