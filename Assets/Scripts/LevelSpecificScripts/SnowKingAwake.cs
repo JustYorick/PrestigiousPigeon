@@ -8,12 +8,15 @@ public class SnowKingAwake : MonoBehaviour
     public bool AllPillarsDestroyed = false;
     private int pillars = 0;
     [SerializeField] GameObject SnowBoss;
+    [SerializeField] GameObject Skeleton;
     [SerializeField] GameObject Layer;
+
+    [SerializeField] ParticleSystem snow;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        snow.Pause(true);
     }
 
     // Update is called once per frame
@@ -21,16 +24,21 @@ public class SnowKingAwake : MonoBehaviour
     {
     }
 
-    public void pillardestroyed(){
+    public void pillardestroyed(Vector3 pos){
         pillars += 1;
+
+        GameObject h = Instantiate(Skeleton, pos, Quaternion.identity);
+        h.transform.parent = Layer.transform;
+        WorldController.Instance.addObstacle(h);
 
         if (pillars == 4){
             AllPillarsDestroyed = true;
             GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.identity);
             g.transform.parent = Layer.transform;
-            //SnowKingSequence
-            pillars = 0;
             WorldController.Instance.addObstacle(g);
+            pillars = 0;
+            snow.Play(true);
+            
         }
     }
 }
