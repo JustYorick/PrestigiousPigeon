@@ -24,6 +24,7 @@ namespace ReDesign.Entities
         public abstract int MoveRange { get; }
         private GameObject healthBarObj;
         private Camera cam;
+        [SerializeField] private GameObject brokenEntityObject;
 
         public virtual void Start()
         {
@@ -63,6 +64,15 @@ namespace ReDesign.Entities
                     WorldController.ObstacleLayer.RemoveAt(WorldController.ObstacleLayer.IndexOf(obstacleTile));
                     obstacleTile.GameObject = null;
                     obstacleTile = null;
+
+                    if (brokenEntityObject)
+                    {
+                        GameObject newObject =
+                            Instantiate(brokenEntityObject, transform.position,
+                                transform.rotation) as GameObject; // instatiate the object
+                        newObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y,
+                            transform.localScale.z);
+                    }
 
                     Destroy(this.gameObject);
                 }
