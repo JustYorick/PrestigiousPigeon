@@ -30,12 +30,16 @@ public class ActionButton : MonoBehaviour{
     private RawImage image;
     private Button button;
     private RectTransform rectTransform;
+    private Canvas spellMenu;
     
     void Start(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<RawImage>();
         button = GetComponent<Button>();
+
+        // Find the spell menu canvas
+        spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
 
         // Add a listener for the OnClick of the button, to make the button wide
         button.onClick.AddListener(Activate);
@@ -49,8 +53,8 @@ public class ActionButton : MonoBehaviour{
     }
 
     void Update(){
-        // Simulate a click event when the keybinding has been pressed
-        if(Input.GetKeyDown(keyBinding)){
+        // Simulate a click event when the keybinding has been pressed and the spellmenu is closed
+        if(Input.GetKeyDown(keyBinding) && !spellMenu.enabled){
             button.onClick.Invoke();
         }
     }

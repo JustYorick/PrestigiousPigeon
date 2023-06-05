@@ -98,7 +98,7 @@ namespace ReDesign
         
         public void SelectFireSpell(){
             BasicFireSpell fireSpell = new BasicFireSpell();
-            if(fireSpell.ManaCost <= manaSystem.Value && (spellSelection == null || spellSelection.GetType() != typeof(BasicFireSpell))){
+            if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
                 spellSelection.particleSystem = fireParticles;
             }else{
@@ -108,7 +108,7 @@ namespace ReDesign
 
         public void SelectIceSpell(){
             BasicIceSpell iceSpell = new BasicIceSpell();
-            if(iceSpell.ManaCost <= manaSystem.Value && (spellSelection == null || spellSelection.GetType() != typeof(BasicIceSpell))){
+            if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;
                 spellSelection.particleSystem = iceParticles;
             }else{
