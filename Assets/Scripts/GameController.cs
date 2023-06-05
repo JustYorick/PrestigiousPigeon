@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour{
         // Make sure the game controller won't be destroyed
         DontDestroyOnLoad(gameObject);
 
+
+        Time.timeScale = 1;
         // Load the scene
         SceneManager.LoadScene(sceneName);
     }
@@ -42,5 +44,20 @@ public class GameController : MonoBehaviour{
             musicVolume = PlayerPrefs.GetFloat("MusicVolume");
             effectVolume = PlayerPrefs.GetFloat("EffectVolume");
         }
+    }
+    
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("prevLevel");
+        PlayerPrefs.DeleteKey("levelsBeaten");
+    }
+    
+    public void ContinueLevel()
+    {
+        // save the current scene as the previously beaten level
+        PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+
+        SceneManager.LoadScene("LevelSelect");
     }
 }

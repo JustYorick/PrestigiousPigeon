@@ -8,7 +8,6 @@ public class EntityAnimator : MonoBehaviour
     void Awake()
     {
         _animator = GetComponent<Animator>();
-        Debug.Log(_animator);
     }
 
     void Start()
@@ -25,7 +24,6 @@ public class EntityAnimator : MonoBehaviour
     {
         if (_animator.GetBool("isWalking"))
         {
-            Debug.Log("isWalking");
             _animator.Play("Walking");
             _animator.SetBool("isWalking", false);
 
@@ -33,7 +31,6 @@ public class EntityAnimator : MonoBehaviour
 
         if (_animator.GetBool("isHit"))
         {
-            Debug.Log("isHit");
 
             _animator.Play("Hit");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
@@ -44,7 +41,6 @@ public class EntityAnimator : MonoBehaviour
         
         if (_animator.GetBool("isAttacking"))
         {
-            Debug.Log("isAttacking");
 
             _animator.Play("Attacking");                
             _animator.SetBool("isAttacking", false);
@@ -53,7 +49,6 @@ public class EntityAnimator : MonoBehaviour
 
         if (_animator.GetBool("isDead"))
         {
-            Debug.Log("Dead");
 
             _animator.Play("Death");
         }

@@ -68,8 +68,11 @@ public class PlayerAnimator : MonoBehaviour
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
-
+            }
+            Animator.SetBool("hasCasted", true);
         }
         else if (IsIceCasted)
         {
@@ -77,13 +80,23 @@ public class PlayerAnimator : MonoBehaviour
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("iceCasted", false);
                 ChangeButton(true);
-
+            }
+            Animator.SetBool("hasCasted", true);
         }
 
-        if (IsHit)
+        if (IsHit && !IsPlayerDead)
         {
             Animator.Play("TakeDamage");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                if (!IsPlayerDead)
+                {
+                    Animator.SetBool("isHit", false);
+                }
+            }
         }
 
         if (IsPlayerDead)
