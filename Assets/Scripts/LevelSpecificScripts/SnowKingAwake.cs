@@ -23,13 +23,14 @@ public class SnowKingAwake : MonoBehaviour
 
     public void pillardestroyed(){
         pillars += 1;
+
         if (pillars == 4){
             AllPillarsDestroyed = true;
             GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.identity);
             g.transform.parent = Layer.transform;
             //SnowKingSequence
             pillars = 0;
-           WorldController.Instance.addObstacle(g);
+            WorldController.Instance.addObstacle(g);
         }
     }
 }
