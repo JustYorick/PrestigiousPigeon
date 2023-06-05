@@ -59,7 +59,6 @@ namespace ReDesign
         {
             FillEntityList();
             showGameOver();
-            Debug.Log("no of enemies: "+ _entities.Count);
             if (_turnPart < _entities.Count && !gameOver)
             {
                 Debug.Log("turnpart:" + _turnPart);
