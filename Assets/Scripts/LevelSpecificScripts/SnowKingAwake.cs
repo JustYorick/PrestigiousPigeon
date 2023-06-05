@@ -6,7 +6,10 @@ namespace ReDesign{
 public class SnowKingAwake : MonoBehaviour
 {
     public bool AllPillarsDestroyed = false;
-    private int pillars = 0;
+    private int pillars = 3;
+    [SerializeField] GameObject SnowBoss;
+    [SerializeField] GameObject Layer;
+    //[SerializeField] private List<GameObject> Icicles = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -16,14 +19,17 @@ public class SnowKingAwake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pillars == 4){
-            AllPillarsDestroyed = true;
-            //SnowKingSequence
-        }
     }
 
     public void pillardestroyed(){
         pillars += 1;
+        if (pillars == 4){
+            AllPillarsDestroyed = true;
+            GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.identity);
+            g.transform.parent = Layer.transform;
+            //SnowKingSequence
+            pillars = 0;
+        }
     }
 }
 }

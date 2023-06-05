@@ -59,6 +59,7 @@ namespace ReDesign
         {
             FillEntityList();
             showGameOver();
+            Debug.Log("no of enemies: "+ _entities.Count);
             if (_turnPart < _entities.Count && !gameOver)
             {
                 Debug.Log("turnpart:" + _turnPart);
@@ -107,7 +108,7 @@ namespace ReDesign
                     }
                     break;
                 // case "Level2Map":
-                //     if (WorldController.getEntities().Where(e => e.name.Contains("Pillar")).Count() == 0)
+                //     if (WorldController.getEntities().Where(e => e.name.Contains("Snow")).Count() == 0)
                 //     {
                 //         _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 2!";
                 //         gameOver = true;               

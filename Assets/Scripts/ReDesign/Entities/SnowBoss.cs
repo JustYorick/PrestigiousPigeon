@@ -57,7 +57,7 @@ namespace ReDesign.Entities
                 StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
-            attacking = false;
+            //attacking = false;
             StopCoroutine(EnemyRotateToAttack());
         }
     }

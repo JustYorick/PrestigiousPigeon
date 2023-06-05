@@ -31,6 +31,7 @@ public class EnvironmentEffect : MonoBehaviour
     {
         ChangeWaterTilesToIce(pathNodes);
         ChangePillarToNothing(pathNodes);
+        ChangeGraveToNothing(pathNodes);
     }
 
     // Ice
@@ -52,6 +53,7 @@ public class EnvironmentEffect : MonoBehaviour
         }
     }
 
+    // Ice
     private void ChangePillarToNothing(List<DefaultTile> pathNodes)
     {
         foreach (DefaultTile pn in pathNodes)
@@ -65,6 +67,26 @@ public class EnvironmentEffect : MonoBehaviour
                 WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
                 Destroy(tempTile.GameObject);
                 tempTile.GameObject = null;
+            }
+        }
+    }
+
+    // Ice
+    private void ChangeGraveToNothing(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("grave"))
+            {
+                WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+                WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
+                Destroy(tempTile.GameObject);
+                tempTile.GameObject = null;
+
+                //spawn skeleton (?)
             }
         }
     }

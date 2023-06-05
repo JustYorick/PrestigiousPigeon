@@ -20,8 +20,11 @@ public class PillarBehaviour : MonoBehaviour
 
     void OnDestroy()
     {
-        TriggerOnDestroy.GetComponent<SnowKingAwake>().pillardestroyed();
-        // Spawns (more) Skeletons/Liches?
+        if (TriggerOnDestroy.GetComponent<SnowKingAwake>() != null){
+            TriggerOnDestroy.GetComponent<SnowKingAwake>().pillardestroyed();
+            // Spawns (more) Skeletons/Liches?
+        }
+        
     }
 }
 }
