@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(RectTransform), typeof(Button))]
 public class ActionButton : MonoBehaviour{
@@ -14,15 +15,18 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private Vector2 widePosition;
     [SerializeField] private Vector2 wideSize;
     [SerializeField] private Texture2D wideTexture;
-
-    [Header("Other buttons")]
+    [Header("")]
     [SerializeField] private ActionButton[] buttons;
-
     [field:SerializeField] public bool active{get; private set;} = false;
+    [Header("Key binding")]
     [SerializeField] private KeyCode keyBinding;
     [SerializeField] private RectTransform bindingTextTransform;
     [SerializeField] private Vector2 narrowBindingPosition;
     [SerializeField] private Vector2 wideBindingPosition;
+    [Header("Slow call")]
+    [SerializeField] private int requiredConfirmations = 1;
+    private int confirmations = 0;
+    [SerializeField] private UnityEvent onConfirm = new UnityEvent();
     private RawImage image;
     private Button button;
     private RectTransform rectTransform;
@@ -75,18 +79,29 @@ public class ActionButton : MonoBehaviour{
     }
 
     public void Activate(){
-        // Activate the button, if it's currently inactive
-        if(!active){
-            MakeWide();
+        // Register the click event as a confirmation
+        confirmations++;
+
+        // Make the button wide
+        MakeWide();
+
+        // If the button is not active and the player has confirmed they want to activate the action
+        if(!active && confirmations >= requiredConfirmations){
+            // Activate the button
             active = true;
+
+            // Reset the confirmation count
+            confirmations = 0;
+
+            // Call the slow-call functions
+            onConfirm.Invoke();
         }
     }
 
     public void Deactivate(){
-        // Deactivate the button, if it's currently active
-        if(active){
-            MakeNarrow();
-            active = false;
-        }
+        // Deactivate the button
+        MakeNarrow();
+        active = false;
+        confirmations = 0;
     }
 }

@@ -16451,6 +16451,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 601802096}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &602773661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 397162538507337337, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+  m_PrefabInstance: {fileID: 1183113228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &607084470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34833,30 +34838,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 397162536590043373, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    - target: {fileID: 397162536590043377, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: onConfirm.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1931783221}
-    - target: {fileID: 397162536590043373, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: EndTurn
-      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1686651853}
-    - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectFireSpell
-      objectReference: {fileID: 0}
     - target: {fileID: 397162538102416884, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1686651853}
-    - target: {fileID: 397162538102416884, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectIceSpell
-      objectReference: {fileID: 0}
     - target: {fileID: 397162538507337337, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_Name
       value: GameUI
@@ -34989,39 +34982,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7199afb2897d897b393e8aca2bb35249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1183113233 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162536665899878, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 1183113228}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1183113234 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162537623658180, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 1183113228}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1183113235 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 397162537160717400, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-  m_PrefabInstance: {fileID: 1183113228}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1183113236 stripped
@@ -49099,9 +49059,6 @@ MonoBehaviour:
   SelectorMap: {fileID: 1607830966}
   fireParticles: {fileID: 1677140986}
   iceParticles: {fileID: 92662506}
-  entityTitleText: {fileID: 1183113235}
-  entityHpText: {fileID: 1183113234}
-  entityMoveRangeText: {fileID: 1183113233}
   spellMenu: {fileID: 1183113237}
 --- !u!4 &1686651854
 Transform:
@@ -55809,6 +55766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edbd3d3f457848a58973940a9504d5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUI: {fileID: 602773661}
   gameOverEvent:
     m_PersistentCalls:
       m_Calls: []
