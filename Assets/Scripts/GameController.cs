@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour{
         // Make sure the game controller won't be destroyed
         DontDestroyOnLoad(gameObject);
 
+
+        Time.timeScale = 1;
         // Load the scene
         SceneManager.LoadScene(sceneName);
     }

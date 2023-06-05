@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 209895922}
   - component: {fileID: 209895921}
   - component: {fileID: 209895923}
+  - component: {fileID: 209895924}
   m_Layer: 5
   m_Name: Level2MapButton
   m_TagString: Untagged
@@ -151,7 +152,7 @@ RectTransform:
   m_GameObject: {fileID: 209895918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2321537, y: 1.3789124, z: 1.3789124}
+  m_LocalScale: {x: 0.63436, y: 3.7678783, z: 3.7678783}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1194687145}
@@ -160,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121.5, y: -273.1}
+  m_AnchoredPosition: {x: -157.6, y: -271.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &209895921
@@ -195,7 +196,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: f179fdd77b78cf240aca432fc9d5e99b, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: a61168ae0323fb04db5af665feaca269, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03a82480976b902488ab2c6c9fcb04cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0c7212ec78d38c4a829edbddf8680ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -257,6 +258,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &209895924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209895918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e32cdca7963704ea0f07a106a36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &220676292
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +462,7 @@ GameObject:
   - component: {fileID: 584024507}
   - component: {fileID: 584024506}
   - component: {fileID: 584024508}
+  - component: {fileID: 584024509}
   m_Layer: 5
   m_Name: Level3MapButton
   m_TagString: Untagged
@@ -465,7 +479,7 @@ RectTransform:
   m_GameObject: {fileID: 584024503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2321537, y: 1.3789124, z: 1.3789124}
+  m_LocalScale: {x: 0.63436, y: 3.7678783, z: 3.7678783}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 993083343}
@@ -474,7 +488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65.2, y: -193.2}
+  m_AnchoredPosition: {x: 60.3, y: -176.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584024506
@@ -509,7 +523,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: 78c955b343bbd4c44a4d484bcb6d70ae, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 43d24eb19bfe72146942a412e9872baf, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -561,7 +575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 837e9b54ffed40340860bb19eb9437fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd4eb187a7db0b1498d0b5ca0d5fb2c2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -571,6 +585,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &584024509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584024503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e32cdca7963704ea0f07a106a36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &731896795
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +940,7 @@ GameObject:
   - component: {fileID: 989796707}
   - component: {fileID: 989796705}
   - component: {fileID: 989796708}
+  - component: {fileID: 989796709}
   m_Layer: 5
   m_Name: TutorialWithTerrainMapButton
   m_TagString: Untagged
@@ -930,7 +957,7 @@ RectTransform:
   m_GameObject: {fileID: 989796703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2321537, y: 1.3789124, z: 1.3789124}
+  m_LocalScale: {x: 0.63436, y: 3.7678783, z: 3.7678783}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 731896796}
@@ -939,7 +966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -289.4, y: -83.6}
+  m_AnchoredPosition: {x: -294.6, y: -197.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989796705
@@ -974,7 +1001,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: 0c187f46dc832304fb14019fa36fe8f2, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 6be49a7b1967c044c8d030a6895b76ca, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1026,7 +1053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b908767992540c342925ddba0d4ac0d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 72e908d917819e942be46b0c954a3e37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1036,6 +1063,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &989796709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989796703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e32cdca7963704ea0f07a106a36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &993083342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,6 +1617,7 @@ GameObject:
   - component: {fileID: 1617145010}
   - component: {fileID: 1617145009}
   - component: {fileID: 1617145011}
+  - component: {fileID: 1617145012}
   m_Layer: 5
   m_Name: Level1MapButton
   m_TagString: Untagged
@@ -1594,7 +1634,7 @@ RectTransform:
   m_GameObject: {fileID: 1617145006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2321537, y: 1.3789124, z: 1.3789124}
+  m_LocalScale: {x: 0.63436, y: 3.7678783, z: 3.7678783}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1056915712}
@@ -1603,7 +1643,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -177.3, y: -176.4}
+  m_AnchoredPosition: {x: -115.3, y: -39.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617145009
@@ -1638,7 +1678,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: 5cbd86c97c503b24980415d706682f33, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: ceac05ffcee9a794580e2db7ba28fbbb, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1690,7 +1730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 54b08600c2207b244934af2b1c63f258, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73a019fe20e076d46bc1e23a581b0748, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1700,6 +1740,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1617145012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617145006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e32cdca7963704ea0f07a106a36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726859421
 GameObject:
   m_ObjectHideFlags: 0

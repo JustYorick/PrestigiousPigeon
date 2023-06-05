@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 343, y: 184}
+  m_AnchoredPosition: {x: 366, y: 175}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &139171978
@@ -431,8 +431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 138}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 4.4961, y: 131.30235}
+  m_SizeDelta: {x: 208, y: 56.4774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &156213391
 MonoBehaviour:
@@ -708,12 +708,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "this game for the minor Game Development at THUAS. Our team includes Chris
-    Golemi, Rick de Bruijn, Yorick Schmidt, Davita de Jong, Dani\xEBl den Heijer,
-    Quinten Ringenier, Arman Farahmand, Ibrahim Zoulali, and Michael Scholten - each
-    of us driven by a shared passion for gaming and a diverse range of skills. We're
-    excited to have used our expertise to bring this game to life and can't wait
-    for you to experience it.\n"
+  m_text: 'this game for the minor Game Development at THUAS. Our team includes Chris
+    Golemi, Rick de Bruijn, Yorick Schmidt, Davita de Jong, Daniel den Heijer, Quinten
+    Ringenier, Arman Farahmand, Ibrahim Zoulali, and Michael Scholten - each of us
+    driven by a shared passion for gaming and a diverse range of skills. We''re excited
+    to have used our expertise to bring this game to life and can''t wait for you
+    to experience it.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32670fe4c0a9ffa4d822f8b689cb2f6e, type: 2}
   m_sharedMaterial: {fileID: -6098719992917817688, guid: 32670fe4c0a9ffa4d822f8b689cb2f6e, type: 2}
@@ -2621,7 +2623,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: bbe497ba14bb902419477dd53591b78f, type: 3}
+  m_Texture: {fileID: 2800000, guid: 648c015412dd49d4287b689564ef90ae, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3686,7 +3688,7 @@ RectTransform:
   m_GameObject: {fileID: 1288108862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7424, y: 1.7424, z: 1.7424}
+  m_LocalScale: {x: 2.2402036, y: 2.0666606, z: 1.7424}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 156213390}
@@ -5612,8 +5614,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.1
-  m_fontSizeBase: 17.1
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5648,7 +5650,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 14.524368, y: 0, z: 11.716515, w: 0}
+  m_margin: {x: 12.454041, y: -8.356043, z: 11.698433, w: -7.6816645}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7139,7 +7141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: bbe497ba14bb902419477dd53591b78f, type: 3}
+  m_Texture: {fileID: 2800000, guid: a328370fc3fed1b4d8179819aa866935, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7306,8 +7308,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7446,15 +7448,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 500a8bd65494a7247aafeda249a6ae39, type: 2}
+  m_sharedMaterial: {fileID: 6743917776716949236, guid: 500a8bd65494a7247aafeda249a6ae39, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7556,7 +7558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317.99997, y: 146.30995}
+  m_AnchoredPosition: {x: 317.99997, y: 175}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6686418169187847024
@@ -7644,8 +7646,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
