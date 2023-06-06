@@ -38,7 +38,7 @@ namespace ReDesign.Entities
 
         public override void Update()
         {
-            if (_animator.GetBool("hasCasted"))
+            if (_animator.GetBool("hasCasted") && MouseController.spellSelection == null)
             {
                 RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
             }
@@ -47,8 +47,6 @@ namespace ReDesign.Entities
         public override void NextAction()
         {
             StateController.ChangeState(GameState.PlayerTurn);
-            Debug.Log("im a player");
-            //StateController.ChangeState(GameState.EndTurn);
             _manaSystem.StartTurn();
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }

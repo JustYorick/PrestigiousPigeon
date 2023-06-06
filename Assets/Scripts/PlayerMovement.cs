@@ -67,12 +67,6 @@ public class PlayerMovement : MonoBehaviour
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
             manaSystem.UseMana(pathCost);
-
-            //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
-            //foreach (DefaultTile dt in list)
-            //{
-            //    Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
-            //}
         }
     }
 
@@ -137,9 +131,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
-        // Don't draw a path, if the movement button is inactive or the path drawing is turned off
-        if(!movementButton.active || !predrawPath || TurnController.gameOver || Math.Abs(WorldController.getPlayerTile().XPos - FindNearestXYPathNode(targetLocation, pathNodesMap).XPos) > manaSystem.GetMana() || Math.Abs(WorldController.getPlayerTile().YPos - FindNearestXYPathNode(targetLocation, pathNodesMap).YPos) > manaSystem.GetMana())
+        // Don't draw a path, if the movement button is inactive, the path drawing is turned off, or a spell is selected.
+        if(!movementButton.active || !predrawPath || TurnController.gameOver || Math.Abs(WorldController.getPlayerTile().XPos - FindNearestXYPathNode(targetLocation, pathNodesMap).XPos) > manaSystem.GetMana() || Math.Abs(WorldController.getPlayerTile().YPos - FindNearestXYPathNode(targetLocation, pathNodesMap).YPos) > manaSystem.GetMana() || MouseController.spellSelection != null)
         {
+            RangeTileTool.Instance.clearTileMap(walkingLayer);
             return;
         }
         if(predrawnPath != null){
