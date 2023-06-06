@@ -27,7 +27,7 @@ public class SnowKingAwake : MonoBehaviour
     public void pillardestroyed(Vector3 pos){
         pillars += 1;
 
-        GameObject h = Instantiate(Skeleton, pos, Quaternion.identity);
+        GameObject h = Instantiate(Skeleton, pos, Quaternion.Euler(-90, 0, 0));
         if (Layer.activeInHierarchy) {
             h.transform.parent = Layer.transform;
         }
@@ -42,7 +42,8 @@ public class SnowKingAwake : MonoBehaviour
             WorldController.Instance.addObstacle(g);
 
             pillars = 0;
-            snow.Play(true);
+            if(snow != null){snow.Play(true);}
+            
             
         }
     }
