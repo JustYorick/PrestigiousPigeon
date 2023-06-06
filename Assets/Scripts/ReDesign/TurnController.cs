@@ -43,6 +43,8 @@ namespace ReDesign
                 _instance = this;
             }
 
+            _turnPart = 0;
+            TurnCount = 0;
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
