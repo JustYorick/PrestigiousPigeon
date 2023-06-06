@@ -17,7 +17,7 @@ namespace ReDesign
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
-        private AttacksAndSpells spellSelection = null;
+        public static AttacksAndSpells spellSelection = null;
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
@@ -66,6 +66,7 @@ namespace ReDesign
                 }
                 spellSelection = null;
                 spellMenu.enabled = false;
+                RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
             }
@@ -97,6 +98,7 @@ namespace ReDesign
         }
         
         public void SelectFireSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             BasicFireSpell fireSpell = new BasicFireSpell();
             if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
@@ -107,6 +109,7 @@ namespace ReDesign
         }
 
         public void SelectIceSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             BasicIceSpell iceSpell = new BasicIceSpell();
             if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;

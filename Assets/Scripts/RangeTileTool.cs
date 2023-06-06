@@ -12,7 +12,7 @@ public class RangeTileTool : MonoBehaviour
 {
     [SerializeField] private Tilemap tileMap;
     
-    [SerializeField] private Tilemap rangeTileMap;
+    [SerializeField] public Tilemap rangeTileMap;
     
     [SerializeField] private RuleTile tile;
 

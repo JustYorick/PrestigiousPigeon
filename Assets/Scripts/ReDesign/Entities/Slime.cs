@@ -44,7 +44,6 @@ namespace ReDesign.Entities
                 .FirstOrDefault();
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
-            Debug.Log("" + range);
             if (range < SightRange)
             {
                 MoveToPlayer(this.MoveRange, _slimeAnimator);
