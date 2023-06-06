@@ -73,11 +73,11 @@ namespace ReDesign
             {
                 if (_turnPart == 0)
                 {
-                    collapseableUI.ShowPlayerTurnUI(); 
+                    collapseableUI?.ShowPlayerTurnUI(); 
                 }
                 if (_turnPart == 1)
                 {
-                    collapseableUI.ShowEnemyTurnUI();
+                    collapseableUI?.ShowEnemyTurnUI();
                 }
                 
                 _entities[_turnPart].NextAction();
