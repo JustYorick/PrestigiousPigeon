@@ -26,7 +26,7 @@ public class SnowKingAwake : MonoBehaviour
 
     public void pillardestroyed(Vector3 pos){
         pillars += 1;
-
+        if(!this.gameObject.scene.isLoaded) return;
         GameObject h = Instantiate(Skeleton, pos, Quaternion.Euler(-90, 0, 0));
         if (Layer.activeInHierarchy) {
             h.transform.parent = Layer.transform;
