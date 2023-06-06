@@ -37,7 +37,7 @@ public class EnvironmentEffect : MonoBehaviour
     }
 
     // Ice
-    private void ChangeWaterTilesToIce(List<DefaultTile> pathNodes)
+    public void ChangeWaterTilesToIce(List<DefaultTile> pathNodes)
     {
         List<DefaultTile> tiles = WorldController.Instance.BaseLayer;
         foreach (DefaultTile pn in pathNodes)

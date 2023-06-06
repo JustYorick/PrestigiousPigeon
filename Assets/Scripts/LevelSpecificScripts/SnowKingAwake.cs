@@ -50,9 +50,7 @@ public class SnowKingAwake : MonoBehaviour
             if(snow != null){snow.Play(true);}
             
             // freeze river
-
-            //ChangeWaterTilesToIce(List<DefaultTile> Layer);
-            //WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(WorldController.ObstacleLayer);
+            WorldController.Instance.GetComponent<EnvironmentEffect>().ChangeWaterTilesToIce(WorldController.Instance.BaseLayer);
 
         }
     }
