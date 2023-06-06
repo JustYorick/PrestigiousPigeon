@@ -7175,6 +7175,7 @@ GameObject:
   - component: {fileID: 633907939}
   - component: {fileID: 633907938}
   - component: {fileID: 633907937}
+  - component: {fileID: 633907942}
   m_Layer: 5
   m_Name: SpellButton
   m_TagString: Untagged
@@ -7232,7 +7233,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -7318,6 +7319,20 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &633907942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633907936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88a29e2bae917a47bb6eabe8204a253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manaSystem: {fileID: 1033115211}
+  GrayWhenBelow: 2
 --- !u!1 &638597160
 GameObject:
   m_ObjectHideFlags: 0
@@ -15008,6 +15023,7 @@ GameObject:
   - component: {fileID: 1194501317}
   - component: {fileID: 1194501316}
   - component: {fileID: 1194501315}
+  - component: {fileID: 1194501319}
   m_Layer: 5
   m_Name: MovementButton
   m_TagString: Untagged
@@ -15085,7 +15101,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -15151,6 +15167,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194501313}
   m_CullTransparentMesh: 1
+--- !u!114 &1194501319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194501313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88a29e2bae917a47bb6eabe8204a253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manaSystem: {fileID: 1033115211}
+  GrayWhenBelow: 1
 --- !u!1001 &1200634655
 PrefabInstance:
   m_ObjectHideFlags: 0
