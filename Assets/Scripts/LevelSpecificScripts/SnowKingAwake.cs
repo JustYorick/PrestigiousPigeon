@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using EnvironmentScripts.EnvironmentEffect;
 
 namespace ReDesign{
 public class SnowKingAwake : MonoBehaviour
@@ -48,7 +49,11 @@ public class SnowKingAwake : MonoBehaviour
             pillars = 0;
             if(snow != null){snow.Play(true);}
             
-            
+            // freeze river
+
+            //ChangeWaterTilesToIce(List<DefaultTile> Layer);
+            //WorldController.Instance.GetComponent<EnvironmentEffect>().FireEnvironmentEffects(WorldController.ObstacleLayer);
+
         }
     }
 }
