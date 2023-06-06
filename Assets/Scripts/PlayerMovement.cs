@@ -67,12 +67,6 @@ public class PlayerMovement : MonoBehaviour
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
             manaSystem.UseMana(pathCost);
-
-            //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
-            //foreach (DefaultTile dt in list)
-            //{
-            //    Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
-            //}
         }
     }
 
