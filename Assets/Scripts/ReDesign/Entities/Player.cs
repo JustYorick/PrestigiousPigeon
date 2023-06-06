@@ -9,6 +9,7 @@ namespace ReDesign.Entities
     {
         private static Transform player;
         private static Vector3 targetLocation;
+        public static Animator _animator;
         [SerializeField] private ManaSystem _manaSystem;
         
         public override int SightRange { get; }
@@ -22,19 +23,25 @@ namespace ReDesign.Entities
 
         public virtual void Awake()
         {
+            _animator = GetComponent<Animator>();
             int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             player = transform;
         }
 
-        private void Start()
+        public override void Start()
         {
+            if (_animator == null) _animator = GetComponent<Animator>();
+            
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
         }
 
         public override void Update()
         {
-            //Player needs to override update since the entity update will end the players turn at the en of movement.
+            if (_animator.GetBool("hasCasted"))
+            {
+                RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            }
         }
 
         public override void NextAction()
@@ -54,7 +61,7 @@ namespace ReDesign.Entities
 
         public override void Attack()
         {
-            attacking = false;
+
         }
 
         public void EndTurn() => StateController.ChangeState(GameState.EndTurn);

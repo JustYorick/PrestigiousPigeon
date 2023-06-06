@@ -46,8 +46,8 @@ namespace ReDesign
             Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
 
             // Move the camera
-            transform.position += moveVector * (moveSpeed * Time.fixedDeltaTime);
-            transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.fixedDeltaTime);            
+            transform.position += moveVector * (moveSpeed * Time.deltaTime);
+            transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);            
             transform.position = new Vector3 
             (
                 Mathf.Clamp (transform.position.x, MinPos.x - ExtraAmountToMove.x, MaxPos.x + ExtraAmountToMove.x), 
