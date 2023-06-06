@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
-    private Canvas _spellMenu;
-    private Button _spellsButton;
-    private Button _moveButton;
+    [SerializeField] private Canvas _spellMenu;
+    [SerializeField] private Button _spellsButton;
+    [SerializeField] private Button _moveButton;
 
     private Animator Animator
     {
@@ -67,27 +67,36 @@ public class PlayerAnimator : MonoBehaviour
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f){
-                _animator.SetBool("fireCasted", false);
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
             }
-
+            Animator.SetBool("hasCasted", true);
         }
         else if (IsIceCasted)
         {
             ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f){
-                _animator.SetBool("iceCasted", false);
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("iceCasted", false);
                 ChangeButton(true);
             }
-
+            Animator.SetBool("hasCasted", true);
         }
 
-        if (IsHit)
+        if (IsHit && !IsPlayerDead)
         {
             Animator.Play("TakeDamage");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                if (!IsPlayerDead)
+                {
+                    Animator.SetBool("isHit", false);
+                }
+            }
         }
 
         if (IsPlayerDead)

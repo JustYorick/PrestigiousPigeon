@@ -32,7 +32,7 @@ public class ActionButton : MonoBehaviour{
     private RectTransform rectTransform;
     private Canvas spellMenu;
     
-    void Start(){
+    void Awake(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<RawImage>();

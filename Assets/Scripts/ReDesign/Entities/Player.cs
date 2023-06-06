@@ -31,13 +31,13 @@ namespace ReDesign.Entities
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             player = transform;
             _healthBar.maxValue = MaxHealth;
-            _healthBar.Fill();
         }
 
         public override void Start()
         {
             if (_animator == null) _animator = GetComponent<Animator>();
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
+            _healthBar.Fill();
         }
 
         public override void Update()
