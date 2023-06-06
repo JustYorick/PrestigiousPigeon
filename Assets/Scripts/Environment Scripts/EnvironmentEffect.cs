@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using ReDesign;
+using ReDesign.Entities;
 
+namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
     // Tiles
@@ -125,6 +127,20 @@ public class EnvironmentEffect : MonoBehaviour
                 WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
                 Destroy(tempTile.GameObject);
                 tempTile.GameObject = null;
+
+                // Entities around burning tree take damage
+                for (int i = -1; i < 2; i++){
+                    for (int j = -1; j < 2; j++){
+                        DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
+                        {
+                            Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
+                            enemy.ReceiveDamage(5);
+                        }
+                    }
+                }
+
+                
             }
              
         }
@@ -155,4 +171,5 @@ public class EnvironmentEffect : MonoBehaviour
         GameObject tileObject = tiles.Where(t => pn.XPos == t.XPos && pn.YPos == t.YPos).FirstOrDefault().GameObject;
         return tileObject;
     }
+}
 }
