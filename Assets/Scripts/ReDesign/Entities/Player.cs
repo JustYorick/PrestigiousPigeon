@@ -41,6 +41,7 @@ namespace ReDesign.Entities
             if (_animator.GetBool("hasCasted") && MouseController.spellSelection == null)
             {
                 RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+                _animator.SetBool("hasCasted", false);
             }
         }
 
