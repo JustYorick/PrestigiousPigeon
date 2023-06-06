@@ -69,6 +69,7 @@ namespace ReDesign
                     manaSystem.UseMana(spellSelection.ManaCost);
                 }
                 spellSelection = null;
+                RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
             }
@@ -100,11 +101,13 @@ namespace ReDesign
         }
         
         public void SelectFireSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             spellSelection = new BasicFireSpell();
             spellSelection.particleSystem = fireParticles;
         }
 
         public void SelectIceSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             spellSelection = new BasicIceSpell();
             spellSelection.particleSystem = iceParticles;
         }
