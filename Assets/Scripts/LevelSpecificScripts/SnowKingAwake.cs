@@ -28,14 +28,19 @@ public class SnowKingAwake : MonoBehaviour
         pillars += 1;
 
         GameObject h = Instantiate(Skeleton, pos, Quaternion.identity);
-        h.transform.parent = Layer.transform;
+        if (Layer.activeInHierarchy) {
+            h.transform.parent = Layer.transform;
+        }
         WorldController.Instance.addObstacle(h);
 
         if (pillars == 4){
             AllPillarsDestroyed = true;
             GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.identity);
-            g.transform.parent = Layer.transform;
+            if (Layer.activeInHierarchy) {
+                g.transform.parent = Layer.transform;
+            }
             WorldController.Instance.addObstacle(g);
+
             pillars = 0;
             snow.Play(true);
             

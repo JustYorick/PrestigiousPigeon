@@ -21,8 +21,8 @@ public class PillarBehaviour : MonoBehaviour
     void OnDestroy()
     {
 
-        if (TriggerOnDestroy.GetComponent<SnowKingAwake>() != null){
-            TriggerOnDestroy.GetComponent<SnowKingAwake>().pillardestroyed(transform.position + new Vector3(0, 0, 1));
+        if (TriggerOnDestroy != null){
+            TriggerOnDestroy.GetComponent<SnowKingAwake>().pillardestroyed(transform.position + new Vector3(0, -1, 1));
         }
         
     }
