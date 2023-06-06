@@ -17,7 +17,7 @@ namespace ReDesign
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
         public static MouseController Instance { get { return _instance; } }
-        private AttacksAndSpells spellSelection = null;
+        public static AttacksAndSpells spellSelection = null;
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
