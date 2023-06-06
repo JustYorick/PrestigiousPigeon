@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIDisable : MonoBehaviour
 {
-    [SerializeField] private ManaSystem _manaSystem;
+    [SerializeField] private StatusBar _manaSystem;
     [SerializeField] private int GrayWhenBelow;
     private Button button;
     private ActionButton actionButton;
@@ -21,7 +21,7 @@ public class UIDisable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_manaSystem.GetMana() < GrayWhenBelow) 
+        if (_manaSystem.Value < GrayWhenBelow) 
         {
             button.interactable = false;
             actionButton.Deactivate();

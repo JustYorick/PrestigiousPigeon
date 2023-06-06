@@ -16,8 +16,6 @@ public class RangeTileTool : MonoBehaviour
     
     [SerializeField] private RuleTile tile;
 
-    [SerializeField] private ManaSystem manaSystem;
-    
     public static RangeTileTool Instance { get; private set; }
 
     private void Awake()

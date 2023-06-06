@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
-    [SerializeField] private ManaSystem manaSystem;
+    [SerializeField] private StatusBar manaSystem;
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
         int pathCost = path == null? 0 : path.Count - 1;
 
-        if (path != null && pathCost <= manaSystem.GetMana())
+        if (path != null && pathCost <= manaSystem.Value)
         {
             predrawPath = false;
             DrawPath(path);
@@ -66,7 +66,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
-            manaSystem.UseMana(pathCost);
+            manaSystem.Value -= pathCost;
+
+            //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
+            //foreach (DefaultTile dt in list)
+            //{
+            //    Debug.Log("x: " + dt.XPos + "y: " + dt.YPos);
+            //}
         }
     }
 
@@ -102,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         predrawPath = true;
         if (StateController.currentState == GameState.PlayerTurn)
         {
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.GetMana());
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.Value);
         }
     }
 
@@ -131,8 +137,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
-        // Don't draw a path, if the movement button is inactive, the path drawing is turned off, or a spell is selected.
-        if(!movementButton.active || !predrawPath || TurnController.gameOver || Math.Abs(WorldController.getPlayerTile().XPos - FindNearestXYPathNode(targetLocation, pathNodesMap).XPos) > manaSystem.GetMana() || Math.Abs(WorldController.getPlayerTile().YPos - FindNearestXYPathNode(targetLocation, pathNodesMap).YPos) > manaSystem.GetMana() || MouseController.spellSelection != null)
+        // Don't draw a path, if the movement button is inactive or the path drawing is turned off
+        if(!movementButton.active || !predrawPath || TurnController.gameOver || Math.Abs(WorldController.getPlayerTile().XPos - FindNearestXYPathNode(targetLocation, pathNodesMap).XPos) > manaSystem.Value || Math.Abs(WorldController.getPlayerTile().YPos - FindNearestXYPathNode(targetLocation, pathNodesMap).YPos) > manaSystem.Value || MouseController.spellSelection != null)
         {
             RangeTileTool.Instance.clearTileMap(walkingLayer);
             return;
@@ -155,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
 
-        if (path != null && path.Count - 1 <= manaSystem.GetMana()){
+        if (path != null && path.Count - 1 <= manaSystem.Value){
             DrawPath(path);
         }
         predrawnPath = path;

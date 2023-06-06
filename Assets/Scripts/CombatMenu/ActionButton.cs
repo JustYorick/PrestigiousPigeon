@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(RectTransform), typeof(Button))]
 public class ActionButton : MonoBehaviour{
@@ -9,28 +10,36 @@ public class ActionButton : MonoBehaviour{
     [SerializeField] private Vector2 narrowPosition;
     [SerializeField] private Vector2 narrowSize;
     [SerializeField] private Texture2D narrowTexture;
-    [SerializeField] private Vector2 narrowImageScale;
 
     [Header("Wide Button")]
     [SerializeField] private Vector2 widePosition;
     [SerializeField] private Vector2 wideSize;
     [SerializeField] private Texture2D wideTexture;
-    [SerializeField] private Vector2 wideImageScale;
-
-    [Header("Other buttons")]
+    [Header("")]
     [SerializeField] private ActionButton[] buttons;
-
     [field:SerializeField] public bool active{get; private set;} = false;
-    [field:SerializeField] private KeyCode keyBinding;
+    [Header("Key binding")]
+    [SerializeField] private KeyCode keyBinding;
+    [SerializeField] private RectTransform bindingTextTransform;
+    [SerializeField] private Vector2 narrowBindingPosition;
+    [SerializeField] private Vector2 wideBindingPosition;
+    [Header("Slow call")]
+    [SerializeField] private int requiredConfirmations = 1;
+    private int confirmations = 0;
+    [SerializeField] private UnityEvent onConfirm = new UnityEvent();
     private RawImage image;
     private Button button;
     private RectTransform rectTransform;
+    private Canvas spellMenu;
     
-    void Start(){
+    void Awake(){
         // Retrieve the rect transform and button of the current object
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<RawImage>();
         button = GetComponent<Button>();
+
+        // Find the spell menu canvas
+        spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
 
         // Add a listener for the OnClick of the button, to make the button wide
         button.onClick.AddListener(Activate);
@@ -44,7 +53,8 @@ public class ActionButton : MonoBehaviour{
     }
 
     void Update(){
-        if(Input.GetKeyDown(keyBinding)){
+        // Simulate a click event when the keybinding has been pressed and the spellmenu is closed
+        if(Input.GetKeyDown(keyBinding) && !spellMenu.enabled){
             button.onClick.Invoke();
         }
     }
@@ -56,7 +66,6 @@ public class ActionButton : MonoBehaviour{
 
         // Set the correct image
         image.texture = narrowTexture;
-        image.rectTransform.localScale = narrowImageScale;
     }
 
     void MakeWide(){
@@ -71,24 +80,32 @@ public class ActionButton : MonoBehaviour{
 
         // Set the correct image
         image.texture = wideTexture;
-        image.rectTransform.localScale = wideImageScale;
     }
 
-    void Activate(){
-        // Activate the button, if it's currently inactive
-        if(!active){
-            MakeWide();
+    public void Activate(){
+        // Register the click event as a confirmation
+        confirmations++;
+
+        // Make the button wide
+        MakeWide();
+
+        // If the button is not active and the player has confirmed they want to activate the action
+        if(!active && confirmations >= requiredConfirmations){
+            // Activate the button
             active = true;
+
+            // Reset the confirmation count
+            confirmations = 0;
+
+            // Call the slow-call functions
+            onConfirm.Invoke();
         }
     }
 
     public void Deactivate(){
-        // Deactivate the button, if it's currently active
-        if(active){
-            MakeNarrow();
-            active = false;
-        }
+        // Deactivate the button
+        MakeNarrow();
+        active = false;
+        confirmations = 0;
     }
-
-    void OnClick(){}
 }
