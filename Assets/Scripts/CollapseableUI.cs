@@ -8,15 +8,27 @@ public class CollapseableUI : MonoBehaviour
 {
     [SerializeField] private GameObject PlayerTurnUI;
     [SerializeField] private GameObject EnemyTurnUI;
+    private Vector3 PlayerTurnUIDefaultPos;
+    private Vector3 EnemyTurnUIDefaultPos;
+
+    private void Start()
+    {
+        PlayerTurnUIDefaultPos = PlayerTurnUI.transform.position;
+        EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
+    }
 
     public void ShowPlayerTurnUI()
     {
-        StartCoroutine(MoveUpAndDown(170, PlayerTurnUI));
+        StopCoroutine(MoveUpAndDown(170, PlayerTurnUI));
+        PlayerTurnUI.transform.position = PlayerTurnUIDefaultPos;
+        Coroutine a = StartCoroutine(MoveUpAndDown(170, PlayerTurnUI));
     }
     
     public void ShowEnemyTurnUI()
     {
-        StartCoroutine(MoveUpAndDown(170, EnemyTurnUI));
+        StopCoroutine(MoveUpAndDown(170, EnemyTurnUI));
+        EnemyTurnUI.transform.position = EnemyTurnUIDefaultPos;
+         Coroutine b = StartCoroutine(MoveUpAndDown(170, EnemyTurnUI));
     }
 
     IEnumerator MoveUpAndDown(int distance, GameObject uiElement)

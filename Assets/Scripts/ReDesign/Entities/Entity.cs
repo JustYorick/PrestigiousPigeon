@@ -97,8 +97,6 @@ namespace ReDesign.Entities
                 if (path != null)
                 {
                     List<DefaultTile> actualPath = new List<DefaultTile>();
-
-                    Debug.Log("moverange = " + movementRange + " pc " + path.Count);
                     if(movementRange >= path.Count){
                         if (path.Count > 0){
                             movementRange = path.Count-1;
