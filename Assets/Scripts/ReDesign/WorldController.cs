@@ -82,6 +82,12 @@ namespace ReDesign
             }
         }
 
+        public bool checkNode(Vector3 pos){
+            DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(pos.x - item.GameObject.transform.position.x))
+                    .ThenBy(item => Math.Abs(pos.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
+            return resultNode.Walkable;
+        }
+
         public void addObstacle(GameObject child){
                 DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(child.transform.position.x - item.GameObject.transform.position.x))
                     .ThenBy(item => Math.Abs(child.transform.position.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
