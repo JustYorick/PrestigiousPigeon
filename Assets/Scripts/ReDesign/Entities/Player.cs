@@ -46,6 +46,13 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
+            // Move the camera to the player
+            StartCoroutine(CameraController.Instance.MoveSmoothlyTo(new Vector3(
+                transform.position.x,
+                CameraController.Instance.transform.position.y,
+                transform.position.z
+            ), 1f));
+            
             StateController.ChangeState(GameState.PlayerTurn);
             Debug.Log("im a player");
             //StateController.ChangeState(GameState.EndTurn);
