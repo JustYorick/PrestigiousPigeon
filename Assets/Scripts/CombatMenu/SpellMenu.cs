@@ -25,7 +25,7 @@ public class SpellMenu : MonoBehaviour{
 
     public void Open(){
         // Only open the spell menu, if the player has enough mana
-        if(mana.Value > minimumMana){
+        if(mana.Value >= minimumMana){
             canvas.enabled = true;
         }else{
             spellButton.Deactivate();
