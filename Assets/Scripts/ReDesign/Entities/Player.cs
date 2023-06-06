@@ -52,7 +52,8 @@ namespace ReDesign.Entities
         {
             StateController.ChangeState(GameState.PlayerTurn);
             _manaSystem.Fill();
-            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.GetMana());
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), _manaSystem.Value);
+            movementButton.Activate();
         }
 
             
