@@ -22,6 +22,7 @@ namespace ReDesign
         
         [SerializeField] private float rotationSpeed = 100f;
         [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private GameObject playerObject;
         private Vector3 inputMoveDir { get; set; } = Vector3.zero;
         private float rotation { get; set; } = 0.0f;
         private Vector2 MinPos { get; set; } = new Vector2(0f,0f);
@@ -33,6 +34,9 @@ namespace ReDesign
             List<DefaultTile> baseLayer = WorldController.Instance.BaseLayer;
             GameObject firstGameObject = baseLayer.First().GameObject;
             GameObject lastGameObject = baseLayer.Last().GameObject;
+            
+            if(!playerObject)
+                playerObject = GameObject.Find("Player");
 
             Vector3 minimalPosition = firstGameObject.transform.position;
             Vector3 maximalPosition = lastGameObject.transform.position;
@@ -51,9 +55,12 @@ namespace ReDesign
             transform.position = new Vector3 
             (
                 Mathf.Clamp (transform.position.x, MinPos.x - ExtraAmountToMove.x, MaxPos.x + ExtraAmountToMove.x), 
-                0.0f, 
+                transform.position.y, 
                 Mathf.Clamp (transform.position.z, MinPos.y - ExtraAmountToMove.y, MaxPos.y + ExtraAmountToMove.y)
             );
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                transform.position = new Vector3(playerObject.transform.position.x, -1f, playerObject.transform.position.z);
         }
 
         void OnMove(InputValue value){
