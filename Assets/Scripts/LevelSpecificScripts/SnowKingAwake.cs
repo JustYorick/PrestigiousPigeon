@@ -37,6 +37,13 @@ public class SnowKingAwake : MonoBehaviour
             }
             WorldController.Instance.addObstacle(h);
         }
+        if(pillars == 2){
+            // freeze river
+            WorldController.Instance.GetComponent<EnvironmentEffect>().ChangeWaterTilesToIce(WorldController.Instance.BaseLayer);
+        }
+        if(pillars == 3){
+            if(snow != null){snow.Play(true);}
+        }
         // spawn Snow King
         if (pillars == 4){
             AllPillarsDestroyed = true;
@@ -47,11 +54,7 @@ public class SnowKingAwake : MonoBehaviour
             WorldController.Instance.addObstacle(g);
 
             pillars = 0;
-            if(snow != null){snow.Play(true);}
             
-            // freeze river
-            WorldController.Instance.GetComponent<EnvironmentEffect>().ChangeWaterTilesToIce(WorldController.Instance.BaseLayer);
-
         }
     }
 }
