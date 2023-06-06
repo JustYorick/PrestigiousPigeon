@@ -43,7 +43,7 @@ public class InfoBox : MonoBehaviour{
 
     Entity GetEntity(DefaultTile tile){
         // Find the first tile with the same position as the tile the player clicked on
-        GameObject entityTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == tile.XPos && t.YPos == tile.YPos).GameObject;
+        GameObject entityTile = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == tile.XPos && t.YPos == tile.YPos)?.GameObject;
 
         // If no tile was found or the there is no entity on that tile, return null
         if(entityTile == null || !entityTile.CompareTag("Entity")){
