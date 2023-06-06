@@ -1153,10 +1153,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7299537762081790402}
-  - component: {fileID: 3723639334559187896}
-  - component: {fileID: 8301478362983429827}
-  - component: {fileID: 7797186886816439511}
-  - component: {fileID: 359671876369628097}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -1181,73 +1177,6 @@ Transform:
   m_Father: {fileID: 6333559100720780197}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3723639334559187896
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928299377416668024}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c85d44df34c982b4da3f0c104eadcb00, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
---- !u!114 &8301478362983429827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928299377416668024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f61836a4ae246aa81bb147077f53989, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthBar: {fileID: 3465360072325292326}
-  finishedMoving: 0
-  _manaSystem: {fileID: 0}
---- !u!114 &7797186886816439511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928299377416668024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 641274bb340e7d34cb90c1a256e71fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ruleTile: {fileID: 11400000, guid: 7a8692fdc99ac884ebb3ceafef24f699, type: 2}
-  walkingLayer: {fileID: 0}
-  manaSystem: {fileID: 0}
-  predrawPath: 1
-  movementButton: {fileID: 0}
---- !u!114 &359671876369628097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7928299377416668024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d7a0e47a8a489ab1feca454b6bef8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spellMenu: {fileID: 0}
-  _spellsButton: {fileID: 0}
-  _moveButton: {fileID: 0}
 --- !u!1 &8093780867746449860
 GameObject:
   m_ObjectHideFlags: 0
