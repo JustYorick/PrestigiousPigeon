@@ -6,7 +6,7 @@ namespace ReDesign{
 public class SnowKingAwake : MonoBehaviour
 {
     public bool AllPillarsDestroyed = false;
-    private int pillars = 0;
+    private int pillars = 3;
     [SerializeField] GameObject SnowBoss;
     [SerializeField] GameObject Skeleton;
     [SerializeField] GameObject Layer;
@@ -28,18 +28,18 @@ public class SnowKingAwake : MonoBehaviour
         pillars += 1;
 
         if(!this.gameObject.scene.isLoaded) return;
-
-        if(WorldController.Instance.checkNode(pos)){
+        // spawn Skeleton
+        if(WorldController.Instance.checkNode(pos)){           // check if tile occupied
             GameObject h = Instantiate(Skeleton, pos, Quaternion.Euler(-90, 0, 0));
             if (Layer.activeInHierarchy) {
                 h.transform.parent = Layer.transform;
             }
             WorldController.Instance.addObstacle(h);
         }
-
+        // spawn Snow King
         if (pillars == 4){
             AllPillarsDestroyed = true;
-            GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.identity);
+            GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.Euler(-90, 0, 0));
             if (Layer.activeInHierarchy) {
                 g.transform.parent = Layer.transform;
             }
