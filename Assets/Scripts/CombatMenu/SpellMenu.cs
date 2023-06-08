@@ -41,4 +41,10 @@ public class SpellMenu : MonoBehaviour{
         canvas.enabled = false;
         mouseController.DeselectSpell();
     }
+
+    public void OpenIfActivated(){
+        if(spellButton.active){
+            Open();
+        }
+    }
 }
