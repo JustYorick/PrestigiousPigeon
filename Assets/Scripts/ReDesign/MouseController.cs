@@ -21,7 +21,7 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
-        [SerializeField] private Canvas spellMenu;
+        [SerializeField] private SpellMenu spellMenu;
 
         private void Awake()
         {
@@ -65,7 +65,7 @@ namespace ReDesign
                     manaSystem.Value -= spellSelection.ManaCost;
                 }
                 spellSelection = null;
-                spellMenu.enabled = false;
+                spellMenu.Close();
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
