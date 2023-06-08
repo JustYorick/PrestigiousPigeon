@@ -135,13 +135,15 @@ namespace ReDesign
                     gameOver = true;
                     break;
                 case "Level3Map":
-                    if(WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 &&
-                        WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1){
+                    if(TurnCount > 10){
+                        
                         ChangeGameOverUI("You beat Level 3!");
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
-                    }
+                    } //else {
+                    //     Debug.Log(WorldController.Instance.getTiles(0, 0));
+                    // }
                     
                     break;
             }
