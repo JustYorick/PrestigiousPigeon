@@ -135,7 +135,7 @@ namespace ReDesign
                     gameOver = true;
                     break;
                 case "Level3Map":
-                    if(TurnCount > 10){
+                    if(TurnCount > 20){
                         
                         ChangeGameOverUI("You beat Level 3!");
                         _retryButton.SetActive(false);
