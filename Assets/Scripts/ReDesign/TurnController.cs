@@ -106,6 +106,13 @@ namespace ReDesign
                         gameOver = true;               
                     }
                     break;
+                // case "Level2Map":
+                //     if (WorldController.getEntities().Where(e => e.name.Contains("Snow")).Count() == 0)
+                //     {
+                //         _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 2!";
+                //         gameOver = true;               
+                //     }
+                //     break;
             }
 
             if (gameOver)

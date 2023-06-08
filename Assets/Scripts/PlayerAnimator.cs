@@ -1,95 +1,100 @@
-﻿using System;
-using System.Linq;
-using ReDesign;
-using ReDesign.Entities;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
-    [SerializeField] private Canvas spellMenu;
-    [SerializeField] private Button spellsButton;
-    [SerializeField] private Button moveButton;
+    [SerializeField] private Canvas _spellMenu;
+    [SerializeField] private Button _spellsButton;
+    [SerializeField] private Button _moveButton;
 
-    
-    void Awake()
+    private Animator Animator
     {
-        _animator = GetComponent<Animator>();
+        get
+        {
+            if (_animator == null)
+                _animator = GetComponent<Animator>();
+            return _animator;
+        }
     }
 
-    void Start()
+    private bool IsWalking => Animator.GetBool("isWalking");
+
+    private bool IsSpellMenuEnabled => _spellMenu.enabled;
+
+    private bool IsFireCasted => Animator.GetBool("fireCasted");
+
+    private bool IsIceCasted => Animator.GetBool("iceCasted");
+
+    private bool IsHit => Animator.GetBool("isHit");
+
+    private bool IsPlayerDead => Animator.GetBool("PlayerDead");
+
+    private void Start()
     {
-        if (_animator == null) _animator = GetComponent<Animator>();
+        _spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        _spellsButton = GameObject.Find("SpellButton").GetComponent<Button>();
+        _moveButton = GameObject.Find("MovementButton").GetComponent<Button>();
+
+        
+        Animator.enabled = true; // Enable the animator if it's disabled.
     }
 
-    void Update()
+    private void Update()
     {
         CheckAnimations();
     }
 
-    void CheckAnimations()
+    private void CheckAnimations()
     {
-        if (_animator.GetBool("isWalking"))
+        if (IsWalking)
         {
-            _animator.Play("Walking");
+            Animator.Play("Walking");
         }
 
-        if (spellMenu.enabled && !_animator.GetBool("isWalking"))
+        if (IsSpellMenuEnabled && !IsWalking)
         {
-            _animator.SetBool("isScrolling", true);
-            _animator.Play("Scrolling");
+            Animator.SetBool("isScrolling", true);
+            Animator.Play("Scrolling");
         }
-        else if (!spellMenu.enabled)
+        else
         {
-            _animator.SetBool("isScrolling", false);
+            Animator.SetBool("isScrolling", false);
         }
 
-        if (_animator.GetBool("fireCasted"))
+        if (IsFireCasted)
         {
             ChangeButton(false);
-            _animator.SetBool("hasCasted", false);
-            _animator.Play("Fire Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                _animator.SetBool("fireCasted", false);
-                _animator.SetBool("hasCasted", true);
-                ChangeButton(true);
-            }
-        }
-
-        if (_animator.GetBool("iceCasted"))
-        {
-            ChangeButton(false);
-            _animator.SetBool("hasCasted", false);
-            _animator.Play("Ice Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                _animator.SetBool("iceCasted", false);
-                _animator.SetBool("hasCasted", true);
-                ChangeButton(true);
-            }
-        }
-
-        if (_animator.GetBool("isHit"))
-        {
-            _animator.Play("TakeDamage");
+            Animator.SetBool("hasCasted", false);
+            Animator.Play("Fire Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
-            {
-                _animator.SetBool("isHit", false);
-            }
+                ChangeButton(true);
+
+        }
+        else if (IsIceCasted)
+        {
+            ChangeButton(false);
+            Animator.SetBool("hasCasted", false);
+            Animator.Play("Ice Spell");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+                ChangeButton(true);
+
         }
 
-        if (_animator.GetBool("PlayerDead"))
+        if (IsHit)
         {
-            _animator.Play("Death");
+            Animator.Play("TakeDamage");
+        }
+
+        if (IsPlayerDead)
+        {
+            Animator.Play("Death");
         }
     }
 
     private void ChangeButton(bool status)
     {
-        spellsButton.interactable = status;
-        moveButton.interactable = status;
+        _spellsButton.interactable = status;
+        _moveButton.interactable = status;
     }
 }
