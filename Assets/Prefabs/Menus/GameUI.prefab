@@ -3199,6 +3199,7 @@ GameObject:
   - component: {fileID: 397162537424545059}
   - component: {fileID: 397162537424545052}
   - component: {fileID: 397162537424545056}
+  - component: {fileID: 1897631657}
   m_Layer: 5
   m_Name: SpellButton
   m_TagString: Untagged
@@ -3347,6 +3348,20 @@ MonoBehaviour:
   onConfirm:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1897631657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397162537424545054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88a29e2bae917a47bb6eabe8204a253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manaSystem: {fileID: 397162537656574421}
+  GrayWhenBelow: 2
 --- !u!1 &397162537623658182
 GameObject:
   m_ObjectHideFlags: 0
@@ -4182,6 +4197,7 @@ GameObject:
   - component: {fileID: 397162537872090309}
   - component: {fileID: 397162537872090310}
   - component: {fileID: 397162537872090314}
+  - component: {fileID: 1319049956}
   m_Layer: 5
   m_Name: MovementButton
   m_TagString: Untagged
@@ -4330,6 +4346,20 @@ MonoBehaviour:
   onConfirm:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1319049956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397162537872090304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88a29e2bae917a47bb6eabe8204a253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manaSystem: {fileID: 397162537656574421}
+  GrayWhenBelow: 1
 --- !u!1 &397162537878006956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4633,6 +4663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellButton: {fileID: 397162537424545056}
+  movementButton: {fileID: 397162537872090314}
   mana: {fileID: 397162537656574421}
   minimumMana: 2
   closeKeyBinding: 27

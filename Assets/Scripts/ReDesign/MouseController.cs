@@ -21,7 +21,7 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
-        [SerializeField] private Canvas spellMenu;
+        [SerializeField] private SpellMenu spellMenu;
 
         private void Awake()
         {
@@ -65,7 +65,7 @@ namespace ReDesign
                     manaSystem.Value -= spellSelection.ManaCost;
                 }
                 spellSelection = null;
-                spellMenu.enabled = false;
+                spellMenu.Close();
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
@@ -145,7 +145,7 @@ namespace ReDesign
 
                 foreach (var t in targets)
                 {
-                    RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(255,0,0,0.5f), SelectorMap, false);
+                    RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(0,0,255,0.2f), SelectorMap, false);
                 }
             }
         }
