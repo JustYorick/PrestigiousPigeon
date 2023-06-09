@@ -136,14 +136,11 @@ namespace ReDesign
                     break;
                 case "Level3Map":
                     if(TurnCount > 20){
-                        
                         ChangeGameOverUI("You beat Level 3!");
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
-                    } //else {
-                    //     Debug.Log(WorldController.Instance.getTiles(0, 0));
-                    // }
+                    }
                     
                     break;
             }
