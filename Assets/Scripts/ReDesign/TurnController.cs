@@ -87,9 +87,8 @@ namespace ReDesign
             if (_turnPart >= _entities.Count)
             {
                 _turnPart = 0;
+                TurnCount++;
             }
-
-            TurnCount++;
         }
 
         public static void FillEntityList()
@@ -135,7 +134,7 @@ namespace ReDesign
                     gameOver = true;
                     break;
                 case "Level3Map":
-                    if(TurnCount > 20){
+                    if(TurnCount > 15){
                         ChangeGameOverUI("You beat Level 3!");
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);

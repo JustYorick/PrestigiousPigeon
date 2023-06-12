@@ -19,10 +19,10 @@ public class MobSpawning : MonoBehaviour
     void Update()
     {
         // turncount counts number of turns of all entities combined!! 
-        if(TurnController.TurnCount%4 == 0 && spawning == false){
+        if(TurnController.TurnCount%2 == 1 && spawning == false){
             Spawn();
         }
-        if(TurnController.TurnCount%4 != 0){
+        if(TurnController.TurnCount%2 != 1){
             spawning = false;
         }
 
