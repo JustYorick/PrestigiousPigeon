@@ -23,9 +23,14 @@ namespace ReDesign
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
         Vector3 previousMousePosition = Vector3.zero;
+        private BasicFireSpell fireSpell;
+        private BasicIceSpell iceSpell;
 
         private void Awake()
         {
+            fireSpell = new BasicFireSpell(fireParticles);
+            iceSpell = new BasicIceSpell(iceParticles);
+
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
@@ -101,10 +106,8 @@ namespace ReDesign
         
         public void SelectFireSpell(){
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            BasicFireSpell fireSpell = new BasicFireSpell();
             if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
-                spellSelection.particleSystem = fireParticles;
             }else{
                 spellSelection = null;
             }
@@ -112,10 +115,8 @@ namespace ReDesign
 
         public void SelectIceSpell(){
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            BasicIceSpell iceSpell = new BasicIceSpell();
             if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;
-                spellSelection.particleSystem = iceParticles;
             }else{
                 spellSelection = null;
             }
