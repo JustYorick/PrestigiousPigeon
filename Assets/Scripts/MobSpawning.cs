@@ -18,7 +18,7 @@ public class MobSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // turncount counts number of turns of all entities combined!! 
+
         if(TurnController.TurnCount%2 == 1 && spawning == false){
             Spawn();
         }
