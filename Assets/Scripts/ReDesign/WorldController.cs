@@ -50,6 +50,7 @@ namespace ReDesign
 
             CreateGrid();
         }
+        
         private void CreateGrid()
         {
             baseLayerChildren = baseLayerChildren.OrderBy(n => n.transform.position.x).ThenBy(n => n.transform.position.z).ToList();

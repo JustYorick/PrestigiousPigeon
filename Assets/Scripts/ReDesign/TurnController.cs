@@ -19,6 +19,7 @@ namespace ReDesign
             get { return _instance; }
         }
 
+        [SerializeField] private GameObject levelUI;
         public static int TurnCount = 0;
         private static int _turnPart = 0;
         public static bool gameOver = false;
@@ -26,6 +27,10 @@ namespace ReDesign
         private static Canvas _gameOver;
         private static RawImage _controlsPanel;
         public UnityEvent gameOverEvent = new UnityEvent();
+        private static CollapseableUI collapseableUI;
+        private static GameObject _retryButton;
+        private static GameObject _continueButton;
+        private static TextMeshProUGUI _gameOverText;
 
         private void Awake()
         {
@@ -38,16 +43,21 @@ namespace ReDesign
                 _instance = this;
             }
 
-            TurnCount = 0;
             _turnPart = 0;
-
+            TurnCount = 0;
             gameOver = false;
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
+            _gameOverText = _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            _retryButton = GameObject.Find("RetryButton");
+            _retryButton.SetActive(true);
+            _continueButton = GameObject.Find("ContinueButton");
+            _continueButton.SetActive(false);
         }
 
         private void Start()
         {
+            collapseableUI = levelUI.GetComponent<CollapseableUI>();
             gameOverEvent.AddListener(showGameOver);
             FillEntityList();
 
@@ -61,7 +71,15 @@ namespace ReDesign
             showGameOver();
             if (_turnPart < _entities.Count && !gameOver)
             {
-                Debug.Log("turnpart:" + _turnPart);
+                if (_turnPart == 0)
+                {
+                    collapseableUI?.ShowPlayerTurnUI(); 
+                }
+                if (_turnPart == 1)
+                {
+                    collapseableUI?.ShowEnemyTurnUI();
+                }
+                
                 _entities[_turnPart].NextAction();
                 _turnPart++;
             }
@@ -69,7 +87,6 @@ namespace ReDesign
             if (_turnPart >= _entities.Count)
             {
                 _turnPart = 0;
-                Debug.Log("all turn parts completed");
             }
 
             TurnCount++;
@@ -78,8 +95,6 @@ namespace ReDesign
         public static void FillEntityList()
         {
             _entities = WorldController.getEntities();
-            //Debug.Log("entities count: "+_entities.Count);
-            //Debug.Log("obst count : " + WorldController.ObstacleLayer.Count);
         }
 
         public void RemoveUI()
@@ -91,20 +106,36 @@ namespace ReDesign
         {
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
-            
-            switch(sceneName){
+
+            switch (sceneName)
+            {
                 case "TutorialWithTerrainMap":
-                    if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 && WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
+                    if (WorldController.getEntities().Where(e => e.name.Contains("Player")).Count() == 1 &&
+                        WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
-                        SceneManager.LoadScene("Level1Map");
+                        ChangeGameOverUI("You beat the Tutorial!");
                     }
+
                     break;
                 case "Level1Map":
-                    if ( (int)WorldController.getPlayerTile().XPos == 0 && (int)WorldController.getPlayerTile().YPos == 25 )
+                    if ((int)WorldController.getPlayerTile().XPos == 0 &&
+                        (int)WorldController.getPlayerTile().YPos == 25)
                     {
-                        _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "You beat Level 1!";
-                        gameOver = true;               
+                        ChangeGameOverUI("You beat Level 1!");
+                        _retryButton.SetActive(false);
+                        _continueButton.SetActive(true);
+                        gameOver = true;
                     }
+
+                    break;
+                case "Level2Map":
+                    ChangeGameOverUI("You beat Level 1!");
+                    _retryButton.SetActive(false);
+                    _continueButton.SetActive(true);
+                    gameOver = true;
+                    break;
+                case "Level3Map":
+                    ChangeGameOverUI("You beat Level 3!");
                     break;
                 // case "Level2Map":
                 //     if (WorldController.getEntities().Where(e => e.name.Contains("Snow")).Count() == 0)
@@ -119,6 +150,14 @@ namespace ReDesign
             {
                 _gameOver.enabled = true;
             }
+        }
+
+        private static void ChangeGameOverUI(string gameOverText)
+        {
+            _gameOverText.text = gameOverText;
+            _retryButton.SetActive(false);
+            _continueButton.SetActive(true);
+            gameOver = true;
         }
     }
 }

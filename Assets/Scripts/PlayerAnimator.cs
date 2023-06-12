@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
-    [SerializeField] private Canvas _spellMenu;
-    [SerializeField] private Button _spellsButton;
-    [SerializeField] private Button _moveButton;
+    private SpellMenu _spellMenu;
+    private Button _spellsButton;
+    private Button _moveButton;
 
     private Animator Animator
     {
@@ -20,7 +20,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private bool IsWalking => Animator.GetBool("isWalking");
 
-    private bool IsSpellMenuEnabled => _spellMenu.enabled;
+    private bool IsSpellMenuEnabled => _spellMenu.IsOpen;
 
     private bool IsFireCasted => Animator.GetBool("fireCasted");
 
@@ -32,7 +32,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        _spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        _spellMenu = GameObject.Find("SpellMenu").GetComponent<SpellMenu>();
         _spellsButton = GameObject.Find("SpellButton").GetComponent<Button>();
         _moveButton = GameObject.Find("MovementButton").GetComponent<Button>();
 
@@ -68,8 +68,12 @@ public class PlayerAnimator : MonoBehaviour
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
-
+                _spellMenu.OpenIfActivated();
+            }
+            Animator.SetBool("hasCasted", true);
         }
         else if (IsIceCasted)
         {
@@ -77,13 +81,24 @@ public class PlayerAnimator : MonoBehaviour
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                Animator.SetBool("iceCasted", false);
                 ChangeButton(true);
-
+                _spellMenu.OpenIfActivated();
+            }
+            Animator.SetBool("hasCasted", true);
         }
 
-        if (IsHit)
+        if (IsHit && !IsPlayerDead)
         {
             Animator.Play("TakeDamage");
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                if (!IsPlayerDead)
+                {
+                    Animator.SetBool("isHit", false);
+                }
+            }
         }
 
         if (IsPlayerDead)

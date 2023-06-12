@@ -8,11 +8,12 @@ using UnityEngine.UIElements;
 
 namespace ReDesign.Entities
 {
-    public class Slime : Entity
+    public class Slime : Enemy
     {
         public override int SightRange { get { return 9; } }
         public override int MoveRange { get { return 1; } }
         private EntityAnimator _slimeAnimator;
+        public override string displayName{get{ return "Slime"; }}
 
         private void Awake()
         {
@@ -43,7 +44,6 @@ namespace ReDesign.Entities
                 .FirstOrDefault();
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
-            Debug.Log("" + range);
             if (range < SightRange)
             {
                 MoveToPlayer(this.MoveRange, _slimeAnimator);
