@@ -10,7 +10,9 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 6; } }
         public override int MoveRange { get { return 2; } }
-        
+
+        public override string displayName => throw new NotImplementedException();
+
         public Lich()
         {
             int MaxHealth = 8;
@@ -59,6 +61,11 @@ namespace ReDesign.Entities
             }
             //attacking = false;
             StopCoroutine(EnemyRotateToAttack());
+        }
+
+        public override void ReceiveDamage(int dmg)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,9 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 40; } }
         public override int MoveRange { get { return 4; } }
-        
+
+        public override string displayName => throw new NotImplementedException();
+
         public SnowBoss()
         {
             int MaxHealth = 25;
@@ -59,6 +61,11 @@ namespace ReDesign.Entities
             }
             //attacking = false;
             StopCoroutine(EnemyRotateToAttack());
+        }
+
+        public override void ReceiveDamage(int dmg)
+        {
+            throw new NotImplementedException();
         }
     }
 }

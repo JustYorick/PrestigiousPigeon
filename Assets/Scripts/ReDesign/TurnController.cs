@@ -129,10 +129,14 @@ namespace ReDesign
 
                     break;
                 case "Level2Map":
-                    ChangeGameOverUI("You beat Level 1!");
-                    _retryButton.SetActive(false);
-                    _continueButton.SetActive(true);
-                    gameOver = true;
+                    if (false) //temp so the level doesnt finish instantly
+                    {
+                        ChangeGameOverUI("You beat Level 1!");
+                        _retryButton.SetActive(false);
+                        _continueButton.SetActive(true);
+                        gameOver = true;
+                    }
+
                     break;
                 case "Level3Map":
                     ChangeGameOverUI("You beat Level 3!");
