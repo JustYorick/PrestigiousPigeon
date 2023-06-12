@@ -32,7 +32,7 @@ public class MobSpawning : MonoBehaviour
             spawning = true;
             if(!this.gameObject.scene.isLoaded) return;
             var r = Random.Range(0, Mobs.Count);
-            GameObject m = Instantiate(Mobs[r], transform.position, Quaternion.identity);
+            GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(r, .6f, 2), Quaternion.identity);
             if (Layer.activeInHierarchy) {
                 m.transform.parent = Layer.transform;
             }
