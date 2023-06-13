@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour{
     public void Awake()
     {
         ApplySettings();
-        AudioListener.volume = musicVolume;
     }
 
     public void LoadScene(string sceneName){

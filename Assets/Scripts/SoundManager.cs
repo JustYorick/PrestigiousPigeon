@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
     [SerializeField] private AudioSource _musicSource, _effectsSource;
+    [SerializeField] private AudioClip[] buttonSounds;
     
     // Start is called before the first frame update
     void Awake()
@@ -61,5 +63,7 @@ public class SoundManager : MonoBehaviour
     public void SetMusicVolume(float volume) => _musicSource.volume = volume;
     
     public void SetEffectsVolume(float volume) => _effectsSource.volume = volume;
-    
+
+    public void PlayButtonSound() => _effectsSource.PlayOneShot(buttonSounds[Random.Range(0, buttonSounds.Length)]);
+
 }
