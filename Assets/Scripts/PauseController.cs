@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseController : MonoBehaviour
 {
     private Canvas _menu;
+    private GraphicRaycaster _raycaster;
     private Canvas spellMenu;
         
     void Awake()
     {
-        _menu = gameObject.GetComponent<Canvas>();
+        _menu = GetComponent<Canvas>();
+        _raycaster = GetComponent<GraphicRaycaster>();
         _menu.enabled = false;
+        _raycaster.enabled = false;
         spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
     }
 
@@ -16,19 +20,24 @@ public class PauseController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !spellMenu.enabled)
         {
-            _menu.enabled = true;
-            Time.timeScale = 0;
+            OpenMenu();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && _menu.enabled)
         {
-            _menu.enabled = false;
-            Time.timeScale = 1;
+            CloseMenu();
         }
+    }
+
+    void OpenMenu(){
+        _menu.enabled = true;
+        _raycaster.enabled = true;
+        Time.timeScale = 0;
     }
 
     public void CloseMenu()
     {
         Time.timeScale = 1;
         _menu.enabled = false;
+        _raycaster.enabled = false;
     }
 }

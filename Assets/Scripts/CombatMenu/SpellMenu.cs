@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellMenu : MonoBehaviour{
     [SerializeField] private ActionButton spellButton;
@@ -9,6 +10,7 @@ public class SpellMenu : MonoBehaviour{
     [SerializeField] private int minimumMana = 2;
     [SerializeField] private KeyCode closeKeyBinding;
     private Canvas canvas;
+    private GraphicRaycaster raycaster;
     private ReDesign.MouseController mouseController;
 
     public bool IsOpen => canvas.enabled;
@@ -16,6 +18,8 @@ public class SpellMenu : MonoBehaviour{
     void Start(){
         // Retrieve the canvas component and the mouse controller
         canvas = GetComponent<Canvas>();
+        raycaster = GetComponent<GraphicRaycaster>();
+        raycaster.enabled = canvas.enabled;
         mouseController = GameObject.Find("MouseController").GetComponent<ReDesign.MouseController>();
     }
 
@@ -31,6 +35,7 @@ public class SpellMenu : MonoBehaviour{
         // Only open the spell menu, if the player has enough mana
         if(mana.Value >= minimumMana){
             canvas.enabled = true;
+            raycaster.enabled = true;
         }else{
             movementButton.Activate();
         }
@@ -39,6 +44,7 @@ public class SpellMenu : MonoBehaviour{
     // Close the spell menu
     public void Close(){
         canvas.enabled = false;
+        raycaster.enabled = false;
         mouseController.DeselectSpell();
     }
 
