@@ -99,7 +99,7 @@ namespace ReDesign
             List<Entity> outList = new List<Entity>();
             foreach (var tile in ObstacleLayer)
             {
-                if (tile.GameObject.CompareTag("Entity"))
+                if (tile.GameObject.CompareTag("Entity")) //tile.GameObject != null && 
                 {
                     outList.Add(tile.GameObject.GetComponent<Entity>());
                 }
@@ -153,6 +153,21 @@ namespace ReDesign
             }
 
             return output;
+        }
+        
+        public void addObstacle(GameObject child, bool walkable){
+            DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(child.transform.position.x - item.GameObject.transform.position.x))
+                .ThenBy(item => Math.Abs(child.transform.position.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
+            resultNode.Walkable = walkable;
+
+            DefaultTile enemy = new DefaultTile()
+            {
+                XPos = resultNode.XPos,
+                YPos = resultNode.YPos,
+                GameObject = child,
+            };
+
+            ObstacleLayer.Add(enemy);
         }
     }
 }

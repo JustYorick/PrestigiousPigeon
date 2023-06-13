@@ -119,6 +119,17 @@ namespace ReDesign
             }
         }
         
+        public void SelectWaterSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
+            BasicWaterSpell waterSpell = new BasicWaterSpell();
+            if(waterSpell.ManaCost <= manaSystem.Value){
+                spellSelection = waterSpell;
+                spellSelection.particleSystem = iceParticles;
+            }else{
+                spellSelection = null;
+            }
+        }
+        
         public void DeselectSpell() => spellSelection = null;
         
         private void DrawCurrentSelectedTile()

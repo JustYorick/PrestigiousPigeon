@@ -87,9 +87,8 @@ namespace ReDesign
             if (_turnPart >= _entities.Count)
             {
                 _turnPart = 0;
+                TurnCount++;
             }
-
-            TurnCount++;
         }
 
         public static void FillEntityList()
