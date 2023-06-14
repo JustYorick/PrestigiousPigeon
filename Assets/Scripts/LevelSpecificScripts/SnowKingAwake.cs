@@ -23,6 +23,10 @@ public class SnowKingAwake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                GetComponent<AddSnowToObjects>().AddSnow();
+            }
     }
 
     public void pillardestroyed(Vector3 pos){
