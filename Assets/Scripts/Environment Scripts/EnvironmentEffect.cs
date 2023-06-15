@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using ReDesign;
+using ReDesign.Entities;
 
+namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
     // Tiles
@@ -30,6 +32,7 @@ public class EnvironmentEffect : MonoBehaviour
     public void IceEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         ChangeWaterTilesToIce(pathNodes);
+        CastIceOnObelisk(pathNodes);
     }
 
     // Ice
@@ -47,6 +50,31 @@ public class EnvironmentEffect : MonoBehaviour
                 newTile.transform.position = obj.transform.position;
                 Destroy(obj);
                 targetTile.GameObject = newTile;
+            }
+        }
+    }
+
+    // Ice
+    private void CastIceOnObelisk(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("obelisk"))
+            {
+                //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+                for (int i = -3; i < 4; i++){
+                    for (int j = -3; j < 4; j++){
+                        DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
+                        {
+                            Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
+                            enemy.ReceiveDamage(5);
+                        }
+                    }
+                }
             }
         }
     }
@@ -115,4 +143,5 @@ public class EnvironmentEffect : MonoBehaviour
         GameObject tileObject = tiles.Where(t => pn.XPos == t.XPos && pn.YPos == t.YPos).FirstOrDefault().GameObject;
         return tileObject;
     }
+}
 }
