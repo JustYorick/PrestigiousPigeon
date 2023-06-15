@@ -7,6 +7,8 @@ using UnityEngine;
 public class AddSnowToObjects : MonoBehaviour
 {
     [SerializeField] private Material snowMaterial;
+    [SerializeField] private GameObject snowTerrain;
+    [SerializeField] private GameObject snowParticles;
     private List<GameObject> snowObjects;
 
     private void Start()
@@ -15,7 +17,8 @@ public class AddSnowToObjects : MonoBehaviour
     }
 
     public void AddSnow()
-    {   
+    {
+        snowTerrain.SetActive(true);
         foreach (GameObject obj in snowObjects)
         {
             List<Material> materials = new List<Material>();
@@ -23,5 +26,11 @@ public class AddSnowToObjects : MonoBehaviour
             materials.Add(snowMaterial);
             obj.GetComponent<Renderer>().materials = materials.ToArray();
         }
+    }
+
+    public void StartSnowing()
+    {
+        snowParticles.SetActive(true);
+        snowParticles.GetComponent<ParticleSystem>().Play();
     }
 }

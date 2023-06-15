@@ -12,21 +12,15 @@ public class SnowKingAwake : MonoBehaviour
     [SerializeField] GameObject Skeleton;
     [SerializeField] GameObject Layer;
 
-    [SerializeField] ParticleSystem snow;
-
     // Start is called before the first frame update
     void Start()
     {
-        snow.Pause(true);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                GetComponent<AddSnowToObjects>().AddSnow();
-            }
     }
 
     public void pillardestroyed(Vector3 pos){
@@ -46,11 +40,12 @@ public class SnowKingAwake : MonoBehaviour
             WorldController.Instance.GetComponent<EnvironmentEffect>().ChangeWaterTilesToIce(WorldController.Instance.BaseLayer);
         }
         if(pillars == 3){
-            if(snow != null){snow.Play(true);}
+            GetComponent<AddSnowToObjects>().StartSnowing();
         }
         // spawn Snow King
         if (pillars == 4){
-            
+                //Transition to snowy area
+            GetComponent<AddSnowToObjects>().AddSnow();
             GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.Euler(-90, 0, 0));
             if (Layer.activeInHierarchy) {
                 g.transform.parent = Layer.transform;
