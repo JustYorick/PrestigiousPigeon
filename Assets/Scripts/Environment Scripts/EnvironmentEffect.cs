@@ -84,7 +84,6 @@ public class EnvironmentEffect : MonoBehaviour
                 targetTile.Walkable = false;
                 targetTile.GameObject = newTile;
                 
-                
                 WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = false;
 
                 WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
@@ -116,13 +115,13 @@ public class EnvironmentEffect : MonoBehaviour
     }
     
     // Fire
-    private void ChangeFrozenPillarTilesToPuddle(List<DefaultTile> pathNodes)
+    public void ChangeFrozenPillarTilesToPuddle(List<DefaultTile> pathNodes)
     {
         List<DefaultTile> tiles = WorldController.Instance.BaseLayer;
         foreach (DefaultTile pn in pathNodes)
         {
             GameObject obj = FindExactGameObjectTile(pn, tiles);
-            
+
             if (obj.name.ToLower().Contains("frozenpillar"))
             {
                 DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
@@ -132,7 +131,7 @@ public class EnvironmentEffect : MonoBehaviour
                 Destroy(obj);
                 newTile.transform.localScale = new Vector3(newTile.transform.localScale.x, newTile.transform.localScale.y * 0.6f, newTile.transform.localScale.z);
                 targetTile.GameObject = newTile;
-                targetTile.Walkable = true;
+                WorldController.Instance.addObstacle(newTile, true);
             }
         }
     }
@@ -195,7 +194,7 @@ public class EnvironmentEffect : MonoBehaviour
         }
     }
 
-    private GameObject FindExactGameObjectTile(DefaultTile pn, List<DefaultTile> tiles)
+    private static GameObject FindExactGameObjectTile(DefaultTile pn, List<DefaultTile> tiles)
     {
         GameObject tileObject = tiles.Where(t => pn.XPos == t.XPos && pn.YPos == t.YPos).FirstOrDefault()?.GameObject;
 
