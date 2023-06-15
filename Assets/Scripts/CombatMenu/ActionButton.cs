@@ -90,7 +90,6 @@ public class ActionButton : MonoBehaviour{
 
         // Make the button wide
         MakeWide();
-        Debug.Log($"{name}: {confirmations}");
 
         // If the button is not active and the player has confirmed they want to activate the action
         if(!active && confirmations >= requiredConfirmations){
