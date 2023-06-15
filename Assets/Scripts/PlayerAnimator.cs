@@ -71,7 +71,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
-                _spellMenu.OpenIfActivated();
+                _spellMenu.AllowedToOpen = true;
             }
             Animator.SetBool("hasCasted", true);
         }
@@ -84,7 +84,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 Animator.SetBool("iceCasted", false);
                 ChangeButton(true);
-                _spellMenu.OpenIfActivated();
+                _spellMenu.AllowedToOpen = true;
             }
             Animator.SetBool("hasCasted", true);
         }

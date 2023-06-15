@@ -22,6 +22,7 @@ namespace ReDesign
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
+        private Canvas pauseMenu;
 
         private void Awake()
         {
@@ -31,9 +32,13 @@ namespace ReDesign
             } else {
                 _instance = this;
             }
+            pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
         }
         private void Update()
         {
+            if(pauseMenu.enabled){
+                return;
+            }
             DrawCurrentSelectedTile();
             
             DrawCurrentSpellRange();
@@ -64,8 +69,8 @@ namespace ReDesign
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
                 }
-                spellSelection = null;
                 spellMenu.Close();
+                spellMenu.AllowedToOpen = false;
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());

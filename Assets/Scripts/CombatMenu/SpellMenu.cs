@@ -10,6 +10,7 @@ public class SpellMenu : MonoBehaviour{
     [SerializeField] private KeyCode closeKeyBinding;
     private Canvas canvas;
     private ReDesign.MouseController mouseController;
+    public bool AllowedToOpen = true;
 
     public bool IsOpen => canvas.enabled;
 
@@ -19,7 +20,7 @@ public class SpellMenu : MonoBehaviour{
         mouseController = GameObject.Find("MouseController").GetComponent<ReDesign.MouseController>();
     }
 
-    void Update(){
+    void LateUpdate(){
         // Close the spell menu and deselect the selected spell on escape
         if(canvas.enabled && Input.GetKeyDown(closeKeyBinding)){
             Close();
@@ -29,7 +30,7 @@ public class SpellMenu : MonoBehaviour{
 
     public void Open(){
         // Only open the spell menu, if the player has enough mana
-        if(mana.Value >= minimumMana){
+        if(mana.Value >= minimumMana && AllowedToOpen){
             canvas.enabled = true;
         }else{
             movementButton.Activate();
@@ -40,11 +41,5 @@ public class SpellMenu : MonoBehaviour{
     public void Close(){
         canvas.enabled = false;
         mouseController.DeselectSpell();
-    }
-
-    public void OpenIfActivated(){
-        if(spellButton.active){
-            Open();
-        }
     }
 }
