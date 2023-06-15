@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerAnimator : MonoBehaviour
@@ -18,6 +19,9 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
+    private Animator _spellBookAnimator;
+    private GameObject _spellBook;
+
     private bool IsWalking => Animator.GetBool("isWalking");
 
     private bool IsSpellMenuEnabled => _spellMenu.IsOpen;
@@ -30,13 +34,20 @@ public class PlayerAnimator : MonoBehaviour
 
     private bool IsPlayerDead => Animator.GetBool("PlayerDead");
 
+
+    private void Awake()
+    {
+        _spellBook = GameObject.Find("spellbook");
+        _spellBookAnimator = _spellBook.GetComponent<Animator>();
+    }
+
     private void Start()
     {
         _spellMenu = GameObject.Find("SpellMenu").GetComponent<SpellMenu>();
         _spellsButton = GameObject.Find("SpellButton").GetComponent<Button>();
         _moveButton = GameObject.Find("MovementButton").GetComponent<Button>();
 
-        
+
         Animator.enabled = true; // Enable the animator if it's disabled.
     }
 
@@ -55,38 +66,54 @@ public class PlayerAnimator : MonoBehaviour
         if (IsSpellMenuEnabled && !IsWalking)
         {
             Animator.SetBool("isScrolling", true);
-            Animator.Play("Scrolling");
+            if (!IsFireCasted || !IsIceCasted)
+            {
+                _spellBookAnimator.SetBool("spellBookOpen", true);
+            }
         }
         else
         {
             Animator.SetBool("isScrolling", false);
+            _spellBookAnimator.SetBool("spellBookOpen", false);
         }
 
         if (IsFireCasted)
         {
-            ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            {
+                ChangeButton(false);
+                _spellBookAnimator.SetBool("spellBookOpen", false);
+            }
+            else
             {
                 Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
-                _spellMenu.OpenIfActivated();
+                _spellMenu.CloseIfDeactivated();
+                Animator.SetBool("isScrolling", false);
+                Animator.SetBool("hasCasted", true);
+                _spellBookAnimator.SetBool("spellBookOpen", true);
             }
-            Animator.SetBool("hasCasted", true);
         }
         else if (IsIceCasted)
         {
-            ChangeButton(false);
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            {
+                ChangeButton(false);
+                _spellBookAnimator.SetBool("spellBookOpen", false);
+            }
+            else
             {
                 Animator.SetBool("iceCasted", false);
+                _spellMenu.CloseIfDeactivated();
                 ChangeButton(true);
-                _spellMenu.OpenIfActivated();
+                Animator.SetBool("isScrolling", false);
+                Animator.SetBool("hasCasted", true);
+                _spellBookAnimator.SetBool("spellBookOpen", true);
             }
-            Animator.SetBool("hasCasted", true);
         }
 
         if (IsHit && !IsPlayerDead)
