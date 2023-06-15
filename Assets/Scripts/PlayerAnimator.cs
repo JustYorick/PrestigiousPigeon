@@ -81,12 +81,15 @@ public class PlayerAnimator : MonoBehaviour
         {
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") && 
+                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && 
+                !Animator.IsInTransition(0))
             {
                 ChangeButton(false);
                 _spellBookAnimator.SetBool("spellBookOpen", false);
             }
-            else
+            else if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && 
+                     Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell"))
             {
                 Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
@@ -100,12 +103,15 @@ public class PlayerAnimator : MonoBehaviour
         {
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
-            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell") && 
+                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && 
+                !Animator.IsInTransition(0))
             {
                 ChangeButton(false);
                 _spellBookAnimator.SetBool("spellBookOpen", false);
             }
-            else
+            else if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && 
+                     Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell"))
             {
                 Animator.SetBool("iceCasted", false);
                 _spellMenu.CloseIfDeactivated();
