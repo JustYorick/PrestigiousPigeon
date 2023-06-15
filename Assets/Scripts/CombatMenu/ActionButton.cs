@@ -49,8 +49,6 @@ public class ActionButton : MonoBehaviour{
         // Make the button wide or narrow depending on whether the button is active
         if(active){
             MakeWide();
-        }else{
-            MakeNarrow();
         }
     }
 
@@ -71,11 +69,6 @@ public class ActionButton : MonoBehaviour{
     }
 
     void MakeWide(){
-        // Make the other buttons narrow
-        for(int i = 0;i < buttons.Length;i++){
-            buttons[i].Deactivate();
-        }
-
         // Make this button wide
         rectTransform.anchoredPosition = widePosition;
         rectTransform.sizeDelta = wideSize;
@@ -90,6 +83,11 @@ public class ActionButton : MonoBehaviour{
 
         // Make the button wide
         MakeWide();
+
+        // Make the other buttons narrow
+        for(int i = 0;i < buttons.Length;i++){
+            buttons[i].Deactivate();
+        }
 
         // If the button is not active and the player has confirmed they want to activate the action
         if(!active && confirmations >= requiredConfirmations){
