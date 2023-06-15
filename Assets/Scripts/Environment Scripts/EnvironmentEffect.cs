@@ -63,7 +63,6 @@ public class EnvironmentEffect : MonoBehaviour
 
             if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("obelisk"))
             {
-                //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
 
                 for (int i = -3; i < 4; i++){
                     for (int j = -3; j < 4; j++){
