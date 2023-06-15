@@ -50,7 +50,7 @@ public class SnowKingAwake : MonoBehaviour
         }
         // spawn Snow King
         if (pillars == 4){
-            AllPillarsDestroyed = true;
+            
             GameObject g = Instantiate(SnowBoss, transform.position, Quaternion.Euler(-90, 0, 0));
             if (Layer.activeInHierarchy) {
                 g.transform.parent = Layer.transform;
@@ -58,6 +58,7 @@ public class SnowKingAwake : MonoBehaviour
             WorldController.Instance.addObstacle(g);
 
             pillars = 0;
+            AllPillarsDestroyed = true;
             
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ReDesign.Entities
 {
-    public class SnowBoss : Entity
+    public class SnowBoss : Enemy
     {
         public override int SightRange { get { return 40; } }
         public override int MoveRange { get { return 4; } }
@@ -63,9 +63,9 @@ namespace ReDesign.Entities
             StopCoroutine(EnemyRotateToAttack());
         }
 
-        public override void ReceiveDamage(int dmg)
-        {
-            throw new NotImplementedException();
-        }
+        // public override void ReceiveDamage(int dmg)
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }
