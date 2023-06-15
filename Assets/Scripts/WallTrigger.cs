@@ -31,7 +31,7 @@ public class WallTrigger : MonoBehaviour
         {
             _entities = WorldController.getEntities();
             foreach (Entity e in _entities){
-                if(!e.name.Contains("Player") && e.transform.position.z > 10){
+                if(!e.name.Contains("Player") && e.transform.position.z > 11){
                     TurnController.gameOver = true;
                     TurnController.Instance.gameOverEvent.Invoke();
                 }
