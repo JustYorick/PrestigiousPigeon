@@ -46,8 +46,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusic(AudioClip clip)
     {
-        _musicSource.clip = clip;
-        _musicSource.Play();
+        _musicSource.PlayOneShot(clip);
     }
 
     public void ToggleMusic() => _musicSource.mute = !_musicSource.mute;
