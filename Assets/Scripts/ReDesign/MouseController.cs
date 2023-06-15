@@ -5,7 +5,6 @@ using System.Linq;
 using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Events;
 
 namespace ReDesign
 {
@@ -13,7 +12,7 @@ namespace ReDesign
     {
         [SerializeField] private PlayerMovement player;
         [SerializeField] private StatusBar manaSystem;
-        [SerializeField] private Tilemap SelectorMap;
+        [field:SerializeField] public Tilemap SelectorMap{get; private set;}
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
@@ -25,7 +24,6 @@ namespace ReDesign
         [SerializeField] private SpellMenu spellMenu;
         private Canvas pauseMenu;
         private ActionButton movementButton;
-        public UnityEvent OnSpellCast = new UnityEvent();
 
         private void Awake()
         {
@@ -73,7 +71,6 @@ namespace ReDesign
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
                     spellMenu.AllowedToOpen = false;
-                    OnSpellCast.Invoke();
                 }
                 spellMenu.Close();
                 movementButton.Activate();

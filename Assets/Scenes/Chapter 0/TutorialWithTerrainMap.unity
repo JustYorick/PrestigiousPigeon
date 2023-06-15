@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17383964, g: 0.20901126, b: 0.25200605, a: 1}
+  m_IndirectSpecularColor: {r: 0.1738391, g: 0.20901069, b: 0.25200552, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18681,7 +18681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1574288006}
   manaSystem: {fileID: 1319049946}
-  SelectorMap: {fileID: 1607830966}
+  <SelectorMap>k__BackingField: {fileID: 1607830966}
   fireParticles: {fileID: 374308440}
   iceParticles: {fileID: 1149691690}
   spellMenu: {fileID: 1319049952}

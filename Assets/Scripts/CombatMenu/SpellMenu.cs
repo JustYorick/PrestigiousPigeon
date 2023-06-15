@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using ReDesign;
 
 public class SpellMenu : MonoBehaviour{
     [SerializeField] private ActionButton spellButton;
@@ -11,6 +13,7 @@ public class SpellMenu : MonoBehaviour{
     private Canvas canvas;
     private ReDesign.MouseController mouseController;
     public bool AllowedToOpen = true;
+    public UnityEvent OnClose = new UnityEvent();
 
     public bool IsOpen => canvas.enabled;
 
@@ -41,5 +44,11 @@ public class SpellMenu : MonoBehaviour{
     public void Close(){
         canvas.enabled = false;
         mouseController.DeselectSpell();
+        OnClose.Invoke();
+        RangeTileTool.Instance.clearTileMap(mouseController.SelectorMap);
+        if (StateController.currentState == GameState.PlayerTurn)
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), mana.Value);
+        }
     }
 }
