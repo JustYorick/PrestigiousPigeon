@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using ReDesign;
 
 public class SpellSlot : MonoBehaviour{
     [SerializeField] private TMPro.TMP_Text spellNameField;
@@ -27,8 +27,12 @@ public class SpellSlot : MonoBehaviour{
         spellButton = GetComponent<Button>();
         spellImage = GetComponent<Image>();
 
-        // Find the spell menu
+        // Find the spell menu and mouse controller
         spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        MouseController mouseController = GameObject.Find("MouseController").GetComponent<MouseController>();
+
+        // Disable the spell slot when the spell is casted
+        mouseController.OnSpellCast.AddListener(Disable);
 
         // Add a listener for when the button is clicked
         spellButton.onClick.AddListener(Enable);

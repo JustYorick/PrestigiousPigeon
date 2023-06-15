@@ -5,6 +5,7 @@ using System.Linq;
 using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Events;
 
 namespace ReDesign
 {
@@ -24,6 +25,7 @@ namespace ReDesign
         [SerializeField] private SpellMenu spellMenu;
         private Canvas pauseMenu;
         private ActionButton movementButton;
+        public UnityEvent OnSpellCast = new UnityEvent();
 
         private void Awake()
         {
@@ -70,9 +72,10 @@ namespace ReDesign
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
+                    spellMenu.AllowedToOpen = false;
+                    OnSpellCast.Invoke();
                 }
                 spellMenu.Close();
-                spellMenu.AllowedToOpen = false;
                 movementButton.Activate();
                 
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
