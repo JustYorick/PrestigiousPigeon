@@ -9,13 +9,13 @@ namespace ReDesign.Entities
     public class SnowBoss : Enemy
     {
         public override int SightRange { get { return 40; } }
-        public override int MoveRange { get { return 4; } }
+        public override int MoveRange { get { return 3; } }
 
         public override string displayName => throw new NotImplementedException();
 
         public SnowBoss()
         {
-            int MaxHealth = 25;
+            int MaxHealth = 20;
             _entityHealth = new UnitHealth(MaxHealth, MaxHealth);
             Attacks = new List<AttacksAndSpells>()
             {
