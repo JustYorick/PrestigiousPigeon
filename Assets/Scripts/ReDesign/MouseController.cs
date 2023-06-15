@@ -23,6 +23,7 @@ namespace ReDesign
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
         private Canvas pauseMenu;
+        private ActionButton movementButton;
 
         private void Awake()
         {
@@ -33,6 +34,7 @@ namespace ReDesign
                 _instance = this;
             }
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
+            movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
         }
         private void Update()
         {
@@ -71,6 +73,8 @@ namespace ReDesign
                 }
                 spellMenu.Close();
                 spellMenu.AllowedToOpen = false;
+                movementButton.Activate();
+                
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
