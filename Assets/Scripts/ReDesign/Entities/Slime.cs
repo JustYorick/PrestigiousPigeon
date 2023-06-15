@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 namespace ReDesign.Entities
 {
@@ -50,7 +51,11 @@ namespace ReDesign.Entities
             }
             else
             {
-                MoveToPlayer(0);
+                if (SceneManager.GetActiveScene().name == "Level3Map"){
+			        MoveToObject(this.MoveRange, _slimeAnimator, "WallTrigger");
+		        } else {
+                	MoveToPlayer(0);
+		        }
             }
         }
 
