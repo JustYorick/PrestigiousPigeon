@@ -36,7 +36,7 @@ public class MobSpawning : MonoBehaviour
             if (Layer.activeInHierarchy) {
                 m.transform.parent = Layer.transform;
             }
-            // WorldController.Instance.addObstacle(h);
+            WorldController.Instance.addObstacle(m);
     }
 }
 }
