@@ -129,7 +129,13 @@ public class PlayerMovement : MonoBehaviour
             
             walkingLayer.SetTile(cell, ruleTile);
         }
+
+        Vector3Int firstCell = walkingLayer.WorldToCell(new Vector3(pathNodes[0].GameObject.transform.position.x, 0, pathNodes[0].GameObject.transform.position.z));
+        
+        walkingLayer.SetTileFlags(firstCell, TileFlags.None);
+        walkingLayer.SetColor(firstCell, Color.clear);
     }
+    
     // Update is called once per frame
     void Update()
     {
