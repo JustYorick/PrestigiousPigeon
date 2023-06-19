@@ -23,7 +23,6 @@ public class MenuController : MonoBehaviour {
     {
         SoundManager.Instance.SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
         SoundManager.Instance.SetEffectsVolume(PlayerPrefs.GetFloat("EffectVolume"));
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume"));
         menu.enabled = false;
 
     }
