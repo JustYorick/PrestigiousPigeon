@@ -19,10 +19,10 @@ public class MobSpawning : MonoBehaviour
     void Update()
     {
 
-        if(TurnController.TurnCount%2 == 1 && spawning == false){
+        if(TurnController.TurnCount%3 == 1 && spawning == false){
             Spawn();
         }
-        if(TurnController.TurnCount%2 != 1){
+        if(TurnController.TurnCount%3 != 1){
             spawning = false;
         }
 
