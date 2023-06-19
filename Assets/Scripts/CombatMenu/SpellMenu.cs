@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ReDesign;
 using UnityEngine;
 using UnityEngine.Events;
 using ReDesign;
@@ -27,6 +28,7 @@ public class SpellMenu : MonoBehaviour{
         // Close the spell menu and deselect the selected spell on escape
         if(canvas.enabled && Input.GetKeyDown(closeKeyBinding)){
             Close();
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), mana.Value);
             movementButton.Activate();
         }
     }
@@ -35,6 +37,7 @@ public class SpellMenu : MonoBehaviour{
         // Only open the spell menu, if the player has enough mana
         if(mana.Value >= minimumMana && AllowedToOpen){
             canvas.enabled = true;
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
         }else{
             movementButton.Activate();
         }

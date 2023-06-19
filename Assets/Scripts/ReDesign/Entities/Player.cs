@@ -78,7 +78,7 @@ namespace ReDesign.Entities
         {
             _entityHealth.ChangeHealth(-dmg);
             _healthBar.Value = _entityHealth.Health;
-            
+            PlayerAnimator._animator.SetBool("isHit", true);
             if (_entityHealth.Health <= 0){
                 TurnController.gameOver = true;
                 PlayerAnimator._animator.SetBool("PlayerDead", true);
