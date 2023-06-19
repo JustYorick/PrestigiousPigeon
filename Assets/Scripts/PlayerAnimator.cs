@@ -93,7 +93,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 Animator.SetBool("fireCasted", false);
                 ChangeButton(true);
-                _spellMenu.CloseIfDeactivated();
+                _spellMenu.AllowedToOpen = true;
                 Animator.SetBool("isScrolling", false);
                 Animator.SetBool("hasCasted", true);
                 _spellBookAnimator.SetBool("spellBookOpen", true);
@@ -114,8 +114,8 @@ public class PlayerAnimator : MonoBehaviour
                      Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell"))
             {
                 Animator.SetBool("iceCasted", false);
-                _spellMenu.CloseIfDeactivated();
                 ChangeButton(true);
+                _spellMenu.AllowedToOpen = true;
                 Animator.SetBool("isScrolling", false);
                 Animator.SetBool("hasCasted", true);
                 _spellBookAnimator.SetBool("spellBookOpen", true);

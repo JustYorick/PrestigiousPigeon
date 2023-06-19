@@ -12,7 +12,7 @@ namespace ReDesign
     {
         [SerializeField] private PlayerMovement player;
         [SerializeField] private StatusBar manaSystem;
-        [SerializeField] private Tilemap SelectorMap;
+        [field:SerializeField] public Tilemap SelectorMap{get; private set;}
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
@@ -27,6 +27,8 @@ namespace ReDesign
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
+        private Canvas pauseMenu;
+        private ActionButton movementButton;
 
         private void Awake()
         {
@@ -38,10 +40,15 @@ namespace ReDesign
             {
                 _instance = this;
             }
+            pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
+            movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
         }
 
         private void Update()
         {
+            if(pauseMenu.enabled){
+                return;
+            }
             DrawCurrentSelectedTile();
 
             DrawCurrentSpellRange();
@@ -77,8 +84,10 @@ namespace ReDesign
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
+                    spellMenu.AllowedToOpen = false;
                 }
-
+                spellMenu.Close();
+                movementButton.Activate();
                 spellSelection = null;
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
