@@ -129,10 +129,14 @@ namespace ReDesign
 
                     break;
                 case "Level2Map":
-                    ChangeGameOverUI("You beat Level 1!");
-                    _retryButton.SetActive(false);
-                    _continueButton.SetActive(true);
-                    gameOver = true;
+                    if (WorldController.getEntities().Where(e => e.name.Contains("snow")).Count() == 0 && GameObject.Find("SnowKingAwakenTrigger").GetComponent<SnowKingAwake>().AllPillarsDestroyed)
+                    {
+                        ChangeGameOverUI("You beat Level 2!");
+                        _retryButton.SetActive(false);
+                        _continueButton.SetActive(true);
+                        gameOver = true;
+                    }
+
                     break;
                 case "Level3Map":
                     ChangeGameOverUI("You beat Level 3!");
