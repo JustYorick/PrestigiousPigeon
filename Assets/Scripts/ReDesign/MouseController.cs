@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CombatMenu;
 using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -29,6 +30,7 @@ namespace ReDesign
         [SerializeField] private SpellMenu spellMenu;
         private Canvas pauseMenu;
         private ActionButton movementButton;
+        private Canvas helpScreen;
 
         private void Awake()
         {
@@ -41,12 +43,13 @@ namespace ReDesign
                 _instance = this;
             }
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
+            helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
             movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
         }
 
         private void Update()
         {
-            if(pauseMenu.enabled){
+            if(pauseMenu.enabled || helpScreen.enabled){
                 return;
             }
             DrawCurrentSelectedTile();
