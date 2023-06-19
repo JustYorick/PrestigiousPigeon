@@ -129,7 +129,7 @@ public class EnvironmentEffect : MonoBehaviour
                 GameObject newTile = Instantiate(puddleTile);
                 newTile.transform.position = obj.transform.position;
                 Destroy(obj);
-                newTile.transform.localScale = new Vector3(newTile.transform.localScale.x, newTile.transform.localScale.y * 0.6f, newTile.transform.localScale.z);
+                newTile.transform.localScale = new Vector3(newTile.transform.localScale.x, newTile.transform.localScale.y * 0.5001f, newTile.transform.localScale.z);
                 targetTile.GameObject = newTile;
                 WorldController.Instance.addObstacle(newTile, true);
             }
