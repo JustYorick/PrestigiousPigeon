@@ -16,7 +16,6 @@ public class AnimationEvent : MonoBehaviour
         // Play sound when it is assigned
         if (soundToPlay)
         {
-            Debug.Log($"Playing {soundToPlay}");
             SoundManager.Instance.PlaySound(soundToPlay);
         }
     }
