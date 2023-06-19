@@ -11,7 +11,7 @@ namespace ReDesign.Entities
         public override int SightRange { get { return 40; } }
         public override int MoveRange { get { return 3; } }
 
-        public override string displayName => throw new NotImplementedException();
+        public override string displayName { get { return "Snow King"; } }
 
         public SnowBoss()
         {
