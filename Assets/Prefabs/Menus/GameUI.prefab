@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 69640961cb633d24c928db941dbbd0fc, type: 3}
+  m_Texture: {fileID: 2800000, guid: 8b3f9ef0530a9674fb0c93f5268a0894, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1136,10 +1136,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrowPosition: {x: -33.5, y: -140}
   narrowSize: {x: 150, y: 100}
-  narrowTexture: {fileID: 2800000, guid: 69640961cb633d24c928db941dbbd0fc, type: 3}
+  narrowTexture: {fileID: 2800000, guid: 8b3f9ef0530a9674fb0c93f5268a0894, type: 3}
   widePosition: {x: -110, y: -140}
   wideSize: {x: 300, y: 100}
-  wideTexture: {fileID: 2800000, guid: 5a781238d9d8b7883a1ce6d7cb6e3099, type: 3}
+  wideTexture: {fileID: 2800000, guid: be3a248a74f6f954296739eee1f137db, type: 3}
   buttons:
   - {fileID: 397162537872090314}
   - {fileID: 397162537424545056}
@@ -3255,7 +3255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 94a2ffa234e333dd9971d8a1a826be13, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7ed970f701675324f90ba97aafce2367, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3332,10 +3332,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrowPosition: {x: -33.5, y: 0}
   narrowSize: {x: 150, y: 100}
-  narrowTexture: {fileID: 2800000, guid: 94a2ffa234e333dd9971d8a1a826be13, type: 3}
+  narrowTexture: {fileID: 2800000, guid: 7ed970f701675324f90ba97aafce2367, type: 3}
   widePosition: {x: -110, y: 0}
   wideSize: {x: 300, y: 100}
-  wideTexture: {fileID: 2800000, guid: ffda0f33f72d8a1b7b3f0e0c973f6dc9, type: 3}
+  wideTexture: {fileID: 2800000, guid: de1bbb524eeaabf479761b61504d2913, type: 3}
   buttons:
   - {fileID: 397162537872090314}
   - {fileID: 397162536590043377}
@@ -4253,7 +4253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 3eb1aebece26797c2abeae0a1a0682e0, type: 3}
+  m_Texture: {fileID: 2800000, guid: 33907a7a8773e3948b3c4980ff0688f8, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4330,10 +4330,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrowPosition: {x: -33.5, y: 140}
   narrowSize: {x: 150, y: 100}
-  narrowTexture: {fileID: 2800000, guid: 3eb1aebece26797c2abeae0a1a0682e0, type: 3}
+  narrowTexture: {fileID: 2800000, guid: 33907a7a8773e3948b3c4980ff0688f8, type: 3}
   widePosition: {x: -110, y: 140}
   wideSize: {x: 300, y: 100}
-  wideTexture: {fileID: 2800000, guid: 050fd3b5d5b408083b69a8520227bf78, type: 3}
+  wideTexture: {fileID: 2800000, guid: 254b12725f2829f4a9f3f76255e44b8c, type: 3}
   buttons:
   - {fileID: 397162537424545056}
   - {fileID: 397162536590043377}
@@ -4668,6 +4668,9 @@ MonoBehaviour:
   minimumMana: 2
   closeKeyBinding: 27
   AllowedToOpen: 1
+  OnClose:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &397162537970314386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4780,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 80
+  m_lineSpacing: 6.5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

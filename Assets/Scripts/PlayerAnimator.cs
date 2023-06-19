@@ -1,4 +1,5 @@
 ﻿using System;
+using CombatMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private bool IsPlayerDead => Animator.GetBool("PlayerDead");
 
+    private bool IsScrolling => Animator.GetBool("isScrolling");
+
 
     private void Awake()
     {
@@ -62,7 +65,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             Animator.Play("Walking");
         }
-
+        
         if (IsSpellMenuEnabled && !IsWalking)
         {
             Animator.SetBool("isScrolling", true);
@@ -74,6 +77,14 @@ public class PlayerAnimator : MonoBehaviour
         else
         {
             Animator.SetBool("isScrolling", false);
+        }
+        
+        if (IsScrolling)
+        {
+            _spellBookAnimator.SetBool("spellBookOpen", true); 
+        }
+        else
+        {
             _spellBookAnimator.SetBool("spellBookOpen", false);
         }
 
@@ -81,36 +92,36 @@ public class PlayerAnimator : MonoBehaviour
         {
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") && 
-                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && 
+            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") &&
+                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 &&
                 !Animator.IsInTransition(0))
             {
                 ChangeButton(false);
                 _spellBookAnimator.SetBool("spellBookOpen", false);
             }
-            else if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && 
-                     Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell"))
+            
+            else if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") &&
+                     Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 Animator.SetBool("fireCasted", false);
+                Animator.SetBool("hasCasted", true);
                 ChangeButton(true);
                 _spellMenu.AllowedToOpen = true;
                 Animator.SetBool("isScrolling", false);
-                Animator.SetBool("hasCasted", true);
-                _spellBookAnimator.SetBool("spellBookOpen", true);
             }
         }
         else if (IsIceCasted)
         {
             Animator.SetBool("hasCasted", false);
             Animator.Play("Ice Spell");
-            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell") && 
-                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && 
+            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell") &&
+                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 &&
                 !Animator.IsInTransition(0))
             {
                 ChangeButton(false);
                 _spellBookAnimator.SetBool("spellBookOpen", false);
             }
-            else if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && 
+            else if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 &&
                      Animator.GetCurrentAnimatorStateInfo(0).IsName("Ice Spell"))
             {
                 Animator.SetBool("iceCasted", false);
@@ -118,14 +129,13 @@ public class PlayerAnimator : MonoBehaviour
                 _spellMenu.AllowedToOpen = true;
                 Animator.SetBool("isScrolling", false);
                 Animator.SetBool("hasCasted", true);
-                _spellBookAnimator.SetBool("spellBookOpen", true);
             }
         }
 
         if (IsHit && !IsPlayerDead)
         {
             Animator.Play("TakeDamage");
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
             {
                 if (!IsPlayerDead)
                 {
@@ -145,4 +155,9 @@ public class PlayerAnimator : MonoBehaviour
         _spellsButton.interactable = status;
         _moveButton.interactable = status;
     }
+
+    public static bool PerformingAction()
+    {
+        return _animator.GetBool("isWalking") || _animator.GetBool("iceCasted") || _animator.GetBool("fireCasted");
+    } 
 }
