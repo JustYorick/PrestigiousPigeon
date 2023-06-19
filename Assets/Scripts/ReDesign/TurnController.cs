@@ -129,8 +129,8 @@ namespace ReDesign
 
                     break;
                 case "Level2Map":
-                    if (WorldController.getEntities().Where(e => e.name.Contains("snow")).Count() == 0 && GameObject.Find("SnowKingAwakenTrigger").GetComponent<SnowKingAwake>().AllPillarsDestroyed)
-                    {
+                    if (WorldController.getEntities().Where(e => e.name.ToLower().Contains("snow")).Count() == 0 && GameObject.Find("SnowKingAwakenTrigger").GetComponent<SnowKingAwake>().AllPillarsDestroyed)
+                    { 
                         ChangeGameOverUI("You beat Level 2!");
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
