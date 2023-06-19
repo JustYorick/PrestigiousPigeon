@@ -66,8 +66,8 @@ public class EnvironmentEffect : MonoBehaviour
             if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("obelisk"))
             {
 
-                for (int i = -3; i < 4; i++){
-                    for (int j = -3; j < 4; j++){
+                for (int i = -4; i < 5; i++){
+                    for (int j = -4; j < 5; j++){
                         DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
                         if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
                         {
