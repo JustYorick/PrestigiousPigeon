@@ -64,11 +64,13 @@ public class PlayerAnimator : MonoBehaviour
         if (IsWalking)
         {
             Animator.Play("Walking");
+
         }
         
         if (IsSpellMenuEnabled && !IsWalking)
         {
             Animator.SetBool("isScrolling", true);
+
             if (!IsFireCasted || !IsIceCasted)
             {
                 _spellBookAnimator.SetBool("spellBookOpen", true);
@@ -92,8 +94,9 @@ public class PlayerAnimator : MonoBehaviour
         {
             Animator.SetBool("hasCasted", false);
             Animator.Play("Fire Spell");
-            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") &&
-                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 &&
+
+            if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Fire Spell") && 
+                Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && 
                 !Animator.IsInTransition(0))
             {
                 ChangeButton(false);
