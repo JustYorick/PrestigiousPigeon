@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
@@ -8,6 +9,9 @@ public class SettingsController : MonoBehaviour
     Toggle toggle;
     Slider slider;
     [SerializeField] string fieldName;
+    // To play when slider changes
+    [SerializeField]private AudioClip sliderSound;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -52,4 +56,16 @@ public class SettingsController : MonoBehaviour
 
     // Read the last saved setting, return 0 if there is no setting with this name available
     public static float ReadSettingFloat(string name) => PlayerPrefs.GetFloat(name, 0.0f);
+
+    public void OnEndDrag()
+    {
+        SoundManager.Instance.PlaySoundWithVolume(sliderSound,slider.value);
+    }
+
+    public void MusicMute()
+    {
+        SoundManager.Instance.ToggleAllSounds();
+    }
+    
+
 }
