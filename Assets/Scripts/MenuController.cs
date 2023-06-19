@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        SoundManager.Instance.SetMusic(menuClip);
+        if(menuClip) SoundManager.Instance.SetMusic(menuClip);
         // Get the canvas component from the containing game object
         menu = gameObject.GetComponent<Canvas>();
     }

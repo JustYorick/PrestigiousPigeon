@@ -13,6 +13,11 @@ public class AnimationEvent : MonoBehaviour
 
     public void PlaySound()
     {
-        SoundManager.Instance.PlaySound(soundToPlay);
+        // Play sound when it is assigned
+        if (soundToPlay)
+        {
+            Debug.Log($"Playing {soundToPlay}");
+            SoundManager.Instance.PlaySound(soundToPlay);
+        }
     }
 }
