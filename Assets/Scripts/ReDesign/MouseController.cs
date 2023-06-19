@@ -156,7 +156,7 @@ namespace ReDesign
 
                 foreach (var t in targets)
                 {
-                    RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(255,0,0,0.5f), SelectorMap, false);
+                    RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(0,0,255,0.2f), SelectorMap, false);
                 }
             }
         }

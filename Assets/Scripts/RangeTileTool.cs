@@ -139,7 +139,7 @@ public class RangeTileTool : MonoBehaviour
         tilesToDraw = tilesToDraw.Distinct().ToList();
         foreach (var t in tilesToDraw)
         {
-            SpawnTile(t.XPos, t.YPos, new Color(0,0,255,0.5f), rangeTileMap);
+            SpawnTile(t.XPos, t.YPos, new Color(255,255,255,0.03f), rangeTileMap);
         }
     }
 }

@@ -4,7 +4,10 @@ using System.Linq;
 using UnityEngine;
 using ReDesign;
 using UnityEditor.Experimental.GraphView;
+using ReDesign.Entities;
 
+
+namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
     // Tiles
@@ -44,10 +47,12 @@ public class EnvironmentEffect : MonoBehaviour
     public void WaterEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         TrySpawningPuddle(pathNodes);
+        ChangePillarToNothing(pathNodes);
+        ChangeGraveToNothing(pathNodes);
     }
 
     // Ice
-    private void ChangeWaterTilesToIce(List<DefaultTile> pathNodes)
+    public void ChangeWaterTilesToIce(List<DefaultTile> pathNodes)
     {
         List<DefaultTile> tiles = WorldController.Instance.BaseLayer;
         foreach (DefaultTile pn in pathNodes)
@@ -89,6 +94,44 @@ public class EnvironmentEffect : MonoBehaviour
                 WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
                 Destroy(tempTile.GameObject);
                 tempTile.GameObject = null;
+            }
+        }
+    }
+
+    // Ice
+    private void ChangePillarToNothing(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
+            {
+                //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+                WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
+                Destroy(tempTile.GameObject);
+                tempTile.GameObject = null;
+            }
+        }
+    }
+
+    // Ice
+    private void ChangeGraveToNothing(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("grave"))
+            {
+                WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+                WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
+                Destroy(tempTile.GameObject);
+                tempTile.GameObject = null;
+
+                //spawn skeleton (?)
             }
         }
     }
@@ -142,7 +185,6 @@ public class EnvironmentEffect : MonoBehaviour
         foreach (DefaultTile pn in pathNodes)
         {
             DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
-
             if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("tree"))
             {
                 WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
@@ -150,7 +192,22 @@ public class EnvironmentEffect : MonoBehaviour
                 WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
                 Destroy(tempTile.GameObject);
                 tempTile.GameObject = null;
+
+                // Entities around burning tree take damage
+                for (int i = -1; i < 2; i++){
+                    for (int j = -1; j < 2; j++){
+                        DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
+                        {
+                            Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
+                            enemy.ReceiveDamage(5);
+                        }
+                    }
+                }
+
+                
             }
+             
         }
     }
 
@@ -200,4 +257,5 @@ public class EnvironmentEffect : MonoBehaviour
 
         return tileObject;
     }
+}
 }
