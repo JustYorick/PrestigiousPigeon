@@ -33,6 +33,10 @@ public class MobSpawning : MonoBehaviour
             if(!this.gameObject.scene.isLoaded) return;
             var r = Random.Range(0, Mobs.Count);
             GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(r, .6f, 2), Quaternion.identity);
+            if (m.gameObject.name.Contains("Slime")){
+                m.transform.localScale = new Vector3(.5f, .5f, .5f);
+            }
+            
             if (Layer.activeInHierarchy) {
                 m.transform.parent = Layer.transform;
             }
