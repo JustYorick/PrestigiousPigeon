@@ -2,7 +2,7 @@
  using UnityEngine;
  using UnityEngine.EventSystems;
 
- public class HoverableUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+ public class HoverableUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
  {
      private Vector3 defaultScale;
      
@@ -19,5 +19,10 @@
      public void OnPointerExit(PointerEventData eventData)
      {
          gameObject.transform.localScale = defaultScale;
+     }
+     public void OnPointerClick(PointerEventData eventData)
+     {
+         if(eventData.button == 0)
+            SoundManager.Instance.PlayButtonSound();
      }
  }

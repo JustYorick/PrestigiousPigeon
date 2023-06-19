@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour {
     private Canvas menu;
     private GraphicRaycaster raycaster;
+    [SerializeField] private AudioClip menuClip;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        if(menuClip) SoundManager.Instance.SetMusic(menuClip);
         // Get the canvas component from the containing game object
         menu = GetComponent<Canvas>();
         raycaster = GetComponent<GraphicRaycaster>();
@@ -23,7 +26,10 @@ public class MenuController : MonoBehaviour {
     }
 
     // Disable the menu to close it again
-    public void CloseMenu(){
+    public void CloseMenu()
+    {
+        SoundManager.Instance.SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+        SoundManager.Instance.SetEffectsVolume(PlayerPrefs.GetFloat("EffectVolume"));
         menu.enabled = false;
         raycaster.enabled = false;
     }
