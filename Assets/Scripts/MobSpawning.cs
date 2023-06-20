@@ -20,17 +20,17 @@ public class MobSpawning : MonoBehaviour
     void Update()
     {
         
-        if(TurnController.TurnCount%frequency == 0 && spawning == false){
-            if(frequency == 1){
-                Debug.Log("Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
-            }
+        if(TurnController.TurnCount%frequency == frequency-1 && spawning == false){
+            // if(frequency == 1){
+            //     Debug.Log("Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
+            // }
             
             Spawn();
         }
-        if(TurnController.TurnCount%frequency != 0){
-            if(frequency == 1){
-                Debug.Log("not Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
-            }
+        if(TurnController.TurnCount%frequency != frequency-1){
+            // if(frequency == 1){
+            //     Debug.Log("not Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
+            // }
             spawning = false;
         }
 
