@@ -25,7 +25,9 @@ namespace ReDesign.Entities{
                 obstacleTile.GameObject = null;
                 obstacleTile = null;
 
-                Destroy(this.gameObject);
+                Animator animator = GetComponentInChildren<Animator>();
+                animator.SetBool("isDead", true);
+                Destroy(this.gameObject, 1f);
 
                 TurnController.Instance.gameOverEvent.Invoke();
             }
