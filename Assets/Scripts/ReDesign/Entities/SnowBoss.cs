@@ -11,7 +11,14 @@ namespace ReDesign.Entities
         public override int SightRange { get { return 40; } }
         public override int MoveRange { get { return 3; } }
 
+        private EntityAnimator _snowBossAnimator;
         public override string displayName { get { return "Snow King"; } }
+        
+        private void Awake()
+        {
+            _snowBossAnimator = GetComponentInChildren<EntityAnimator>();
+
+        }
 
         public SnowBoss()
         {
@@ -40,7 +47,7 @@ namespace ReDesign.Entities
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             if (range < SightRange)
             {
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _snowBossAnimator);
             } else
             {
                 MoveToPlayer(0);
@@ -56,6 +63,7 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
+                _snowBossAnimator.SetAttacking();
                 StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
