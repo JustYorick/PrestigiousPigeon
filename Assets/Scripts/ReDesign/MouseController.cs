@@ -28,12 +28,17 @@ namespace ReDesign
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
+        private BasicFireSpell fireSpell;
+        private BasicIceSpell iceSpell;
         private Canvas pauseMenu;
         private ActionButton movementButton;
         private Canvas helpScreen;
 
         private void Awake()
         {
+            fireSpell = new BasicFireSpell(fireParticles);
+            iceSpell = new BasicIceSpell(iceParticles);
+
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
@@ -49,19 +54,22 @@ namespace ReDesign
 
         private void Update()
         {
+            Vector3 mousePosition = GetMouseWorldPos();
+            DefaultTile selectedTile = MouseToTile(mousePosition);
+            
             if(pauseMenu.enabled || helpScreen.enabled){
                 return;
             }
-            DrawCurrentSelectedTile();
-
             DrawCurrentSpellRange();
 
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
-            {
-                Vector3 pos = GetMouseWorldPos();
+
+            if(selectedTile != prevSelectedTile){
                 GridLayout gr = WorldController.Instance.gridLayout;
-                player.ShowPath(pos, gr, pathNodesMap);
+                player.ShowPath(mousePosition, gr, pathNodesMap);
+                DrawCurrentSelectedTile(selectedTile);
             }
+            prevSelectedTile = selectedTile;
             if (!Input.GetMouseButtonDown(0))
             {
                 return;
@@ -69,20 +77,16 @@ namespace ReDesign
 
             if (spellSelection == null)
             {
-                Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
-                player.MovePlayer(pos, gr, pathNodesMap);
-            }
-            else
-            {
+                player.MovePlayer(mousePosition, gr, pathNodesMap);
+            }else{
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY)
-                        .Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) &&
-                    manaSystem.Value >= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
                 {
-                    int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
-                    int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
+                    DefaultTile nearestPathNode = player.FindNearestXYPathNode(mousePosition, pathNodesMap);
+                    int x = nearestPathNode.XPos;
+                    int y = nearestPathNode.YPos;
                     StartCoroutine(Player.RotateToAttack());
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
@@ -113,11 +117,11 @@ namespace ReDesign
             }
         }
 
-        public DefaultTile MouseToTile()
+        public DefaultTile MouseToTile(Vector3 mousePosition)
         {
             DefaultTile hoveredNode = WorldController.Instance.BaseLayer
-                .OrderBy(item => Math.Abs(GetMouseWorldPos().x - item.GameObject.transform.position.x))
-                .ThenBy(item => Math.Abs(GetMouseWorldPos().z - item.GameObject.transform.position.z)).ToList()
+                .OrderBy(item => Math.Abs(mousePosition.x - item.GameObject.transform.position.x))
+                .ThenBy(item => Math.Abs(mousePosition.z - item.GameObject.transform.position.z)).ToList()
                 .FirstOrDefault();
 
             return hoveredNode;
@@ -126,14 +130,9 @@ namespace ReDesign
         public void SelectFireSpell()
         {
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            BasicFireSpell fireSpell = new BasicFireSpell();
-            if (fireSpell.ManaCost <= manaSystem.Value)
-            {
+            if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
-                spellSelection.particleSystem = fireParticles;
-            }
-            else
-            {
+            }else{
                 spellSelection = null;
             }
         }
@@ -141,32 +140,23 @@ namespace ReDesign
         public void SelectIceSpell()
         {
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            BasicIceSpell iceSpell = new BasicIceSpell();
-            if (iceSpell.ManaCost <= manaSystem.Value)
-            {
+            if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;
-                spellSelection.particleSystem = iceParticles;
-            }
-            else
-            {
+            }else{
                 spellSelection = null;
             }
         }
 
         public void DeselectSpell() => spellSelection = null;
-
-        private void DrawCurrentSelectedTile()
+        
+        private void DrawCurrentSelectedTile(DefaultTile hoveredNode)
         {
-            if (MouseToTile() != prevSelectedTile)
+            Color color = new Color(255, 255, 255, 0.05f);
+            prevSelectedTile = hoveredNode;
+            RangeTileTool.Instance.clearTileMap(SelectorMap);
+            if (hoveredNode != null && drawSelectedTile)
             {
-                Color color = new Color(255, 255, 255, 0.05f);
-                DefaultTile hoveredNode = MouseToTile();
-                prevSelectedTile = hoveredNode;
-                RangeTileTool.Instance.clearTileMap(SelectorMap);
-                if (hoveredNode != null && drawSelectedTile)
-                {
-                    RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
-                }
+                RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
             }
         }
 
@@ -191,8 +181,7 @@ namespace ReDesign
             {
                 if (spellSelection.GetType() == typeof(BasicFireSpell))
                     PlayerAnimator._animator.SetBool("fireCasted", true);
-
-                if (spellSelection.GetType() == typeof(BasicIceSpell))
+                else if (spellSelection.GetType() == typeof(BasicIceSpell))
                     PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
