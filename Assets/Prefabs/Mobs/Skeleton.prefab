@@ -388,7 +388,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: a03284aad7e2fa041956317df0f13f35, type: 3}
+  - {fileID: 2100000, guid: d3c9f51613a8c7a48bf5375ca71d0bab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -589,7 +589,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d7bb147a9b3d27b4b9509802c7d7e092, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

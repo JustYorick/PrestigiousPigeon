@@ -66,4 +66,14 @@ public class EntityAnimator : MonoBehaviour
         _animator.SetBool("isWalking", true);
         _animator.SetBool("isIdle", true);
     }
+
+    public void SetHit()
+    {
+        _animator.SetBool("isHit", true);
+    }
+
+    public void SetDead()
+    {
+        _animator.SetBool("isDead", true);
+    }
 }

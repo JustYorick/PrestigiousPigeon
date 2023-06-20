@@ -32,7 +32,6 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            //Debug.Log("im a Lich");
             StateController.ChangeState(GameState.EnemyTurn);
 
             //Move() will call Attack() and change turn
@@ -53,7 +52,6 @@ namespace ReDesign.Entities
                 MoveToPlayer(0);
             }
             
-            //foreach(AttacksAndSpells atk in _attacks)
         }
 
         public override void Attack()
@@ -70,10 +68,5 @@ namespace ReDesign.Entities
             //attacking = false;
             StopCoroutine(EnemyRotateToAttack());
         }
-
-        // public override void ReceiveDamage(int dmg)
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 }
