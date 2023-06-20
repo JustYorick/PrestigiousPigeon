@@ -8,7 +8,7 @@ using ReDesign.Entities;
 namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
-    //public ParticleSystem particleSystem;
+    public ParticleSystem particleSystem;
     // Tiles
     [SerializeField] private GameObject iceTile;
     [SerializeField] private GameObject waterTile;
@@ -72,6 +72,14 @@ public class EnvironmentEffect : MonoBehaviour
                         DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
                         if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
                         {
+
+                            GameObject p = GameObject.Find("Ice Particles");
+                            if (p != null)
+                                {
+                                    particleSystem = Instantiate(p.GetComponent<ParticleSystem>(), enemyTile.GameObject.transform.position, Quaternion.Euler(-90, 0, 0));
+                                    particleSystem.Play();
+                                }
+
                             Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                             enemy.ReceiveDamage(5);
                         }
@@ -158,16 +166,17 @@ public class EnvironmentEffect : MonoBehaviour
                 for (int i = -1; i < 2; i++){
                     for (int j = -1; j < 2; j++){
                         DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
-                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
                         {
+
+                            GameObject p = GameObject.Find("Fire Particles");
+                            if (p != null)
+                                {
+                                    particleSystem = Instantiate(p.GetComponent<ParticleSystem>(), enemyTile.GameObject.transform.position, Quaternion.Euler(-90, 0, 0));
+                                    particleSystem.Play();
+                                }
                             Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                             enemy.ReceiveDamage(5);
-                            
-                            // if (particleSystem != null)
-                            //     {
-                            //         particleSystem.transform.position = enemyTile.GameObject.transform.position;
-                            //         particleSystem.Play();
-                            //     }
                         }
                     }
                 }
