@@ -497,8 +497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5344cfa4a4594e2ab4884bbc2e8220e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 8642962180711539446}
   finishedMoving: 0
+  _healthBar: {fileID: 8642962180711539446}
+  deathEntityObject: {fileID: 7812348134182722187, guid: 1aa2ab847bdb281428344fc71a94ed6b, type: 3}
 --- !u!1 &8642962180711539446
 GameObject:
   m_ObjectHideFlags: 0

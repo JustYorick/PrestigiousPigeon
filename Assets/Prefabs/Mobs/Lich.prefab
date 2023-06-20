@@ -742,7 +742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5554773124210642262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -9.500002, z: 0.70000005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -765,6 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finishedMoving: 0
   _healthBar: {fileID: 6208343531714861500}
+  deathEntityObject: {fileID: 7053671398183441971, guid: 27eb4c22b5157544d8233b9182d1ae7e, type: 3}
 --- !u!1 &5556697747644982053
 GameObject:
   m_ObjectHideFlags: 0
