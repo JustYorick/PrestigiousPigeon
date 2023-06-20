@@ -8,6 +8,7 @@ using ReDesign.Entities;
 namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
+    //public ParticleSystem particleSystem;
     // Tiles
     [SerializeField] private GameObject iceTile;
     [SerializeField] private GameObject waterTile;
@@ -161,6 +162,12 @@ public class EnvironmentEffect : MonoBehaviour
                         {
                             Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                             enemy.ReceiveDamage(5);
+                            
+                            // if (particleSystem != null)
+                            //     {
+                            //         particleSystem.transform.position = enemyTile.GameObject.transform.position;
+                            //         particleSystem.Play();
+                            //     }
                         }
                     }
                 }
