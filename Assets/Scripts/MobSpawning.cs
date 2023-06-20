@@ -9,7 +9,7 @@ public class MobSpawning : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] List<GameObject> Mobs;
     [SerializeField] GameObject Layer;
-    [SerializeField] int frequency = 2;
+    [SerializeField] int frequency = 3;
     private bool spawning = false;
     void Start()
     {
@@ -21,16 +21,9 @@ public class MobSpawning : MonoBehaviour
     {
         
         if(TurnController.TurnCount%frequency == frequency-1 && spawning == false){
-            // if(frequency == 1){
-            //     Debug.Log("Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
-            // }
-            
             Spawn();
         }
         if(TurnController.TurnCount%frequency != frequency-1){
-            // if(frequency == 1){
-            //     Debug.Log("not Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
-            // }
             spawning = false;
         }
 
