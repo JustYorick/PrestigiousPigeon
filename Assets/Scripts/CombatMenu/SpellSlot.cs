@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using CombatMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using ReDesign;
 
 public class SpellSlot : MonoBehaviour{
     [SerializeField] private TMPro.TMP_Text spellNameField;
@@ -20,7 +21,7 @@ public class SpellSlot : MonoBehaviour{
     
     private Image spellImage;
     private Button spellButton;
-    private Canvas spellMenu;
+    private SpellMenu spellMenu;
 
     void Awake(){
         // Retrieve the button and image components
@@ -28,7 +29,10 @@ public class SpellSlot : MonoBehaviour{
         spellImage = GetComponent<Image>();
 
         // Find the spell menu
-        spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        spellMenu = GameObject.Find("SpellMenu").GetComponent<SpellMenu>();
+
+        // Disable the spell slot when the spell spell menu closes
+        spellMenu.OnClose.AddListener(Disable);
 
         // Add a listener for when the button is clicked
         spellButton.onClick.AddListener(Enable);
@@ -47,7 +51,7 @@ public class SpellSlot : MonoBehaviour{
 
     void Update(){
         // Simulate a button click, if the button is unlocked, the keybinding is down, and the spell menu is open
-        if(unlocked && Input.GetKeyDown(binding) && spellMenu.enabled){
+        if(unlocked && Input.GetKeyDown(binding) && spellMenu.IsOpen){
             spellButton.onClick.Invoke();
         }
     }
