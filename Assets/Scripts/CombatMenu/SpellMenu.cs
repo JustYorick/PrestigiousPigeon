@@ -19,19 +19,20 @@ namespace CombatMenu
 
         public bool IsOpen => canvas.enabled;
 
-    void Start(){
-        // Retrieve the canvas component and the mouse controller
-        canvas = GetComponent<Canvas>();
-        raycaster = GetComponent<GraphicRaycaster>();
-        raycaster.enabled = canvas.enabled;
-        mouseController = GameObject.Find("MouseController").GetComponent<ReDesign.MouseController>();
-    }
+        void Start(){
+            // Retrieve the canvas component and the mouse controller
+            canvas = GetComponent<Canvas>();
+            raycaster = GetComponent<GraphicRaycaster>();
+            raycaster.enabled = canvas.enabled;
+            mouseController = GameObject.Find("MouseController").GetComponent<ReDesign.MouseController>();
+        }
 
-    void Update(){
-        // Close the spell menu and deselect the selected spell on escape
-        if(canvas.enabled && Input.GetKeyDown(closeKeyBinding)){
-            Close();
-            movementButton.Activate();
+        void Update(){
+            // Close the spell menu and deselect the selected spell on escape
+            if(canvas.enabled && Input.GetKeyDown(closeKeyBinding)){
+                Close();
+                movementButton.Activate();
+            }
         }
 
         void LateUpdate(){
