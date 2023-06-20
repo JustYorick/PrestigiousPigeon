@@ -32,7 +32,7 @@ public class ActionButton : MonoBehaviour
     private int confirmations = 0;
     [SerializeField] private UnityEvent onConfirm = new UnityEvent();
     private RawImage image;
-    private Button button;
+    public Button button;
     private RectTransform rectTransform;
     private Canvas spellMenu;
     private Canvas pauseMenu;
