@@ -92,9 +92,10 @@ namespace ReDesign
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
                     spellMenu.AllowedToOpen = false;
+                }else{
+                    movementButton.Activate();
                 }
                 spellMenu.Close();
-                movementButton.Activate();
                 spellSelection = null;
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
