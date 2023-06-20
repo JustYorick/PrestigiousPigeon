@@ -7,6 +7,7 @@ namespace ReDesign.Entities{
     public abstract class Enemy : Entity
     {
         [SerializeField] private GameObject _healthBar;
+        [SerializeField] private float deathAnimationTime = 1f;
         public override void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
@@ -27,7 +28,7 @@ namespace ReDesign.Entities{
 
                 Animator animator = GetComponentInChildren<Animator>();
                 animator.SetBool("isDead", true);
-                Destroy(this.gameObject, 1f);
+                Destroy(this.gameObject, deathAnimationTime);
 
                 TurnController.Instance.gameOverEvent.Invoke();
             }
