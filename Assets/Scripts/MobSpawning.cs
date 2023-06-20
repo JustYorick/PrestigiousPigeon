@@ -9,6 +9,7 @@ public class MobSpawning : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] List<GameObject> Mobs;
     [SerializeField] GameObject Layer;
+    [SerializeField] int frequency = 2;
     private bool spawning = false;
     void Start()
     {
@@ -18,11 +19,18 @@ public class MobSpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(TurnController.TurnCount%3 == 1 && spawning == false){
+        
+        if(TurnController.TurnCount%frequency == 0 && spawning == false){
+            if(frequency == 1){
+                Debug.Log("Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
+            }
+            
             Spawn();
         }
-        if(TurnController.TurnCount%3 != 1){
+        if(TurnController.TurnCount%frequency != 0){
+            if(frequency == 1){
+                Debug.Log("not Spawning " + TurnController.TurnCount + " " + TurnController.TurnCount%frequency);
+            }
             spawning = false;
         }
 
@@ -32,7 +40,7 @@ public class MobSpawning : MonoBehaviour
             spawning = true;
             if(!this.gameObject.scene.isLoaded) return;
             var r = Random.Range(0, Mobs.Count);
-            GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(r, .6f, 2), Quaternion.identity);
+            GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(1, .6f, 2), Quaternion.identity);
             if (m.gameObject.name.Contains("Slime")){
                 m.transform.localScale = new Vector3(.5f, .5f, .5f);
             }
@@ -41,6 +49,17 @@ public class MobSpawning : MonoBehaviour
                 m.transform.parent = Layer.transform;
             }
             WorldController.Instance.addObstacle(m);
+
+            var a = Random.Range(0, Mobs.Count);
+            GameObject o = Instantiate(Mobs[a], transform.position + new Vector3(-1, .6f, 2), Quaternion.identity);
+            if (o.gameObject.name.Contains("Slime")){
+                o.transform.localScale = new Vector3(.5f, .5f, .5f);
+            }
+            
+            if (Layer.activeInHierarchy) {
+                o.transform.parent = Layer.transform;
+            }
+            WorldController.Instance.addObstacle(o);
     }
 }
 }
