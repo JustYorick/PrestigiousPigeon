@@ -26,7 +26,8 @@ public class UIDisable : MonoBehaviour
             button.interactable = false;
             actionButton.Deactivate();
         }
-        else if (!PlayerAnimator.PerformingAction()){
+        else
+        {
             button.interactable = true;
         }
     }

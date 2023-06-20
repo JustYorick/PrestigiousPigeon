@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CombatMenu;
 using ReDesign.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -13,85 +12,60 @@ namespace ReDesign
     {
         [SerializeField] private PlayerMovement player;
         [SerializeField] private StatusBar manaSystem;
-        [field:SerializeField] public Tilemap SelectorMap{get; private set;}
+        [SerializeField] private Tilemap SelectorMap;
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
-
-        public static MouseController Instance
-        {
-            get { return _instance; }
-        }
-
+        public static MouseController Instance { get { return _instance; } }
         public static AttacksAndSpells spellSelection = null;
         public ParticleSystem fireParticles;
         public ParticleSystem iceParticles;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
-        private Canvas pauseMenu;
-        private ActionButton movementButton;
-        private Canvas helpScreen;
 
         private void Awake()
         {
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);
-            }
-            else
-            {
+            } else {
                 _instance = this;
             }
-            pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
-            helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
-            movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
         }
-
         private void Update()
         {
-            if(pauseMenu.enabled || helpScreen.enabled){
-                return;
-            }
             DrawCurrentSelectedTile();
-
+            
             DrawCurrentSpellRange();
-
+            
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.ShowPath(pos, gr, pathNodesMap);
             }
-            if (!Input.GetMouseButtonDown(0))
-            {
+            if(!Input.GetMouseButtonDown(0)){
                 return;
             }
-
             if (spellSelection == null)
             {
                 Vector3 pos = GetMouseWorldPos();
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.MovePlayer(pos, gr, pathNodesMap);
-            }
-            else
-            {
+            }else{
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY)
-                        .Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) &&
-                    manaSystem.Value >= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
                 {
                     int x = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).XPos;
                     int y = player.FindNearestXYPathNode(GetMouseWorldPos(), pathNodesMap).YPos;
-                    StartCoroutine(Player.RotateToAttack());
+                    StartCoroutine(Player.RotateToAttack());    
                     CheckSpellCasted(spellSelection);
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
-                    spellMenu.AllowedToOpen = false;
                 }
-                spellMenu.Close();
-                movementButton.Activate();
                 spellSelection = null;
+                spellMenu.Close();
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
                 StopCoroutine(Player.RotateToAttack());
@@ -122,39 +96,31 @@ namespace ReDesign
 
             return hoveredNode;
         }
-
-        public void SelectFireSpell()
-        {
+        
+        public void SelectFireSpell(){
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             BasicFireSpell fireSpell = new BasicFireSpell();
-            if (fireSpell.ManaCost <= manaSystem.Value)
-            {
+            if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
                 spellSelection.particleSystem = fireParticles;
-            }
-            else
-            {
+            }else{
                 spellSelection = null;
             }
         }
 
-        public void SelectIceSpell()
-        {
+        public void SelectIceSpell(){
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             BasicIceSpell iceSpell = new BasicIceSpell();
-            if (iceSpell.ManaCost <= manaSystem.Value)
-            {
+            if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;
                 spellSelection.particleSystem = iceParticles;
-            }
-            else
-            {
+            }else{
                 spellSelection = null;
             }
         }
-
+        
         public void DeselectSpell() => spellSelection = null;
-
+        
         private void DrawCurrentSelectedTile()
         {
             if (MouseToTile() != prevSelectedTile)
@@ -174,26 +140,23 @@ namespace ReDesign
         {
             if (spellSelection != null)
             {
-                DefaultTile playerPos = player.FindNearestXYPathNode(player.gameObject.transform.position,
-                    WorldController.Instance.BaseLayer);
+                DefaultTile playerPos = player.FindNearestXYPathNode(player.gameObject.transform.position, WorldController.Instance.BaseLayer);
                 List<DefaultTile> targets = spellSelection.GetTargetLocations(playerPos.XPos, playerPos.YPos);
 
                 foreach (var t in targets)
                 {
-                    RangeTileTool.Instance.SpawnTile(t.XPos, t.YPos, new Color(0, 0, 255, 0.2f), SelectorMap, false);
+                    RangeTileTool.Instance.SpawnTile(t.XPos,t.YPos, new Color(0,0,255,0.2f), SelectorMap, false);
                 }
             }
         }
-
+        
         private static void CheckSpellCasted(AttacksAndSpells spellSelection)
         {
             if (spellSelection != null)
             {
-                if (spellSelection.GetType() == typeof(BasicFireSpell))
-                    PlayerAnimator._animator.SetBool("fireCasted", true);
+                if (spellSelection.GetType() == typeof(BasicFireSpell)) PlayerAnimator._animator.SetBool("fireCasted", true);
 
-                if (spellSelection.GetType() == typeof(BasicIceSpell))
-                    PlayerAnimator._animator.SetBool("iceCasted", true);
+                if (spellSelection.GetType() == typeof(BasicIceSpell)) PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
     }

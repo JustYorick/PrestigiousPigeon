@@ -19,10 +19,7 @@ public class GameController : MonoBehaviour{
     }
 
     // Apply the settings before anything else runs
-    public void Awake()
-    {
-        ApplySettings();
-    }
+    public void Awake() => ApplySettings();
 
     public void LoadScene(string sceneName){
         // Make sure the game controller won't be destroyed
@@ -38,13 +35,15 @@ public class GameController : MonoBehaviour{
     public void ReloadCurrentScene() => LoadScene(SceneManager.GetActiveScene().name);
 
     private void LoadVolume(){
-
-        // Set the sound settings to the stored sound settings, if the sound setting is on
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-        effectVolume = PlayerPrefs.GetFloat("EffectVolume");
-        
-        SoundManager.Instance.SetEffectsVolume(effectVolume);
-        SoundManager.Instance.SetMusicVolume(musicVolume);
+        // Set all sound settings to 0, if the sound setting is off
+        if(PlayerPrefs.GetInt("Sound") == 0){
+            musicVolume = 0;
+            effectVolume = 0;
+        }else{
+            // Set the sound settings to the stored sound settings, if the sound setting is on
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            effectVolume = PlayerPrefs.GetFloat("EffectVolume");
+        }
     }
     
     public void DeleteSave()
