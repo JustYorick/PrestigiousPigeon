@@ -546,7 +546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4393247770269217395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49, y: -9.81, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -765,7 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finishedMoving: 0
   _healthBar: {fileID: 6208343531714861500}
-  deathEntityObject: {fileID: 7053671398183441971, guid: 27eb4c22b5157544d8233b9182d1ae7e, type: 3}
+  deathEntityObject: {fileID: 6465826145588060526, guid: 3c679c9b9a1b4594fa738111af6b3dbe, type: 3}
 --- !u!1 &5556697747644982053
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7513747685993626658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 3.3, z: -12.0804405}
+  m_LocalPosition: {x: -5, y: 14, z: -12.0804405}
   m_LocalScale: {x: 11.22, y: 11.22, z: 11.22}
   m_ConstrainProportionsScale: 1
   m_Children:

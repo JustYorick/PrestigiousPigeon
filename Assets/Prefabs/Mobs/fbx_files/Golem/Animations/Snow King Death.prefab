@@ -1575,7 +1575,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7152077842093207871}
-  - component: {fileID: 7496740534699675493}
   - component: {fileID: 617126938890812785}
   m_Layer: 0
   m_Name: snowgolem
@@ -1601,18 +1600,6 @@ Transform:
   m_Father: {fileID: 7750362404314036769}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7496740534699675493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7496971981717777285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4e4f72772d34d079c37f77b88cadb4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &617126938890812785
 Animator:
   serializedVersion: 5
@@ -1623,7 +1610,7 @@ Animator:
   m_GameObject: {fileID: 7496971981717777285}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: beb42edec55efa840980038600a06c06, type: 3}
-  m_Controller: {fileID: 9100000, guid: 13c4223322dacd34d8da335415fa510c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1fd8314dc93e1364394ae825b9e3b40e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1673,7 +1660,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7750362404314036769}
-  - component: {fileID: -2118283098335790158}
   m_Layer: 0
   m_Name: Snow King Death
   m_TagString: Untagged
@@ -1697,26 +1683,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &-2118283098335790158
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7750362404314036771}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: beb42edec55efa840980038600a06c06, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1fd8314dc93e1364394ae825b9e3b40e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7768411418171918558
 GameObject:
   m_ObjectHideFlags: 0
