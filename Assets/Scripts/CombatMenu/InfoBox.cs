@@ -89,7 +89,7 @@ public class InfoBox : MonoBehaviour{
 
     void ShowObjectInfo(GameObject g){
         // Set the object info
-        entityHpText.text = $"Weakness: ";
+        entityHpText.text = $"Spell: ";
         if(g.name.ToLower().Contains("tree")){
             entityTitleText.text = "Tree";
             entityMoveRangeText.text = $"Fire";
@@ -120,7 +120,7 @@ public class InfoBox : MonoBehaviour{
         GameObject Tile = WorldController.Instance.BaseLayer.FirstOrDefault(t => t.XPos == tile.XPos && t.YPos == tile.YPos)?.GameObject;
         if (Tile != null){
             entityTitleText.text = Tile.name;
-            entityHpText.text = $"Weakness: ";
+            entityHpText.text = $"Spell: ";
             if (Tile.name == "Water"){
                 entityMoveRangeText.text = $"Ice";
             }
