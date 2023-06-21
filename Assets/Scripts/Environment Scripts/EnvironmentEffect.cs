@@ -33,8 +33,8 @@ public class EnvironmentEffect : MonoBehaviour
     public void IceEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         ChangeWaterTilesToIce(pathNodes);
-        CastIceOnObelisk(pathNodes);
         ChangePillarToNothing(pathNodes);
+        CastIceOnObelisk(pathNodes);
         ChangeGraveToNothing(pathNodes);
     }
 
@@ -53,6 +53,27 @@ public class EnvironmentEffect : MonoBehaviour
                 newTile.transform.position = obj.transform.position;
                 Destroy(obj);
                 targetTile.GameObject = newTile;
+            }
+        }
+    }
+
+    // Ice
+    private void ChangePillarToNothing(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            if (WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).Count() > 1){
+
+                DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).ElementAt(1);
+                Debug.Log("test" + (tempTile != null) + " " + (tempTile.GameObject != null) + " " + (tempTile.GameObject.name.ToLower().Contains("pillar")));
+                if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
+                {
+                    //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+                    WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).ElementAt(1));
+                    Destroy(tempTile.GameObject);
+                    tempTile.GameObject = null;
+                }
             }
         }
     }
@@ -90,23 +111,6 @@ public class EnvironmentEffect : MonoBehaviour
         }
     }
 
-    // Ice
-    private void ChangePillarToNothing(List<DefaultTile> pathNodes)
-    {
-        foreach (DefaultTile pn in pathNodes)
-        {
-            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
-
-            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
-            {
-                //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
-
-                WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
-                Destroy(tempTile.GameObject);
-                tempTile.GameObject = null;
-            }
-        }
-    }
 
     // Ice
     private void ChangeGraveToNothing(List<DefaultTile> pathNodes)
