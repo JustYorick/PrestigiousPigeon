@@ -5,6 +5,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
+
 namespace ReDesign.Entities
 {
     public abstract class Entity : MonoBehaviour
@@ -62,6 +63,65 @@ namespace ReDesign.Entities
                     {
                         path = newPath;
                     }
+                }
+                
+                if (path != null)
+                {
+                    List<DefaultTile> actualPath = new List<DefaultTile>();
+                    if(movementRange >= path.Count){
+                        if (path.Count > 0){
+                            movementRange = path.Count-1;
+                        } else {
+                            movementRange = 0;
+                        }
+                    }
+                    actualPath.AddRange(path.GetRange(0, movementRange+1));
+
+                    actualPath.First().Walkable = true;
+                    actualPath.Last().Walkable = false;
+
+
+                    movingCoroutine = EntityMoveSquares(actualPath, animator);
+                    StartCoroutine(movingCoroutine);
+                    currentTile.XPos = actualPath.Last().XPos;
+                    currentTile.YPos = actualPath.Last().YPos;
+                }
+                else
+                {
+                    finishedMoving = true;
+                }
+            }
+            else
+            {
+                finishedMoving = true;
+            }
+        }
+
+        public void MoveToObject(int movementRange, EntityAnimator animator = null, string name = "")
+        {
+            DefaultTile currentTile = WorldController.ObstacleLayer
+                .FirstOrDefault(o => o.GameObject == this.gameObject);
+            List<DefaultTile> targetLocations = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
+            DefaultTile enemyPos = WorldController.getPlayerTile();
+            foreach (var tile in WorldController.ObstacleLayer)
+            {
+                if (tile.GameObject.name.Equals(name))
+                {
+                    enemyPos = tile;
+                }
+            }
+            if (targetLocations.FirstOrDefault(t => t.XPos == enemyPos.XPos && t.YPos == currentTile.YPos) == null)
+            {
+                int widthAndHeight = (int)Mathf.Sqrt(WorldController.Instance.BaseLayer.Count);
+                PlayerPathfinding pf =
+                    new PlayerPathfinding(widthAndHeight, widthAndHeight, WorldController.Instance.BaseLayer);
+
+                List<DefaultTile> path = null;
+
+                List<DefaultTile> newPath = pf.FindPath(currentTile.XPos, currentTile.YPos, enemyPos.XPos, currentTile.YPos);
+                if (newPath != null && (path == null || newPath.Count < path.Count))
+                {
+                    path = newPath;
                 }
                 
                 if (path != null)

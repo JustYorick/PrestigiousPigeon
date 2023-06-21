@@ -46,8 +46,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Currently only works for square grids not rectangular grids
-        int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
-        int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        int size = (int) Math.Sqrt(pathNodesMap.Count);
+        int width = size; //temp
+        int height = size; //temp
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
 

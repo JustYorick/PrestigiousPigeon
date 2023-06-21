@@ -18,12 +18,6 @@ namespace ReDesign.Entities
         public override int SightRange { get; }
         public override int MoveRange { get { return _manaSystem.Value; } }
         
-        private List<AttacksAndSpells> _attacks = new List<AttacksAndSpells>
-        {
-            new BasicFireSpell(),
-            new BasicIceSpell()
-        };
-
         public virtual void Awake()
         {
             _animator = GetComponent<Animator>();
