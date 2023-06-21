@@ -18,6 +18,7 @@ public class AddSnowToObjects : MonoBehaviour
 
     public void AddSnow()
     {
+        snowObjects = GameObject.FindGameObjectsWithTag("AddSnow").ToList();
         snowTerrain.SetActive(true);
         foreach (GameObject obj in snowObjects)
         {

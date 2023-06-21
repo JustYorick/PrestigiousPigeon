@@ -11,7 +11,7 @@ namespace ReDesign.Entities
         public override int SightRange { get { return 6; } }
         public override int MoveRange { get { return 2; } }
 
-        public override string displayName => throw new NotImplementedException();
+        public override string displayName{ get { return "Lich"; } }
 
         public Lich()
         {
