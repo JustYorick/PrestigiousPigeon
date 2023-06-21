@@ -205,6 +205,9 @@ namespace ReDesign
 
                 if (spellSelection.GetType() == typeof(BasicIceSpell))
                     PlayerAnimator._animator.SetBool("iceCasted", true);
+                
+                if (spellSelection.GetType() == typeof(BasicWaterSpell))
+                    PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
     }

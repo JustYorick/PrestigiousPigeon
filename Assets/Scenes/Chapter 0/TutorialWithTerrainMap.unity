@@ -5173,7 +5173,7 @@ MonoBehaviour:
   treeTile: {fileID: 5444859503468468003, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
   bridgeTile: {fileID: 6982753071637512987, guid: c30141b4a039add48bd798d7942942b6, type: 3}
   puddleTile: {fileID: 3389842853394874753, guid: 5f110739b0558ac479ebc96afd27fdb1, type: 3}
-  FrozenPillar: {fileID: 7078459178697745778, guid: 6df21bba928f88749929a2b03cc2e8ed, type: 3}
+  FrozenPillar: {fileID: 919132149155446097, guid: 2b812e9a05b30204bade754b830bf390, type: 3}
 --- !u!1001 &442918836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14787,11 +14787,6 @@ PrefabInstance:
       propertyPath: onConfirm.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EndTurn
       objectReference: {fileID: 0}
-    - target: {fileID: 397162537970314384, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_lineSpacing
-      value: 6.5
-      objectReference: {fileID: 0}
-      objectReference: {fileID: 1574288005}
     - target: {fileID: 397162536688103944, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: <unlocked>k__BackingField
       value: 1
@@ -14823,6 +14818,10 @@ PrefabInstance:
     - target: {fileID: 397162536688103945, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537970314384, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_lineSpacing
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

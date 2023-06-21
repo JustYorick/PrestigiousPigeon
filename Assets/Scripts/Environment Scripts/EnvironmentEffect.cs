@@ -84,7 +84,9 @@ public class EnvironmentEffect : MonoBehaviour
                 
                 GameObject objObs = FindExactGameObjectTile(pn, obstacleLayer);
                 GameObject newTile = Instantiate(FrozenPillar);
+                newTile.name = "frozenpillar";
                 var position = objObs.transform.position;
+                newTile.transform.localScale = new Vector3(0.5f, 0.2f, 0.2f);
                 newTile.transform.position = position;
                 targetTile.Walkable = false;
                 targetTile.GameObject = newTile;
