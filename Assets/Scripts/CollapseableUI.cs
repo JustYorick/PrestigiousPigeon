@@ -7,14 +7,18 @@ public class CollapseableUI : MonoBehaviour
 {
     [SerializeField] private GameObject PlayerTurnUI;
     [SerializeField] private GameObject EnemyTurnUI;
+    [SerializeField] private GameObject ObjectiveUI;
     [SerializeField] private Canvas canvas;
     private Vector3 PlayerTurnUIDefaultPos;
     private Vector3 EnemyTurnUIDefaultPos;
+    private Vector3 ObjectiveUIDefaultPos;
 
     private void Start()
     {
         PlayerTurnUIDefaultPos = PlayerTurnUI.transform.position;
         EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
+        ObjectiveUIDefaultPos = ObjectiveUI.transform.position;
+        ShowObjectiveUI();
     }
 
     public void ShowPlayerTurnUI()

@@ -158,7 +158,7 @@ public class PlayerAnimator : MonoBehaviour
             _spellsButton.button.interactable = true;
             _moveButton.button.interactable = true;
         }
-        if (TurnController._turnPart == 0 || TurnController._turnPart > 1)
+        if (TurnController._turnPart is 0 or > 1)
         {
             _spellsButton.button.interactable = false;
             _moveButton.button.interactable = false;

@@ -60,8 +60,6 @@ namespace ReDesign
             collapseableUI = levelUI.GetComponent<CollapseableUI>();
             gameOverEvent.AddListener(showGameOver);
             FillEntityList();
-            //starts the first turn loop
-            ResolveNextTurn();
         }
 
         public static void ResolveNextTurn()
