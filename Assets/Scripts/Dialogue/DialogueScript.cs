@@ -51,7 +51,7 @@ public class DialogueScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount && receiveInput)
         {
             cooldown = Time.time;
-            if (lineComplete)
+            if (lineComplete && fadeFinished)
             {
                 NextLine();
             } 
