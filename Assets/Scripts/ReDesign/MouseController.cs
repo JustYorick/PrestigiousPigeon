@@ -14,6 +14,8 @@ namespace ReDesign
         [SerializeField] private PlayerMovement player;
         [SerializeField] private StatusBar manaSystem;
         [field:SerializeField] public Tilemap SelectorMap{get; private set;}
+        [SerializeField] public Tilemap GridMap;
+
         private static MouseController _instance;
         private static bool drawSelectedTile = true;
         private Vector3 targetLocation;
@@ -56,11 +58,10 @@ namespace ReDesign
         {
             Vector3 mousePosition = GetMouseWorldPos();
             DefaultTile selectedTile = MouseToTile(mousePosition);
-            
-            if(pauseMenu.enabled || helpScreen.enabled){
+            if (pauseMenu.enabled || helpScreen.enabled){
                 return;
             }
-            DrawCurrentSpellRange();
+
 
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
 
@@ -68,6 +69,7 @@ namespace ReDesign
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.ShowPath(mousePosition, gr, pathNodesMap);
                 DrawCurrentSelectedTile(selectedTile);
+                DrawCurrentSpellRange();
             }
             prevSelectedTile = selectedTile;
             if (!Input.GetMouseButtonDown(0))
@@ -133,7 +135,10 @@ namespace ReDesign
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             if(fireSpell.ManaCost <= manaSystem.Value){
                 spellSelection = fireSpell;
-            }else{
+                DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
+                DrawCurrentSpellRange();
+            }
+            else{
                 spellSelection = null;
             }
         }
@@ -143,7 +148,10 @@ namespace ReDesign
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             if(iceSpell.ManaCost <= manaSystem.Value){
                 spellSelection = iceSpell;
-            }else{
+                DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
+                DrawCurrentSpellRange();
+            }
+            else{
                 spellSelection = null;
             }
         }
@@ -154,7 +162,10 @@ namespace ReDesign
             if(waterSpell.ManaCost <= manaSystem.Value){
                 spellSelection = waterSpell;
                 spellSelection.particleSystem = iceParticles;
-            }else{
+                DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
+                DrawCurrentSpellRange();
+            }
+            else{
                 spellSelection = null;
             }
         }
@@ -165,10 +176,11 @@ namespace ReDesign
         {
             Color color = new Color(255, 255, 255, 0.05f);
             prevSelectedTile = hoveredNode;
+            RangeTileTool.Instance.clearTileMap(GridMap);
             RangeTileTool.Instance.clearTileMap(SelectorMap);
             if (hoveredNode != null && drawSelectedTile)
             {
-                RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, SelectorMap, false);
+                RangeTileTool.Instance.SpawnTile(hoveredNode.XPos, hoveredNode.YPos, color, GridMap, false);
             }
         }
 
