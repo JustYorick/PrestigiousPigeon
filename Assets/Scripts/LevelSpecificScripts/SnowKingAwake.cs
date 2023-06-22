@@ -29,7 +29,7 @@ public class SnowKingAwake : MonoBehaviour
         if(!this.gameObject.scene.isLoaded) return;
         // spawn Skeleton
         if(WorldController.Instance.checkNode(pos)){           // check if tile occupied
-            GameObject h = Instantiate(Skeleton, new Vector3(pos.x, pos.y + 0.18f, pos.z), Quaternion.Euler(0, 0, 0));
+            GameObject h = Instantiate(Skeleton, new Vector3(pos.x, pos.y-.2f, pos.z), Quaternion.Euler(0, 0, 0));
             if (Layer.activeInHierarchy) {
                 h.transform.parent = Layer.transform;
             }
