@@ -10,11 +10,6 @@ public class EntityAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Start()
-    {
-        if (_animator == null) _animator = GetComponent<Animator>();
-    }
-
     void Update()
     {
         CheckAnimations();
