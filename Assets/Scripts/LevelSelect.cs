@@ -34,7 +34,10 @@ public class LevelSelect : MonoBehaviour
         _levelsBeaten = PlayerPrefs.GetInt("levelsBeaten");
         for (int i = 0; i < _levelsBeaten; i++)
         {
-            _buttons[i].interactable = true;
+            if (i < 4)
+            {
+                _buttons[i].interactable = true;
+            }
         }
         playButton.SetActive(false);
         _prevLevel = PlayerPrefs.GetString("prevLevel");
@@ -45,7 +48,7 @@ public class LevelSelect : MonoBehaviour
                 GameObject.Find("TutorialWithTerrainMapButton").GetComponent<Button>());
         }
         // activate button for next level
-        else
+        else if (_levelsBeaten < 4)
         {
             _nextLevel = SceneUtility.GetScenePathByBuildIndex(_levelsBeaten + 1);
             _nextLevel = _nextLevel.Split('/').Last();

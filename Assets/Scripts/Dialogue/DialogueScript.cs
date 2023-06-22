@@ -217,7 +217,6 @@ public class DialogueScript : MonoBehaviour
     private IEnumerator LoadBackground(string filePath, string imgName, Texture texture)
     {
         string path = "file:///" + Application.streamingAssetsPath + filePath + imgName;
-        Debug.Log(path);
         UnityWebRequest req = UnityWebRequestTexture.GetTexture(path);
         yield return req.SendWebRequest();
         backgroundImage.texture = DownloadHandlerTexture.GetContent(req);
