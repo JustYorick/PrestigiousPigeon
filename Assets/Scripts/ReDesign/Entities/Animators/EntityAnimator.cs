@@ -4,7 +4,7 @@ using UnityEngine;
 public class EntityAnimator : MonoBehaviour
 {
     private Animator _animator;
-    
+
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -21,32 +21,27 @@ public class EntityAnimator : MonoBehaviour
         {
             _animator.Play("Walking");
             _animator.SetBool("isWalking", false);
-
         }
 
-        if (_animator.GetBool("isHit"))
+        if (_animator.GetBool("isHit") && !_animator.GetBool("isDead"))
         {
-
             _animator.Play("Hit");
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
             {
                 _animator.SetBool("isHit", false);
             }
         }
-        
+
         if (_animator.GetBool("isAttacking"))
         {
-
-            _animator.Play("Attacking");                
+            _animator.Play("Attacking");
             _animator.SetBool("isAttacking", false);
-
         }
 
-        if (_animator.GetBool("isDead"))
-        {
-
-            _animator.Play("Death");
-        }
+        // if (_animator.GetBool("isDead"))
+        // {
+        //     _animator.Play("Death");
+        // }
     }
 
 

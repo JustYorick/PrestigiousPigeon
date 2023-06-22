@@ -5,7 +5,6 @@ public class PauseController : MonoBehaviour
 {
     private Canvas _menu;
     private GraphicRaycaster _raycaster;
-    private Canvas spellMenu;
     private Canvas _spellMenu;
     private Canvas _helpMenu;
 
@@ -15,7 +14,7 @@ public class PauseController : MonoBehaviour
         _raycaster = GetComponent<GraphicRaycaster>();
         _menu.enabled = false;
         _raycaster.enabled = false;
-        spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
+        _spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
         _helpMenu = GameObject.Find("HelpScreen").GetComponent<Canvas>();
     }
 
