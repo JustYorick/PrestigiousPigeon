@@ -8,6 +8,7 @@ using ReDesign.Entities;
 namespace ReDesign{
 public class EnvironmentEffect : MonoBehaviour
 {
+    public ParticleSystem particleSystem;
     // Tiles
     [SerializeField] private GameObject iceTile;
     [SerializeField] private GameObject waterTile;
@@ -32,6 +33,7 @@ public class EnvironmentEffect : MonoBehaviour
     public void IceEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         ChangeWaterTilesToIce(pathNodes);
+        CastIceOnObelisk(pathNodes);
         ChangePillarToNothing(pathNodes);
         ChangeGraveToNothing(pathNodes);
     }
@@ -51,6 +53,39 @@ public class EnvironmentEffect : MonoBehaviour
                 newTile.transform.position = obj.transform.position;
                 Destroy(obj);
                 targetTile.GameObject = newTile;
+            }
+        }
+    }
+
+    // Ice
+    private void CastIceOnObelisk(List<DefaultTile> pathNodes)
+    {
+        foreach (DefaultTile pn in pathNodes)
+        {
+            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("obelisk"))
+            {
+
+                for (int i = -4; i < 5; i++){
+                    for (int j = -4; j < 5; j++){
+                        DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
+                        {
+
+                            GameObject p = GameObject.Find("Ice Particles");
+                            if (p != null)
+                                {
+                                    Vector3 pos = enemyTile.GameObject.transform.position + new Vector3(0,-1,0);
+                                    particleSystem = Instantiate(p.GetComponent<ParticleSystem>(), pos, Quaternion.Euler(-90, 0, 0));
+                                    particleSystem.Play();
+                                }
+
+                            Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
+                            enemy.ReceiveDamage(5);
+                        }
+                    }
+                }
             }
         }
     }
@@ -132,8 +167,15 @@ public class EnvironmentEffect : MonoBehaviour
                 for (int i = -1; i < 2; i++){
                     for (int j = -1; j < 2; j++){
                         DefaultTile enemyTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos+j && t.YPos == pn.YPos+i).FirstOrDefault();
-                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
+                        if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity") && !enemyTile.GameObject.name.Contains("Player"))
                         {
+                            GameObject p = GameObject.Find("Fire Particles");
+                            if (p != null)
+                                {
+                                    Vector3 pos = enemyTile.GameObject.transform.position + new Vector3(0,-1,0);
+                                    particleSystem = Instantiate(p.GetComponent<ParticleSystem>(), pos, Quaternion.Euler(-90, 0, 0));
+                                    particleSystem.Play();
+                                }
                             Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
                             enemy.ReceiveDamage(5);
                         }

@@ -25,7 +25,7 @@ public class InfoBox : MonoBehaviour{
         // If the user presses the right mouse button
         if (Input.GetMouseButtonDown(1)){
             // Calculate the tile the player clicked on
-            DefaultTile tile = mouseController.MouseToTile();
+            DefaultTile tile = mouseController.MouseToTile(MouseController.GetMouseWorldPos());
 
             // Try to retrieve the entity on that tile
             Entity entity = GetEntity(tile);

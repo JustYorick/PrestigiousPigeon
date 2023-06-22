@@ -1,21 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//using UnityEditor.Search;
 using UnityEngine;
 
 public class CollapseableUI : MonoBehaviour
 {
     [SerializeField] private GameObject PlayerTurnUI;
     [SerializeField] private GameObject EnemyTurnUI;
+    [SerializeField] private GameObject ObjectiveUI;
     [SerializeField] private Canvas canvas;
     private Vector3 PlayerTurnUIDefaultPos;
     private Vector3 EnemyTurnUIDefaultPos;
+    private Vector3 ObjectiveUIDefaultPos;
 
     private void Start()
     {
         PlayerTurnUIDefaultPos = PlayerTurnUI.transform.position;
         EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
+        ObjectiveUIDefaultPos = ObjectiveUI.transform.position;
+        ShowObjectiveUI();
     }
 
     public void ShowPlayerTurnUI()
@@ -32,11 +35,20 @@ public class CollapseableUI : MonoBehaviour
          Coroutine b = StartCoroutine(MoveUpAndDown(170 * canvas.scaleFactor, EnemyTurnUI));
     }
 
+    public void ShowObjectiveUI()
+    {
+        StartCoroutine(MoveUpAndDown(360 * canvas.scaleFactor, ObjectiveUI));
+        ObjectiveUI.transform.position = ObjectiveUIDefaultPos;
+    }
+    
     IEnumerator MoveUpAndDown(float distance, GameObject uiElement)
     {
         yield return MoveUI(distance, uiElement);
         yield return new WaitForSeconds(1);
         yield return MoveUI(-distance, uiElement);
+        if(uiElement == ObjectiveUI){
+            ReDesign.TurnController.ResolveNextTurn();
+        }
     }
     
     private IEnumerator MoveUI (float distance, GameObject uiElement)
