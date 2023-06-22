@@ -60,7 +60,7 @@ namespace ReDesign.Entities
             
         }
 
-        public override void Attack()
+        public override void Attack(AudioClip attackSound)
         {
             DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
             List<DefaultTile> targetTiles = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
@@ -69,6 +69,8 @@ namespace ReDesign.Entities
             {
                 _lichAnimator.SetAttacking();
                 StartCoroutine(EnemyRotateToAttack());
+                SoundManager.Instance.PlaySound(attackSound);
+
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             //attacking = false;

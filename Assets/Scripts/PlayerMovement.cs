@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private StatusBar manaSystem;
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
+    [SerializeField] private AudioSource footStepSource;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
     private Player _player;
 
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         targetLoc = transform.position;
+        footStepSource.volume = PlayerPrefs.GetFloat("EffectVolume") - .1f;
     }
 
     // Start is called before the first frame update
@@ -86,8 +88,13 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator MoveSquares(List<DefaultTile> path, GridLayout gridLayout)
     {
+        // MoveSound ON
+        footStepSource.enabled = true;
         foreach (DefaultTile pathNode in path)
         {
+            // Pans sound left and right for each tile
+            footStepSource.panStereo *= -1;
+            
             targetLoc = SnapCoordinateToGrid(new Vector3(
                 pathNode.GameObject.transform.position.x,
                 transform.position.y,
@@ -111,6 +118,9 @@ public class PlayerMovement : MonoBehaviour
         {
             RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.Value);
         }
+        
+        // MoveSound OFF
+        footStepSource.enabled = false;
     }
 
     public static Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)

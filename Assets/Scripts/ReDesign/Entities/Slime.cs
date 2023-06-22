@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
@@ -59,7 +60,7 @@ namespace ReDesign.Entities
             }
         }
 
-        public override void Attack()
+        public override void Attack(AudioClip attackSound)
         {
             DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject)
                 .FirstOrDefault();
@@ -70,6 +71,7 @@ namespace ReDesign.Entities
             if (targetTile != null)
             {
                 StartCoroutine(EnemyRotateToAttack());
+                SoundManager.Instance.PlaySound(attackSound);
                 _slimeAnimator.SetAttacking();
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
