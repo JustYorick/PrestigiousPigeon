@@ -65,7 +65,6 @@ public class EnvironmentEffect : MonoBehaviour
             if (WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).Count() > 1){
 
                 DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).ElementAt(1);
-                Debug.Log("test" + (tempTile != null) + " " + (tempTile.GameObject != null) + " " + (tempTile.GameObject.name.ToLower().Contains("pillar")));
                 if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
                 {
                     //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;

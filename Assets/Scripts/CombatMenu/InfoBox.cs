@@ -101,8 +101,11 @@ public class InfoBox : MonoBehaviour{
         if(g.name.ToLower().Contains("obelisk")){
             entityTitleText.text = "Obelisk";
             entityMoveRangeText.text = $"Ice";
-            Transform p = g.transform.GetChild(0);
-            p.gameObject.SetActive(!p.gameObject.activeInHierarchy);
+            if(g.transform.childCount > 0){
+                Transform p = g.transform.GetChild(0);
+                p.gameObject.SetActive(!p.gameObject.activeInHierarchy);
+            }
+            
         }
         if(g.name.ToLower().Contains("grave")){
             entityTitleText.text = "Grave";
