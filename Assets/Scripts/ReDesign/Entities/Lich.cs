@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ReDesign.Entities
 {
@@ -49,7 +50,12 @@ namespace ReDesign.Entities
                 MoveToPlayer(this.MoveRange, _lichAnimator);
             } else
             {
-                MoveToPlayer(0);
+                //MoveToPlayer(0);
+                if (SceneManager.GetActiveScene().name == "Level3Map"){
+			        MoveToObject(this.MoveRange, _lichAnimator, "WallTrigger");
+		        } else {
+                	MoveToPlayer(0);
+		        }
             }
             
         }
