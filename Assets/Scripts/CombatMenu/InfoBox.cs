@@ -94,9 +94,15 @@ public class InfoBox : MonoBehaviour{
             entityTitleText.text = "Tree";
             entityMoveRangeText.text = $"Fire";
         }
-        if(g.name.ToLower().Contains("obelisk") || g.name.ToLower().Contains("pillar1")){
+        if (g.name.ToLower().Contains("pillar1")){
+            entityTitleText.text = "Inactive Obelisk";
+            entityMoveRangeText.text = $"Ice";
+        }
+        if(g.name.ToLower().Contains("obelisk")){
             entityTitleText.text = "Obelisk";
             entityMoveRangeText.text = $"Ice";
+            Transform p = g.transform.GetChild(0);
+            p.gameObject.SetActive(!p.gameObject.activeInHierarchy);
         }
         if(g.name.ToLower().Contains("grave")){
             entityTitleText.text = "Grave";
