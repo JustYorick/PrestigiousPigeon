@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17383921, g: 0.20901075, b: 0.2520054, a: 1}
+  m_IndirectSpecularColor: {r: 0.1738394, g: 0.20901093, b: 0.2520057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -382,18 +382,6 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -432,10 +420,6 @@ PrefabInstance:
     - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4662771869988621493, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
@@ -937,18 +921,6 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
       objectReference: {fileID: 0}
@@ -987,10 +959,6 @@ PrefabInstance:
     - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785259188131473394, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4244e277770a4ab48aef96b893056fe3, type: 3}
@@ -15531,6 +15499,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 682617770956686077, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_text
+      value: Kill all enemies!
+      objectReference: {fileID: 0}
     - target: {fileID: 3138412152859740423, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: minimumMana
       value: 1
@@ -22987,6 +22959,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6819417836857549408, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7527598111799672305, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -23062,6 +23038,10 @@ PrefabInstance:
     - target: {fileID: 7527598111799672305, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591898011157159981, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
+      propertyPath: m_text
+      value: Kill all enemies!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
