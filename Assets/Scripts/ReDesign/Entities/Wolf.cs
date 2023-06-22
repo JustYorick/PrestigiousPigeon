@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ReDesign.Entities
 {
@@ -48,7 +49,12 @@ namespace ReDesign.Entities
                 MoveToPlayer(this.MoveRange, _wolfAnimator);
             } else
             {
-                MoveToPlayer(0);
+                //MoveToPlayer(0);
+                if (SceneManager.GetActiveScene().name == "Level3Map"){
+			        MoveToObject(this.MoveRange, _wolfAnimator, "WallTrigger");
+		        } else {
+                	MoveToPlayer(0);
+		        }
             }
 
             //foreach(AttacksAndSpells atk in _attacks)

@@ -30,7 +30,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sitting
-  m_Speed: 1
+  m_Speed: 1.35
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -62,9 +62,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 3.893793
-  m_TransitionOffset: 0
-  m_ExitTime: 0.39954004
+  m_TransitionDuration: 0.8691654
+  m_TransitionOffset: 0.082069464
+  m_ExitTime: 0.5053037
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -288,7 +288,7 @@ AnimatorStateMachine:
     m_Position: {x: 480, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7477452032803348088}
-    m_Position: {x: 250, y: -10, z: 0}
+    m_Position: {x: 250, y: -20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -7,8 +7,8 @@ public class PlayerAnimator : MonoBehaviour
 {
     public static Animator _animator;
     private SpellMenu _spellMenu;
-    private Button _spellsButton;
-    private Button _moveButton;
+    private ActionButton _spellsButton;
+    private ActionButton _moveButton;
 
     private Animator Animator
     {
@@ -47,8 +47,8 @@ public class PlayerAnimator : MonoBehaviour
     private void Start()
     {
         _spellMenu = GameObject.Find("SpellMenu").GetComponent<SpellMenu>();
-        _spellsButton = GameObject.Find("SpellButton").GetComponent<Button>();
-        _moveButton = GameObject.Find("MovementButton").GetComponent<Button>();
+        _spellsButton = GameObject.Find("SpellButton").GetComponent<ActionButton>();
+        _moveButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
 
 
         Animator.enabled = true; // Enable the animator if it's disabled.
@@ -155,8 +155,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void ChangeButton(bool status)
     {
-        _spellsButton.interactable = status;
-        _moveButton.interactable = status;
+        _spellsButton.button.interactable = status;
+        _moveButton.button.interactable = status;
+        if(status){
+            _moveButton.Activate();
+        }
     }
 
     public static bool PerformingAction()
