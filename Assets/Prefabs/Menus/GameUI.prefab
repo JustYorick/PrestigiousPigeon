@@ -1809,7 +1809,7 @@ MonoBehaviour:
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
   binding: 51
-  <unlocked>k__BackingField: 0
+  <unlocked>k__BackingField: 1
 --- !u!1 &397162536691283865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,8 +5080,8 @@ MonoBehaviour:
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
   spellName: Fire
-  range: 2
-  damage: 1
+  range: 1
+  damage: 7
   manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -5240,7 +5240,7 @@ MonoBehaviour:
   spellStatsField: {fileID: 397162537970314384}
   spellName: Ice
   range: 2
-  damage: 1
+  damage: 5
   manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
