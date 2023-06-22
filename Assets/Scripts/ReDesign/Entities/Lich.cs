@@ -11,7 +11,14 @@ namespace ReDesign.Entities
         public override int SightRange { get { return 6; } }
         public override int MoveRange { get { return 2; } }
 
+        private EntityAnimator _lichAnimator;
         public override string displayName{ get { return "Lich"; } }
+
+        private void Awake()
+        {
+            _lichAnimator = GetComponentInChildren<EntityAnimator>();
+
+        }
 
         public Lich()
         {
@@ -25,7 +32,6 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            //Debug.Log("im a Lich");
             StateController.ChangeState(GameState.EnemyTurn);
 
             //Move() will call Attack() and change turn
@@ -40,13 +46,12 @@ namespace ReDesign.Entities
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             if (range < SightRange)
             {
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _lichAnimator);
             } else
             {
                 MoveToPlayer(0);
             }
             
-            //foreach(AttacksAndSpells atk in _attacks)
         }
 
         public override void Attack()
@@ -56,16 +61,12 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
+                _lichAnimator.SetAttacking();
                 StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
             //attacking = false;
             StopCoroutine(EnemyRotateToAttack());
         }
-
-        // public override void ReceiveDamage(int dmg)
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 }

@@ -147,7 +147,18 @@ namespace ReDesign
                 spellSelection = null;
             }
         }
-
+        
+        public void SelectWaterSpell(){
+            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
+            BasicWaterSpell waterSpell = new BasicWaterSpell();
+            if(waterSpell.ManaCost <= manaSystem.Value){
+                spellSelection = waterSpell;
+                spellSelection.particleSystem = iceParticles;
+            }else{
+                spellSelection = null;
+            }
+        }
+        
         public void DeselectSpell() => spellSelection = null;
         
         private void DrawCurrentSelectedTile(DefaultTile hoveredNode)
@@ -183,6 +194,9 @@ namespace ReDesign
                 if (spellSelection.GetType() == typeof(BasicFireSpell))
                     PlayerAnimator._animator.SetBool("fireCasted", true);
                 else if (spellSelection.GetType() == typeof(BasicIceSpell))
+                    PlayerAnimator._animator.SetBool("iceCasted", true);
+                
+                if (spellSelection.GetType() == typeof(BasicWaterSpell))
                     PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
