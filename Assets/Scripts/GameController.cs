@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour{
     // Apply the settings before anything else runs
     public void Awake()
     {
+        Debug.Log(PlayerPrefs.GetInt("cutsceneSave"));
         ApplySettings();
     }
 
@@ -51,14 +52,21 @@ public class GameController : MonoBehaviour{
     {
         PlayerPrefs.DeleteKey("prevLevel");
         PlayerPrefs.DeleteKey("levelsBeaten");
+        PlayerPrefs.DeleteKey("cutsceneSave");
     }
     
     public void ContinueLevel()
     {
+        int chapter = PlayerPrefs.GetInt("cutsceneSave");
+
         // save the current scene as the previously beaten level
         PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
         PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
-
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("Ch" + chapter + "_PostCombat");
+        if (SceneManager.GetActiveScene().buildIndex - 2 != PlayerPrefs.GetInt("levelsBeaten"))
+        {
+            chapter++;
+            PlayerPrefs.SetInt("cutsceneSave", chapter);
+        }
     }
 }
