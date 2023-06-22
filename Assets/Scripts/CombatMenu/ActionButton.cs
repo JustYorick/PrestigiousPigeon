@@ -64,7 +64,6 @@ public class ActionButton : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(TurnController._turnPart);
         // Simulate a click event when the keybinding has been pressed and the spellmenu is closed
         if (Input.GetKeyDown(keyBinding) && !spellMenu.enabled && !pauseMenu.enabled && !helpScreen.enabled &&
             !PlayerAnimator.PerformingAction() && TurnController._turnPart == 1)
