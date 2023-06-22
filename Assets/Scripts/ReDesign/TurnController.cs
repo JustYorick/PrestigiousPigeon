@@ -21,7 +21,7 @@ namespace ReDesign
 
         [SerializeField] private GameObject levelUI;
         public static int TurnCount = 0;
-        private static int _turnPart = 0;
+        public static int _turnPart = 0;
         public static bool gameOver = false;
         private static List<Entity> _entities = new List<Entity>();
         private static Canvas _gameOver;
@@ -76,6 +76,7 @@ namespace ReDesign
                 {
                     collapseableUI?.ShowEnemyTurnUI();
                 }
+                
                 
                 _entities[_turnPart].NextAction();
                 _turnPart++;
