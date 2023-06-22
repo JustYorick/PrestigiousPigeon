@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1738391, g: 0.20901069, b: 0.25200552, a: 1}
+  m_IndirectSpecularColor: {r: 0.1738394, g: 0.20901093, b: 0.2520057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15286,6 +15286,14 @@ PrefabInstance:
       propertyPath: onConfirm.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2000819627}
+    - target: {fileID: 397162536590043377, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: onConfirm.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndTurn
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162537970314384, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: m_lineSpacing
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -15381,10 +15389,6 @@ PrefabInstance:
     - target: {fileID: 397162538507337341, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336176207582568905, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
-      propertyPath: m_text
-      value: Kill all enemies!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}

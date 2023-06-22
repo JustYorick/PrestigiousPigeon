@@ -31,20 +31,11 @@ public class CollapseableUI : MonoBehaviour
          Coroutine b = StartCoroutine(MoveUpAndDown(170 * canvas.scaleFactor, EnemyTurnUI));
     }
 
-    public void ShowObjectiveUI()
-    {
-        StartCoroutine(MoveUpAndDown(360 * canvas.scaleFactor, ObjectiveUI));
-        ObjectiveUI.transform.position = ObjectiveUIDefaultPos;
-    }
-    
     IEnumerator MoveUpAndDown(float distance, GameObject uiElement)
     {
         yield return MoveUI(distance, uiElement);
         yield return new WaitForSeconds(1);
         yield return MoveUI(-distance, uiElement);
-        if(uiElement == ObjectiveUI){
-            ReDesign.TurnController.ResolveNextTurn();
-        }
     }
     
     private IEnumerator MoveUI (float distance, GameObject uiElement)
