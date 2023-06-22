@@ -982,10 +982,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Nature
-  range: 0
-  damage: 0
-  manaCost: 0
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
@@ -1786,7 +1782,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 397162536688103946}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ReDesign.MouseController, Assembly-CSharp
+        m_MethodName: SelectWaterSpell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &397162536688103944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,15 +1809,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Water
-  range: 3
-  damage: 1
-  manaCost: 1
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
   binding: 51
-  <unlocked>k__BackingField: 0
+  <unlocked>k__BackingField: 1
 --- !u!1 &397162536691283865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,10 +2086,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Light
-  range: 0
-  damage: 0
-  manaCost: 0
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
@@ -2440,10 +2440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Wind
-  range: 0
-  damage: 0
-  manaCost: 0
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
@@ -4668,7 +4664,7 @@ MonoBehaviour:
   spellButton: {fileID: 397162537424545056}
   movementButton: {fileID: 397162537872090314}
   mana: {fileID: 397162537656574421}
-  minimumMana: 2
+  minimumMana: 1
   closeKeyBinding: 27
   AllowedToOpen: 1
   OnClose:
@@ -5079,10 +5075,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Fire
-  range: 2
-  damage: 1
-  manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
@@ -5238,10 +5230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Ice
-  range: 2
-  damage: 1
-  manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
@@ -5461,10 +5449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
-  spellName: Lightning
-  range: 0
-  damage: 0
-  manaCost: 0
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}

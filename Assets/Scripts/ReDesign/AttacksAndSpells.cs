@@ -12,6 +12,7 @@ namespace ReDesign
         public abstract int MaximumRange { get; }
         public abstract int Damage { get; }
         public virtual int ManaCost { get{ return 0; } }
+        public virtual string attackName { get{ return ""; } }
         public ParticleSystem particleSystem;
 
         /// <summary>

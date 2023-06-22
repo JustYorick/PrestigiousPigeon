@@ -172,7 +172,7 @@ namespace ReDesign
             }
         }
 
-        private void DrawCurrentSpellRange()
+        public void DrawCurrentSpellRange()
         {
             if (spellSelection != null)
             {
