@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class AnimationEvent : MonoBehaviour
 {
-    [SerializeField] private AudioClip soundToPlay; 
+    [SerializeField] private AudioClip soundToPlay;
+    // scene to load in built settings Like: Scenes/Chapter 0/TutorialWithTerrainMap
+    [SerializeField] private string nextScene; 
     public void LoadScene()
     {
-        SceneManager.LoadScene("Scenes/Chapter 0/TutorialWithTerrainMap");
+        SceneManager.LoadScene(nextScene);
     }
 
     public void PlaySound()

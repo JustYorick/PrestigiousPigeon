@@ -6390,6 +6390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundToPlay: {fileID: 8300000, guid: 39886dd842040b94eb8d2035601736c5, type: 3}
+  nextScene: 
 --- !u!4 &181651260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8265731052364952745, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
@@ -18997,6 +18998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundToPlay: {fileID: 8300000, guid: d2914c65195d62a48960c71a379295c9, type: 3}
+  nextScene: 
 --- !u!1001 &677596332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25618,7 +25620,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelMusic: {fileID: 8300000, guid: a99863136d0eafa4e89dbaf8857d591a, type: 3}
   levelSound: {fileID: 8300000, guid: 10d394a6467e30d4f96ca778204b05bd, type: 3}
-  bridgeBreak: {fileID: 0}
 --- !u!4 &971586439
 Transform:
   m_ObjectHideFlags: 0
@@ -32128,7 +32129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.21
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 4375099119916177492, guid: e8d1bd32067e3d04085289c5cf213756, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52323,7 +52324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 4, z: -3}
+  m_FollowOffset: {x: 0, y: 5, z: -3}
   m_XDamping: 0.2
   m_YDamping: 0.2
   m_ZDamping: 0.2
@@ -52413,6 +52414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundToPlay: {fileID: 0}
+  nextScene: Scenes/Chapter 0/TutorialWithTerrainMap
 --- !u!114 &1023215487024505803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52459,7 +52461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023215487024505805}
   m_LocalRotation: {x: 0.20007457, y: 0.000000006519258, z: -0.0000000013969839, w: 0.97978073}
-  m_LocalPosition: {x: -0.0000005364418, y: 4.740486, z: -1.5899031}
+  m_LocalPosition: {x: -0.0000005364418, y: 5.6897526, z: -1.2754292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

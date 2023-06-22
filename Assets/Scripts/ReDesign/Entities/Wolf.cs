@@ -60,7 +60,7 @@ namespace ReDesign.Entities
             //foreach(AttacksAndSpells atk in _attacks)
         }
 
-        public override void Attack()
+        public override void Attack(AudioClip attackSound)
         {
             DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
             List<DefaultTile> targetTiles = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
@@ -68,6 +68,8 @@ namespace ReDesign.Entities
             if (targetTile != null)
             {
                 _wolfAnimator.SetAttacking();
+                SoundManager.Instance.PlaySound(attackSound);
+
                 StartCoroutine(EnemyRotateToAttack());
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
