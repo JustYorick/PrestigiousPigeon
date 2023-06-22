@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17383964, g: 0.20901126, b: 0.25200605, a: 1}
+  m_IndirectSpecularColor: {r: 0.17383921, g: 0.20901075, b: 0.2520054, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5332,6 +5332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72aa2d6a5585c3c40b3916cdb19f916b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
   iceTile: {fileID: 5743808060426498505, guid: c7dccf7958fc9684d86e2dff8710f4f6, type: 3}
   waterTile: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
   treeTile: {fileID: 5444859503468468003, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
@@ -15375,6 +15376,14 @@ PrefabInstance:
       propertyPath: m_lineSpacing
       value: 6.5
       objectReference: {fileID: 0}
+    - target: {fileID: 397162538076870724, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: range
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 397162538076870724, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: damage
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538076870725, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -15383,6 +15392,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1686651853}
+    - target: {fileID: 397162538102416887, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 397162538507337337, guid: ddd218d055f01652c8c542f2404a3e76, type: 3}
       propertyPath: m_Name
       value: GameUI

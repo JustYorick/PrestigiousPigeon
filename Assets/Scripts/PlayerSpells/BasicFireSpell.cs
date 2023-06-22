@@ -5,9 +5,9 @@ using ReDesign;
 
 public class BasicFireSpell : AttacksAndSpells
 {
-    public override int MinimumRange { get { return 2; } }
-    public override int MaximumRange { get { return 2; } }
-    public override int Damage { get { return 5; } }
+    public override int MinimumRange { get { return 1; } }
+    public override int MaximumRange { get { return 1; } }
+    public override int Damage { get { return 7; } }
     public override int ManaCost { get { return 2; } }
     private EnvironmentEffect environmentEffect;
 

@@ -37,7 +37,18 @@ public class InfoBox : MonoBehaviour{
                 
                 // Show entity info in the info box
                 ShowEntityInfo(entity);
+            } 
+            
+            else {
+                GameObject go = GetObject(tile);
+                if (go != null){
+                    ShowObjectInfo(go);
+                } else {
+                    ShowTileInfo(tile);
+                }
             }
+
+
         }
     }
 
@@ -60,4 +71,80 @@ public class InfoBox : MonoBehaviour{
         entityHpText.text = $"HP: {entity._entityHealth.Health}";
         entityMoveRangeText.text = $"Move Range: {entity.MoveRange}";
     }
+
+
+
+    GameObject GetObject(DefaultTile tile){
+        // Find the first tile with the same position as the tile the player clicked on
+        GameObject g = WorldController.ObstacleLayer.FirstOrDefault(t => t.XPos == tile.XPos && t.YPos == tile.YPos)?.GameObject;
+
+        // If no tile was found or the there is no object on that tile, return null
+        if(g == null || g.CompareTag("Entity")){
+            return null;
+        }
+
+        // Return the objecton the tile
+        return g;
+    }
+
+    void ShowObjectInfo(GameObject g){
+        // Set the object info
+        entityHpText.text = $"Spell: ";
+        if(g.name.ToLower().Contains("tree")){
+            entityTitleText.text = "Tree";
+            entityMoveRangeText.text = $"Fire";
+        }
+        if (g.name.ToLower().Contains("pillar1")){
+            entityTitleText.text = "Inactive Obelisk";
+            entityMoveRangeText.text = $"Ice";
+        }
+        if(g.name.ToLower().Contains("obelisk")){
+            entityTitleText.text = "Obelisk";
+            entityMoveRangeText.text = $"Ice";
+            if(g.transform.childCount > 0){
+                Transform p = g.transform.GetChild(0);
+                p.gameObject.SetActive(!p.gameObject.activeInHierarchy);
+            }
+            
+        }
+        if(g.name.ToLower().Contains("grave")){
+            entityTitleText.text = "Grave";
+            entityMoveRangeText.text = $"Ice";
+        }
+        if(g.name.ToLower().Contains("rock")){
+            entityTitleText.text = "Rock";
+            entityMoveRangeText.text = $"-";
+        }
+        if(g.name.ToLower().Contains("fence")){
+            entityTitleText.text = "Fence";
+            entityMoveRangeText.text = $"-";
+        }
+        if(g.name.ToLower().Contains("icicle")){
+            entityTitleText.text = "Icicle";
+            entityMoveRangeText.text = $"Fire";
+        }
+    }
+
+    void ShowTileInfo(DefaultTile tile){
+        GameObject Tile = WorldController.Instance.BaseLayer.FirstOrDefault(t => t.XPos == tile.XPos && t.YPos == tile.YPos)?.GameObject;
+        if (Tile != null){
+            entityTitleText.text = Tile.name;
+            entityHpText.text = $"Spell: ";
+            if (Tile.name == "Water"){
+                entityMoveRangeText.text = $"Ice";
+            }
+            if (Tile.name == "Grass" || Tile.name == "GraveyardGravel"){
+                entityMoveRangeText.text = $"-";
+            }
+            if (Tile.name == "Ice"){
+                entityMoveRangeText.text = $"Fire";
+            }
+            if (Tile.name.ToLower().Contains("bridge")){
+                entityTitleText.text = "Bridge";
+                entityMoveRangeText.text = $"Fire";
+            }
+            
+        }
+    }
+
 }
