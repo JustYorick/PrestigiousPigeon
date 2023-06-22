@@ -16,7 +16,10 @@ public class EnvironmentEffect : MonoBehaviour
     [SerializeField] private GameObject bridgeTile;
     [SerializeField] private GameObject puddleTile;
     [SerializeField] private GameObject FrozenPillar;
+    
+    [SerializeField] private AudioClip treeBurnSound;
 
+    
     /// <summary>
     /// Makes all relevant tiles react to fire environment effect
     /// </summary>
