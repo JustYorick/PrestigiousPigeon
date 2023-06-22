@@ -136,6 +136,8 @@ namespace ReDesign
             }else{
                 spellSelection = null;
             }
+            RangeTileTool.Instance.clearTileMap(SelectorMap);
+            DrawCurrentSpellRange();
         }
 
         public void SelectIceSpell()
@@ -146,6 +148,8 @@ namespace ReDesign
             }else{
                 spellSelection = null;
             }
+            RangeTileTool.Instance.clearTileMap(SelectorMap);
+            DrawCurrentSpellRange();
         }
         
         public void SelectWaterSpell(){
@@ -157,6 +161,8 @@ namespace ReDesign
             }else{
                 spellSelection = null;
             }
+            RangeTileTool.Instance.clearTileMap(SelectorMap);
+            DrawCurrentSpellRange();
         }
         
         public void DeselectSpell() => spellSelection = null;
