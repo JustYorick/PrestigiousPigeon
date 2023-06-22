@@ -1,5 +1,6 @@
 ﻿using System;
 using CombatMenu;
+using ReDesign;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -150,6 +151,17 @@ public class PlayerAnimator : MonoBehaviour
         if (IsPlayerDead)
         {
             Animator.Play("Death");
+        }
+        
+        if (TurnController._turnPart == 1)
+        {
+            _spellsButton.button.interactable = true;
+            _moveButton.button.interactable = true;
+        }
+        if (TurnController._turnPart == 0 || TurnController._turnPart > 1)
+        {
+            _spellsButton.button.interactable = false;
+            _moveButton.button.interactable = false;
         }
     }
 
