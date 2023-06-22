@@ -10,8 +10,14 @@ namespace ReDesign.Entities
     {
         public override int SightRange { get { return 6; } }
         public override int MoveRange { get { return 3; } }
+        private EntityAnimator _skeletonAnimator;
 
         public override string displayName { get { return "Skeleton"; } }
+
+        private void Awake()
+        {
+            _skeletonAnimator = GetComponentInChildren<EntityAnimator>();
+        }
 
         public Skeleton()
         {
@@ -40,7 +46,7 @@ namespace ReDesign.Entities
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
             if (range < SightRange)
             {
-                MoveToPlayer(this.MoveRange);
+                MoveToPlayer(this.MoveRange, _skeletonAnimator);
             } else
             {
                 MoveToPlayer(0);
@@ -56,6 +62,7 @@ namespace ReDesign.Entities
             DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
             if (targetTile != null)
             {
+                _skeletonAnimator.SetAttacking();
                 StartCoroutine(EnemyRotateToAttack());
                 SoundManager.Instance.PlaySound(attackSound);
 

@@ -55,7 +55,15 @@ public class SnowKingAwake : MonoBehaviour
 
             pillars = 0;
             AllPillarsDestroyed = true;
-            
+            GameObject[] objectives = GameObject.FindGameObjectsWithTag("Objective");
+            foreach(GameObject objective in objectives){
+                TMPro.TMP_Text objectiveText = objective.GetComponent<TMPro.TMP_Text>();
+                if(objectiveText != null){
+                    objectiveText.text = "Kill all enemies!";
+                }
+            }
+            CollapseableUI gameUi = GameObject.Find("GameUI").GetComponent<CollapseableUI>();
+            gameUi.ShowObjectiveUI();
         }
     }
 }
