@@ -291,7 +291,7 @@ public class EnvironmentEffect : MonoBehaviour
             {
                 GameObject puddle = Instantiate(puddleTile);
                 Vector3 pos = tile.GameObject.transform.position;
-                puddle.transform.position = new Vector3(pos.x, pos.y+0.5001f, pos.z);
+                puddle.transform.position = new Vector3(pos.x, pos.y+0.5351f, pos.z);
                 WorldController.Instance.addObstacle(puddle, true); 
             }
         }
