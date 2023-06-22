@@ -208,8 +208,6 @@ public class DialogueScript : MonoBehaviour
     private IEnumerator LoadCharacter(string filePath, string imgName, Texture texture)
     {
         string path = "file:///" + Application.streamingAssetsPath + filePath + imgName;
-        File.WriteAllText("C:/Arman/Unity Projects/test.txt", path);
-        Debug.Log(path);
         UnityWebRequest req = UnityWebRequestTexture.GetTexture(path);
         yield return req.SendWebRequest();
         characterPortrait.texture = DownloadHandlerTexture.GetContent(req);
