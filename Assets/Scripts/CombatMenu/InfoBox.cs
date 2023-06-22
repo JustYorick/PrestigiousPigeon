@@ -127,7 +127,11 @@ public class InfoBox : MonoBehaviour{
             if (Tile.name == "Grass" || Tile.name == "GraveyardGravel"){
                 entityMoveRangeText.text = $"-";
             }
-            if (Tile.name.ToLower().Contains("bridge") || Tile.name == "Ice"){
+            if (Tile.name == "Ice"){
+                entityMoveRangeText.text = $"Fire";
+            }
+            if (Tile.name.ToLower().Contains("bridge")){
+                entityTitleText.text = "Bridge";
                 entityMoveRangeText.text = $"Fire";
             }
             
