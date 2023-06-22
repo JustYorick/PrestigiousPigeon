@@ -82,6 +82,11 @@ public class SoundManager : MonoBehaviour
     {
         _effectsSource.PlayOneShot(clip, volume);
     }
+    
+    public void PlaySoundWithVolumeMultiplier(AudioClip clip, float volumeMultiplier)
+    {
+        _effectsSource.PlayOneShot(clip, _effectsSource.volume * volumeMultiplier);
+    }
 
     public void SetMusic(AudioClip clip)
     {

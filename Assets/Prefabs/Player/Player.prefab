@@ -991,9 +991,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishedMoving: 0
+  walkingClip: {fileID: 0}
+  attackingClip: {fileID: 0}
   _manaSystem: {fileID: 0}
   _healthBar: {fileID: 0}
   movementButton: {fileID: 0}
+  dmgClip: {fileID: 8300000, guid: f2dd7281de37cec42a1645317c01e785, type: 3}
+  deathClip: {fileID: 8300000, guid: 48ef5cc4cf95c944ebf49560bf4a70c8, type: 3}
 --- !u!114 &5796109697066660948
 MonoBehaviour:
   m_ObjectHideFlags: 0

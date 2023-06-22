@@ -7,12 +7,17 @@ namespace ReDesign.Entities{
     public abstract class Enemy : Entity
     {
         [SerializeField] private GameObject _healthBar;
+        [SerializeField] private AudioClip enemyDmgClip;
+
+
         public override void ReceiveDamage(int dmg)
         {
             _entityHealth.ChangeHealth(-dmg);
             _healthBar.transform.localScale = (new Vector3(
                 _entityHealth.HealthPercentage(_entityHealth.Health),
                 (float)0.1584, (float)0.09899999));
+            
+            SoundManager.Instance.PlaySound(enemyDmgClip);
             
             if (_entityHealth.Health <= 0)
             {

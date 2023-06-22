@@ -17,6 +17,9 @@ namespace ReDesign.Entities
         
         public override int SightRange { get; }
         public override int MoveRange { get { return _manaSystem.Value; } }
+        [SerializeField] private AudioClip dmgClip;
+        [SerializeField] private AudioClip deathClip;
+
         
         public virtual void Awake()
         {
@@ -57,7 +60,7 @@ namespace ReDesign.Entities
             //throw new System.NotImplementedException();
         }
 
-        public override void Attack()
+        public override void Attack(AudioClip attackSound)
         {
 
         }
@@ -72,10 +75,13 @@ namespace ReDesign.Entities
         {
             _entityHealth.ChangeHealth(-dmg);
             _healthBar.Value = _entityHealth.Health;
+            SoundManager.Instance.PlaySound(dmgClip);
+
             PlayerAnimator._animator.SetBool("isHit", true);
             if (_entityHealth.Health <= 0){
                 TurnController.gameOver = true;
-                PlayerAnimator._animator.SetBool("PlayerDead", true);
+                PlayerAnimator._animator.SetBool("PlayerDead", true);                
+                SoundManager.Instance.PlaySound(deathClip);
             }
             TurnController.Instance.gameOverEvent.Invoke();
         }

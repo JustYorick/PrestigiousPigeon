@@ -497,8 +497,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5344cfa4a4594e2ab4884bbc2e8220e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 8642962180711539446}
   finishedMoving: 0
+  enemyWalkingClip: {fileID: 8300000, guid: d308af9b3149b9f4b9ea3223645a840e, type: 3}
+  enemyAttackingClip: {fileID: 8300000, guid: b419851f3abc0694fad27df7f4d76300, type: 3}
+  _healthBar: {fileID: 8642962180711539446}
+  enemyDmgClip: {fileID: 8300000, guid: 45d21f58adb2ef040925687c603754e6, type: 3}
 --- !u!1 &8642962180711539446
 GameObject:
   m_ObjectHideFlags: 0

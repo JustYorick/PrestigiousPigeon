@@ -19,12 +19,15 @@ namespace ReDesign.Entities
         private Vector3 targetLoc;
         public abstract void NextAction();
         public abstract void Move();
-        public abstract void Attack();
+        public abstract void Attack(AudioClip attackSound);
         public abstract int SightRange { get; }
         public abstract int MoveRange { get; }
         private GameObject healthBarObj;
         private Camera cam;
+        [SerializeField] private AudioClip walkingClip;
+        [SerializeField] private AudioClip attackingClip;
         public abstract string displayName{get;}
+        
 
         public virtual void Start()
         {
@@ -160,9 +163,13 @@ namespace ReDesign.Entities
         public IEnumerator EntityMoveSquares(List<DefaultTile> path, EntityAnimator animator = null)
         {
             GridLayout gr = WorldController.Instance.gridLayout;
+
             // Loop over each tile in the path (skipping the first one, since that's the entity's starting tile)
             for (int i = 1; i < path.Count; i++)
             {
+                SoundManager.Instance.PlaySound(walkingClip);
+                
+
                 // Starts the walking animation of the entity
                 if(animator)
                     animator.SetWalking();
@@ -189,6 +196,7 @@ namespace ReDesign.Entities
                 }
                 transform.rotation = targetRotation;
             }
+            // Turn off the walking sound
 
             finishedMoving = true;
         }
@@ -199,7 +207,7 @@ namespace ReDesign.Entities
             if (finishedMoving)
             {
                 finishedMoving = false;
-                Attack();
+                Attack(attackingClip);
                 StateController.ChangeState(GameState.EndTurn);
             }
         }
