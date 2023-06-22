@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,20 @@ public class SettingsController : MonoBehaviour
     // To play when slider changes
     [SerializeField]private AudioClip sliderSound;
 
+
+    private void Awake()
+    {
+        SaveSetting("Sound", false);
+        PlayerPrefs.SetInt("Sound", 0);
+        if (PlayerPrefs.GetFloat("EffectVolume") == 0f)
+        {
+            PlayerPrefs.SetFloat("EffectVolume", 0.2f);
+        }
+        if (PlayerPrefs.GetFloat("MusicVolume") == 0f)
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 0.2f);
+        }
+    }
 
     // Start is called before the first frame update
     void Start(){
@@ -52,10 +67,10 @@ public class SettingsController : MonoBehaviour
     void SaveSetting(string name, float value) => PlayerPrefs.SetFloat(name, value);
 
     // Read the last saved setting, return 1 if there is no setting with this name available
-    public static bool ReadSettingBool(string name) => PlayerPrefs.GetInt(name, 1) >= 1;
+    public static bool ReadSettingBool(string name) => PlayerPrefs.GetInt(name, 1) == 1;
 
     // Read the last saved setting, return 0 if there is no setting with this name available
-    public static float ReadSettingFloat(string name) => PlayerPrefs.GetFloat(name, 0.0f);
+    public static float ReadSettingFloat(string name) => PlayerPrefs.GetFloat(name, 0.2f);
 
     public void OnEndDrag()
     {

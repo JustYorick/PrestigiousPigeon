@@ -31,6 +31,7 @@ namespace ReDesign
         private static GameObject _retryButton;
         private static GameObject _continueButton;
         private static TextMeshProUGUI _gameOverText;
+        private static int _chapter;
 
         private void Awake()
         {
@@ -111,6 +112,7 @@ namespace ReDesign
                         WorldController.getEntities().Where(e => e.tag.Contains("Entity")).Count() == 1)
                     {
                         ChangeGameOverUI("You beat the Tutorial!");
+                        _chapter = 0;
                     }
 
                     break;
@@ -122,6 +124,7 @@ namespace ReDesign
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
+                        _chapter = 1;
                     }
 
                     break;
@@ -132,6 +135,7 @@ namespace ReDesign
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
+                        _chapter = 2;
                     }
 
                     break;
@@ -141,6 +145,7 @@ namespace ReDesign
                         _retryButton.SetActive(false);
                         _continueButton.SetActive(true);
                         gameOver = true;
+                        _chapter = 3;
                     }
                     
                     break;
@@ -158,6 +163,14 @@ namespace ReDesign
             _retryButton.SetActive(false);
             _continueButton.SetActive(true);
             gameOver = true;
+        }
+        
+        public void ContinueLevel()
+        {
+            // save the current scene as the previously beaten level
+            PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
+            PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("Ch" + _chapter + "_PostCombat");
         }
     }
 }

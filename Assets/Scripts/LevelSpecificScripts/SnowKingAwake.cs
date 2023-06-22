@@ -7,7 +7,7 @@ namespace ReDesign{
 public class SnowKingAwake : MonoBehaviour
 {
     public bool AllPillarsDestroyed = false;
-    private int pillars = 0;
+    private int pillars = 4;
     [SerializeField] GameObject SnowBoss;
     [SerializeField] GameObject Skeleton;
     [SerializeField] GameObject Layer;
