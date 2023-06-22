@@ -59,7 +59,7 @@ public class SnowKingAwake : MonoBehaviour
             foreach(GameObject objective in objectives){
                 TMPro.TMP_Text objectiveText = objective.GetComponent<TMPro.TMP_Text>();
                 if(objectiveText != null){
-                    objectiveText.text = "Survive 15 turns!";
+                    objectiveText.text = "Kill all enemies!";
                 }
             }
             CollapseableUI gameUi = GameObject.Find("GameUI").GetComponent<CollapseableUI>();
