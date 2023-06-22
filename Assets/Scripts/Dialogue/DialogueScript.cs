@@ -35,6 +35,8 @@ public class DialogueScript : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.SetMusic(null);
+
         receiveInput = true;
         skipPanel.SetActive(false);
         canvas.gameObject.SetActive(true);
@@ -49,7 +51,7 @@ public class DialogueScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time > cooldown + clickCooldownAmount && receiveInput)
         {
             cooldown = Time.time;
-            if (lineComplete)
+            if (lineComplete && fadeFinished)
             {
                 NextLine();
             } 
@@ -75,13 +77,23 @@ public class DialogueScript : MonoBehaviour
         {
             Texture2D newTexture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
             characterPortrait.texture = newTexture;
+        } else
+        {
+            Texture2D newTexture = LoadImage("Assets\\Images\\Character Portraits\\", "emptycharacter.png");
+            characterPortrait.texture = newTexture;
         }
 
         if (linesReader.linesList.dialogueLines[index].backgroundImg != string.Empty)
             backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", linesReader.linesList.dialogueLines[index].backgroundImg);
 
         if (linesReader.linesList.dialogueLines[index].speakerName != string.Empty)
+        {
             speakerNameText.text = linesReader.linesList.dialogueLines[index].speakerName;
+        } else
+        {
+            speakerNameText.text = "";
+        }
+            
 
         
         if (linesReader.linesList.dialogueLines[index].music.Length > 0)
@@ -94,18 +106,27 @@ public class DialogueScript : MonoBehaviour
         }
 
         if (linesReader.linesList.dialogueLines[index].soundEffect != string.Empty)
-            StartCoroutine(LoadAudio("\\Sounds\\Effects\\" + linesReader.linesList.dialogueLines[index].soundEffect, soundEffect));
+            StartCoroutine(LoadAudio("\\Sounds\\Effects\\" + linesReader.linesList.dialogueLines[index].soundEffect, soundEffect, false));
 
         //Play effects
     }
 
-    private IEnumerator LoadAudio(string filePath, AudioSource audioSource)
+    private IEnumerator LoadAudio(string filePath, AudioSource audioSource, bool isMusic)
     {
         string path = "file:///" + Application.dataPath + filePath;
         UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.MPEG);
         yield return req.SendWebRequest();
         audioSource.clip = DownloadHandlerAudioClip.GetContent(req);
+        if (isMusic)
+        {
+            audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+        } else
+        {
+            audioSource.volume = PlayerPrefs.GetFloat("EffectVolume");
+        }
+        
         audioSource.Play();
+        //SoundManager.Instance.SetMusic(audioSource.clip);
     }
 
     private IEnumerator FadeOutAudio()
@@ -122,7 +143,7 @@ public class DialogueScript : MonoBehaviour
         }
         else
         {
-            StartCoroutine(LoadAudio("\\Sounds\\Music\\" + linesReader.linesList.dialogueLines[index].music, backgroundMusic));
+            StartCoroutine(LoadAudio("\\Sounds\\Music\\" + linesReader.linesList.dialogueLines[index].music, backgroundMusic, true));
         }
         fadeFinished = true;
     }
