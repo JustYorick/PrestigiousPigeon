@@ -1,6 +1,7 @@
 using ReDesign;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace CombatMenu
 {
@@ -11,6 +12,7 @@ namespace CombatMenu
         [SerializeField] public int minimumMana = 2;
         [SerializeField] private KeyCode closeKeyBinding;
         private Canvas canvas;
+        private GraphicRaycaster raycaster;
         private ReDesign.MouseController mouseController;
         public bool AllowedToOpen = true;
         public UnityEvent OnClose = new UnityEvent();
@@ -20,7 +22,17 @@ namespace CombatMenu
         void Start(){
             // Retrieve the canvas component and the mouse controller
             canvas = GetComponent<Canvas>();
-            mouseController = GameObject.Find("MouseController").GetComponent<MouseController>();
+            raycaster = GetComponent<GraphicRaycaster>();
+            raycaster.enabled = canvas.enabled;
+            mouseController = GameObject.Find("MouseController").GetComponent<ReDesign.MouseController>();
+        }
+
+        void Update(){
+            // Close the spell menu and deselect the selected spell on escape
+            if(canvas.enabled && Input.GetKeyDown(closeKeyBinding)){
+                Close();
+                movementButton.Activate();
+            }
         }
 
         void LateUpdate(){
@@ -36,6 +48,7 @@ namespace CombatMenu
             // Only open the spell menu, if the player has enough mana
             if(mana.Value >= minimumMana && AllowedToOpen){
                 canvas.enabled = true;
+                raycaster.enabled = true;
                 RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
             }else{
                 movementButton.Activate();
@@ -45,6 +58,7 @@ namespace CombatMenu
         // Close the spell menu
         public void Close(){
             canvas.enabled = false;
+            raycaster.enabled = false;
             mouseController.DeselectSpell();
             OnClose.Invoke();
             RangeTileTool.Instance.clearTileMap(mouseController.SelectorMap);

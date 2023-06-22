@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class FrozenPillar : MonoBehaviour
 {
-    [SerializeField] private int MeltInXturns;
+    [SerializeField] private int MeltInXturns = 2;
     private int startingTurnCount;
 
     // Start is called before the first frame update
