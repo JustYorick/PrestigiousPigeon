@@ -11,6 +11,7 @@ public class SnowKingAwake : MonoBehaviour
     [SerializeField] GameObject SnowBoss;
     [SerializeField] GameObject Skeleton;
     [SerializeField] GameObject Layer;
+    [SerializeField] ParticleSystem SpawnParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class SnowKingAwake : MonoBehaviour
         // spawn Skeleton
         if(WorldController.Instance.checkNode(pos)){           // check if tile occupied
             GameObject h = Instantiate(Skeleton, new Vector3(pos.x, pos.y-.2f, pos.z), Quaternion.Euler(0, 0, 0));
+            SpawnParticles.transform.position = h.transform.position;
+            SpawnParticles.Play();
             if (Layer.activeInHierarchy) {
                 h.transform.parent = Layer.transform;
             }
