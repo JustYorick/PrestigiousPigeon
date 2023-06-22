@@ -10,6 +10,7 @@ public class MobSpawning : MonoBehaviour
     [SerializeField] List<GameObject> Mobs;
     [SerializeField] GameObject Layer;
     [SerializeField] int frequency = 2;
+    [SerializeField] ParticleSystem SpawnParticles;
     private bool spawning = false;
     void Start()
     {
@@ -38,7 +39,8 @@ public class MobSpawning : MonoBehaviour
                 i = .6f;
             }
             GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(0, i, 2), Quaternion.identity);
-            
+            SpawnParticles.transform.position = m.transform.position;
+            SpawnParticles.Play();
             
             if (Layer.activeInHierarchy) {
                 m.transform.parent = Layer.transform;
