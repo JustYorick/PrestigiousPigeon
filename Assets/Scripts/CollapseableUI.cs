@@ -29,6 +29,10 @@ public class CollapseableUI : MonoBehaviour
                 ShowObjectiveUI();
             }
         }
+        else
+        {
+            ShowObjectiveUI();
+        }
     }
 
     public void ShowPlayerTurnUI()
