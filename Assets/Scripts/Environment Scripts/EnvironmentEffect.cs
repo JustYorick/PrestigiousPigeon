@@ -39,6 +39,8 @@ public class EnvironmentEffect : MonoBehaviour
     public void IceEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         ChangeWaterTilesToIce(pathNodes);
+        ChangePillarToNothing(pathNodes);
+        ChangeGraveToNothing(pathNodes);
         CastIceOnObelisk(pathNodes);
         ChangePuddleToFrozenPillar(pathNodes);
     }
@@ -50,8 +52,6 @@ public class EnvironmentEffect : MonoBehaviour
     public void WaterEnvironmentEffects(List<DefaultTile> pathNodes)
     {
         TrySpawningPuddle(pathNodes);
-        ChangePillarToNothing(pathNodes);
-        ChangeGraveToNothing(pathNodes);
     }
 
     // Ice
@@ -142,16 +142,30 @@ public class EnvironmentEffect : MonoBehaviour
     {
         foreach (DefaultTile pn in pathNodes)
         {
-            DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+            if (WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).Count() > 1){
 
-            if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
-            {
-                //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+                DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).ElementAt(1);
+                if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
+                {
+                    //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
 
-                WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
-                Destroy(tempTile.GameObject);
-                tempTile.GameObject = null;
+                    WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).ElementAt(1));
+                    Destroy(tempTile.GameObject);
+                    tempTile.GameObject = null;
+                }
             }
+
+
+            // DefaultTile tempTile = WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+
+            // if (tempTile != null && tempTile.GameObject != null && tempTile.GameObject.name.ToLower().Contains("pillar"))
+            // {
+            //     //WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault().Walkable = true;
+
+            //     WorldController.ObstacleLayer.Remove(WorldController.ObstacleLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault());
+            //     Destroy(tempTile.GameObject);
+            //     tempTile.GameObject = null;
+            // }
         }
     }
 
@@ -294,7 +308,7 @@ public class EnvironmentEffect : MonoBehaviour
             {
                 GameObject puddle = Instantiate(puddleTile);
                 Vector3 pos = tile.GameObject.transform.position;
-                puddle.transform.position = new Vector3(pos.x, pos.y+0.5001f, pos.z);
+                puddle.transform.position = new Vector3(pos.x, pos.y+0.5351f, pos.z);
                 WorldController.Instance.addObstacle(puddle, true); 
             }
         }

@@ -59,18 +59,8 @@ public class SoundManager : MonoBehaviour
                 _effectsSource = gameObject.AddComponent<AudioSource>();
             }
         }
-
-
-
+        
         DontDestroyOnLoad(transform.gameObject);
-    }
-    private void Start()
-    {
-        if (PlayerPrefs.GetInt("Sound") == 0)
-        {
-            _musicSource.mute = true;
-            _effectsSource.mute = true;
-        }
     }
 
     public void PlaySound(AudioClip clip)
@@ -105,8 +95,8 @@ public class SoundManager : MonoBehaviour
     
     public void ToggleAllSounds()
     {
-        _musicSource.mute = !_musicSource.mute;
-        _effectsSource.mute = !_effectsSource.mute;
+        ToggleMusic();
+        ToggleEffects();
     }
 
     public void SetMusicVolume(float volume) => _musicSource.volume = volume;

@@ -35,6 +35,7 @@ public class DialogueScript : MonoBehaviour
 
     void Start()
     {
+        
         SoundManager.Instance.SetMusic(null);
 
         receiveInput = true;
@@ -75,16 +76,16 @@ public class DialogueScript : MonoBehaviour
 
         if (linesReader.linesList.dialogueLines[index].speakingCharImg != string.Empty)
         {
-            Texture2D newTexture = LoadImage("Assets\\Images\\Character Portraits\\", linesReader.linesList.dialogueLines[index].speakingCharImg);
-            characterPortrait.texture = newTexture;
+            StartCoroutine(LoadCharacter("/Images/Character Portraits/", linesReader.linesList.dialogueLines[index].speakingCharImg, characterPortrait.texture));
         } else
         {
-            Texture2D newTexture = LoadImage("Assets\\Images\\Character Portraits\\", "emptycharacter.png");
-            characterPortrait.texture = newTexture;
+            StartCoroutine(LoadCharacter("/Images/Character Portraits/", "emptycharacter.png", characterPortrait.texture));
         }
 
         if (linesReader.linesList.dialogueLines[index].backgroundImg != string.Empty)
-            backgroundImage.texture = LoadImage("Assets\\Images\\Backgrounds\\", linesReader.linesList.dialogueLines[index].backgroundImg);
+        {
+            StartCoroutine(LoadBackground("/Images/Backgrounds/", linesReader.linesList.dialogueLines[index].backgroundImg, backgroundImage.texture));
+        }
 
         if (linesReader.linesList.dialogueLines[index].speakerName != string.Empty)
         {
@@ -111,9 +112,11 @@ public class DialogueScript : MonoBehaviour
         //Play effects
     }
 
+
+
     private IEnumerator LoadAudio(string filePath, AudioSource audioSource, bool isMusic)
     {
-        string path = "file:///" + Application.dataPath + filePath;
+        string path = "file:///" + Application.streamingAssetsPath + filePath;
         UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.MPEG);
         yield return req.SendWebRequest();
         audioSource.clip = DownloadHandlerAudioClip.GetContent(req);
@@ -177,7 +180,7 @@ public class DialogueScript : MonoBehaviour
             //GO NEXT SCENE
         }
     }
-
+    /*
     private Texture2D LoadImage(string folderPath, string imgName)
     {
         MemoryStream dest = new MemoryStream();
@@ -200,6 +203,21 @@ public class DialogueScript : MonoBehaviour
         //Load the Image Byte to Texture2D
         tempTexture.LoadImage(imageBytes);
         return tempTexture;
+    }*/
+
+    private IEnumerator LoadCharacter(string filePath, string imgName, Texture texture)
+    {
+        string path = "file:///" + Application.streamingAssetsPath + filePath + imgName;
+        UnityWebRequest req = UnityWebRequestTexture.GetTexture(path);
+        yield return req.SendWebRequest();
+        characterPortrait.texture = DownloadHandlerTexture.GetContent(req);
+    }
+    private IEnumerator LoadBackground(string filePath, string imgName, Texture texture)
+    {
+        string path = "file:///" + Application.streamingAssetsPath + filePath + imgName;
+        UnityWebRequest req = UnityWebRequestTexture.GetTexture(path);
+        yield return req.SendWebRequest();
+        backgroundImage.texture = DownloadHandlerTexture.GetContent(req);
     }
 
     private IEnumerator FadeToBlackAndNextScene()

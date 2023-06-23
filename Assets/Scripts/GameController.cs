@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,11 @@ public class GameController : MonoBehaviour{
         ApplySettings();
     }
 
+    private void Start()
+    {
+        ApplySettings();
+    }
+
     public void LoadScene(string sceneName){
         // Make sure the game controller won't be destroyed
         DontDestroyOnLoad(gameObject);
@@ -37,7 +43,7 @@ public class GameController : MonoBehaviour{
     // Reload the active scene
     public void ReloadCurrentScene() => LoadScene(SceneManager.GetActiveScene().name);
 
-    private void LoadVolume(){
+    public void LoadVolume(){
 
         // Set the sound settings to the stored sound settings, if the sound setting is on
         musicVolume = PlayerPrefs.GetFloat("MusicVolume");
@@ -51,14 +57,6 @@ public class GameController : MonoBehaviour{
     {
         PlayerPrefs.DeleteKey("prevLevel");
         PlayerPrefs.DeleteKey("levelsBeaten");
-    }
-    
-    public void ContinueLevel()
-    {
-        // save the current scene as the previously beaten level
-        PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
-        PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
-
-        SceneManager.LoadScene("LevelSelect");
+        PlayerPrefs.DeleteKey("cutsceneSave");
     }
 }

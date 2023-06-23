@@ -1786,7 +1786,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 397162536688103946}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &397162536688103944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,7 +1821,7 @@ MonoBehaviour:
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0, g: 0.16215563, b: 1, a: 1}
   binding: 51
-  <unlocked>k__BackingField: 0
+  <unlocked>k__BackingField: 1
 --- !u!1 &397162536691283865
 GameObject:
   m_ObjectHideFlags: 0
@@ -4668,7 +4680,7 @@ MonoBehaviour:
   spellButton: {fileID: 397162537424545056}
   movementButton: {fileID: 397162537872090314}
   mana: {fileID: 397162537656574421}
-  minimumMana: 2
+  minimumMana: 1
   closeKeyBinding: 27
   AllowedToOpen: 1
   OnClose:
@@ -5080,8 +5092,8 @@ MonoBehaviour:
   spellNameField: {fileID: 397162538529888867}
   spellStatsField: {fileID: 397162537970314384}
   spellName: Fire
-  range: 2
-  damage: 1
+  range: 1
+  damage: 7
   manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -5240,7 +5252,7 @@ MonoBehaviour:
   spellStatsField: {fileID: 397162537970314384}
   spellName: Ice
   range: 2
-  damage: 1
+  damage: 5
   manaCost: 2
   lockedColor: {r: 0, g: 0, b: 0, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6047,8 +6059,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Objective:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
-  m_sharedMaterial: {fileID: -8697639540106609228, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7a27a921896efca4abcd28c5a909ff66, type: 2}
+  m_sharedMaterial: {fileID: 7982469746391333951, guid: 7a27a921896efca4abcd28c5a909ff66, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
