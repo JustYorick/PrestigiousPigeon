@@ -7,6 +7,7 @@ public class PauseController : MonoBehaviour
     private GraphicRaycaster _raycaster;
     private Canvas _spellMenu;
     private Canvas _helpMenu;
+    private bool _spellMenuWasOpen = false;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class PauseController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !_spellMenu.enabled)
+        if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !(_spellMenu.enabled || _spellMenuWasOpen))
         {
             OpenMenu();
         }
@@ -28,6 +29,7 @@ public class PauseController : MonoBehaviour
         {
             CloseMenu();
         }
+        _spellMenuWasOpen = _spellMenu.enabled;
     }
 
     void OpenMenu(){

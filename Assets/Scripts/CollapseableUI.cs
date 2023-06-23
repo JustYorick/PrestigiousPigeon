@@ -12,12 +12,16 @@ public class CollapseableUI : MonoBehaviour
     private Vector3 PlayerTurnUIDefaultPos;
     private Vector3 EnemyTurnUIDefaultPos;
     private Vector3 ObjectiveUIDefaultPos;
+    private ActionButton _movementButton;
 
     private void Start()
     {
         PlayerTurnUIDefaultPos = PlayerTurnUI.transform.position;
         EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
         ObjectiveUIDefaultPos = ObjectiveUI.transform.position;
+        _movementButton = GameObject
+                .Find("MovementButton")
+                .GetComponent<ActionButton>();
         ShowObjectiveUI();
     }
 
@@ -43,11 +47,15 @@ public class CollapseableUI : MonoBehaviour
     
     IEnumerator MoveUpAndDown(float distance, GameObject uiElement)
     {
+        if(uiElement == ObjectiveUI){
+            _movementButton.Deactivate();
+        }
         yield return MoveUI(distance, uiElement);
         yield return new WaitForSeconds(1);
         yield return MoveUI(-distance, uiElement);
         if(uiElement == ObjectiveUI){
             ReDesign.TurnController.ResolveNextTurn();
+            _movementButton.Activate();
         }
     }
     
