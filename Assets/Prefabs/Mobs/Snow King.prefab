@@ -1711,7 +1711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishedMoving: 0
+  walkingClip: {fileID: 8300000, guid: e59c9ed93d502c94ea634e2baea3d071, type: 3}
+  attackingClip: {fileID: 8300000, guid: 81cb64e23825a7a48b88f9696875be82, type: 3}
   _healthBar: {fileID: 861968893077612542}
+  enemyDmgClip: {fileID: 8300000, guid: d230baca5f2fe5a42a1c3929da9c220c, type: 3}
   deathEntityObject: {fileID: 7750362404314036771, guid: 9c63a4d3218f4d8468083289749f9adf, type: 3}
 --- !u!1 &7750362405167506009
 GameObject:
