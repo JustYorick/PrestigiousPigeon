@@ -38,7 +38,13 @@ public class MobSpawning : MonoBehaviour
             if (r == 0){
                 i = .6f;
             }
+            if (r != 0){
+                i = .2f;
+            }
             GameObject m = Instantiate(Mobs[r], transform.position + new Vector3(0, i, 2), Quaternion.identity);
+            if (m.gameObject.name.Contains("Slime")){
+                m.transform.position = m.transform.position + new Vector3(0, -.15f, 0);
+            }
             SpawnParticles.transform.position = m.transform.position;
             SpawnParticles.Play();
             
