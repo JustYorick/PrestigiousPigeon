@@ -2,85 +2,80 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TutorialController : MonoBehaviour
 {
-
-    private Canvas _tutorialCanvas;
-    private Canvas _introCanvas;
-    private Canvas _statsCanvas;
-    private Canvas _buttonsCanvas;
-    private Canvas _spellsCanvas;
-    private Canvas _infoCanvas;
+    [SerializeField] private Canvas tutorialCanvas;
+    [SerializeField] private Canvas introCanvas;
+    [SerializeField] private Canvas statsCanvas;
+    [SerializeField] private Canvas buttonsCanvas;
+    [SerializeField] private Canvas spellsCanvas;
+    [SerializeField] private Canvas infoCanvas;
+    [SerializeField] private GameObject manaImages;
+    [SerializeField] private GameObject healthImages;
+    [SerializeField] private GameObject moveButtonImages;
+    [SerializeField] private GameObject spellButtonImages;
+    [SerializeField] private GameObject endTurnButtonImages;
+    [SerializeField] private GameObject spellsImages;
+    [SerializeField] private GameObject spellsInfoImages;
+    [SerializeField] private GameObject healthText;
+    [SerializeField] private GameObject manaText;
+    [SerializeField] private GameObject moveButtonText;
+    [SerializeField] private GameObject spellButtonText;
+    [SerializeField] private GameObject endTurnButtonText;
+    [SerializeField] private GameObject spellsText;
+    [SerializeField] private GameObject spellsInfoText;
+    [SerializeField] private Button statsNext;
+    [SerializeField] private Button buttonsNext;
+    [SerializeField] private Button spellsNext;
+    [SerializeField] private Canvas spellMenu;
     private int _onClickCount;
-    private GameObject _healthImages;
-    private GameObject _manaImages;
-    private GameObject _moveButtonImages;
-    private GameObject _spellButtonImages;
-    private GameObject _endTurnButtonImages;
-    private GameObject _spellsImages;
-    private GameObject _spellsInfoImages;
-    private GameObject _healthText;
-    private GameObject _manaText;
+    [SerializeField] private CollapseableUI collapseableUI;
+    [SerializeField] private ActionButton moveActionButton;
+    [SerializeField] private Button moveButton;
+    [SerializeField] private Button spellButton;
+    [SerializeField] private Button endTurnButton;
 
-    void Awake()
+    private void Start()
     {
-        _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
-        _introCanvas = GameObject.Find("IntroCanvas").GetComponent<Canvas>();
-        _statsCanvas = GameObject.Find("StatsCanvas").GetComponent<Canvas>();
-        _buttonsCanvas = GameObject.Find("ButtonsCanvas").GetComponent<Canvas>();
-        _spellsCanvas = GameObject.Find("SpellsCanvas").GetComponent<Canvas>();
-        _infoCanvas = GameObject.Find("InfoCanvas").GetComponent<Canvas>();
-        _healthImages = GameObject.Find("HealthImages");
-        _manaImages = GameObject.Find("ManaImages");
-        _moveButtonImages = GameObject.Find("MoveButtonImages");
-        _spellButtonImages = GameObject.Find("SpellButtonImages");
-        _endTurnButtonImages = GameObject.Find("EndTurnButtonImages");
-        _spellsImages = GameObject.Find("SpellsImages");
-        _spellsInfoImages = GameObject.Find("SpellsInfoImages");
-        _healthText = GameObject.Find("HealthText");
-        _manaText = GameObject.Find("ManaText");
-        _manaImages.SetActive(false);
-        _manaText.SetActive(false);
-    }
-
-    void Start()
-    {
-    }
-    
-    void Update()
-    {
-        if (_tutorialCanvas.enabled)
-        {
-            Time.timeScale = 0;
-        }
-    }
-
-    public void SkipTutorial()
-    {
-        _tutorialCanvas.enabled = false;
+        statsNext.onClick.AddListener(IncreaseCount);
+        buttonsNext.onClick.AddListener(IncreaseCount);
+        spellsNext.onClick.AddListener(IncreaseCount);
+        manaImages.SetActive(false);
+        manaText.SetActive(false);
+        spellButtonImages.SetActive(false);
+        spellButtonText.SetActive(false);
+        endTurnButtonImages.SetActive(false);
+        endTurnButtonText.SetActive(false);
+        spellsInfoImages.SetActive(false);
+        spellsInfoText.SetActive(false);
+        moveActionButton.Deactivate();
+        moveButton.enabled = false;
+        spellButton.enabled = false;
+        endTurnButton.interactable = false;
     }
 
     public void IntroNext()
     {
-        _introCanvas.enabled = false;
-        _statsCanvas.enabled = true;
+        introCanvas.enabled = false;
+        statsCanvas.enabled = true;
     }
 
     public void StatsNext()
     {
-        _onClickCount++;
         switch (_onClickCount)
         {
             case 1:
-                _healthImages.SetActive(false);
-                _manaImages.SetActive(true);
-                _manaText.SetActive(true);
+                healthImages.SetActive(false);
+                healthText.SetActive(false);
+                manaImages.SetActive(true);
+                manaText.SetActive(true);
                 break;
             case 2:
-                _statsCanvas.enabled = false;
-                _buttonsCanvas.enabled = true;
+                statsCanvas.enabled = false;
+                buttonsCanvas.enabled = true;
                 _onClickCount = 0;
                 break;
         }
@@ -88,24 +83,24 @@ public class TutorialController : MonoBehaviour
     
     public void ButtonsNext()
     {
-        _onClickCount++;
         switch (_onClickCount)
         {
             case 1:
-                _moveButtonImages.SetActive(false);
-                _moveButtonText.SetActive(false);
-                _spellButtonImages.SetActive(true);
-                _spellButtonText.SetActive(true);
+                moveButtonImages.SetActive(false);
+                moveButtonText.SetActive(false);
+                spellButtonImages.SetActive(true);
+                spellButtonText.SetActive(true);
                 break;
             case 2:
-                _spellButtonImages.SetActive(false);
-                _spellButtonText.SetActive(false);
-                _endTurnButtonImages.SetActive(true);
-                _endTurnButtonText.SetActive(true);
+                spellButtonImages.SetActive(false);
+                spellButtonText.SetActive(false);
+                endTurnButtonImages.SetActive(true);
+                endTurnButtonText.SetActive(true);
                 break;
             case 3:
-                _spellsCanvas.enabled = true;
-                _buttonsCanvas.enabled = false;
+                spellsCanvas.enabled = true;
+                buttonsCanvas.enabled = false;
+                spellMenu.enabled = true;
                 _onClickCount = 0;
                 break;
         }
@@ -113,24 +108,35 @@ public class TutorialController : MonoBehaviour
     
     public void SpellsNext()
     {
-        _onClickCount++;
         switch (_onClickCount)
         {
             case 1:
-                _spellsImages.SetActive(false);
-                _spellsInfoImages.SetActive(true);
+                spellsImages.SetActive(false);
+                spellsText.SetActive(false);
+                spellsInfoImages.SetActive(true);
+                spellsInfoText.SetActive(true);
                 break;
             case 2:
-                _spellsCanvas.enabled = false;
-                _infoCanvas.enabled = true;
+                spellsCanvas.enabled = false;
+                infoCanvas.enabled = true;
                 _onClickCount = 0;
+                spellMenu.enabled = false;
                 break;
         }
     }
     
     public void InfoNext()
     {
-        _tutorialCanvas.enabled = false;
-        Time.timeScale = 1;
+        tutorialCanvas.enabled = false;
+        collapseableUI.ShowObjectiveUI();
+        moveActionButton.Activate();
+        moveButton.enabled = true;
+        spellButton.enabled = true;
+        endTurnButton.interactable = true;
+    }
+
+    public void IncreaseCount()
+    {
+        _onClickCount++;
     }
 }

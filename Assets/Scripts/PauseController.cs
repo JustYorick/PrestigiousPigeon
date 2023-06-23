@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseController : MonoBehaviour
@@ -7,6 +8,7 @@ public class PauseController : MonoBehaviour
     private GraphicRaycaster _raycaster;
     private Canvas _spellMenu;
     private Canvas _helpMenu;
+    private Canvas _tutorialCanvas;
 
     void Awake()
     {
@@ -22,7 +24,14 @@ public class PauseController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !_spellMenu.enabled)
         {
-            OpenMenu();
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
+                if (!_tutorialCanvas.enabled)
+                {
+                    OpenMenu();
+                }
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && _menu.enabled)
         {
