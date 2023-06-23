@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour{
     public void ApplySettings(){
         // Make the game fullscreen or windowed, depending on the FullScreen setting
         Screen.fullScreen = SettingsController.ReadSettingBool("FullScreen");
-
+        
         // Load and store the volume settings
         LoadVolume();
     }

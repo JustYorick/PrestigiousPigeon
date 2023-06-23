@@ -26,6 +26,10 @@ public class SettingsController : MonoBehaviour
         {
             PlayerPrefs.SetFloat("MusicVolume", 0.2f);
         }
+
+        PlayerPrefs.SetInt("ResolutionWidth", 1920);
+        PlayerPrefs.SetInt("ResolutionHeight", 1080);
+        Screen.SetResolution(PlayerPrefs.GetInt("ResolutionWidth"), PlayerPrefs.GetInt("ResolutionHeight"), ReadSettingBool("FullScreen"));
     }
 
     // Start is called before the first frame update
