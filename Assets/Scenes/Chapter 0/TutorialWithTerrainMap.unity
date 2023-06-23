@@ -5489,6 +5489,7 @@ MonoBehaviour:
   bridgeTile: {fileID: 6982753071637512987, guid: c30141b4a039add48bd798d7942942b6, type: 3}
   puddleTile: {fileID: 3389842853394874753, guid: 5f110739b0558ac479ebc96afd27fdb1, type: 3}
   FrozenPillar: {fileID: 8609297299487323921, guid: fc42882ff60636840b241771779954e5, type: 3}
+  treeBurnSound: {fileID: 0}
 --- !u!1001 &442918836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18906,7 +18907,9 @@ MonoBehaviour:
   <SelectorMap>k__BackingField: {fileID: 1607830966}
   GridMap: {fileID: 70714346}
   fireParticles: {fileID: 1332352364}
+  fireSound: {fileID: 8300000, guid: dd3ba93355007b94d90b1c44bd6f0d51, type: 3}
   iceParticles: {fileID: 1520492333}
+  iceSound: {fileID: 8300000, guid: a3d79ece5201e054e9dcd8d8b6b09d09, type: 3}
   spellMenu: {fileID: 1319049952}
 --- !u!4 &1686651854
 Transform:
