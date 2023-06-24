@@ -16,8 +16,8 @@ public class SettingsController : MonoBehaviour
 
     private void Awake()
     {
-        SaveSetting("Sound", false);
-        PlayerPrefs.SetInt("Sound", 0);
+        //SaveSetting("Sound", false);
+        //PlayerPrefs.SetInt("Sound", 0);
         if (PlayerPrefs.GetFloat("EffectVolume") == 0f)
         {
             PlayerPrefs.SetFloat("EffectVolume", 0.2f);
@@ -79,6 +79,14 @@ public class SettingsController : MonoBehaviour
 
     public void ToggleAudio()
     {
+        if (PlayerPrefs.GetInt("Sound") == 0)
+        {
+            PlayerPrefs.SetInt("Sound", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Sound", 0);
+        }
         SoundManager.Instance.ToggleAllSounds();
     }
 

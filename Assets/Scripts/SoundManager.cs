@@ -89,9 +89,28 @@ public class SoundManager : MonoBehaviour
         _musicSource.Stop();
     }
 
-    public void ToggleMusic() => _musicSource.mute = !_musicSource.mute;
-    
-    public void ToggleEffects() => _effectsSource.mute = !_effectsSource.mute;
+    public void ToggleMusic()
+    {
+        if (PlayerPrefs.GetInt("Sound") == 0)
+        {
+            _musicSource.mute = false;
+        } else
+        {
+            _musicSource.mute = true;
+        }
+        //_musicSource.mute = !_musicSource.mute;
+    }
+
+    public void ToggleEffects()
+    {
+        if (PlayerPrefs.GetInt("Sound") == 0)
+        {
+            _effectsSource.mute = false;
+        } else
+        {
+            _effectsSource.mute = true;
+        }
+    }
     
     public void ToggleAllSounds()
     {
