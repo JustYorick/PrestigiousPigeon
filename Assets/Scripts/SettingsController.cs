@@ -77,10 +77,10 @@ public class SettingsController : MonoBehaviour
         SoundManager.Instance.PlaySoundWithVolume(sliderSound,slider.value);
     }
 
-    public void ToggleAudio()
+    public void MusicMute()
     {
         SoundManager.Instance.ToggleAllSounds();
     }
+    
 
-    public void ToggleFullscreen() => Screen.fullScreen = !Screen.fullScreen;
 }
