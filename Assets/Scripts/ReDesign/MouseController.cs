@@ -5,6 +5,7 @@ using System.Linq;
 using CombatMenu;
 using ReDesign.Entities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 namespace ReDesign
@@ -35,6 +36,7 @@ namespace ReDesign
         private Canvas pauseMenu;
         private ActionButton movementButton;
         private Canvas helpScreen;
+        private Canvas _tutorialCanvas;
 
         private void Awake()
         {
@@ -52,6 +54,7 @@ namespace ReDesign
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
             helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
             movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
+            
         }
 
         private void Update()
@@ -60,6 +63,15 @@ namespace ReDesign
             DefaultTile selectedTile = MouseToTile(mousePosition);
             if (pauseMenu.enabled || helpScreen.enabled){
                 return;
+            }
+
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
+                if (_tutorialCanvas.enabled)
+                {
+                    return;
+                }
             }
 
 
