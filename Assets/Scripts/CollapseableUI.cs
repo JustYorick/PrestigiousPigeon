@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ReDesign;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -23,8 +24,8 @@ public class CollapseableUI : MonoBehaviour
         EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
         ObjectiveUIDefaultPos = ObjectiveUI.transform.position;
         _movementButton = GameObject
-                .Find("MovementButton")
-                .GetComponent<ActionButton>();
+            .Find("MovementButton")
+            .GetComponent<ActionButton>();
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
@@ -61,16 +62,41 @@ public class CollapseableUI : MonoBehaviour
 
     IEnumerator MoveUpAndDown(float distance, GameObject uiElement)
     {
-        if(uiElement == ObjectiveUI){
+        if (uiElement == ObjectiveUI)
+        {
             _movementButton.Deactivate();
         }
+
         yield return MoveUI(distance, uiElement);
         yield return new WaitForSeconds(1);
         yield return MoveUI(-distance, uiElement);
-        if (uiElement == ObjectiveUI)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            ReDesign.TurnController.ResolveNextTurn();
-            _movementButton.Activate();
+            SnowKingAwake snowKingAwake = GameObject.Find("SnowKingAwakenTrigger").GetComponent<SnowKingAwake>();
+            if (snowKingAwake.AllPillarsDestroyed)
+            {
+                if (uiElement == ObjectiveUI)
+                {
+                    _movementButton.Activate();
+                }
+            }
+            else
+            {
+                if (uiElement == ObjectiveUI)
+                {
+                    _movementButton.Activate();
+                    TurnController.ResolveNextTurn();
+                }
+            }
+        }
+
+        else
+        {
+            if (uiElement == ObjectiveUI)
+            {
+                TurnController.ResolveNextTurn();
+                _movementButton.Activate();
+            }
         }
     }
 
