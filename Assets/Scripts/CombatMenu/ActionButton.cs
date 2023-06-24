@@ -5,6 +5,7 @@ using ReDesign;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(RectTransform), typeof(Button))]
 public class ActionButton : MonoBehaviour
@@ -38,6 +39,7 @@ public class ActionButton : MonoBehaviour
     private Canvas spellMenu;
     private Canvas pauseMenu;
     private Canvas helpScreen;
+    private Canvas _tutorialCanvas;
 
     void Awake()
     {
@@ -68,7 +70,18 @@ public class ActionButton : MonoBehaviour
         if (Input.GetKeyDown(keyBinding) && !spellMenu.enabled && !pauseMenu.enabled && !helpScreen.enabled &&
             !PlayerAnimator.PerformingAction() && TurnController._turnPart == 1)
         {
-            button.onClick.Invoke();
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
+                if (!_tutorialCanvas.enabled)
+                {
+                    button.onClick.Invoke();
+                }
+            }
+            else
+            {
+                button.onClick.Invoke();
+            }
         }
     }
 

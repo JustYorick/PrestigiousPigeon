@@ -167,9 +167,12 @@ namespace ReDesign
         
         public void ContinueLevel()
         {
-            // save the current scene as the previously beaten level
-            PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
-            PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+            if (SceneManager.GetActiveScene().buildIndex > PlayerPrefs.GetInt("levelsBeaten"))
+            {
+                // save the current scene as the previously beaten level
+                PlayerPrefs.SetString("prevLevel", SceneManager.GetActiveScene().name);
+                PlayerPrefs.SetInt("levelsBeaten", SceneManager.GetActiveScene().buildIndex);
+            }
             SceneManager.LoadScene("Ch" + _chapter + "_PostCombat");
         }
     }
