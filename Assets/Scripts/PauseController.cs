@@ -8,6 +8,7 @@ public class PauseController : MonoBehaviour
     private GraphicRaycaster _raycaster;
     private Canvas _spellMenu;
     private Canvas _helpMenu;
+    private bool _spellMenuWasOpen = false;
     private Canvas _tutorialCanvas;
     private Canvas _settings;
     private GraphicRaycaster _settingsRaycaster;
@@ -27,7 +28,7 @@ public class PauseController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !_spellMenu.enabled)
+        if (Input.GetKeyDown(KeyCode.Escape) && !_menu.enabled && !(_spellMenu.enabled || _spellMenuWasOpen))
         {
             if (SceneManager.GetActiveScene().buildIndex == 2)
             {
@@ -42,7 +43,8 @@ public class PauseController : MonoBehaviour
         {
             CloseMenu();
         }
-
+        _spellMenuWasOpen = _spellMenu.enabled;
+        
         if (_menu.enabled)
         {
             _raycaster.enabled = true;

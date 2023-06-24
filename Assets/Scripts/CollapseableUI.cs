@@ -14,6 +14,7 @@ public class CollapseableUI : MonoBehaviour
     private Vector3 PlayerTurnUIDefaultPos;
     private Vector3 EnemyTurnUIDefaultPos;
     private Vector3 ObjectiveUIDefaultPos;
+    private ActionButton _movementButton;
     private Canvas _tutorialCanvas;
 
     private void Start()
@@ -21,6 +22,9 @@ public class CollapseableUI : MonoBehaviour
         PlayerTurnUIDefaultPos = PlayerTurnUI.transform.position;
         EnemyTurnUIDefaultPos = EnemyTurnUI.transform.position;
         ObjectiveUIDefaultPos = ObjectiveUI.transform.position;
+        _movementButton = GameObject
+                .Find("MovementButton")
+                .GetComponent<ActionButton>();
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             _tutorialCanvas = GameObject.Find("Tutorial").GetComponent<Canvas>();
@@ -57,12 +61,16 @@ public class CollapseableUI : MonoBehaviour
 
     IEnumerator MoveUpAndDown(float distance, GameObject uiElement)
     {
+        if(uiElement == ObjectiveUI){
+            _movementButton.Deactivate();
+        }
         yield return MoveUI(distance, uiElement);
         yield return new WaitForSeconds(1);
         yield return MoveUI(-distance, uiElement);
         if (uiElement == ObjectiveUI)
         {
             ReDesign.TurnController.ResolveNextTurn();
+            _movementButton.Activate();
         }
     }
 
