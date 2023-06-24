@@ -78,6 +78,10 @@ public class ActionButton : MonoBehaviour
                     button.onClick.Invoke();
                 }
             }
+            else
+            {
+                button.onClick.Invoke();
+            }
         }
     }
 

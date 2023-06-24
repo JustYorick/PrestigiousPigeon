@@ -38,6 +38,10 @@ public class PauseController : MonoBehaviour
                     OpenMenu();
                 }
             }
+            else
+            {
+                OpenMenu();
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && _menu.enabled && !_settings.enabled)
         {
