@@ -28,8 +28,10 @@ namespace ReDesign
         private static RawImage _controlsPanel;
         public UnityEvent gameOverEvent = new UnityEvent();
         private static CollapseableUI collapseableUI;
-        private static GameObject _retryButton;
-        private static GameObject _continueButton;
+        private static GameObject _retryButtonGameObject;
+        private static Button _retryButton;
+        private static GameObject _continueButtonGameObject;
+        private static Button _continueButton;
         private static TextMeshProUGUI _gameOverText;
         private static int _chapter;
 
@@ -50,10 +52,14 @@ namespace ReDesign
             _gameOver = GameObject.Find("GameOver").GetComponent<Canvas>();
             _gameOver.enabled = false;
             _gameOverText = _gameOver.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            _retryButton = GameObject.Find("RetryButton");
-            _retryButton.SetActive(true);
-            _continueButton = GameObject.Find("ContinueButton");
-            _continueButton.SetActive(false);
+            _retryButtonGameObject = GameObject.Find("RetryButton");
+            _retryButton = _retryButtonGameObject.GetComponent<Button>();
+            _retryButtonGameObject.SetActive(true);
+            _retryButton.interactable = true;
+            _continueButtonGameObject = GameObject.Find("ContinueButton");
+            _continueButton = _continueButtonGameObject.GetComponent<Button>();
+            _continueButtonGameObject.SetActive(false);
+            _continueButton.interactable = false;
         }
 
         private void Start()
@@ -121,8 +127,6 @@ namespace ReDesign
                         (int)WorldController.getPlayerTile().YPos == 25)
                     {
                         ChangeGameOverUI("You beat Level 1!");
-                        _retryButton.SetActive(false);
-                        _continueButton.SetActive(true);
                         gameOver = true;
                         _chapter = 1;
                     }
@@ -132,8 +136,6 @@ namespace ReDesign
                     if (WorldController.getEntities().Where(e => e.name.ToLower().Contains("snow")).Count() == 0 && GameObject.Find("SnowKingAwakenTrigger").GetComponent<SnowKingAwake>().AllPillarsDestroyed)
                     { 
                         ChangeGameOverUI("You beat Level 2!");
-                        _retryButton.SetActive(false);
-                        _continueButton.SetActive(true);
                         gameOver = true;
                         _chapter = 2;
                     }
@@ -142,8 +144,7 @@ namespace ReDesign
                 case "Level3Map":
                     if(TurnCount > 15){
                         ChangeGameOverUI("You beat Level 3!");
-                        _retryButton.SetActive(false);
-                        _continueButton.SetActive(true);
+
                         gameOver = true;
                         _chapter = 3;
                     }
@@ -159,9 +160,11 @@ namespace ReDesign
 
         private static void ChangeGameOverUI(string gameOverText)
         {
+            _retryButtonGameObject.SetActive(false);
+            _retryButton.interactable = false;
+            _continueButtonGameObject.SetActive(true);
+            _continueButton.interactable = true;
             _gameOverText.text = gameOverText;
-            _retryButton.SetActive(false);
-            _continueButton.SetActive(true);
             gameOver = true;
         }
         
