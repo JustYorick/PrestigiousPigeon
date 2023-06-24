@@ -30,6 +30,8 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private Button statsNext;
     [SerializeField] private Button buttonsNext;
     [SerializeField] private Button spellsNext;
+    [SerializeField] private Button infoNext;
+    [SerializeField] private Button skipButton;
     [SerializeField] private Canvas spellMenu;
     private int _onClickCount;
     [SerializeField] private CollapseableUI collapseableUI;
@@ -43,6 +45,8 @@ public class TutorialController : MonoBehaviour
         statsNext.onClick.AddListener(IncreaseCount);
         buttonsNext.onClick.AddListener(IncreaseCount);
         spellsNext.onClick.AddListener(IncreaseCount);
+        skipButton.onClick.AddListener(ShowObjective);
+        infoNext.onClick.AddListener(ShowObjective);
         manaImages.SetActive(false);
         manaText.SetActive(false);
         spellButtonImages.SetActive(false);
@@ -128,7 +132,6 @@ public class TutorialController : MonoBehaviour
     public void InfoNext()
     {
         tutorialCanvas.enabled = false;
-        collapseableUI.ShowObjectiveUI();
         moveActionButton.Activate();
         moveButton.enabled = true;
         spellButton.enabled = true;
@@ -138,5 +141,10 @@ public class TutorialController : MonoBehaviour
     public void IncreaseCount()
     {
         _onClickCount++;
+    }
+
+    public void ShowObjective()
+    {
+        collapseableUI.ShowObjectiveUI();
     }
 }
