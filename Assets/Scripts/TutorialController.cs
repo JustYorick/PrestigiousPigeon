@@ -136,6 +136,8 @@ public class TutorialController : MonoBehaviour
         moveButton.enabled = true;
         spellButton.enabled = true;
         endTurnButton.interactable = true;
+        skipButton.interactable = false;
+        infoNext.interactable = false;
     }
 
     public void IncreaseCount()
