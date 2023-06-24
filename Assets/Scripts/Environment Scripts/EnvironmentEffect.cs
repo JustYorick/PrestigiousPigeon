@@ -126,7 +126,7 @@ public class EnvironmentEffect : MonoBehaviour
                                 }
 
                             Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
-                            enemy.ReceiveDamage(5);
+                            enemy.ReceiveDamage(3);
                         }
                     }
                 }

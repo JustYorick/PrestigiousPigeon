@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,7 +421,7 @@ RectTransform:
   m_GameObject: {fileID: 156213389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.3990695, y: 1.8883718, z: 0.8497725}
+  m_LocalScale: {x: 2.3475673, y: 1.304204, z: 0.58689535}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1288108863}
@@ -431,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.4961, y: -61}
+  m_AnchoredPosition: {x: 319, y: -66.72492}
   m_SizeDelta: {x: 208, y: 56.4774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &156213391
@@ -3279,6 +3279,127 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e32cdca7963704ea0f07a106a36574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &1066645895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6686418169241745425}
+    m_Modifications:
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 210.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -327.12396
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -73.28744
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407484, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_Name
+      value: Resolution Dropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013600875028407485, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1802346594}
+    - target: {fileID: 8013600875028407485, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResolution
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+--- !u!224 &1066645896 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8013600875028407480, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+  m_PrefabInstance: {fileID: 1066645895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1066645897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8013600875028407485, guid: af533700ddf7e67408b55f78edf2159a, type: 3}
+  m_PrefabInstance: {fileID: 1066645895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1068641212
@@ -6432,6 +6553,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782674406}
   m_CullTransparentMesh: 1
+--- !u!1 &1802346592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1802346593}
+  - component: {fileID: 1802346594}
+  m_Layer: 0
+  m_Name: ResolutionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1802346593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802346592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1145.6356, y: 394.97562, z: -328.0598}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1802346594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802346592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cebf45bdc432c3459281d5f5c1cf811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 1066645897}
 --- !u!1 &1837205291
 GameObject:
   m_ObjectHideFlags: 0
@@ -9099,6 +9265,7 @@ RectTransform:
   - {fileID: 6686418169664480558}
   - {fileID: 6686418169280587483}
   - {fileID: 156213390}
+  - {fileID: 1066645896}
   - {fileID: 6686418170272421580}
   - {fileID: 6686418170132911353}
   m_Father: {fileID: 6686418170410386170}
@@ -9754,7 +9921,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6686418169891724262}
         m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
-        m_MethodName: MusicMute
+        m_MethodName: ToggleAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10018,7 +10185,7 @@ RectTransform:
   - {fileID: 796330293692094427}
   - {fileID: 6686418168975590390}
   m_Father: {fileID: 6686418169241745425}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10129,9 +10296,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: CloseMenu
+      - m_Target: {fileID: 1802346594}
+        m_TargetAssemblyTypeName: ResolutionController, Assembly-CSharp
+        m_MethodName: ResetResolution
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10456,7 +10623,7 @@ RectTransform:
   - {fileID: 3675680807499858701}
   - {fileID: 6686418169187847025}
   m_Father: {fileID: 6686418169241745425}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10567,9 +10734,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: CloseMenu
+      - m_Target: {fileID: 1802346594}
+        m_TargetAssemblyTypeName: ResolutionController, Assembly-CSharp
+        m_MethodName: SaveResolution
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1452331024}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ApplySettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11232,7 +11411,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6686418170892743354}
+        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
+        m_MethodName: ToggleFullscreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!224 &6686418170975016800
 RectTransform:
