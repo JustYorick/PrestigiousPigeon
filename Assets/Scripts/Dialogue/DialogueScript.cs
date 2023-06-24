@@ -127,7 +127,14 @@ public class DialogueScript : MonoBehaviour
         {
             audioSource.volume = PlayerPrefs.GetFloat("EffectVolume");
         }
-        
+        if (PlayerPrefs.GetInt("Sound") == 1)
+        {
+            audioSource.mute = true;
+        } else
+        {
+            audioSource.mute = false;
+        }
+
         audioSource.Play();
         //SoundManager.Instance.SetMusic(audioSource.clip);
     }

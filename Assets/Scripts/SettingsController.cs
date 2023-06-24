@@ -43,6 +43,7 @@ public class SettingsController : MonoBehaviour
         }else if(slider != null){
             slider.value = ReadSettingFloat(fieldName);
         }
+        ToggleAudio();
         startFinished = true;
     }
 
