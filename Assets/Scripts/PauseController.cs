@@ -9,6 +9,8 @@ public class PauseController : MonoBehaviour
     private Canvas _spellMenu;
     private Canvas _helpMenu;
     private Canvas _tutorialCanvas;
+    private Canvas _settings;
+    private GraphicRaycaster _settingsRaycaster;
 
     void Awake()
     {
@@ -18,6 +20,9 @@ public class PauseController : MonoBehaviour
         _raycaster.enabled = false;
         _spellMenu = GameObject.Find("SpellMenu").GetComponent<Canvas>();
         _helpMenu = GameObject.Find("HelpScreen").GetComponent<Canvas>();
+        _settings = GameObject.Find("Settings").GetComponent<Canvas>();
+        _settingsRaycaster = GameObject.Find("Settings").GetComponent<GraphicRaycaster>();
+        _settingsRaycaster.enabled = false;
     }
 
     void Update()
@@ -33,9 +38,26 @@ public class PauseController : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && _menu.enabled)
+        else if (Input.GetKeyDown(KeyCode.Escape) && _menu.enabled && !_settings.enabled)
         {
             CloseMenu();
+        }
+
+        if (_menu.enabled)
+        {
+            _raycaster.enabled = true;
+        }
+
+        if (_settings.enabled && Input.GetKeyDown(KeyCode.Escape))
+        {
+            _settings.enabled = false;
+            _settingsRaycaster.enabled = false;
+            _raycaster.enabled = true;
+        }
+
+        if (_settings.enabled && _menu.enabled)
+        {
+            _raycaster.enabled = false;
         }
     }
 
