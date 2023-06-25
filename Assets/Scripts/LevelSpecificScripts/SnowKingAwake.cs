@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,13 @@ namespace ReDesign
         [SerializeField] GameObject Layer;
         [SerializeField] ParticleSystem SpawnParticles;
         [SerializeField] private TMPro.TMP_Text objectiveText;
+        [SerializeField] private AudioClip levelMusic;
+        [SerializeField] private AudioClip bossMusic;
+
+        private void Start()
+        {
+            SoundManager.Instance.SetMusic(levelMusic);
+        }
 
         public void pillardestroyed(Vector3 pos)
         {
@@ -66,6 +74,8 @@ namespace ReDesign
                 pillars = 0;
                 AllPillarsDestroyed = true;
                 CameraController.Instance.TurnOnAnimator(CameraController.Instance.transform.position);
+                SoundManager.Instance.SetMusic(bossMusic);
+
                 if (objectiveText != null)
                 {
                     objectiveText.text = "Kill all enemies!";
