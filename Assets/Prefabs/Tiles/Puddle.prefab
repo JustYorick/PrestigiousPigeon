@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4832434481727312557}
   - component: {fileID: 6550712667375941627}
   - component: {fileID: 4003109291088219698}
-  - component: {fileID: 2680106882659225561}
   m_Layer: 0
   m_Name: Puddle
   m_TagString: Untagged
@@ -112,17 +111,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82cea898a1b9c764bb7b536e5f6667f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2680106882659225561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389842853394874753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a6916a5b42dec49ab195b53edc1547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 4fcb11da53dea824484ab43c06cd1d0c, type: 3}
-  soundVolMultiplier: 1

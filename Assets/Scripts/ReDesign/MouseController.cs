@@ -36,7 +36,8 @@ namespace ReDesign
         [SerializeField] private SpellMenu spellMenu;
         private BasicFireSpell fireSpell;
         private BasicIceSpell iceSpell;
-        private BasicWaterSpell waterSpell;
+        private BasicWaterSpell waterSpell;        
+        [SerializeField] private AudioClip waterSound;
         private Canvas pauseMenu;
         private ActionButton movementButton;
         private Canvas helpScreen;
@@ -222,7 +223,10 @@ namespace ReDesign
                 }
 
                 if (spellSelection.GetType() == typeof(BasicWaterSpell))
+                {
                     PlayerAnimator._animator.SetBool("iceCasted", true);
+                    SoundManager.Instance.PlaySound(waterSound);
+                }
             }
         }
 
