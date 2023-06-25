@@ -1430,7 +1430,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6763290181310970853}
-  m_LocalRotation: {x: -0.001092505, y: 0.019861639, z: 0.0123393405, w: 0.999726}
+  m_LocalRotation: {x: -0.0010925052, y: 0.019861639, z: 0.012339342, w: 0.999726}
   m_LocalPosition: {x: -0.040612213, y: 0.6024517, z: -0.0000000034792969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1557,7 +1557,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7409780253235369106}
-  m_LocalRotation: {x: -0.15236256, y: -0.00055414025, z: 0.0011825141, w: 0.9883238}
+  m_LocalRotation: {x: -0.15236259, y: -0.00055414025, z: 0.0011825144, w: 0.9883238}
   m_LocalPosition: {x: 1.0008255e-10, y: 2.4445603, z: -0.000000002546883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1660,6 +1660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7750362404314036769}
+  - component: {fileID: 8142344348873192457}
   m_Layer: 0
   m_Name: Snow King Death
   m_TagString: Untagged
@@ -1683,6 +1684,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8142344348873192457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7750362404314036771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026113423b8bbd14a8a96716614e715f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSound: {fileID: 8300000, guid: 258793da51329f64eb64629dff957ef3, type: 3}
 --- !u!1 &7768411418171918558
 GameObject:
   m_ObjectHideFlags: 0
