@@ -65,7 +65,7 @@ namespace ReDesign
         {
             Vector3 mousePosition = GetMouseWorldPos();
             DefaultTile selectedTile = MouseToTile(mousePosition);
-            if (pauseMenu.enabled || helpScreen.enabled){
+            if (pauseMenu.enabled || helpScreen.enabled || PlayerAnimator._animator.GetBool("isWalking")){
                 return;
             }
 
