@@ -236,13 +236,11 @@ namespace ReDesign
                 {
                     PlayerAnimator._animator.SetBool("fireCasted", true);
                     SoundManager.Instance.PlaySound(fireSound);
-                    Debug.Log("Fire");
                 }
                 else if (spellSelection.GetType() == typeof(BasicIceSpell))
                 {
                     PlayerAnimator._animator.SetBool("iceCasted", true);
                     SoundManager.Instance.PlaySound(iceSound);
-                    Debug.Log("Ice");
 
                 }
 
