@@ -11,6 +11,7 @@ public class EnvironmentEffect : MonoBehaviour
     public ParticleSystem particleSystem;
     // Tiles
     [SerializeField] private GameObject iceTile;
+    [SerializeField] private GameObject iceTileWithoutSound;
     [SerializeField] private GameObject waterTile;
     [SerializeField] private GameObject treeTile;
     [SerializeField] private GameObject bridgeTile;
@@ -66,6 +67,24 @@ public class EnvironmentEffect : MonoBehaviour
                 DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
                 targetTile.Walkable = true;
                 GameObject newTile = GameObject.Instantiate(iceTile);
+                newTile.transform.position = obj.transform.position;
+                Destroy(obj);
+                targetTile.GameObject = newTile;
+            }
+        }
+    }
+    
+    public void ChangeWaterTilesToIceWithoutSound(List<DefaultTile> pathNodes)
+    {
+        List<DefaultTile> tiles = WorldController.Instance.BaseLayer;
+        foreach (DefaultTile pn in pathNodes)
+        {
+            GameObject obj = FindExactGameObjectTile(pn, tiles);
+            if (obj.name.ToLower().Contains("water"))
+            {
+                DefaultTile targetTile = WorldController.Instance.BaseLayer.Where(t => t.XPos == pn.XPos && t.YPos == pn.YPos).FirstOrDefault();
+                targetTile.Walkable = true;
+                GameObject newTile = GameObject.Instantiate(iceTileWithoutSound);
                 newTile.transform.position = obj.transform.position;
                 Destroy(obj);
                 targetTile.GameObject = newTile;

@@ -49,7 +49,7 @@ namespace ReDesign
             {
                 // freeze river
                 WorldController.Instance.GetComponent<EnvironmentEffect>()
-                    .ChangeWaterTilesToIce(WorldController.Instance.BaseLayer);
+                    .ChangeWaterTilesToIceWithoutSound(WorldController.Instance.BaseLayer);
             }
 
             if (pillars == 3)
