@@ -13,11 +13,14 @@ public class SettingsController : MonoBehaviour
     // To play when slider changes
     [SerializeField]private AudioClip sliderSound;
 
+    private bool startFinished = false;
+
 
     private void Awake()
     {
-        SaveSetting("Sound", false);
-        PlayerPrefs.SetInt("Sound", 0);
+        startFinished = false;
+        //SaveSetting("Sound", false);
+        //PlayerPrefs.SetInt("Sound", 0);
         if (PlayerPrefs.GetFloat("EffectVolume") == 0f)
         {
             PlayerPrefs.SetFloat("EffectVolume", 0.2f);
@@ -40,6 +43,8 @@ public class SettingsController : MonoBehaviour
         }else if(slider != null){
             slider.value = ReadSettingFloat(fieldName);
         }
+        ToggleAudio();
+        startFinished = true;
     }
 
     public void SaveSetting(){
@@ -80,6 +85,23 @@ public class SettingsController : MonoBehaviour
     public void ToggleAudio()
     {
         SoundManager.Instance.ToggleAllSounds();
+    }
+
+    public void ToggleAudioSetting()
+    {
+        if (startFinished)
+        {
+            if (PlayerPrefs.GetInt("Sound") == 0)
+            {
+                PlayerPrefs.SetInt("Sound", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Sound", 0);
+            }
+            ToggleAudio();
+        }
+
     }
 
     public void ToggleFullscreen() => Screen.fullScreen = !Screen.fullScreen;

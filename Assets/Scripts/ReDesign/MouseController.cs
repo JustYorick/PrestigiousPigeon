@@ -28,8 +28,10 @@ namespace ReDesign
 
         public static AttacksAndSpells spellSelection = null;
         public ParticleSystem fireParticles;
+        [SerializeField] private AudioClip fireSound;
         public ParticleSystem iceParticles;
         public ParticleSystem waterParticles;
+        [SerializeField] private AudioClip iceSound;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
         private BasicFireSpell fireSpell;
@@ -39,6 +41,7 @@ namespace ReDesign
         private ActionButton movementButton;
         private Canvas helpScreen;
         private Canvas _tutorialCanvas;
+        private SpellBar _spellBar;
 
         private void Awake()
         {
@@ -54,17 +57,18 @@ namespace ReDesign
             {
                 _instance = this;
             }
+
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
             helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
             movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
-            
+            _spellBar = GameObject.Find("Spellbar").GetComponent<SpellBar>();
         }
 
         private void Update()
         {
             Vector3 mousePosition = GetMouseWorldPos();
             DefaultTile selectedTile = MouseToTile(mousePosition);
-            if (pauseMenu.enabled || helpScreen.enabled){
+            if (pauseMenu.enabled || helpScreen.enabled || PlayerAnimator._animator.GetBool("isWalking")){
                 return;
             }
 
@@ -80,12 +84,14 @@ namespace ReDesign
 
             List<DefaultTile> pathNodesMap = WorldController.Instance.BaseLayer;
 
-            if(selectedTile != prevSelectedTile){
+            if (selectedTile != prevSelectedTile)
+            {
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.ShowPath(mousePosition, gr, pathNodesMap);
                 DrawCurrentSelectedTile(selectedTile);
                 DrawCurrentSpellRange();
             }
+
             prevSelectedTile = selectedTile;
             if (!Input.GetMouseButtonDown(0))
             {
@@ -96,10 +102,13 @@ namespace ReDesign
             {
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.MovePlayer(mousePosition, gr, pathNodesMap);
-            }else{
+            }
+            else if(!_spellBar.MouseOver){
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY)
+                        .Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) &&
+                    manaSystem.Value >= spellSelection.ManaCost)
                 {
                     DefaultTile nearestPathNode = player.FindNearestXYPathNode(mousePosition, pathNodesMap);
                     int x = nearestPathNode.XPos;
@@ -109,13 +118,17 @@ namespace ReDesign
                     spellSelection.Effect(x, y);
                     manaSystem.Value -= spellSelection.ManaCost;
                     spellMenu.AllowedToOpen = false;
-                }else{
+                }
+                else
+                {
                     movementButton.Activate();
                 }
+
                 spellMenu.Close();
                 spellSelection = null;
                 RangeTileTool.Instance.clearTileMap(SelectorMap);
                 CheckSpellCasted(spellSelection);
+
                 StopCoroutine(Player.RotateToAttack());
             }
         }
@@ -164,7 +177,7 @@ namespace ReDesign
         public void SelectWaterSpell() => SelectSpell(waterSpell);
         
         public void DeselectSpell() => spellSelection = null;
-        
+
         private void DrawCurrentSelectedTile(DefaultTile hoveredNode)
         {
             Color color = new Color(255, 255, 255, 0.05f);
@@ -192,18 +205,27 @@ namespace ReDesign
             }
         }
 
-        private static void CheckSpellCasted(AttacksAndSpells spellSelection)
+        private void CheckSpellCasted(AttacksAndSpells spellSelection)
         {
             if (spellSelection != null)
             {
                 if (spellSelection.GetType() == typeof(BasicFireSpell))
+                {
                     PlayerAnimator._animator.SetBool("fireCasted", true);
+                    SoundManager.Instance.PlaySound(fireSound);
+                }
                 else if (spellSelection.GetType() == typeof(BasicIceSpell))
+                {
                     PlayerAnimator._animator.SetBool("iceCasted", true);
-                
+                    SoundManager.Instance.PlaySound(iceSound);
+
+                }
+
                 if (spellSelection.GetType() == typeof(BasicWaterSpell))
                     PlayerAnimator._animator.SetBool("iceCasted", true);
             }
         }
+
+
     }
 }

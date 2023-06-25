@@ -135,6 +135,8 @@ public class TutorialController : MonoBehaviour
         moveActionButton.Activate();
         moveButton.enabled = true;
         spellButton.enabled = true;
+        infoCanvas.enabled = false;
+        introCanvas.enabled = false;
         endTurnButton.interactable = true;
         skipButton.interactable = false;
         infoNext.interactable = false;
