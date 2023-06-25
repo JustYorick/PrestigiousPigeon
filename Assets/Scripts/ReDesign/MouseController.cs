@@ -55,7 +55,7 @@ namespace ReDesign
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
             helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
             movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
-            _spellBar = GameObject.Find("SpellBar").GetComponent<SpellBar>();
+            _spellBar = GameObject.Find("Spellbar").GetComponent<SpellBar>();
         }
 
         private void Update()
@@ -94,10 +94,10 @@ namespace ReDesign
             {
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.MovePlayer(mousePosition, gr, pathNodesMap);
-            }else{
+            }else if(!_spellBar.MouseOver){
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
-                if (!_spellBar.MouseOver && spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
+                if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
                 {
                     DefaultTile nearestPathNode = player.FindNearestXYPathNode(mousePosition, pathNodesMap);
                     int x = nearestPathNode.XPos;
