@@ -6,19 +6,32 @@ using System.Linq;
 using UnityEngine.Tilemaps;
 using ReDesign;
 using ReDesign.Entities;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private TileBase ruleTile;
     [SerializeField] private Tilemap walkingLayer;
-    [SerializeField] private ManaSystem manaSystem;
+    [SerializeField] private StatusBar manaSystem;
     [SerializeField] private bool predrawPath = true;
     [SerializeField] private ActionButton movementButton;
+    [SerializeField] private AudioSource footStepSource;
     private List<DefaultTile> predrawnPath = new List<DefaultTile>();
+    private Player _player;
+
+    private Vector3 targetLoc;
+
+    private void Awake()
+    {
+        targetLoc = transform.position;
+        footStepSource.volume = PlayerPrefs.GetFloat("EffectVolume") - .1f;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        _player = GetComponent<Player>();
     }
 
     /// <summary>
@@ -30,13 +43,14 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap)
     {
         // Don't move, if the movement button is inactive 
-        if(!movementButton.active){
+        if(!movementButton.active || TurnController.gameOver){
             return;
         }
 
         //Currently only works for square grids not rectangular grids
-        int width = (int) Math.Sqrt(pathNodesMap.Count); //temp
-        int height = (int) Math.Sqrt(pathNodesMap.Count); //temp
+        int size = (int) Math.Sqrt(pathNodesMap.Count);
+        int width = size; //temp
+        int height = size; //temp
 
         PlayerPathfinding playerPathfinding = new PlayerPathfinding(width, height, pathNodesMap);
 
@@ -46,14 +60,16 @@ public class PlayerMovement : MonoBehaviour
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
         int pathCost = path == null? 0 : path.Count - 1;
 
-        if (path != null && pathCost <= manaSystem.GetMana())
+        if (path != null && pathCost <= manaSystem.Value)
         {
             predrawPath = false;
             DrawPath(path);
+            PlayerAnimator._animator.SetBool("isIdle", false);
+            PlayerAnimator._animator.SetBool("isWalking", true);
             StartCoroutine(MoveSquares(path, gridLayout));
             playerPathNode.Walkable = true;
             targetPathNode.Walkable = false;
-            manaSystem.UseMana(pathCost);
+            manaSystem.Value -= pathCost;
 
             //List<DefaultTile> list = new BasicIceSpell().GetTargetLocations(5, 5);
             //foreach (DefaultTile dt in list)
@@ -72,9 +88,19 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator MoveSquares(List<DefaultTile> path, GridLayout gridLayout)
     {
+        // MoveSound ON
+        footStepSource.enabled = true;
         foreach (DefaultTile pathNode in path)
         {
-            transform.position = SnapCoordinateToGrid(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z), gridLayout); //fix!!!!
+            // Pans sound left and right for each tile
+            footStepSource.panStereo *= -1;
+            
+            targetLoc = SnapCoordinateToGrid(new Vector3(
+                pathNode.GameObject.transform.position.x,
+                transform.position.y,
+                pathNode.GameObject.transform.position.z
+            ),
+            gridLayout); //fix!!!!
             yield return new WaitForSeconds(.2f);
             Vector3Int cell = walkingLayer.WorldToCell(new Vector3(pathNode.GameObject.transform.position.x, transform.position.y, pathNode.GameObject.transform.position.z));
             walkingLayer.SetTile(cell, null);
@@ -84,12 +110,20 @@ public class PlayerMovement : MonoBehaviour
         dt.XPos = path.Last().XPos;
         dt.YPos = path.Last().YPos;
 
-
-        GetComponent<Player>().finishedMoving = true;
+        PlayerAnimator._animator.SetBool("isIdle", true);
+        PlayerAnimator._animator.SetBool("isWalking", false);
+        _player.finishedMoving = true;
         predrawPath = true;
+        if (StateController.currentState == GameState.PlayerTurn)
+        {
+            RangeTileTool.Instance.drawMoveRange(WorldController.getPlayerTile(), manaSystem.Value);
+        }
+        
+        // MoveSound OFF
+        footStepSource.enabled = false;
     }
 
-    private Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
+    public static Vector3 SnapCoordinateToGrid(Vector3 position, GridLayout gridLayout)
     {
         Vector3Int cellPos = gridLayout.WorldToCell(position);
         Grid grid = gridLayout.gameObject.GetComponent<Grid>();
@@ -106,15 +140,24 @@ public class PlayerMovement : MonoBehaviour
             
             walkingLayer.SetTile(cell, ruleTile);
         }
+
+        Vector3Int firstCell = walkingLayer.WorldToCell(new Vector3(pathNodes[0].GameObject.transform.position.x, 0, pathNodes[0].GameObject.transform.position.z));
+        
+        walkingLayer.SetTileFlags(firstCell, TileFlags.None);
+        walkingLayer.SetColor(firstCell, Color.clear);
     }
+    
     // Update is called once per frame
     void Update()
     {
+        RotatePlayer();
     }
 
     public void ShowPath(Vector3 targetLocation, GridLayout gridLayout, List<DefaultTile> pathNodesMap){
         // Don't draw a path, if the movement button is inactive or the path drawing is turned off
-        if(!movementButton.active || !predrawPath){
+        if(!movementButton.active || !predrawPath || TurnController.gameOver || Math.Abs(WorldController.getPlayerTile().XPos - FindNearestXYPathNode(targetLocation, pathNodesMap).XPos) > manaSystem.Value || Math.Abs(WorldController.getPlayerTile().YPos - FindNearestXYPathNode(targetLocation, pathNodesMap).YPos) > manaSystem.Value || MouseController.spellSelection != null)
+        {
+            RangeTileTool.Instance.clearTileMap(walkingLayer);
             return;
         }
         if(predrawnPath != null){
@@ -135,9 +178,22 @@ public class PlayerMovement : MonoBehaviour
 
         List<DefaultTile> path = playerPathfinding.FindPath(playerPathNode.XPos, playerPathNode.YPos, targetPathNode.XPos, targetPathNode.YPos);
 
-        if (path != null && path.Count - 1 <= manaSystem.GetMana()){
+        if (path != null && path.Count - 1 <= manaSystem.Value){
             DrawPath(path);
         }
         predrawnPath = path;
+    }
+
+    public void RotatePlayer()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * 5) ;
+
+        Vector3 relativePos = targetLoc - transform.position;
+
+        if (targetLoc != transform.position)
+        {
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            transform.rotation = rotation;
+        }
     }
 }

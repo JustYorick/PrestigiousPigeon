@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,20 +12,30 @@ public class GameController : MonoBehaviour{
     public void QuitGame(int code) => Application.Quit(code);
 
     public void ApplySettings(){
-        // Make the game fullscreen or windowed, depending on the FullScreen setting
-        Screen.fullScreen = SettingsController.ReadSettingBool("FullScreen");
-
+        // Set resolution based on playerprefs and make the game fullscreen or windowed, depending on the FullScreen setting
+        Screen.SetResolution(PlayerPrefs.GetInt("ResolutionWidth"), PlayerPrefs.GetInt("ResolutionHeight"), SettingsController.ReadSettingBool("FullScreen"));
+        
         // Load and store the volume settings
         LoadVolume();
     }
 
     // Apply the settings before anything else runs
-    public void Awake() => ApplySettings();
+    public void Awake()
+    {
+        ApplySettings();
+    }
+
+    private void Start()
+    {
+        ApplySettings();
+    }
 
     public void LoadScene(string sceneName){
         // Make sure the game controller won't be destroyed
         DontDestroyOnLoad(gameObject);
 
+
+        Time.timeScale = 1;
         // Load the scene
         SceneManager.LoadScene(sceneName);
     }
@@ -32,15 +43,20 @@ public class GameController : MonoBehaviour{
     // Reload the active scene
     public void ReloadCurrentScene() => LoadScene(SceneManager.GetActiveScene().name);
 
-    private void LoadVolume(){
-        // Set all sound settings to 0, if the sound setting is off
-        if(PlayerPrefs.GetInt("Sound") == 0){
-            musicVolume = 0;
-            effectVolume = 0;
-        }else{
-            // Set the sound settings to the stored sound settings, if the sound setting is on
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-            effectVolume = PlayerPrefs.GetFloat("EffectVolume");
-        }
+    public void LoadVolume(){
+
+        // Set the sound settings to the stored sound settings, if the sound setting is on
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        effectVolume = PlayerPrefs.GetFloat("EffectVolume");
+        
+        SoundManager.Instance.SetEffectsVolume(effectVolume);
+        SoundManager.Instance.SetMusicVolume(musicVolume);
+    }
+    
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("prevLevel");
+        PlayerPrefs.DeleteKey("levelsBeaten");
+        PlayerPrefs.DeleteKey("cutsceneSave");
     }
 }

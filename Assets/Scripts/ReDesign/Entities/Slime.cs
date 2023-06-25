@@ -2,12 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 namespace ReDesign.Entities
 {
-    public class Slime : Entity
+    public class Slime : Enemy
     {
+        public override int SightRange { get { return 9; } }
+        public override int MoveRange { get { return 1; } }
+        private EntityAnimator _slimeAnimator;
+        public override string displayName{get{ return "Slime"; }}
+
+        private void Awake()
+        {
+            _slimeAnimator = GetComponentInChildren<EntityAnimator>();
+        }
         
         public Slime()
         {
@@ -21,42 +34,50 @@ namespace ReDesign.Entities
 
         public override void NextAction()
         {
-            //Debug.Log("im a slime");
             StateController.ChangeState(GameState.EnemyTurn);
 
             //Move() will call Attack() and change turn
             Move();
-            
         }
 
         public override void Move()
         {
-            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
+            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject)
+                .FirstOrDefault();
             DefaultTile enemyPos = WorldController.getPlayerTile();
             int range = Math.Abs(currentTile.XPos - enemyPos.XPos) + Math.Abs(currentTile.YPos - enemyPos.YPos);
-            Debug.Log(""+range);
-            if (range < 9)
+            if (range < SightRange)
             {
-                MoveToPlayer(1);
-            } else
-            {
-                MoveToPlayer(0);
+                MoveToPlayer(this.MoveRange, _slimeAnimator);
             }
-            
-            //foreach(AttacksAndSpells atk in _attacks)
+            else
+            {
+                if (SceneManager.GetActiveScene().name == "Level3Map"){
+			        MoveToObject(this.MoveRange, _slimeAnimator, "WallTrigger");
+		        } else {
+                	MoveToPlayer(0);
+		        }
+            }
         }
 
-        public override void Attack()
+        public override void Attack(AudioClip attackSound)
         {
-            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject).FirstOrDefault();
+            DefaultTile currentTile = WorldController.ObstacleLayer.Where(o => o.GameObject == this.gameObject)
+                .FirstOrDefault();
             List<DefaultTile> targetTiles = Attacks[0].GetTargetLocations(currentTile.XPos, currentTile.YPos);
-            DefaultTile targetTile = targetTiles.Where(t => t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos).FirstOrDefault();
+            DefaultTile targetTile = targetTiles.Where(t =>
+                    t.XPos == WorldController.getPlayerTile().XPos && t.YPos == WorldController.getPlayerTile().YPos)
+                .FirstOrDefault();
             if (targetTile != null)
             {
-                //Debug.Log("targettile");
+                StartCoroutine(EnemyRotateToAttack());
+                SoundManager.Instance.PlaySound(attackSound);
+                _slimeAnimator.SetAttacking();
                 Attacks[0].Effect(targetTile.XPos, targetTile.YPos);
             }
-            attacking = false;
+
+            StopCoroutine(EnemyRotateToAttack());
         }
+        
     }
 }

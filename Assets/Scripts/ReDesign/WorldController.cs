@@ -25,10 +25,7 @@ namespace ReDesign
                 Destroy(gameObject);
             else
                 Instance = this;
-        }
-
-        private void Start()
-        {
+            
             ReadWorld();
         }
 
@@ -53,6 +50,7 @@ namespace ReDesign
 
             CreateGrid();
         }
+        
         private void CreateGrid()
         {
             baseLayerChildren = baseLayerChildren.OrderBy(n => n.transform.position.x).ThenBy(n => n.transform.position.z).ToList();
@@ -81,6 +79,17 @@ namespace ReDesign
             // Adds unwalkable tiles based on tiles in the obstacleLayer
             foreach (GameObject child in obstacleLayerChildren)
             {
+                addObstacle(child);
+            }
+        }
+
+        public bool checkNode(Vector3 pos){
+            DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(pos.x - item.GameObject.transform.position.x))
+                    .ThenBy(item => Math.Abs(pos.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
+            return resultNode.Walkable;
+        }
+
+        public void addObstacle(GameObject child){
                 DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(child.transform.position.x - item.GameObject.transform.position.x))
                     .ThenBy(item => Math.Abs(child.transform.position.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
                 resultNode.Walkable = false;
@@ -93,7 +102,6 @@ namespace ReDesign
                 };
 
                 ObstacleLayer.Add(enemy);
-            }
         }
 
         public static List<Entity> getEntities()
@@ -101,7 +109,7 @@ namespace ReDesign
             List<Entity> outList = new List<Entity>();
             foreach (var tile in ObstacleLayer)
             {
-                if (tile.GameObject.CompareTag("Entity"))
+                if (tile.GameObject.CompareTag("Entity")) //tile.GameObject != null && 
                 {
                     outList.Add(tile.GameObject.GetComponent<Entity>());
                 }
@@ -155,6 +163,21 @@ namespace ReDesign
             }
 
             return output;
+        }
+        
+        public void addObstacle(GameObject child, bool walkable){
+            DefaultTile resultNode = BaseLayer.OrderBy(item => Math.Abs(child.transform.position.x - item.GameObject.transform.position.x))
+                .ThenBy(item => Math.Abs(child.transform.position.z - item.GameObject.transform.position.z)).ToList().FirstOrDefault();
+            resultNode.Walkable = walkable;
+
+            DefaultTile enemy = new DefaultTile()
+            {
+                XPos = resultNode.XPos,
+                YPos = resultNode.YPos,
+                GameObject = child,
+            };
+
+            ObstacleLayer.Add(enemy);
         }
     }
 }

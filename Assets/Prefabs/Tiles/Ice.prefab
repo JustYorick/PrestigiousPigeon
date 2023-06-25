@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3964613548257732780}
   - component: {fileID: 8063175107089675199}
   - component: {fileID: 5983480366230294413}
+  - component: {fileID: 1547435664294194788}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 71c9b843771301549937050871074bb9, type: 2}
+  - {fileID: 2100000, guid: 09677e07323b2314abadf6553f233228, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1547435664294194788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5743808060426498505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a6916a5b42dec49ab195b53edc1547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 0a8fa9127b8f4db40a212b902db0c31a, type: 3}
+  soundVolMultiplier: 1

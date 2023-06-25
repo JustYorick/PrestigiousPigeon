@@ -7,10 +7,17 @@ public class BasicIceSpell : AttacksAndSpells
 {
     public override int MinimumRange { get { return 2; } }
     public override int MaximumRange { get { return 2; } }
-    public override int Damage { get { return 5; } } //Change back to 5
+    public override int Damage { get { return 5; } }
+    public override int ManaCost { get { return 2; } }
+    EnvironmentEffect environmentEffect;
+
+    public BasicIceSpell(ParticleSystem particles){
+        environmentEffect = WorldController.Instance.GetComponent<EnvironmentEffect>();
+        particleSystem = particles;
+    }
 
     public override void EnvironmentEffect(List<DefaultTile> targetTiles)
     {
-        WorldController.Instance.GetComponent<EnvironmentEffect>().IceEnvironmentEffects(targetTiles);
+        environmentEffect.IceEnvironmentEffects(targetTiles);
     }
 }

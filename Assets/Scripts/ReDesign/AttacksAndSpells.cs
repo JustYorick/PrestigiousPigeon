@@ -11,6 +11,8 @@ namespace ReDesign
         public abstract int MinimumRange { get; }
         public abstract int MaximumRange { get; }
         public abstract int Damage { get; }
+        public virtual int ManaCost { get{ return 0; } }
+        public ParticleSystem particleSystem;
 
         /// <summary>
         /// Causes the spell or attack to be casted at targeted x and y coordinates
@@ -27,13 +29,18 @@ namespace ReDesign
             if (enemyTile != null && enemyTile.GameObject != null && enemyTile.GameObject.CompareTag("Entity"))
             {
                 Entity enemy = enemyTile.GameObject.GetComponent<Entity>();
-                Debug.Log("dmg" + Damage);
                 enemy.ReceiveDamage(Damage);
             } 
             else
             {
                 EnvironmentEffect(tileList);
             }
+            if (particleSystem != null)
+            {
+                particleSystem.transform.position = targetTile.GameObject.transform.position;
+                particleSystem.Play();
+            }
+
             
             //foreach enemy/tile
             //mana -2
