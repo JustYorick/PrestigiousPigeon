@@ -3010,6 +3010,7 @@ GameObject:
   - component: {fileID: 397162537279776416}
   - component: {fileID: 397162537279776422}
   - component: {fileID: 397162537279776417}
+  - component: {fileID: 649708231361099512}
   m_Layer: 5
   m_Name: Spellbar
   m_TagString: Untagged
@@ -3082,6 +3083,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &649708231361099512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397162537279776419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e35d20c047ae23d8accca60b79ab4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &397162537303732449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3161,7 @@ RectTransform:
   m_GameObject: {fileID: 397162537403371538}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 397162538529888866}

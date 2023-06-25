@@ -37,6 +37,7 @@ namespace ReDesign
         private ActionButton movementButton;
         private Canvas helpScreen;
         private Canvas _tutorialCanvas;
+        private SpellBar _spellBar;
 
         private void Awake()
         {
@@ -54,7 +55,7 @@ namespace ReDesign
             pauseMenu = GameObject.Find("PauseMenu").GetComponent<Canvas>();
             helpScreen = GameObject.Find("HelpScreen").GetComponent<Canvas>();
             movementButton = GameObject.Find("MovementButton").GetComponent<ActionButton>();
-            
+            _spellBar = GameObject.Find("Spellbar").GetComponent<SpellBar>();
         }
 
         private void Update()
@@ -93,7 +94,7 @@ namespace ReDesign
             {
                 GridLayout gr = WorldController.Instance.gridLayout;
                 player.MovePlayer(mousePosition, gr, pathNodesMap);
-            }else{
+            }else if(!_spellBar.MouseOver){
                 int playerPosX = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).XPos;
                 int playerPosY = player.FindNearestXYPathNode(player.gameObject.transform.position, pathNodesMap).YPos;
                 if (spellSelection.GetTargetLocations(playerPosX, playerPosY).Contains(player.FindNearestXYPathNode(mousePosition, pathNodesMap)) && manaSystem.Value >= spellSelection.ManaCost)
