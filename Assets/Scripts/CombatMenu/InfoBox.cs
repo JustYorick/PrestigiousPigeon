@@ -133,7 +133,7 @@ public class InfoBox : MonoBehaviour{
             if (Tile.name == "Water"){
                 entityMoveRangeText.text = $"Ice";
             }
-            if (Tile.name == "Grass" || Tile.name == "GraveyardGravel"){
+            if (Tile.name == "Grass" || Tile.name == "GraveyardGravel" || Tile.name == "Stone"){
                 entityMoveRangeText.text = $"-";
             }
             if (Tile.name == "Ice"){
