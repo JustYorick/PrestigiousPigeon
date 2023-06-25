@@ -25,11 +25,14 @@ namespace ReDesign
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private GameObject playerObject;
         [SerializeField] private Vector2 ExtraAmountToMove;
+        [SerializeField] private Animator _animatorForLvl2;
+        private Vector3 prevPos;
         private Vector3 inputMoveDir { get; set; } = Vector3.zero;
         private float rotation { get; set; } = 0.0f;
         private Vector2 MinPos { get; set; } = new Vector2(0f,0f);
         private Vector2 MaxPos { get; set; } = new Vector2(0f,0f);
         private bool lockedToPlayer = false;
+        private bool animationStopped = false;
         
 
         private void Start()
@@ -49,30 +52,44 @@ namespace ReDesign
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                lockedToPlayer = !lockedToPlayer;
-
-            if (lockedToPlayer){
-                transform.position = playerObject.transform.position;
-                transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
-            }else if (!lockedToPlayer) {
-                // Calculate the direction to move the camera in, use the direction the camera is facing
-                Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
-
-                // Move the camera
-                transform.position += moveVector * (moveSpeed * Time.deltaTime);
-                transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
-                transform.position = new Vector3
-                (
-                    Mathf.Clamp(transform.position.x, MinPos.x - ExtraAmountToMove.x, MaxPos.x + ExtraAmountToMove.x),
-                    transform.position.y,
-                    Mathf.Clamp(transform.position.z, MinPos.y - ExtraAmountToMove.y, MaxPos.y + ExtraAmountToMove.y)
-                );
-
                 if (Input.GetKeyDown(KeyCode.Space))
-                    transform.position = new Vector3(playerObject.transform.position.x, -1f,
-                        playerObject.transform.position.z);
-            }
+                    lockedToPlayer = !lockedToPlayer;
+
+                if (lockedToPlayer)
+                {
+                    transform.position = playerObject.transform.position;
+                    transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
+                }
+                else if (!lockedToPlayer)
+                {
+                    // Calculate the direction to move the camera in, use the direction the camera is facing
+                    Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
+
+                    // Move the camera
+                    transform.position += moveVector * (moveSpeed * Time.deltaTime);
+                    transform.eulerAngles += new Vector3(0, rotation, 0) * (rotationSpeed * Time.deltaTime);
+                    transform.position = new Vector3
+                    (
+                        Mathf.Clamp(transform.position.x, MinPos.x - ExtraAmountToMove.x,
+                            MaxPos.x + ExtraAmountToMove.x),
+                        transform.position.y,
+                        Mathf.Clamp(transform.position.z, MinPos.y - ExtraAmountToMove.y,
+                            MaxPos.y + ExtraAmountToMove.y)
+                    );
+
+                    if (Input.GetKeyDown(KeyCode.Space))
+                        transform.position = new Vector3(playerObject.transform.position.x, -1f,
+                            playerObject.transform.position.z);
+                }
+
+                if (animationStopped)
+                {
+                    transform.position = prevPos;
+                    transform.rotation = new Quaternion(0, 1, 0, 0);
+                    if (Vector3.Distance(transform.localPosition, prevPos) < 0.2f) {
+                        animationStopped = false;
+                    }
+                }
         }
 
         void OnMove(InputValue value){
@@ -100,6 +117,25 @@ namespace ReDesign
         {
             Debug.Log("Moving camera");
             transform.position = position;
+        }
+
+        public void TurnOnAnimator(Vector3 pos)
+        {
+            _instance.prevPos = pos;
+            Debug.Log(pos);
+            Debug.Log(prevPos);
+
+            _animatorForLvl2.enabled = true;
+            _animatorForLvl2.Play("CameraAnimationLvl2");
+        }
+
+        public void SetPositionBack()
+        {
+            _animatorForLvl2.enabled = false;
+            _animatorForLvl2.StopPlayback();
+            animationStopped = true;
+            Debug.Log(prevPos);
+            _instance.MoveTo(_instance.prevPos);
         }
     }
 }

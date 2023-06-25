@@ -167,6 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4231135538321614428}
+  - component: {fileID: 3423426766445382116}
   m_Layer: 0
   m_Name: Wolf Death
   m_TagString: Untagged
@@ -190,6 +191,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3423426766445382116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496286067095729613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026113423b8bbd14a8a96716614e715f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSound: {fileID: 8300000, guid: 461bd3ec419ac6f41850cf48466c1f18, type: 3}
 --- !u!1 &1678474668329985008
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +954,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6116390620135008027}
-  m_LocalRotation: {x: -0.033773355, y: 0.0031019703, z: -0.09140791, w: 0.9952358}
+  m_LocalRotation: {x: -0.033773363, y: 0.0031019703, z: -0.091407925, w: 0.9952358}
   m_LocalPosition: {x: -1.0244548e-10, y: 0.002711594, z: -9.41669e-11}
   m_LocalScale: {x: 0.99999994, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
