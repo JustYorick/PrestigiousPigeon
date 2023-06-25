@@ -21,7 +21,7 @@ namespace ReDesign
 
         private void Start()
         {
-            SoundManager.Instance.SetMusic(levelMusic);
+            //SoundManager.Instance.SetMusic(levelMusic);
         }
 
         public void pillardestroyed(Vector3 pos)
