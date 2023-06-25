@@ -30,11 +30,14 @@ namespace ReDesign
         public ParticleSystem fireParticles;
         [SerializeField] private AudioClip fireSound;
         public ParticleSystem iceParticles;
+        public ParticleSystem waterParticles;
         [SerializeField] private AudioClip iceSound;
         private DefaultTile prevSelectedTile;
         [SerializeField] private SpellMenu spellMenu;
         private BasicFireSpell fireSpell;
         private BasicIceSpell iceSpell;
+        private BasicWaterSpell waterSpell;        
+        [SerializeField] private AudioClip waterSound;
         private Canvas pauseMenu;
         private ActionButton movementButton;
         private Canvas helpScreen;
@@ -45,6 +48,7 @@ namespace ReDesign
         {
             fireSpell = new BasicFireSpell(fireParticles);
             iceSpell = new BasicIceSpell(iceParticles);
+            waterSpell = new BasicWaterSpell(waterParticles);
 
             if (_instance != null && _instance != this)
             {
@@ -155,12 +159,10 @@ namespace ReDesign
             return hoveredNode;
         }
 
-        public void SelectFireSpell()
-        {
+        void SelectSpell(AttacksAndSpells spell){
             RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            if (fireSpell.ManaCost <= manaSystem.Value)
-            {
-                spellSelection = fireSpell;
+            if(spell.ManaCost <= manaSystem.Value){
+                spellSelection = spell;
                 DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
                 DrawCurrentSpellRange();
             }
@@ -169,36 +171,12 @@ namespace ReDesign
             }
         }
 
-        public void SelectIceSpell()
-        {
-            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            if (iceSpell.ManaCost <= manaSystem.Value)
-            {
-                spellSelection = iceSpell;
-                DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
-                DrawCurrentSpellRange();
-            }
-            else{
-                spellSelection = null;
-            }
-        }
+        public void SelectFireSpell() => SelectSpell(fireSpell);
 
-        public void SelectWaterSpell()
-        {
-            RangeTileTool.Instance.clearTileMap(RangeTileTool.Instance.rangeTileMap);
-            BasicWaterSpell waterSpell = new BasicWaterSpell();
-            if (waterSpell.ManaCost <= manaSystem.Value)
-            {
-                spellSelection = waterSpell;
-                spellSelection.particleSystem = iceParticles;
-                DrawCurrentSelectedTile(MouseToTile(GetMouseWorldPos()));
-                DrawCurrentSpellRange();
-            }
-            else{
-                spellSelection = null;
-            }
-        }
-
+        public void SelectIceSpell() => SelectSpell(iceSpell);
+        
+        public void SelectWaterSpell() => SelectSpell(waterSpell);
+        
         public void DeselectSpell() => spellSelection = null;
 
         private void DrawCurrentSelectedTile(DefaultTile hoveredNode)
@@ -245,7 +223,10 @@ namespace ReDesign
                 }
 
                 if (spellSelection.GetType() == typeof(BasicWaterSpell))
+                {
                     PlayerAnimator._animator.SetBool("iceCasted", true);
+                    SoundManager.Instance.PlaySound(waterSound);
+                }
             }
         }
 
