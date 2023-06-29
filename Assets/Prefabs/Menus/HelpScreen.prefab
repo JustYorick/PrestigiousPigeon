@@ -3932,9 +3932,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Spells can not only be used on foes, but on the environment as well. \nUsing
     the right elements at the right time may create new tiles that can aid Loki in
-    his conquest. \r\nFor example: There is a wall of rocks between you and your
-    objective. \nFirst use water magic to create a wet rock. \nUsing ice magic after
-    that will expand the water, exploding the rock and freeing the way.\r\n"
+    his conquest. \r\nFor example: a bridge has been destroyed and you need to get
+    to the other side. By casting the ice spell on water, you create an ice tile
+    which is a walkable tile.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
   m_sharedMaterial: {fileID: -8697639540106609228, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
@@ -6097,10 +6097,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Magic in Arbarest consists of the main elements. \nUsing different kinds
-    of magic during combat proves useful, as\r\nSome enemies have weaknesses and
-    strengths against certain elements.\r\nElements can be used to create powerful
-    reactions.\r\n"
+  m_text: "Magic in Albarest consists of the main elements. \nUsing different kinds
+    of magic during combat proves useful, as\r some spells cost less mana than others.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
   m_sharedMaterial: {fileID: -8697639540106609228, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}

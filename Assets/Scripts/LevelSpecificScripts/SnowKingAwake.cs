@@ -78,7 +78,7 @@ namespace ReDesign
 
                 if (objectiveText != null)
                 {
-                    objectiveText.text = "Kill all enemies!";
+                    objectiveText.text = "Kill the Snow King!";
                 }
 
                 CollapseableUI gameUi = GameObject.Find("GameUI").GetComponent<CollapseableUI>();
