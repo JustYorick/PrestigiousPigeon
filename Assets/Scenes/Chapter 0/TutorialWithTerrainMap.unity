@@ -2734,7 +2734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3899958144565727378, guid: 1ad576eab88f0e243a1ea65335a0d698, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3899958144565727378, guid: 1ad576eab88f0e243a1ea65335a0d698, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3176,7 +3176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &136028161 stripped
 GameObject:
@@ -5969,7 +5969,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Using Mouse2 (Right-Click) when hovering over an enemy or tile the box
     in the top right of your screen will update with any available information about
-    said enemy or tile.\nSuch as it's health and move range. \nIt's move range will
+    said enemy or tile.\nSuch as its health and move range. \nIts move range will
     also show on the game grid.\n\nNow get out there and kill some slimes!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 949f5ef8322ead442b816dfb4aa9a8a7, type: 2}
@@ -6906,7 +6906,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5064787031117785832, guid: 3314d1531cdad6fd8891e730771c703a, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5064787031117785832, guid: 3314d1531cdad6fd8891e730771c703a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7655,6 +7655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 0}
   iceTile: {fileID: 5743808060426498505, guid: c7dccf7958fc9684d86e2dff8710f4f6, type: 3}
+  iceTileWithoutSound: {fileID: 0}
   waterTile: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
   treeTile: {fileID: 5444859503468468003, guid: cb99cc943444c6c468950dae68ca0a10, type: 3}
   bridgeTile: {fileID: 6982753071637512987, guid: c30141b4a039add48bd798d7942942b6, type: 3}
@@ -9640,7 +9641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
       propertyPath: m_Name
-      value: Water (2)
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
       propertyPath: m_TagString
@@ -10111,7 +10112,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &643164812
 GameObject:
@@ -12219,7 +12220,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &785144575
 GameObject:
@@ -13690,7 +13691,7 @@ RectTransform:
   - {fileID: 910049620}
   - {fileID: 635640097}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -17788,7 +17789,7 @@ Transform:
   - {fileID: 378099453}
   - {fileID: 2134928777}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1143041320
 PrefabInstance:
@@ -23015,7 +23016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 437255851163339370, guid: bbea10d16b15c48e5aea63409313a707, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 437255851163339370, guid: bbea10d16b15c48e5aea63409313a707, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23934,7 +23935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
       propertyPath: m_Name
-      value: Water (1)
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 4548602199722856802, guid: 951d744f08c667246af0a2491e75af1d, type: 3}
       propertyPath: m_TagString
@@ -26365,8 +26366,10 @@ MonoBehaviour:
   fireParticles: {fileID: 1332352364}
   fireSound: {fileID: 8300000, guid: dd3ba93355007b94d90b1c44bd6f0d51, type: 3}
   iceParticles: {fileID: 1520492333}
+  waterParticles: {fileID: 2096977006}
   iceSound: {fileID: 8300000, guid: a3d79ece5201e054e9dcd8d8b6b09d09, type: 3}
   spellMenu: {fileID: 1319049952}
+  waterSound: {fileID: 8300000, guid: 4fcb11da53dea824484ab43c06cd1d0c, type: 3}
 --- !u!4 &1686651854
 Transform:
   m_ObjectHideFlags: 0
@@ -30703,6 +30706,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4214659274175047470, guid: 98cdfefcb02884043b4d8a83f01be5cf, type: 3}
   m_PrefabInstance: {fileID: 2091857389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2096977005
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7330636829591168552, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_Name
+      value: Water Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330636829591168555, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+--- !u!198 &2096977006 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7330636829591168554, guid: 76c9e40d41a59b3968f8fc05621dcbc1, type: 3}
+  m_PrefabInstance: {fileID: 2096977005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2097297539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31627,7 +31692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2349107519789170950, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2349107519789170950, guid: 34169a6e25cfcab4283f2531ee22539e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -32249,7 +32314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686418169553959580, guid: 11d1ae8f020f17f42bacd06e101af31a, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6686418169553959580, guid: 11d1ae8f020f17f42bacd06e101af31a, type: 3}
       propertyPath: m_AnchorMax.x

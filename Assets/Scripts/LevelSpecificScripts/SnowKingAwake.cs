@@ -21,7 +21,7 @@ namespace ReDesign
 
         private void Start()
         {
-            SoundManager.Instance.SetMusic(levelMusic);
+            //SoundManager.Instance.SetMusic(levelMusic);
         }
 
         public void pillardestroyed(Vector3 pos)
@@ -78,7 +78,7 @@ namespace ReDesign
 
                 if (objectiveText != null)
                 {
-                    objectiveText.text = "Kill all enemies!";
+                    objectiveText.text = "Kill the Snow King!";
                 }
 
                 CollapseableUI gameUi = GameObject.Find("GameUI").GetComponent<CollapseableUI>();

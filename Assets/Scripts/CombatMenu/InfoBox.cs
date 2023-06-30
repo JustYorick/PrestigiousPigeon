@@ -119,9 +119,9 @@ public class InfoBox : MonoBehaviour{
             entityTitleText.text = "Fence";
             entityMoveRangeText.text = $"-";
         }
-        if(g.name.ToLower().Contains("icicle")){
-            entityTitleText.text = "Icicle";
-            entityMoveRangeText.text = $"Fire";
+        if(g.name.ToLower().Contains("puddle")){
+            entityTitleText.text = "Water Puddle";
+            entityMoveRangeText.text = $"Ice";
         }
     }
 
@@ -133,17 +133,27 @@ public class InfoBox : MonoBehaviour{
             if (Tile.name == "Water"){
                 entityMoveRangeText.text = $"Ice";
             }
-            if (Tile.name == "Grass" || Tile.name == "GraveyardGravel"){
+            if (Tile.name == "Grass" || Tile.name == "GraveyardGravel" || Tile.name == "Stone"){
                 entityMoveRangeText.text = $"-";
             }
-            if (Tile.name == "Ice"){
+            if (Tile.name.Contains("Ice"))
+            {
+                entityTitleText.text = "Ice";
                 entityMoveRangeText.text = $"Fire";
             }
             if (Tile.name.ToLower().Contains("bridge")){
                 entityTitleText.text = "Bridge";
                 entityMoveRangeText.text = $"Fire";
             }
-            
+
+            if (Tile.name == "GraveyardGravel")
+            {
+                entityTitleText.text = "Graveyard Gravel";
+            }
+            if(Tile.name.ToLower().Contains("frozenpillar")){
+                entityTitleText.text = "Icicle";
+                entityMoveRangeText.text = $"Fire";
+            }
         }
     }
 
