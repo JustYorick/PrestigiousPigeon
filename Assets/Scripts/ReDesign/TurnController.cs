@@ -71,29 +71,61 @@ namespace ReDesign
 
         public static void ResolveNextTurn()
         {
-            FillEntityList();
-            showGameOver();
-            if (_turnPart < _entities.Count && !gameOver)
+            if (SceneManager.GetActiveScene().name.Equals("Level1Map"))
             {
-                if (_turnPart == 0)
+                FillEntityList();
+                showGameOver();
+
+                if (_turnPart >= _entities.Count)
                 {
-                    collapseableUI?.ShowPlayerTurnUI(); 
-                }
-                if (_turnPart == 1)
-                {
-                    collapseableUI?.ShowEnemyTurnUI();
+                    _turnPart = 0;
+                    TurnCount++;
                 }
                 
-                
-                _entities[_turnPart].NextAction();
-                _turnPart++;
+                if (_turnPart < _entities.Count && !gameOver)
+                {
+                    if (_turnPart == 0)
+                    {
+                        collapseableUI?.ShowPlayerTurnUI();
+                    }
+                    if (_turnPart == 1)
+                    {
+                        collapseableUI?.ShowEnemyTurnUI();
+                    }
+
+
+                    _entities[_turnPart].NextAction();
+                    _turnPart++;
+                }
+
+
+            } else
+            {
+                FillEntityList();
+                showGameOver();
+                if (_turnPart < _entities.Count && !gameOver)
+                {
+                    if (_turnPart == 0)
+                    {
+                        collapseableUI?.ShowPlayerTurnUI();
+                    }
+                    if (_turnPart == 1)
+                    {
+                        collapseableUI?.ShowEnemyTurnUI();
+                    }
+
+
+                    _entities[_turnPart].NextAction();
+                    _turnPart++;
+                }
+
+                if (_turnPart >= _entities.Count)
+                {
+                    _turnPart = 0;
+                    TurnCount++;
+                }
             }
 
-            if (_turnPart >= _entities.Count)
-            {
-                _turnPart = 0;
-                TurnCount++;
-            }
         }
 
         public static void FillEntityList()
